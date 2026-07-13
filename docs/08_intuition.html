@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第六章 · 直觉的诞生，以及它撞见的那道缝</title>
+<style>
+  body { max-width: 46rem; margin: 2rem auto; padding: 0 1.2rem;
+         font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+         font-size: 1.05rem; line-height: 1.75; color: #1a1a1a; }
+  h1 { font-size: 1.55rem; border-bottom: 1px solid #ddd; padding-bottom: .35rem; }
+  h2 { font-size: 1.22rem; margin-top: 1.8rem; }
+  h3 { font-size: 1.08rem; }
+  blockquote { border-left: 3px solid #bbb; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #333; }
+  code { background: #f5f5f5; padding: .08em .3em; border-radius: 3px; font-size: .9em; }
+  pre { background: #f5f5f5; padding: .75rem; overflow-x: auto; border-radius: 4px; }
+  .nav { font-size: .88rem; margin-bottom: 1.2rem; color: #666; }
+  .nav a { color: #0366d6; text-decoration: none; }
+  .math-block { text-align: center; margin: 1.2rem 0; overflow-x: auto; }
+  .katex-display { margin: 1rem 0; overflow-x: auto; }
+  a.fn-ref { color: #0366d6; text-decoration: none; font-weight: 600; }
+  a.fn-ref:hover { text-decoration: underline; }
+  .footnotes { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: .92rem; }
+  .footnotes h2 { font-size: 1rem; color: #666; margin-top: 0; }
+  ol.footnotes { padding-left: 1.4rem; }
+  li.footnote { margin: .65rem 0; }
+  li.footnote:target { background: #fff8e6; margin-left: -0.4rem; padding: .35rem .4rem; border-radius: 4px; }
+  a.fn-back { color: #666; text-decoration: none; margin-right: .35rem; }
+  a.fn-back:hover { color: #0366d6; }
+  .fn-back-list { margin-left: .25rem; font-size: .85em; color: #888; }
+  .fn-back-list a { color: #888; text-decoration: none; }
+  .fn-back-list a:hover { color: #0366d6; text-decoration: underline; }
+  #status { font-size: .85rem; color: #888; margin-top: 2rem; }
+  #status.err { color: #c00; }
+</style>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<script defer src="vendor/katex/katex.min.js"></script>
+<script defer src="vendor/katex/auto-render.min.js"></script>
+</head>
+<body>
+<p class="nav"><a href="index.html">← 目录</a></p>
+<h1>第六章 · 直觉的诞生，以及它撞见的那道缝</h1>
+<p>第五章交出了两本账：算子读铸出可数性和离散的桩，态读供出钝的基底和跳变的洞。这一章，你的直觉先从算子读那本账起步——它拿着 ℚ 的锐性，想往前走到一个连续的世界。它会在自己肚子里，撞见从另一本账里长出来的、不给对上的东西。这一章走到那道缝跟前就停住——不缝合，不安慰。</p>
+<h2>6.0 承接：直觉，从两本账中的一本起步</h2>
+<p>上一章立在同一个 \(D=0\) 上，翻开成两张互相看不见的脸。算子读铸出了可数性——NNO，\(\mathbb{Q}\) 的锐性——还有每次落盘留下的、可逐一指认的投影 \(\{P_i\}\)。态读供出了钝的质地——无原子、等号不可判定的基底感、连续的先后顺序、不可重入的漂移，还有遭遇他者时撕出的洞。</p>
+<p>这一章，你的直觉先从算子读那本账起步。它先认清自己手里有什么、借了什么，然后长成它日常的模样——推理、确定感、定律、时态、概率。走到尽头时，它会想往前走一步：从 \(\mathbb{Q}\) 搭一个连续统出来。那一脚，踩进另一本账的地盘——撞上一道它自己合不上的缝。</p>
+<p>前面几章那些过程——模流、搬算子、绵延——都有一个共同的脾气：它们<strong>两读对称</strong>。把时间挂在算子上，还是挂在态上，读出来是同一件事（第二章那个恒等式）；因为它们都只是在<strong>移动东西</strong>，而移动，从哪头看都一样。可这一章要长出来的东西不一样：<strong>逻辑不是在移动东西，逻辑是在判定——给一个真值。</strong> 而判定天生不对称：它总要有一个<strong>判的视角</strong>（那个第二态、那个&quot;我&quot;），和一个<strong>被判的内容</strong>；判者和被判者，不能像时间那样对调。所以从这一章起，你会觉得声音&quot;偏&quot;了——偏向了视角这一头。那不是哪里出错了，是<strong>判定第一次进场</strong>：在此之前是不带人称的移动（两读对称），从此有了一个判官（一头沉）。那些&quot;锐还是钝&quot;&quot;是不是恰好等于&quot;的问题，也是从这里才冒出来的——它们是判出来的，不是移动出来的；你不问真值，就没有锐钝。<sup><a href="#fn-measure6" id="fnref-measure6" class="fn-ref">[measure6]</a></sup></p>
+<p>而每一次这样把世界落定，你都会撞到一件事：它<strong>顶回来</strong>。你想把一件事读成这样、钉成那样，总有一股抗拒从对面推回来——推得动的地方你落了账，推不动的地方你落不成。这股顶回来的、挑你的劲，就是你平时说的&quot;<strong>力</strong>&quot;。它不是你维持自己的那份内在的重，而是从外面、冲着你此刻要落的这一账顶回来的一记抗拒。而且它挑对象——同一堵墙，顶得住你的手、拦不住穿墙而过的东西，因为你和那东西带的&quot;荷&quot;不一样（具体机制留到第七章拆）。这里只先认出它：<strong>判定不是白判的，每一次落账都要顶着一股外在的抗拒。</strong> 要紧的是别把它和那道够不到的缝混了——力顶你、却不望着你；它推得动、推不动都是可算的账（你换根桩、绕个路，多半能过去），而那道缝是另一回事（第四章那个怎么也推不平的他者）。力是要付的价，缝是付不掉的墙。</p>
+<blockquote><p>被活出来，这股&quot;顶回来&quot;你一直在摸：手按上桌面，桌面把你按回去；你以为门朝里开，肩膀撞上去，门不让。那一下不是你想出来的，是世界替你把话说完了——你想怎么读它，它答应不答应，从来不全由你。可你也知道，这种顶多半是能商量的：换个角度推、换只手、找到门把手往外拉，它就让开了。它顶你，但它不看你。而这一章走到最后你会撞见另一样东西：它不顶你，它望着你——你换多少个角度，它都不让开。</p></blockquote>
+<p>那么这个&quot;判&quot;，判的到底是什么？说到底，是<strong>我这个视角，和世界那本记录，对不对得上</strong>——我这一路走下来的感觉、预期、构造（主观这一侧），和账本上已经落定的事实（客观这一侧），彼此相不相容。这正是上一章那个&quot;核对&quot;（历史一致性）在做的事；而逻辑的真值，就是这个对齐检验结果的分级：<strong>对上了、而且落定了，是经典的非此即彼；还没对上、门开着，是那些悬而未决的中间值；根本对不上，是那道缝。</strong> 所以逻辑从来不是一套飘在半空、与主体无关的规则——它天生关乎那个正在验证的主体。这一点不是本书的发明：你手里这套直觉主义逻辑，本就是<strong>验证着的主体</strong>的逻辑——在它的读法里，一个命题&quot;为真&quot;，意思就是<strong>你手上有一个能兑现它的构造</strong>，而不是它在某个无人称的天上先验地为真<sup><a href="#fn-brouwer" id="fnref-brouwer" class="fn-ref">[brouwer]</a></sup>。用这套逻辑，就已经把&quot;主体的验证活动&quot;焊进了真值本身。所以你隐约觉得&quot;逻辑是在判主观和客观的关系&quot;，不是错觉——是你正踩在一条老传统上，只是以前没人替你把它接到这台机器的两本账上。</p>
+<p>这一章尽头那道合不上的缝，根子就埋在这里：判定这件事，有个自己补不上的洞——它总得<strong>外接一个判的视角</strong>，而这个视角，判定自己长不出来。逻辑能自己供出<strong>形式</strong>——什么样的真值结构、命题之间怎么蕴含（那套 Heyting 的骨架）；可它供不出<strong>执行</strong>——到底站在哪个视角上、拿哪个态去把一个命题判成真或假，这一步没有一个由逻辑内部结构挑定的答案（还记得第三章第一个不可知：判定的那个锚，非典范）。所以这一章真正合不上的地方，不是有人担心的&quot;逻辑会自我指涉、会说谎&quot;——自指是良性的、可控的（后面会看到）；真正合不上的，是<strong>判定没法从它自己内部自足地生出来</strong>，它总要伸手去借一个不由它选定的视角。这道&quot;判定不能自给&quot;的裂缝，就是无迹在逻辑这一层现出的样子；这一章走到底那道缝，正是它。</p>
+<p>直觉，和前面每一样东西一样，系于无迹。它不是你主动去想的规则——是你还没想的时候，世界已经在你身上沉积下来的那套 &quot;什么定了、什么还开着&quot; 的感觉。这套直觉跑在一个必须持续维持才不塌的稳态上：经典账本活着，靠的是第二态持续做功、把自己顶在远离基线处（第四、五章）。直觉跑在肉上。</p>
+<h2>6.1 你的直觉手里有什么：三样东西</h2>
+<p>你的直觉要能 &quot;把握&quot; 这个世界，先有三样东西——在你还没主动去想的时候，就已经在了的。其中两样来自算子读铸的那本账，一样来自这个世界自身的结构。</p>
+<p><strong>第一样：真值的房间。</strong> 你的直觉对一个命题的感觉，不止&quot;是&quot;和&quot;不是&quot;两格。有些事，你直觉上觉得 &quot;差不多是这样&quot;——不是 &quot;是&quot;，是一种有偏向的模糊。有些事，你觉得 &quot;还不好说&quot;——还没落定，但悬在那里，你能感觉到它。有些事，你觉得 &quot;要再看看&quot;——它可能随着时间展开，后面才显出形状。把这些直觉上能感觉到的心安程度收在一起，不是一个只有两格的开关，是一整套有层次的房间。第五章建成的世界是一个 topos，这个 topos 的内部真值空间 \(\Omega\) 天然是一个 <strong>Heyting 代数</strong>：它的底——那本学出来的账本 \(\mathcal{A}_{\text{phys}}\)——无原子，世界最底层没有 &quot;原子事实&quot;；不同测量语境之间，也不能同时全按成非此即彼（KS）。所以 \(\Omega\) 保留了 &quot;与、或、蕴含&quot; 的惯常走法，<strong>不替你判成是与不是</strong>——中间那些房间，是结构本就填了的。</p>
+<p><strong>第二样：数得清的能力。</strong> 你的直觉能数：一件、两件、三件……这份能数出自可分性（公理，第零章）→ Feldman–Moore → \(\mathcal{R}\) 可数轨道 → 自然数对象 NNO。NNO 在任何 topos 里都是可判定的——自然数上，等号非此即彼。数数是算子读的日常动作：每一次 \(D=0\) 判定成立，铸一个可重认的单位，一步一步、可数地展开。记住 NNO 是借来的——这一笔 &quot;借&quot;，到本章末尾要连本带利地回来。</p>
+<p><strong>第三样：锐的数感。</strong> 从 NNO 出发，一步一步走——\(\mathbb{N}\)，\(\mathbb{Z}\)，\(\mathbb{Q}\)。每一个有理数都非此即彼：\(\frac{1}{2}=\frac{2}{4}\) 判得出、&quot;大于、小于、等于&quot; 全判得出。可判定性传到 \(\mathbb{Q}\)，这一路上的每一个数，你的直觉都能干净地落成一个是或否。这份锐的感觉，足矣计数，足矣落盘。</p>
+<p>三样东西。真值房间是这个世界自己的结构；数数是从可分性借来的；锐的数感是在借来的数数上，一步一步铺到 \(\mathbb{Q}\) 的。到此为止，直觉觉得每一件事都非此即彼——有原子事实（落盘处二值）、有可判定的数感（\(\mathbb{Q}\)）。它握着 \(\mathbb{Q}\) 的锐性，觉得再往前走一步——做一个分割，把 \(\mathbb{Q}\) 搭成一根连续的实数线——应该是顺理成章的事。</p>
+<p>可它要往前踩的那一步，脚下是什么？是<strong>第四样：钝</strong>。而钝和前三样有一个根本的不同——<strong>前三样都是&quot;来&quot;的，钝是原生的。</strong> 这件事得反过来看：不是&quot;世界本来是锐的、钝要另找来历&quot;，恰恰相反——<strong>世界的底色本来就是钝的，需要交代来历的是锐。</strong> 上一章从态那一侧看到过它了：这台机器读任何一个量，读出的从来不是针尖上一个点，是<strong>一片浓淡</strong>——那正是第零章开篇那个&quot;满溢无程度&quot;的浓淡。它为什么是浓淡而非点？因为这台代数<strong>弥散</strong>：没有最小的投影，任何一块都还能再分，底下没有&quot;原子事实&quot;这种终点（这也就是 \(\Omega\) 那个&quot;无原子的底&quot;的来历）。一片能无限细分的浓淡，你问它&quot;<strong>恰好</strong>等于那个数吗&quot;，它给不出一个干脆的是或否——要判定&quot;恰好相等&quot;，得把无穷细的深浅一直比到底，而它没有底可比。<strong>这个&quot;问到底也裁不出是与否&quot;的余量，就是钝</strong>：不是模糊、不是没测准，是等号在这里<strong>结构上不可判定</strong>（往后你会看到，这台机器内部那根戴德金实数轴，正是这样一个等号判不了的钝对象<sup><a href="#fn-apart" id="fnref-apart" class="fn-ref">[apart]</a></sup>）。</p>
+<p>那么锐是怎么从这片钝里&quot;来&quot;的？——<strong>靠一次次落账凿出来。</strong> 每一次 \(D=0\) 的落盘，是在这片浓淡上钉下一个可反复指认、谁读都一样的记号（\(\mathbb{Q}\) 的锐性，正是这样一枚枚凿出来的记号攒起来的——凿子上那圈用来编号的刻度，用的正是前一样&quot;借来的数数&quot;：可分性借来的可数标签，是编号；落账把编号凿进浓淡，是刻痕。借来的是号，凿下的是痕，两样合起来才是一枚锐记号）。所以<strong>锐是落账在钝上凿出的离散刻痕，不是钝底下预先埋着的骨架</strong>。这是一条清晰的族谱：<strong>浓淡（钝，原生）→ 一次次落账凿出可数记号（锐）→ 想把这些记号连成一根既连续又逐点可读的实数轴（下一步，第七章那块板要干的事）。</strong> 直觉此刻正站在第二步的尽头、要往第三步踩——它以为脚下是锐的连续统，其实脚下是钝，锐只是它凿在钝上的那些点，点与点之间的&quot;连续&quot;还没有着落。</p>
+<p><sup><a href="#fn-bluntcare" id="fnref-bluntcare" class="fn-ref">[bluntcare]</a></sup></p>
+<p>那是下一步。先拎清一道界限：直觉的质地（那套 &quot;与或非&quot;）是从 topos 结构里长出来的；数数是从可分性借来的，借来当刻度用的。这道 &quot;内生／外借&quot; 的分界，是本章最后那道断裂的伏笔。</p>
+<p>直觉给的是<strong>形式</strong>——一件事直觉上能感到哪些层次的心安、那些层次之间怎么走。<strong>哪些事真的落定了、有确定的心安可言</strong>，直觉的形式自己说了不算：那要靠上一章的历史一致性 \(D=0\) 把退相干的、定下来的记录填进来。直觉的形式是形状，\(D\) 往里填人；把填了人的那些房间一件件<strong>说出</strong>去，是再下一章的事。这条线索先埋在这里。</p>
+<blockquote><p>被活出来，这解释了&quot;一件悬而未决的事&quot;那种奇特的质地。你等一个结果——考没考上、她答不答应——这件事在你的世界里是真真切切地在的，你能想它、能担心它、能跟别人提起它。可它不在&quot;发生过&quot;那本账本里，它挂在真值的那些中间房间里，带着一种说不清的重量——还没落定，却已经能承重。这种&quot;还没真却已实在&quot;的感觉，是这台机器的真值空间本就多过真假两格。</p></blockquote>
+<h2>6.2 直觉是什么：你的身体替你先量了一遍</h2>
+<p>直觉到底是什么，又从哪来？</p>
+<p><strong>直觉，就是你在还没想的时候，身体已经替你量过了一遍。</strong> 你走进一间屋子——你&quot;觉得&quot;宽敞、&quot;觉得&quot;闷，你活在这副身体里，身体先量了。你看见一个人的脸——你&quot;觉得&quot;他累了、&quot;觉得&quot;他在躲你，直觉已经是活着的身体反复触碰世界、压出的那条印子。</p>
+<p>那<strong>推理</strong>呢？推理是直觉的一种特殊用法——<strong>一次走完了流程、却没把结果登记进屋的预演</strong>。</p>
+<p>真正的一次判定——比如你下定决心&quot;就是他了&quot;——你的身体走完了那个触碰世界的过程，而且把结果登进了账本（落盘，付出那道不可逆的沉积代价 B1）。这是一次<strong>真的</strong>。推理不一样：推理也走了那遍触碰的流程——你试着感觉&quot;如果这样，会怎样&quot;——但你扣住了登记这一步。你预演了一次真的，却没让结果翘入既成事实。你&quot;想了&quot;，但没&quot;定了&quot;。</p>
+<p>这个区别，解释了你的直觉里最根本的一件事：<strong>为什么你的直觉天生没有排中律。</strong></p>
+<p>因为——<strong>那种非此即彼的确定感，是落了盘才来的。</strong> 一件事只有被登记进那本经典账本、成了既成事实，它才非此即彼：要么发生了、要么没发生。而你的直觉——在还没落盘的时候——天然停在&quot;这个大概是这样&quot;或&quot;这个还不好说&quot;里。它不会替你把所有东西都定成是非。排中律（一件事非真即假）要求每件事此刻就已经落定在是非里——可你的直觉恰恰活在那个<strong>还没落定</strong>的地带。所以排中律在你的直觉里天然不生效。规则没被改动——直觉这件事的本性就是不落盘，落盘才给二值。</p>
+<p>直觉不落盘，排中律要每件事此刻就已落定——直觉活在还没落定的地带，排中律管不到它。直觉主义的机制就在这儿：你的直觉只能产出直觉主义。</p>
+<p>这一击能从三个方向被感到，而三个方向各自独立、指向同一个形状：</p>
+<p>- <strong>身体的方向</strong>（刚说的）：你的直觉不落盘，所以那种非此即彼的确定感，它天然给不了。 - <strong>结构的方向</strong>：你把不同语境底下感受到的东西放到一起——它们<strong>不能同时</strong>都被按成非此即彼。这是一条硬定理（Kochen–Specker：没有一套整体的赋值能让所有语境同时有确定点值<sup><a href="#fn-ks" id="fnref-ks" class="fn-ref">[ks]</a></sup>）。跨语境的整体二值化，结构上就不可能——你的直觉跨语境拼读的时候，天然就觉得有些东西拼不到一处、不能同时都是定数。 - <strong>时间的方向</strong>：你的直觉只对<strong>过去</strong>有那种&quot;定了&quot;的感觉。过去那一侧，历史一致性 \(D\) 已经把记录退相干成了确定；未来那一侧，\(D\) <strong>没有定义域</strong>——尺子还没搬过去、影像还没有，那里是&quot;尚未&quot;（第一章：理解流单侧、正向没有定义域；第三章：未来无物）。所以时间轴上，你的直觉对现在之前的事，感觉是定的（&quot;发生过&quot;）；对现在之后的事，感觉永远是开的（&quot;还不好说&quot;）。</p>
+<p>三个方向——你的身体怎么跑、结构里横跨语境时什么事做不了、时间在哪个方向才产生确定感——各自独立，却都给你同一种直觉的质地：中间那些房间填了东西。三路同归，是这一击最硬的地方。</p>
+<p>听到&quot;从量子的世界长出来的直觉&quot;，最容易滑向一个古老的误会——那个&quot;量子逻辑&quot;（Birkhoff–von Neumann：投影的格，非分配）。本书走的是另一条路。非对易性进入直觉，有两条走法：一条塞进&quot;与或非&quot;怎么用、把分配律废掉（量子逻辑格）；另一条放进<strong>几何</strong>——放进不同语境之间怎么缝、放进时间的未来怎么还开着——让&quot;与或非&quot;的日常走法照旧，只让那种非此即彼的确定感退位。<strong>本书走后一条：单个语境内部，直觉感觉是定的；量子性住在语境之间和时间前方——那些拼不拢、还没展开的地方。</strong> &quot;与&quot;&quot;或&quot;&quot;蕴含&quot;的走法留着；退位的是一种&quot;什么事都已经是非此即彼&quot;的感觉。——把量子性放进几何，本书走的是围绕一本学出来的账本的<strong>群胚</strong>这条路——只有群胚这条路才载得动他者 \([\sigma]\in H^2(\mathcal{R},\mathbb{T})\)。把所有语境铺成一张<strong>偏序</strong>的那条路<sup><a href="#fn-toposq" id="fnref-toposq" class="fn-ref">[toposq]</a></sup>，偏序底上没有它的自然居所，不是同一个 topos。这一层留附录。</p>
+<blockquote><p>被活出来：这解释了胡塞尔追问了一生的&quot;直觉从哪来&quot;。直觉既不是天上的柏拉图法则，也不是心理的习惯——它是一个活着的身体反复触碰世界、趋自洽的产物。它显得那么&quot;必然、那么先天&quot;，是因为你站在这个世界<strong>里面</strong>，看不见它是被一道道触碰撑起来的；从缝里往外看，看不见那面墙。</p></blockquote>
+<p><sup><a href="#fn-tradeoff" id="fnref-tradeoff" class="fn-ref">[tradeoff]</a></sup></p>
+<h2>6.3 那，日常那种铁板钉钉的确定感，是怎么回事？</h2>
+<p>如果直觉天生没有排中律，为什么你日常的感觉里，很多事就像铁板钉钉——要么是、要么不是，天经地义？</p>
+<p>因为那种铁板钉钉的确定感，是直觉的一个<strong>特例</strong>。是三种条件凑齐、且三种够不到恰好都被遮住时，露出的一小片平坦。这三个条件各有各的来路：</p>
+<p>- <strong>落脚</strong>：直觉得先有个站着的地方——那是下一节要讲的、它坐在他者障碍边缘的那一下。 - <strong>单语境内的确定</strong>：在一组彼此相容、可以同时感觉到的事实里，账本可对易，你的直觉自然就有非此即彼——在这一小片内，确定感是免得的（上一章步3 的副产品）。 - <strong>落盘后的确定</strong>：一件事非此即彼，靠的是它被登记了——落盘成既成事实。而这里有一个微妙处：这个世界无原子，没有天然的&quot;就是这么回事&quot;。确定感不是世界自带的，是<strong>登记这个动作制造</strong>出来的（J2：弥散代数上没有正规的二值点，确定感是落盘的产物）。</p>
+<p>三样凑齐，那种铁板钉钉的感觉就现出来了。但这只是一片<strong>平坦</strong>。平坦，是因为三种&quot;够不到&quot;恰好都被遮住了：横向的锚被遮住了，于是你觉得眼前的对错是绝对的，忘了它挂在一个会漂的视角上；纵向的未来被遮住了，于是你对将来的事，也生出一种&quot;反正它就在那儿&quot;的错觉；脚手架的维数被遮住了，于是你觉得什么东西，都能给出一个确定的值。<strong>那种铁板钉钉的感觉，就是三种够不到都被遮住时那一小片平坦；直觉原本的质地，是任何一种够不到一露头时就露出来的——感觉还开着，有些事还没定。</strong> 日常之所以觉得非此即彼天经地义，是因为日常恰好活在那片平坦上——遮蔽是常态，露头才显出底下的直觉质地。</p>
+<p>那<strong>科学</strong>呢？既然直觉天生不给你非此即彼的确定感，科学为什么偏偏用它？科学的立身之本是<strong>可重复实验</strong>——一次实验，定义上就是要<strong>落账</strong>的：把结果登记下来、让别人能照着再做一次、再登记一次。可重复，意味着每一次都被逼进&quot;非此即彼&quot;的登记；那种确定感，正是落盘的产物（上一节）。科学的方法——可重复、每次落账——只在那片平坦上运转。它把自己牢牢钉在三种够不到都被遮住的地方，那里确定感免得。科学用非此即彼的确定感，因为科学这套做法，本就只收落了盘的东西。</p>
+<p>还有最后一层。你或许会想：既然确定感是遮蔽的产物，那我应该能察觉到&quot;有东西被遮住了&quot;才对。可你察觉不到——而且察觉不到本身是有原因的。那层遮蔽，是你压出这片对易账本的同一个动作顺手做下的；而&quot;这片是压出来的、底下遮着三种够不到&quot;这句话本身，是一个判断，一旦你把它说出来、想把它登记下来，它就得先被压成一件对易的事实，落进这片平坦里——于是它也成了平坦的一部分，指不出平坦的边。<strong>账本登记不了它自己是被压出来的这件事</strong>：任何登记都已经在账本的格式里了。所以那片铁板钉钉的平坦，不只是遮住了三种够不到，它还遮住了&quot;自己是一片被压出来的平坦&quot;——它看起来就是世界本身。这不是错觉可以纠正的错，是有限者一压出事实、就必然附带的一层自我遮蔽。<sup><a href="#fn-epilogue6" id="fnref-epilogue6" class="fn-ref">[epilogue6]</a></sup></p>
+<h2>6.4 三种直觉的质地：定律、&quot;将会&quot;、&quot;大概&quot;</h2>
+<p>你的直觉，有三种最日常的走法。它们是上一章三座桥（规律、时态、概率）在你直觉里的形状。</p>
+<p><strong>&quot;凡是如此&quot;——定律感。</strong> 你不只在活——你开始给自己颁一条铁律：&quot;凡……则……&quot;，朝一切将来许下去。你感到一条定律（&quot;凡金属受热则膨胀&quot;），不是在做一个逻辑推导——是你的直觉对一切后续情形都有一种&quot;反正都会是这样&quot;的感觉。在我们的内语言里，全称量词 \(\forall\) 的意思正是&quot;对一切后续阶段都成立&quot;（细化序上的强制语义<sup><a href="#fn-kj" id="fnref-kj" class="fn-ref">[kj]</a></sup>，这条语义在范畴论里就叫<strong>筛</strong>）。所以，定律感不是一个悬在时间之外的事实，而是一份朝着一切未来延伸的承诺。这也解释了它为什么能和&quot;未来还能变&quot;并处而不打架：\(\forall\) 指向了未来，而未来，正是你的直觉里那扇还敞着的门。</p>
+<p><strong>&quot;将会&quot;——将至感。</strong> 你说&quot;将会下雨&quot;，不是在预报——是你的直觉在一切后续的展开里，感到一件事会成立。这是细化序上的一种&quot;将会&quot;模态，把时态接进了直觉的质地。</p>
+<p><strong>&quot;大概&quot;——有偏向但还没定感。</strong> 你说&quot;大概会赢&quot;，是在直觉的中间房间里再划层次：不是定、不是不定，是介于两者之间、有偏向的&quot;还没定&quot;。<sup><a href="#fn-prob6" id="fnref-prob6" class="fn-ref">[prob6]</a></sup></p>
+<p>三种直觉的走法，都长在同一套 Heyting 内语言上。</p>
+<p>你每天感受到的几乎都在这三格里。你感到&quot;金属一定膨胀&quot;——那是你直觉里的一个全称承诺，量到一切的将来。你感到&quot;明天大概会下雨&quot;——那是你在直觉的中间房间里，感到一个有偏向的区间。你感到&quot;他会来的&quot;——那个&quot;将会&quot;，是你把直觉挂在了一个尚未填充的细化序上。语言就是直觉在活人嘴里跑的样子——一套朝未来开着口的、时时在中间房间里感到偏向的、直觉主义的质地。</p>
+<blockquote><p>被活出来，&quot;凡金属受热则膨胀&quot;这种笃定，不是因为你数过了所有金属——是你对&quot;往后但凡遇到，都会这样&quot;有一种不必再看的托付。定律感的底，是一份朝着一切将来伸出去的信任，不是一次已经数完的清点。这也是它为什么能和&quot;未来还没定&quot;并处而不打架：它没有断言未来已经发生，它只是把自己押给了未来的每一次。你说&quot;他会来的&quot;，也是这样——不是你看见了他来，是你把一段还空着的将来，先交付了出去。</p></blockquote>
+<h2>6.5 直觉站在哪里：坐在他者障碍的边缘</h2>
+<p>直觉在你身上长出来了，能用了——但它<strong>站在什么上面</strong>？它的落脚点、它的&quot;奠立&quot;，是什么？</p>
+<p>先看那些让直觉得以站稳的东西：习惯。沉积下来的习惯——一套套你不需要主动去想、身体已经替你做熟了的做法——让你对世界的把握可以反复地、一致地稳定下来。这些可拉平的习惯，凑在一起，构成一个层；这个层，数学上有个名字，叫<strong>一阶上同调</strong> \(H^1\)<sup><a href="#fn-h1diff" id="fnref-h1diff" class="fn-ref">[h1diff]</a></sup>。</p>
+<p>现在问：你的直觉能不能把世界<strong>整个</strong>拉平——能不能对一切都有一个全局一致、处处对得上的把握？</p>
+<p>这里撞上了第四章那个他者。回忆一下：账本嵌进舞台，带着一个抹不平的二阶扭曲 \([\sigma]\)（他者）。用扩张的语言说：\([\sigma]\) 分类了一个扭曲的扩张，而&quot;把世界整个拉平&quot;，就是给这个扩张找一个<strong>全局的截面</strong>（一个 splitting）。**而有一条定义性的定理：全局截面存在，当且仅当 \([\sigma]=0\)**<sup><a href="#fn-split" id="fnref-split" class="fn-ref">[split]</a></sup>。</p>
+<p>所以：只要他者非零（\([\sigma]\neq0\)），一阶的拉平做得多熟，都拉不平整个世界——总在某处，你的直觉感到对不上。拉平能不能做到底，定义上就等于那个二阶的他者是不是零。障碍就是他者本身，不经任何中间的翻译。<sup><a href="#fn-h1lift" id="fnref-h1lift" class="fn-ref">[h1lift]</a></sup></p>
+<p>直觉的奠立就是坐在他者障碍的边缘：在一个直觉感到抹不平的世界里，挑一处能暂时站稳的局部，把感觉立在那里，同时感到再往外一点就对不上了。这有一个<strong>定义性的、标准的障碍</strong>撑着：他者那个非零的 \([\sigma]\)，让 &quot;全局拉平&quot; 不可能，逼着直觉只能局部奠立。直觉的落脚，是在一道抹不平的裂缝边上。</p>
+<blockquote><p>被活出来，这其实就是&quot;我不敢往下想了&quot;那种感觉的形状。你推一个结论、推到一个地方，再前一步就碰到一个你没办法、也不愿意再往前推的东西——那个人到底怎么想的、那件事为什么这么发生了。你沿着绳子往外爬，感到绳子在晃；你不再爬，就停在那里——那根绳子，原来就没拴在更远处。</p></blockquote>
+<h2>6.6 你借了一样东西：自指、Tarski 与哥德尔</h2>
+<p>直觉在你手里立住了、能用了。现在你做一件事：你让它指向自己。</p>
+<p>你先试一句指向别处的话。&quot;窗外在下雨&quot;——这句话指窗外，不指自己。没事。</p>
+<p>你再试一句指向自己、但已经落了盘的话。&quot;这句话已经登记在账本里了。&quot;——这句话说了自己。但它自己也是登记过的。落盘（B1）把自指拍平在一阶：你回头去查，它就在那，像任何一条记录一样，不绕圈。</p>
+<p>你再试一句指向自己、但还没落盘的话。&quot;我正在推这个结论。&quot;——这句话也指向自己。可你还在推、还没落盘。推理定义上不落盘，所以这句话没有制造一件需要被判定的事。推理的自指绕不上更高的塔——<strong>理由在&quot;不落盘&quot;，不在什么&quot;结合律封顶&quot;</strong>：推理没有付那道落盘的代价，不制造需要被判定的事实，所以它就到不了那个&quot;造出一件事、再回头指认这件事&quot;的层。<sup><a href="#fn-noweld" id="fnref-noweld" class="fn-ref">[noweld]</a></sup></p>
+<p>你感觉——目前为止，都还没出事。</p>
+<p>然后你试第三种。你不用一句话说&quot;我是真的&quot;或&quot;我正在推&quot;——你用借来的数数，造一个句子指向自己。你说：</p>
+<p>&quot;这句话，从下面这些公理里，推不出来。&quot;</p>
+<p>这个句子用上了数数。它用了&quot;这句话&quot;（一个可编号的对象）、&quot;这些公理&quot;（一组可被枚举的前提）、&quot;推不出来&quot;（一个可以编码的证明关系）。你借来的 ℕ，把它搭了起来。然后你检查：这句话是真的——它确实推不出来。可&quot;它推不出来&quot;这个判断，是你刚才用推理推出来的。它说的是&quot;我推不出我&quot;。而你推出来了它的&quot;推不出&quot;。</p>
+<p>你停下了。</p>
+<p>你借来数数，打开了一座没有顶的塔。第一种自指，落盘拍平在一阶；第二种，推理不落盘、上不了塔；第三种——用借来的 ℕ 造出来的句法自指——封不住。<strong>哥德尔的一切，都住在这一层。</strong></p>
+<p>从几何的那一侧看，这条线更加刺眼。</p>
+<p>你先在一套纯几何的理论里推——只有线、角、多项式。你发现：每一个句子，都能被判定真假。几何那一侧，完满、自洽（Tarski–Seidenberg，量词消去<sup><a href="#fn-tarski" id="fnref-tarski" class="fn-ref">[tarski]</a></sup>）。</p>
+<p>然后你允许自己<strong>数数</strong>——让这套理论也能说&quot;第一次、第二次&quot;。你一加上数数，那个句子就回来了：</p>
+<p>&quot;这句话，不能被证明。&quot;</p>
+<p>它是真的。但你不能在系统里证明它——因为那个证明，恰好就是它说自己没有的东西。你撞上了不完备（哥德尔<sup><a href="#fn-godel" id="fnref-godel" class="fn-ref">[godel]</a></sup>）。</p>
+<p>这条线是你自己走出来的：几何那一侧，你用几何的量词推，一切完满；你一引入数数，不完备就进来了。从 §6.1 借数数的那一刻，你就已经签了一份永远还不清的合同。悖论是借 ℕ 必付的利息。</p>
+<p>把这件事放到更大的背景下看。&quot;算不出来&quot;，在这个世界里不止哥德尔那一种。你亲手去摸三种不一样的&quot;算不出来&quot;——它们的质地根本不同。</p>
+<p>第一种。你让一台计算机跑一个问题，它永远跑不完。每一步都在算，每一步都还没到。答案是有的——但没有任何算法能在有限步里跑到它。你等，等不来。这是算法的够不到：有真值，你够不着。停在判定层的内语言里，有精确的层级：有些落在 \(\Sigma_1\)，有些落在 \(\Pi_2\)——&quot;对一切、存在某个&quot;，比停机还高<sup><a href="#fn-mipstar" id="fnref-mipstar" class="fn-ref">[mipstar]</a></sup><sup><a href="#fn-spectralgap" id="fnref-spectralgap" class="fn-ref">[spectralgap]</a></sup>。</p>
+<p>第二种。你敲一面鼓，另一个人敲另一面。形状不同，声音一模一样。你听不出哪面是哪面。两面鼓的形状各自是定的——只是耳朵收到的数据分不开它们。这是欠定的够不到。</p>
+<p>第三种。你面对另一个人。你永远不知道——他是不是另一个真的他者，还是只是你世界里一个看起来像他者、但其实能从你自己的结构里推出来的东西。这件事，你<strong>推不出、也证不伪</strong>。但要说准：&quot;推不出&quot;不等于&quot;没有答案&quot;——在任何一个给定的世界 \((\mathcal{M},\mathcal{A})\) 上，那个 \([\sigma]\) <strong>有一个确定的值</strong>（他者要么在、要么不在，是既成的事实）；只是这个值<strong>不由你的公理决定</strong>（第四章，元定理 W：站在这套形式系统里面，公理根本推不出他者是不是零）。答案在——但不在你手里的那套公理里，只能被领受、不能被算出。这正是&quot;起点被抛、他者被给予&quot;的另一面：被给予的东西有它确定的样子，你却生不出、也验不动它。</p>
+<p>所以，前两种（算法跑不完、谱反推不出）是&quot;有确定答案、但我够不着&quot;的认识边界。哥德尔（系统证不完自己），是你借 \(\mathbb{N}\) 必付的利息。而 \([\sigma]\)（有一个确定的值，但不由公理决定、只能被领受），则是<strong>被给予</strong>在计算层的样子：不是&quot;没有答案&quot;，是&quot;答案在、却不在你的公理里&quot;（真正&quot;不被决定&quot;的，是读法、是那道余圈——第零章 <sup><a href="02_start.html#fn-z17" id="fnref-z17" class="fn-ref">[z17]</a></sup> 早分清了，那才是没有事实可言的一侧；\([\sigma]\) 不是那一侧，它有事实、只是你够不着）。</p>
+<p>够不着，不等于不被决定。三种&quot;算不出来&quot;，别混。</p>
+<p>现在你回头。你在 §6.1 借来数数，背上了一笔债。说谎者——用句子说句子自己。罗素——用集合装集合。哥德尔——用数数编码证明。它们全是&quot;借来数数、用数数说自己&quot;这个制度下的条目。利息，从一开始就记在合同里了。</p>
+<p>还有一件必须诚实交代的事：<strong>这笔债，把本书自己也算进去了。</strong> 这套框架，一旦被形式化、借用了 ℕ 的句法，就同样落进哥德尔的辖区，同样证不了自己的一致性。本书不主张自己逃出了哥德尔——那是逃不出的。它主张的，只是：悖论有一张清楚的债表（说谎者、罗素、哥德尔，都是&quot;借用 ℕ 做自指&quot;这一制度下的条目），是借 ℕ 必付的利息。</p>
+<p>这笔债还有一层极深、却几乎照不见的本金：这套框架，连同一切形式系统、一切逻辑、一切&quot;这推出那&quot;，都建在一个更底的东西上——<strong>对易性</strong>。它就是&quot;可判断&quot;这件事本身的格式：一句话能分出真假、能落成一件确定的事，本身就已经预设了它正站在一片对易的账本上。而你没法为对易性再往下奠基，因为你用来奠基的每一样工具——推理、等号、&quot;同一个&quot;——都已经在用它了。你想问&quot;对易性从哪来&quot;，可你一开口问，就已经站在它上面。<strong>它是这本书能被写出来所站的那块地基，而书没法在自己内部为这块地基奠基。</strong> 说到底，对易性之于这本书，就像 \(\omega^*\)、像那个理解窗口 \(\mathcal{N}\)——是推不出的、只能从外面领受的东西。<sup><a href="#fn-commgrammar" id="fnref-commgrammar" class="fn-ref">[commgrammar]</a></sup>这本书对世界说的那句话——&quot;有些东西是被给予的、连公理都推不出&quot;——最后也落回到它自己头上：它写自己所用的那套逻辑的地基，正是它自己标出的那种&quot;被给予&quot;。</p>
+<p>面对这笔债，出路不在向上超越——不在宣称有一种非算法的心灵能凌驾于形式系统之上。出路是<strong>侧身</strong>——换一种不那么依赖借来句法的介质。那是很后面的卷才碰的方向。</p>
+<h2>6.7 逻辑在哪断：落定线</h2>
+<p>但借 ℕ 付的利息，不只在自指那座无界塔上。还有一笔更日常的——你每天讲道理的时候，就在付。</p>
+<p>你用普通逻辑推理——非此即彼、要么真要么假、排中。这套逻辑，什么时候才真的成立？只在一个地方：<strong>已经落定的账上</strong>。一件事一旦被观测完、登记进那本谁看都一样的公共账本，它就成了&quot;哪个角度读都同一个结果&quot;的东西——正是这个<strong>哪头读都一样</strong>（态那头读、算子那头读，落定之后完全重合），让二值逻辑在它身上免费。经典逻辑不是天条，它是账本的原住民。</p>
+<p>可一旦你把同一套逻辑，用到一件<strong>还没落定</strong>的事上——一个还开着的未来、一个你没探进去的他者的内里、一件正在成形还没定型的东西——你就在偷偷做一件账本不允许的事：你假设它&quot;要么真、要么假&quot;，可它还没被测量、还没选定从哪个角度看，那个&quot;二值&quot;根本还不存在。你以为你在讲道理，其实你在往一件活的事上，偷偷焊死一个锚。</p>
+<p>所以逻辑也有它够不到的地方，而且这地方最隐蔽——因为它不像一堵墙那样拦着你，它让你以为你一路畅通、句句在理。真相是：<strong>逻辑只在已经付清的账上免费；越过那条&quot;落定&quot;的线，它就断了。</strong></p>
+<p>逻辑断在哪儿、断得多厉害，它并没有消失得无影无踪，而是沉淀成了<strong>世界的形状</strong>。那些彼此对不齐的角度之间、那本黏不成一整本的账留下的落差，正是你在下一章要看到的几何。量子引力里那些跨语境粘不起来的概率、contextuality 那道上同调障碍（Abramsky–Brandenburger 那套 \(H^1\)/\(H^2\) 障碍）——是同一个形状在不同尺度上的影子<sup><a href="#fn-contextcare" id="fnref-contextcare" class="fn-ref">[contextcare]</a></sup>。逻辑合不上的地方，世界就鼓出一道弯。断裂没有被填平，它被沉淀成了空间。</p>
+<h2>6.8 直觉撞见的那道缝</h2>
+<p>现在，顺着你的直觉最自然的走向，走到它的尽头。它会在自己肚子里撞见一样对不上的东西。这是本章的末尾，也是全书的一道悬崖。</p>
+<p>你的直觉从 §6.1 起步时，手里握着 \(\mathbb{Q}\) 的锐性：每一个有理数都非此即彼，&quot;大于&quot;&quot;小于&quot;&quot;等于&quot;每一个都判得出。足够计数，足够落盘。直觉觉得：再往前走一步——做一个分割，把 \(\mathbb{Q}\) 搭成一根连续的实数线——应该是顺理成章的事。</p>
+<p>**第一步：\(\mathbb{Q}\) 锐。** 这是算子读给你的全部确定感。每一个数、每一个等号、每一次落盘，都铁板钉钉。你用它计数，用它给桩编号，用它判定 &quot;是&quot; 或 &quot;不是&quot;。\(\mathbb{Q}\) 的锐性到此为止，是你直觉里最远的那片已知陆地。</p>
+<p><strong>第二步：做分割，想搭一个连续统出来。</strong> 在 topos 内部对 \(\mathbb{Q}\) 做 Dedekind 切割——把全部有理数分成下集和上集，把那个边界点当作一个新的 &quot;实数&quot;。切割出来的对象，在数学上叫内部 Dedekind 实数（\(\mathbb{R}_{\text{int}}\)，以区别于柯西实数，两者在一般 topos 内不同构）<sup><a href="#fn-dedekind" id="fnref-dedekind" class="fn-ref">[dedekind]</a></sup>。但这里有一件事翻不过去：这个对象上的等号—— &quot;\(x\) 恰好等于 \(r\)&quot;——<strong>不能判定</strong>。真值在 \(\bot\) 与 \(\top\) 之间，问不出，不是没想清楚，是分割这个构造本身的产物<sup><a href="#fn-apart" class="fn-ref">[apart]</a></sup>。离开 \(\mathbb{Q}\) 的第一步，你的直觉就跨进了一片钝的领地——等号不再非此即彼。</p>
+<p><strong>第三步：认知不认。</strong> 你的直觉手里握着的那根 &quot;每个数非此即彼&quot; 的实数轴，内部没有对象可兑现。你想把每一次分割当作一个精确的点来读——点性态度——但这笔借条在内部兑不了。这不是 KS——KS 管的是跨语境的全局锐化。这里说的是更根上的事：单个语境内部，离开 \(\mathbb{Q}\) 之后，连 &quot;等于 \(r\)&quot; 这个判定都写不出来。</p>
+<p><sup><a href="#fn-twoblunts" id="fnref-twoblunts" class="fn-ref">[twoblunts]</a></sup></p>
+<p>而这道&quot;搭不出锐连续统&quot;的缝，正是下一章那块板要跨的。直觉在这里撞的墙——想要一根既连续又逐点可读的实数轴，内部却兑不出——第七章会用一块<strong>装上去的</strong>板绕过去；但那块板是借来的、要付态外位的代价（第三章 §3.1 早已定过：锐的连续统值，唯一的落脚处就是那块板）。所以这道缝不是无解，它的&quot;解&quot;是付代价装板、不是内生。直觉此刻站在缝前，下一章教它怎么在缝上架一块借来的桥。</p>
+<p>就是这里——直觉从 \(\mathbb{Q}\) 的锐，跨进 Dedekind 实数对象的钝，想用点性态度去读它——撞上了一道合不上的缝。</p>
+<p>同一时间，你回头看一眼那件每天都在做的事：<strong>说一句 &quot;还在&quot;。</strong></p>
+<p>&quot;杯子还在桌上。&quot;你这样说。你上次见到杯子是今天早上，现在天已经黑了。中间这十几个小时，杯子没被看到。你凭什么断定它 &quot;一直在&quot;？</p>
+<p>你把这件事拆开，会看见两个同时发生的动作，来自两本不同的账。</p>
+<p>第一个动作，来自算子读那本。你在这道流上打了一枚标记——&quot;早上见到杯子的那一次&quot;。流的先后顺序——III₁ 没有节拍（\(S(\mathcal{M})=[0,\infty)\)，Connes 1973；见第七章脚注），没有天然的刻度，你钉进去的标记只能是遭遇本身——&quot;那次&quot;。这就是 \(\mathbb{Q}\) 的锐性在这里显形了：分辨一步一步展开，每一步落成一个可数的桩。算子读给了你桩——落盘铸的离散投影，每个非此即彼。</p>
+<p>第二个动作，来自态读那本。桩与桩之间隔着一片空——从早上到现在，杯子没被看到。被看到的只有一件事：<strong>你的绵延没断</strong>。滞留撑着刚过去的一瞬，前摄预着下一瞬——这片 &quot;没断&quot;，是态读那面给你的连续先后顺序（Connes 余圈对 \(t\) 强连续，第五章）。你没有 &quot;杯子一直在&quot; 的证据，你只有 &quot;我一直是连着走的&quot; 的感觉。你把这感觉——被给予的连续——过户给杯子。</p>
+<p>两个动作，两种原料。桩是可数的、锐的——\(\mathbb{Q}\) 的脾气，算子读的产物。连续是钝的、无刻度的——态读白送的。它们来路不同，来自两本互盲的账。可数是可数，连续是连续——<strong>桩钉在流上，给了你地址；流填满桩之间，给了你连续。但两样东西之间，没有一把天生的尺子能把它们对上。</strong> 你每次说 &quot;还在&quot;，都在同时用这两样东西搭一小块板；板底下那道缝，你不填——你只是从上面走过去。</p>
+<p>同一道缝，三副面孔。</p>
+<p>现象学那副，刚说完：可数的桩和活的连续，来路不同，板是搭的不是长的。</p>
+<p>数学那副，在数字上精确可见：\(\mathbb{Q}\) 的锐性止步于分割；做 Dedekind 切割，出来的对象等号不可判定（D4.7）；你想用的 &quot;每个分割就是一个点&quot; 那根锐实数轴，内部没有对象。锐性没有内部对象——点读法是一笔连内部都兑现不了的借条。</p>
+<p>结构那副，是那个更广的后果：单语境里可以锐化（谱定理），全局锐化要求一套一致的隐变量——KS 说做不到<sup><a href="#fn-ks" class="fn-ref">[ks]</a></sup>。但缝比 KS 更早——离开 \(\mathbb{Q}\) 就没有锐对象，不等跨语境就已经在。\(\mathbb{Q}\) 的锐性止步、Dedekind 的钝接手、点读法的借条兑不了现——三步，每一步都在 KS 那堵墙之前就已经在了。</p>
+<p>三副面孔说的是同一件事：从根上就没有那把绝对的尺子。</p>
+<p>然后你感到三种冲动。它们是同时来的。</p>
+<p>第一种。你想把它抹平。你忍不住想——要没有他者就好了，世界就能整张拉平、干干净净。你试过。\([\sigma]\neq0\)——那条定理拦在你面前：全局拉平不存在。</p>
+<p>第二种。你想把它补全。你忍不住想——未来也已经定了，排中律能通到将来，现在就能说以后的事。你试过。\(D\) 只朝过去有定义——未来那一侧，没有定义域。</p>
+<p>第三种。你想把它锐化。你忍不住想——每一个钝量，底下都有一个精确的数值，只是还没找到。你试过。KS 拦住了你：全局锐化不可能。所有语境同时有确定点值——结构上做不到。</p>
+<p>抹平、补全、锐化——三种想把那道缝填上的冲动，各自撞在一条已经立好的定理上。你放下了手。</p>
+<p>你放下了手，但你还有一件事没放下——一件你做得到的事。</p>
+<p>态读是承受。历史一致性算法只筛，不写，不推——它让你看见你的态能容得下什么，但容不下的那些，它不告诉你。你光是感受、光是承受，就永远停在同一个中心化子里——读到的全是已经冻上了的东西。</p>
+<p>落账是推进。每次落账，你把你当前的态里已经退相干的那部分——你能非此即彼的那些事——抽出来，写成一条谁看都一样的公共记录。你写一封你信服的邮件。你推一个你觉得自己彻底想通了的道理。你反复磨、反复推，一直推到写不下去了、推不平了。</p>
+<p>剩下来的就是残差。残差不是&quot;写错了&quot;——是这笔账，在你这个锚里怎么都落不下去。你在自己的中心化子里冰了一片，读不到不一致；但残差从冰冻区外面摸进来——它告诉你：你的锚，到这里就封顶了。</p>
+<p>态读让你看见你的态能把什么搓成一致。落账让你看见你站在哪儿搓不下去了。</p>
+<p>你的直觉走到了这里。它从算子读起步，手里握着 \(\mathbb{Q}\) 的锐；想再往前走一步——搭一个连续的、到处能钉点的世界——踩进了态读的地盘，撞上了另一本账不给对上的东西。\(\mathbb{Q}\) 的锐止步于分割，Dedekind 实数内部是钝的，点读法的借条兑不了现。桩是可数的，连续是钝的。没有一把天生的尺子能把它们对上——因为从一开始，就没有那把绝对的尺子。</p>
+<p>这道缝，直觉合不上。</p>
+<p>认知拿什么，去面对一道自己合不上的缝？</p>
+<blockquote><p>分割做出来了。全部有理数分成两堆，边界立在那里，等着被读成一个点。<br>
+<br>
+一直到这一步，都还顺——一步接一步，锐的、可数的，每一下都落得干脆。<br>
+<br>
+去读那个边界点。<br>
+<br>
+读不出。<br>
+<br>
+不是没读清，不是还差一道手续。是那里，没有一个点。你手指合拢的地方，是空的。<br>
+<br>
+你回头找那个&quot;本该在那里的点&quot;。你找不到。而这一次，连&quot;够不到&quot;都谈不上——因为你一直在做的那件事，把每样东西都读成一个点，这一下，读了个空。你要的那个点，不是躲得太深你够不着，是那里，从来没有点可读。<br>
+<br>
+那把能把可数的桩和钝的连续一次量尽的尺子，从来没有在过。不是丢了，是没有过。<br>
+<br>
+前面每一章，你伸手都摸到过一个&quot;够不到&quot;，那些够不到还有个形状。这一次，你伸手去读一个点，那个你一直在用的读法，却读了个空——连&quot;点&quot;这个东西，原来都是你自己带来的。<br>
+<br>
+它不给你下一句。它就停在这里。</p></blockquote>
+<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<li id="fn-bluntcare" class="footnote"><a href="#fnref-bluntcare" class="fn-back" title="返回引用处">↩</a>这里要拦两个最容易犯的混淆，先钉住。其一：<strong>钝不是他者</strong>。两样东西听着都&quot;没有尽头&quot;，但一个是&quot;值永远收不到一个点&quot;（钝，弥散，态这一侧就够得着），一个是&quot;记录永远拼不平的那处扭曲&quot;（他者，要账本立起来才谈得上、比这里高一整阶）——够不到的那个当不了这里的钝。其二：<strong>钝不是&quot;连续加上不可逆&quot;打包成的东西</strong>。钝是弥散——横着切、永远切不到原子；不可逆是另一根轴——纵着走、回不来。两根轴都源于无迹，却不是一回事：一片钝的浓淡完全可以配一道可逆的流。别把它们卷成一团。</li>
+<li id="fn-epilogue6" class="footnote"><a href="#fnref-epilogue6" class="fn-back" title="返回引用处">↩</a>看清这层遮蔽、却仍然一如既往地过日子——仍然把桌子当桌子、把昨天当昨天——这是本书最后（尾声）才回得来的一个姿态；这里只把它标出来：确定感这片平坦，是造出来的，而造它的动作把&quot;造&quot;这件事也一并抹平了。</li>
+<li id="fn-noweld" class="footnote"><a href="#fnref-noweld" class="fn-back" title="返回引用处">↩</a>要避开一个错焊：不能说&quot;结合律严格就把 \(H^2\) 封顶了&quot;——严格结合只平凡化结合子那一个 3-余圈，管不到 \(H^2\)；而 \(H^2\) 恰恰是他者内核 \([\sigma]\) 住的地方，若它被结合律&quot;封&quot;住，就等于说他者被结合律管着，与&quot;他者连公理都推不出&quot;直接冲突。推理不上塔，是因为它不落盘，与结合律无关。</li>
+<li id="fn-prob6" class="footnote"><a href="#fnref-prob6" class="fn-back" title="返回引用处">↩</a>这一层——直觉内部的概率——完整的机器相当重，本节只给方向：概率是直觉的分级细化，住在 \(\bot\) 与 \(\top\) 之间那些中间房间里的有序结构。完整构造留待另处。</li>
+<li id="fn-h1lift" class="footnote"><a href="#fnref-h1lift" class="fn-back" title="返回引用处">↩</a>一阶的那些拉平方式，\([\sigma]=0\) 时它们的全体构成一个 \(H^1\) 的空间——那是&quot;有多少种拉平法&quot;的参数；可 \([\sigma]\neq0\) 时，这个空间是<strong>空的</strong>，一种全局拉平法都没有。\(H^1\) 管&quot;有多少种拉法&quot;，\([\sigma]\) 管&quot;到底有没有一种&quot;。</li>
+<li id="fn-measure6" class="footnote"><a href="#fnref-measure6" class="fn-back" title="返回引用处">↩</a>后面那个最极端的判定——测量、落盘——正是这一点的顶峰：它不是一个可逆的动力学过程，是那记非此即彼的<strong>承诺</strong>，所以它才那么不像物理里别的过程。</li>
+<li id="fn-tradeoff" class="footnote"><a href="#fnref-tradeoff" class="fn-back" title="返回引用处">↩</a>推理不落盘，会不会&quot;不算数&quot;？恰恰相反——不落盘正是推理不被决定处。它可以反复试、可以走死胡同再退回来，而不必为每一步付出 B1 那道不可逆的代价。代价是：它换不来二值的确定，那个确定只有真正落盘的测量才给。推理买的是一个不被决定的试错余地，卖的是确定。</li>
+<li id="fn-commgrammar" class="footnote"><a href="#fnref-commgrammar" class="fn-back" title="返回引用处">↩</a>不过这里要补一层分别，免得把三样东西说成一样：\(\omega^*\) 和 \(\mathcal{N}\) 是<strong>世界那头</strong>给的——具体的一个态、一个窗口；而对易性不是世界的属性，是<strong>认知这头</strong>为了能有&quot;事实&quot;而必须自带的格式——它是&quot;事实&quot;这个词的语法。所以严格说，对易性不是被世界给予，是被有限性逼出：一个握不住全部、必须切块共享的有限者，要有可反复指认的事实，就不得不把账本压成对易的。三样都推不出、都只能领受，但来路不同：两样从世界领受，对易性从有限性领受。</li>
+<li id="fn-twoblunts" class="footnote"><a href="#fnref-twoblunts" class="fn-back" title="返回引用处">↩</a>顺手分清两个&quot;钝&quot;，别当成一个：这里这个&quot;钝&quot;——等号不可判定——是 topos 内部 Dedekind 构造的产物，根在<strong>直觉主义的分割构造</strong>；它和第三章那个&quot;维数值定义不出&quot;的钝不是一回事，那个根在<strong>无迹</strong>（要截断才有值）。两个钝都源于这台机器，但一个来自内部逻辑、一个来自无迹，别混成一个。</li>
+<li id="fn-h1diff" class="footnote"><a href="#fnref-h1diff" class="fn-back" title="返回引用处">↩</a>更准确地说：不同的拉平方式<strong>之间的差</strong>，构成 \(H^1\)——习惯本身是一个已经选定的拉平方式，习惯<strong>与习惯之间的差</strong>才是这个 \(H^1\) 的元素</li>
+<li id="fn-contextcare" class="footnote"><a href="#fnref-contextcare" class="fn-back" title="返回引用处">↩</a><strong>形式同型，不是同一个类</strong>：本书的 \([\sigma]\) 与 contextuality 障碍形式上像，但不是同一个上同调类；结构同型，非物理预言，元规则 M</li>
+<li id="fn-brouwer" class="footnote"><a href="#fnref-brouwer" class="fn-back" title="返回引用处">↩</a>传统对应（同型，非把诸家收编为本框架推论；本书只指出&quot;逻辑关乎验证主体、真值系于主客对齐&quot;这条线索与本机器的判定结构同形）：Brouwer/Heyting 的 <strong>BHK 解释</strong>——命题为真＝主体持有一个构造/验证（直觉主义逻辑本即&quot;验证着的主体&quot;的逻辑）；Kant，*Kritik der reinen Vernunft*，先验逻辑——判断＝把感性直观纳入知性概念（&quot;直观无概念则盲，概念无直观则空&quot;），与本处&quot;感觉给定→结论&quot;的对齐同构；Brandom, R., *Making It Explicit* (1994)，推论主义——意义活在前提→结论的推论关节里；Husserl，noesis（意向作用/主观侧）／noema（意向相关项/客观侧），及《形式与超越论逻辑》（客观逻辑结构系于主观构造活动）。诚实边界：这些是传统对应，非本框架的证明；本框架只提供其代数形（判定＝视角对内容的裁决、真值＝主客对齐检验的分级）。</li>
+<li id="fn-dedekind" class="footnote"><a href="#fnref-dedekind" class="fn-back" title="返回引用处">↩</a>topos 内部实数取<strong>戴德金</strong>实数对象（一般 topos 内戴德金与柯西实数不同构，本书用戴德金）；在层 topos 中戴德金实数对象＝连续/可测实值函数的层。见 Johnstone, P. T., *Sketches of an Elephant: A Topos Theory Compendium*, Oxford Logic Guides <strong>43–44</strong>, Oxford University Press (2002), §D4.7。</li>
+<li id="fn-ks" class="footnote"><a href="#fnref-ks" class="fn-back" title="返回引用处">↩</a>Kochen, S., Specker, E. P., &quot;The problem of hidden variables in quantum mechanics,&quot; *J. Math. Mech.* <strong>17</strong> (1967), 59–87。无一套整体赋值使一切对易语境同时有确定点值；本书用于&quot;跨语境不能同时二值化&quot;（结构腿，§6.2）与&quot;全局锐化不可能&quot;（§6.8）。</li>
+<li id="fn-kj" class="footnote"><a href="#fnref-kj" class="fn-back" title="返回引用处">↩</a>细化序上的强制（Kripke–Joyal）语义：预层/层 topos 内 \(\forall\) 量化到一切后续阶段；标准，见 Mac Lane, S., Moerdijk, I., *Sheaves in Geometry and Logic: A First Introduction to Topos Theory*, Universitext, Springer (1992), Ch. VI。</li>
+<li id="fn-split" class="footnote"><a href="#fnref-split" class="fn-back" title="返回引用处">↩</a>\([\sigma]\in H^2(\mathcal{R},\mathbb{T})\) 分类扭曲扩张 \(1\to\mathbb{T}\to\Sigma\to\mathcal{R}\to1\)；**全局 splitting（截面同态）存在 \(\iff[\sigma]=0\)**（定义性障碍，Schreier 理论群胚版／Feldman–Moore）；splitting 非空时全体＝\(H^1(\mathcal{R},\mathbb{T})\)-torsor（&quot;拉平方式之差&quot;）。\([\sigma]\) 是扩张类障碍、非任何 \(H^1\to H^2\) 连接同态之像（详见附录）。</li>
+<li id="fn-tarski" class="footnote"><a href="#fnref-tarski" class="fn-back" title="返回引用处">↩</a>一阶实闭域理论完备且可判定（量词消去）：Tarski, A., *A Decision Method for Elementary Algebra and Geometry* (2nd ed., rev.), University of California Press (1951)。<strong>辖区＝一阶实闭域，不扩大为&quot;本书几何整体完备&quot;。</strong></li>
+<li id="fn-godel" class="footnote"><a href="#fnref-godel" class="fn-back" title="返回引用处">↩</a>Gödel, K., &quot;Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I,&quot; *Monatshefte für Mathematik und Physik* <strong>38</strong> (1931), 173–198：解释足够算术（Robinson Q 以上）的一致递归可公理化理论不完备，且不能证明自身一致性。<strong>含本框架自身一经形式化的情形——债已入账。</strong></li>
+<li id="fn-mipstar" class="footnote"><a href="#fnref-mipstar" class="fn-back" title="返回引用处">↩</a>\(\text{MIP}^*=\text{RE}\)：Ji, Z., Natarajan, A., Vidick, T., Wright, J., Yuen, H., *Commun. ACM* <strong>64</strong> (2021), 131–138。量子多体交互证明的判定能力＝递归可枚举，\(\Sigma_1\)-完备（停机问题层）。此处用于&quot;算法跑不完＝认识论边界 G&quot;，非&quot;不被决定&quot;。<strong>作为&quot;有真值却算不到&quot;的外部实例引，非本框架内部定理</strong>：MIP\*=RE 关于量子多体交互证明，不是这台 \(\text{III}_1\) 机器内部证出的结论。</li>
+<li id="fn-spectralgap" class="footnote"><a href="#fnref-spectralgap" class="fn-back" title="返回引用处">↩</a>谱隙不可判定：Cubitt, T., Pérez-García, D., Wolf, M. M., *Nature* <strong>528</strong> (2015), 207–211（正式证明 *Forum Math. Pi* <strong>10</strong> (2022), e14）。\(\Pi_2\)-完备，较停机问题更高、更不可及。同属&quot;够不着&quot;（G），非不被决定。<strong>作为外部实例引，非本框架内部定理</strong>：谱隙不可判定关于格点哈密顿量，不是 \(\text{III}_1\) 机器内部的定理。</li>
+<li id="fn-apart" class="footnote"><a href="#fnref-apart" class="fn-back" title="返回引用处">↩</a>直觉主义/topos 实数上，等号一般不可判定（apartness 关系是基本的，\(x=y\) 的真值一般非 \(\top/\bot\)）：Johnstone, P. T., *Sketches of an Elephant: A Topos Theory Compendium*, Oxford Logic Guides <strong>43–44</strong>, Oxford UP (2002), §D4.7；Fourman, M. P., Scott, D. S., *Sheaves and logic*, in: Applications of Sheaves, Springer LNM <strong>753</strong> (1979), 302–401。本书校正：内部 Dedekind 实数 \(\mathbb{R}_{\text{int}}\) 是<strong>钝</strong>的（等号不可判定）；\(\mathbb{Q}\) 的锐性止于分割。认知手里的銳实数轴是一笔内部兑现不了的借条（点性态度）；D 七章板 = 让该借条生效的机器。</li>
+<li id="fn-toposq" class="footnote"><a href="#fnref-toposq" class="fn-back" title="返回引用处">↩</a>量子理论的 topos 处理不唯一：把量子性放进几何有多条路——语境<strong>偏序</strong>上的谱预层：Isham, C. J., Butterfield, J., &quot;Topos perspective on the Kochen–Specker theorem: I. Quantum states as generalized valuations,&quot; *Int. J. Theor. Phys.* <strong>37</strong> (1998), 2669–2733；Döring, A., Isham, C. J., &quot;A topos foundation for theories of physics: I–IV,&quot; *J. Math. Phys.* <strong>49</strong> (2008), 053515–053518／Bohr 化内 C\*-代数：Heunen, C., Landsman, N. P., Spitters, B., &quot;A topos for algebraic quantum theory,&quot; *Comm. Math. Phys.* <strong>291</strong> (2009), 63–110／本书的 Cartan <strong>群胚</strong>＋gerbe：Feldman–Moore 1977（同 <sup><a href="#fn-split" class="fn-ref">[split]</a></sup>）。三者不等价（底几何不同、输入不同）；他者 \([\sigma]\in H^2(\mathcal{R},\mathbb{T})\) 是不可拉平的扭曲类——它的自然居所是群胚（Cartan 对），偏序底上没有它的自然居所（非&quot;不可能&quot;——只是本书需要在群胚上陈述它，故不选偏序路线）。这也是为什么本书的量子 topos 必须走群胚路线而非偏序路线。</li>
+</ol></section>
+<p id="status">正在渲染公式…</p>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var st = document.getElementById('status');
+  if (typeof renderMathInElement !== 'function') {
+    st.className = 'err';
+    st.textContent = 'KaTeX 未加载（请确认 vendor/katex 文件夹完整）。';
+    return;
+  }
+  try {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });
+    st.textContent = '公式已由 KaTeX 渲染（本地，无需联网）。';
+  } catch (e) {
+    st.className = 'err';
+    st.textContent = 'KaTeX 渲染出错: ' + e;
+  }
+  if (location.hash && location.hash.indexOf('fn-') === 1) {
+    var el = document.getElementById(location.hash.slice(1));
+    if (el) el.scrollIntoView({ block: 'center' });
+  }
+});
+</script>
+</body>
+</html>

@@ -24,12 +24,12 @@ files = [
 ]
 
 SAFE_NAME = {
-    "导论": "导论",
-    "零": "0-起点", "一": "1-两流对仗", "二": "2-意向性与中心定理",
-    "三": "3-三种不可知与禁格", "四": "4-他者",
-    "五": "5-世界topos", "六": "6-直觉的诞生",
-    "七": "7-断言板", "八": "8-经典世界的来源",
-    "九": "9-边界的图", "尾声": "10-尾声", "附录": "11-附录W",
+    "导论": "introduction",
+    "零": "start", "一": "twostreams", "二": "intentionality",
+    "三": "unknowable", "四": "theother",
+    "五": "worldtopos", "六": "intuition",
+    "七": "assertion", "八": "classicalworld",
+    "九": "boundary", "尾声": "epilogue", "附录": "appendixW",
 }
 
 PH_INLINE = "⟦MATH:{0}⟧"

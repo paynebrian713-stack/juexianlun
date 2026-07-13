@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第三章 · 三种不可知与禁格</title>
+<style>
+  body { max-width: 46rem; margin: 2rem auto; padding: 0 1.2rem;
+         font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+         font-size: 1.05rem; line-height: 1.75; color: #1a1a1a; }
+  h1 { font-size: 1.55rem; border-bottom: 1px solid #ddd; padding-bottom: .35rem; }
+  h2 { font-size: 1.22rem; margin-top: 1.8rem; }
+  h3 { font-size: 1.08rem; }
+  blockquote { border-left: 3px solid #bbb; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #333; }
+  code { background: #f5f5f5; padding: .08em .3em; border-radius: 3px; font-size: .9em; }
+  pre { background: #f5f5f5; padding: .75rem; overflow-x: auto; border-radius: 4px; }
+  .nav { font-size: .88rem; margin-bottom: 1.2rem; color: #666; }
+  .nav a { color: #0366d6; text-decoration: none; }
+  .math-block { text-align: center; margin: 1.2rem 0; overflow-x: auto; }
+  .katex-display { margin: 1rem 0; overflow-x: auto; }
+  a.fn-ref { color: #0366d6; text-decoration: none; font-weight: 600; }
+  a.fn-ref:hover { text-decoration: underline; }
+  .footnotes { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: .92rem; }
+  .footnotes h2 { font-size: 1rem; color: #666; margin-top: 0; }
+  ol.footnotes { padding-left: 1.4rem; }
+  li.footnote { margin: .65rem 0; }
+  li.footnote:target { background: #fff8e6; margin-left: -0.4rem; padding: .35rem .4rem; border-radius: 4px; }
+  a.fn-back { color: #666; text-decoration: none; margin-right: .35rem; }
+  a.fn-back:hover { color: #0366d6; }
+  .fn-back-list { margin-left: .25rem; font-size: .85em; color: #888; }
+  .fn-back-list a { color: #888; text-decoration: none; }
+  .fn-back-list a:hover { color: #0366d6; text-decoration: underline; }
+  #status { font-size: .85rem; color: #888; margin-top: 2rem; }
+  #status.err { color: #c00; }
+</style>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<script defer src="vendor/katex/katex.min.js"></script>
+<script defer src="vendor/katex/auto-render.min.js"></script>
+</head>
+<body>
+<p class="nav"><a href="index.html">← 目录</a></p>
+<h1>第三章 · 三种不可知与禁格</h1>
+<p>上一章那道墙，把&quot;两股缝成一条&quot;的路堵死了。缝合不拢，就等于说：认知有一圈够不到的边界。</p>
+<p>这一章不往前走。中心定理那道墙很硬，走过之后得有个慢拍——先停下来，把这圈边界数清楚：它们恰好是三种，围着一个空着的位置。数完，下一章再回到缝里，去看那处更特别的东西——他者。</p>
+<h2>3.0 承接：先停下，把够不到的边界数清楚</h2>
+<p>到这里，&quot;认知够不到某些东西&quot;已经撞见过几次：视角挣不来（第二章）、未来定义不出（第一章）、还有维数那种&quot;问它凭什么是这个数、就得站到世界外去&quot;的够不到（第二章 R★ 已埋过根）。这一章要做的，就是把这些&quot;够不到&quot;数清楚、归好类——待会儿会看到，它们分别就是横向的锚、纵向的未来、维数的脚手架。</p>
+<p>先说清一件事，免得后面混。本章讲的是<strong>够不到的位置</strong>——那些俯瞰性的、态外的位置，根本不存在；不是<strong>够得到、却不可对象化的东西</strong>——那个抹不平的他者。前者是本章的&quot;禁格&quot;，后者是第四章的他者。两者都叫&quot;边界&quot;，但一个是位置不存在，一个是东西不可把握，分属两章。</p>
+<h2>3.1 三种不可知，就是前面遇到过的那三个</h2>
+<p>把认知够不到的边界数一数，会发现：它们<strong>就是前面已经撞见过的那三个具体的够不到</strong>。</p>
+<p>先说清&quot;三种&quot;是按什么数的。这一章的三种，是沿两个坐标分的——<strong>补给物能不能被典范地给出</strong>，以及<strong>那个位置能不能被占据（可居）</strong>。要注意，这和另一种按&quot;够不到的性质&quot;来分的表，不是同一张。两张表看的是同一批边界的不同侧面。<strong>这一章数的，是位置的可居与典范，而不是性质。</strong> 有意思的是，本章这三种不可知，恰好各占了另一种表的一个类型：横向是判定不了（锚没法选），纵向是无物（还没发生），脚手架是病句（硬把钝的当锐的用）。把它们摆在一起，是为了看清&quot;能不能居、典不典范&quot;这个侧面，并不意味着它们是同一种东西。</p>
+<p><strong>横向不可知，就是参考态的锚。</strong> 判定任何一件事，都得先固定一个判定用的参照——判定锚 \(\omega_{\text{ext}}\)，也就是第二章那个外接的第二个态。这个判定锚<strong>可居</strong>：你判定时，总已经站在某个锚上。但它<strong>非典范</strong>：该用哪个锚，没有结构挑定的答案，那些候选随 Connes 余圈漂移，没有一个是天生的原点。这其实是全书<strong>第一个被认出</strong>的不可知——而且&quot;不可知&quot;这个概念本身就从这里起源（要区分：横向是时间序上<strong>第一个被认出</strong>的；而它们共同的<strong>来源</strong>，是那个无迹的禁格，见 §3.4——那是逻辑序上的根）。无迹，意味着没有态外位、没有一把不依赖任何态的绝对尺子；于是判定必须外接第二个态当参照，而这第二个态永远选不出典范的那一个。<strong>第一个不可知，就是这个第二态的非典范性</strong>；后面两种不可知——未来、脚手架——都是照着这个原型认出来的。</p>
+<p><strong>纵向不可知，就是未来。</strong> 未来的窗口 \(\sigma_{+\lambda}(\mathcal{N})\) 需要当下之外、尚未被给予的材料。那里<strong>无物</strong>，谈不上典范不典范，也无处可居。未来不是&quot;难算的已有之物&quot;，是&quot;还没有的东西&quot;。</p>
+<p><strong>脚手架不可知，就是断言板。</strong> 要把这个世界里那些钝的量，当成锐的实数轴来用——好去测量、去算——就得搭一块<strong>脚手架</strong>：一块把钝量当锐实数来使的板，也就是第七章的断言板。</p>
+<p>别把它听成一块可有可无的权宜之板。往后（第七章）会看到：在这台机器里，锐的实数<strong>连续统</strong>值根本没有别的地方可以安放。这里说的不是零散的有理数——那些在 \(\mathbb{Q}\) 里本来就是锐的——是那根<strong>连续</strong>的、逐点可读的实数轴。这台机器内部长不出这样一根锐轴：它内部的实数轴等号不可判定，天生是钝的。所以想要一根锐的实数轴，只能靠这块板搭出来。这块板不是修补的诸多办法之一，是<strong>锐的连续统值唯一能落脚的方式</strong>。</p>
+<p>可它<strong>不可居</strong>：它是被外部对象化出来的一套标度，不是主体能站上去活的地方。它<strong>可以典范地构想、可以组织起一切逼近</strong>，可它底下并没有一座常在的桥。</p>
+<p><strong>维数，是这块板上的一个具体条目</strong>。维数的<strong>存在性</strong>是典范给定的，刚硬到连标度都不用选；但维数的<strong>具体值</strong>，是这块板搭出来的东西，而且在这台无迹的机器里根本<strong>定义不出来</strong>——要付代价截断才有值。所以别把第三个不可知窄化成&quot;维数&quot;：脚手架比维数大，维数只是它四层分解里的一层。第三个不可知的真身，其实是<strong>&quot;硬要拿钝量当锐实数用，就只好搭一块底下没桥的板&quot;</strong>这件事本身。</p>
+<p>所以&quot;三种不可知&quot;，是把三个已经遇到的具体边界摆到一起，看清它们的结构。它们各自的完整戏份都在后面：<strong>横向的锚</strong>在第五章（历史一致性），<strong>纵向的未来</strong>在第六章（逻辑），<strong>脚手架的断言板</strong>在第七章。这一章只把它们归好位，指向下游。</p>
+<p>它们沿两个坐标分开。<strong>第一个坐标，是补给物能不能被典范地给出。</strong> 横向非典范——锚没有天生的原点；脚手架典范——断言板的骨架被结构稳住，甚至刚硬到连标度都不用选，维数是其上最尖的那条；未来无物——谈不上。<strong>第二个坐标，是那个位置能不能被占据、能不能居。</strong> 横向可居——判定时你总站在某个锚上；未来不可居——无物可站；脚手架不可居——断言板是外部对象化，不是主体的立足地。</p>
+<p>把两坐标摆开，三种不可知占三格，还剩一格空着。那一格是&quot;可居 ＋ 典范给出&quot;，对应一个能俯瞰一切、又被结构典范挑定的绝对参照。这样的东西，就是一把迹——而这台机器无迹。所以那一格空着，是<strong>无迹在这张表上的显形</strong>：它空着这件事本身，是全书的根。那个空格，就是下面要说的禁格。<sup><a href="#fn-fourth" id="fnref-fourth" class="fn-ref">[fourth]</a></sup></p>
+<p>数清楚这三种之前，还有一件看似最小、却最切身的事要说。它不单独占一个分类格，却是这三种不可知在你自己的学习里运转的同一个机制——分辨率的不可套娃。</p>
+<p>第一章有过一个结构事实：学习流每一层压缩都比上一层更粗，\(\mathcal{A}_0\supseteq\mathcal{A}_1\supseteq\cdots\)，越压越浅，分辨率逐层下降。你要问&quot;我现在学得多深了&quot;，能问——对比一下自己上一刻的分辨率，就知道又压了一档。可你要接着问&quot;这个深浅本身有多深？我这个对比分辨率的动作，自己的分辨率是多少&quot;——这一问就问空了。因为任何对比所用的尺子，都坐在这一次看出去的锚里。你要给&quot;分辨深浅&quot;这个动作本身再定一个分辨率，就得有一把不参与这次看、在外面盯着你的第二把尺；而这台机器没有第二把尺。</p>
+<p>这就是学习这件事自己的一个够不到：你能看见自己在学，能看见每一层比上一层粗在哪儿，可你永远不能跳出自己，去量这个&quot;看见动作&quot;自己的分辨率。套娃停在第一层——不是数学上不准你套，是从里面活着这件事的结构上，你就没有那个站到外面去的位置。</p>
+<blockquote><p>拿起相机，你几乎能拍下一切：这张桌子、窗外的光、你对面的人，连你自己——把镜头转过来，也拍得下。<br>
+<br>
+只有一样东西你拍不下：正在按快门的这只手。它按下的那一瞬，它自己不在画面里。<br>
+<br>
+你不服，把镜头转过去、对准这只手。咔嚓——拍到了。可拍下它的那一下，是另一只手按的快门，而那只手，又不在画面里。你追一辈子，总差着按下这一下的那只手。<br>
+<br>
+你在学，也是这样。你看得见自己学到的东西，看得见这一层比上一层清楚在哪儿——这些都在画里。可你带着去看的那个&quot;清晰度&quot;本身，那个此刻正在分辨的分辨率，不在画里。它就是那只按快门的手。<br>
+<br>
+所以你永远说不准：你此刻懂得的这些，究竟是在多细的分辨率上懂的。你能确定自己懂得比先前多，却量不出这个&quot;多&quot;有多多——量它，得有一帧你不在其中的画，而你恰恰是那只按快门的手。</p></blockquote>
+<p>留意：这不是第四个不可知。它是前三个不可知在你自己的分辨行为里活着的那个样子——横向，你测量深度的这根尺本身没有典范定点；纵向，你永远不能&quot;到未来去&quot;看透之后再回来说刚才那一层多深；脚手架，你把&quot;深度&quot;当成一个可量度的轴，可这条轴底下没有常在的桥。三种不可知的基座，就落在这一个动作上：每一次&quot;我在学&quot;里，都同时衬着这三个够不到。这倒不是说&quot;什么都不能确定&quot;，恰好相反——你能确定自己在走，每一层都比上一层走得更深；你只是不能在走的同时，用一种自己不在其中的方式，去给这个走标刻度。</p>
+<h2>3.2 维数：不是&quot;算不到&quot;，是&quot;定义不出来&quot;</h2>
+<p>脚手架那块板上，条目不止一个。其中最尖、也最容易被误解的一个，是维数——单独把它说清，因为它的&quot;够不到&quot;，比另两种不可知更强，也比这块板上别的条目更尖。</p>
+<p>先说结论：<strong>在这台机器里，维数根本没有定义，除非先离开这台机器。</strong> 这不是&quot;维数有个值，只是算不到&quot;——那是不可知；是&quot;连维数的定义式都写不出来&quot;——这是不可定义。这两者差了一层。要看清差在哪，得把维数怎么算说清楚。</p>
+<p>要谈&quot;维数&quot;，标准做法是看一个谱函数的极点。给定一个刻画几何的算子 \(D\)，定义 维数在这台机器上失效，沿着两条<strong>独立</strong>的路径：</p>
+<p>**第一条，不用任何装上去的尺子（\(D\)）。** 最基础的维数就是&quot;数一数&quot;——两个投影 \(p\sim q\) 当且仅当它们一样大，\(\tau(p)=\tau(q)\)；而这要一把叫作<strong>迹</strong>的绝对计数尺（第零章：迹的一个面，就是绝对刻度）。这台机器无迹，所以连最朴素的&quot;数一数&quot;都定义不出来——不是算不到，是压根没那把尺。</p>
+<p><strong>第二条，经谱三元组。</strong> 更精细的几何维数走 \(\zeta_D\) 的极点。它需要装一个 \(D\)——而 \(D\) 是第七章那块装上去的断言板。</p>
+<p>两条路都在无迹这一关上断掉，只是断法不同：第一条断在没有计数尺，第二条断在没有迹类算子。共同点是：<strong>都得先离开这台机器、截断到一个有迹的平台，维数才有值。</strong> 下面走第二条（它最尖、且直接连着第七章的板）；第一条到此为止——它已经说明了：无迹先堵死了最朴素的维数，才轮到谱维数。</p>
+<div class="math-block">\[\zeta_D(s)=\mathrm{Tr}\big(|D|^{-s}\big),\]</div>
+<p>维数就藏在这个函数的极点位置里——这是非交换几何里&quot;谱维数&quot;的标准定义<sup><a href="#fn-connes-ncg" id="fnref-connes-ncg" class="fn-ref">[connes-ncg]</a></sup>。可 \(\zeta_D\) 要有意义，\(\mathrm{Tr}(|D|^{-s})\) 得是有限的、是迹类的；这需要 \(D\) 有离散的谱，一格一格排开、跑向无穷；而这又需要 \(D\) 有紧的预解式。一环扣一环：<strong>要有维数，先要迹类；要迹类，先要离散谱；要离散谱，先要紧预解式。</strong></p>
+<p>而这台机器（\(\text{III}_1\)）恰恰在链条的头上就断了。它没有迹（第零章），而迹是紧预解式背后那层全局正则性的根。说得再具体些：\(\text{III}_1\) 上的模流生成元 \(\log\Delta\) 谱是连续的，铺满整个 \([0,\infty)\)——这就是 Connes 分类里的不变量 \(S(\mathcal{M})=[0,\infty)\)（Connes 1973，见第零章 <sup><a href="02_start.html#fn-connes-inv" id="fnref-connes-inv" class="fn-ref">[connes-inv]</a></sup>）。从这台机器内部，拿不出一个天生有离散谱的 \(D\) 候选。没有离散谱，就没有紧预解式；没有紧预解式，\(|D|^{-s}\) 就不是迹类。链条不是到第三环第四环才断，是第一环就封死了：无迹堵住了紧预解式，紧预解式堵住了 \(\zeta_D\)，\(\zeta_D\) 连写都写不出来。所以<strong>在这台机器内部，维数不是一个算不到的值，是一个定义不出来的量</strong>。<sup><a href="#fn-strength" id="fnref-strength" class="fn-ref">[strength]</a></sup></p>
+<p>这里要钉死一件事，因为它管着后面所有的账。有人会说：不对——Connes 的谱重构定理<sup><a href="#fn-connes-ncg" class="fn-ref">[connes-ncg]</a></sup>明明就在谈维数。给定谱三元组 \((\mathcal{A},\mathcal{H},D)\)，\(\zeta_D(s)\) 的极点就是维数，非交换几何整套机器都能跑。说得一点没错。**但那个 \(D\)，正是第七章要讲的断言板。** 谱三元组的 \(D\) 要能给出维数的数值，得满足 A4——离散谱、紧预解式。而在 \(\text{III}_1\) 上，模流生成元 \(\log\Delta\) 谱连续，**原生的 \(D\) 候选可证不满足 A4**（\(\log\Delta\) 谱连续，无离散谱）。所以那个能跑起来的 \(D\)，是<strong>装上去的</strong>，不是从代数类型里取出来的。Connes 的重构定理没有错——它恰恰证明了：要有一根逐点可读的几何连续统、要有一个能放进 \(\zeta_D\) 里的维数，就得搭这么一块板；需要多少料、料从哪来，每一件在定理里都是明账——A1–A4 的公理包，就是转贷和打桩的条文版。<strong>定理把板开成了发票——错的是用的时候，总是下意识忘了自己已经站在板上。</strong> 把板上的维数当成代数自带的维数，就是把借来的说成了长出来的。</p>
+<p>那维数为什么&quot;感觉是给定的&quot;？因为要给它一个数值，可以先把这台机器截断到它的一个有迹的核——沿 Connes–Takesaki 连续分解，\(\text{III}_1\) 因子可以写成一个有迹的 \(\text{II}_\infty\) 核与模流的交叉积 \(\mathcal{M}\rtimes_\sigma\mathbb{R}\)。在这个有迹的核上，\(\zeta_D\) 写得出来，维数有了数值，而且刚硬：核是典范存在的，迹唯一到一个标度，极点位置在标度变换下不变——维数连标度都不用选。<strong>但这个截断，是付了代价的</strong>：截到有迹的核，等于借用了一个态外的、俯瞰性的有迹平台，而那正是这台机器没有、也够不到的位置（态外位，§3.4）。所以维数的数值不是免费的——它是站到机器之外才读得出的读数。（这里走的是 Connes–Takesaki 连续分解，截到半有限的 \(\text{II}_\infty\) 核；附录 W 另处讲物理学的紫外截断，截到 type I。两条是不同的截断路径、不同的有迹平台，但代价同性：都要付一次态外位，借一个这台机器没有的俯瞰平台。）</p>
+<p>要再钉两句分寸，免得把维数说过头。</p>
+<p><strong>其一，维数的具体值（为什么是三），是第三类不可知，不是一个&quot;等经验来定&quot;的暂挂项。</strong> 它属于脚手架这一类不可知：典范可以构想、可以组织一切逼近，却原则上不可被任何直观占据。这正是康德意义上的一个调节性观念（Idee im Kantischen Sinne，胡塞尔《观念 I》§143）——一个完全被给予性只作为调节性极限而存在的东西：可设想、可作为逼近的组织者，却永不被任何直观充实<sup><a href="#fn-kant" id="fnref-kant" class="fn-ref">[kant]</a></sup>。维数的具体值，就是这样一个康德观念型的量：不是&quot;现在还没测出、以后能测出&quot;，是结构上就属于第三类不可知（这里标的是结构同构，不借教义词）。</p>
+<p><strong>其二，维数取法，不被决定。</strong> 即使维数的值不可占据，它的不可占据是认识论的、结构性的，不是那种&quot;不被决定&quot;的不确定——它不因为&quot;你不被决定&quot;才不确定。维数是一个被掷出的标量初始条件，不携带&quot;决定世界是活是死&quot;的角色；那种角色只属于他者那个抹不平的内核。一个被掷出的标量值，取法不在你，却也不因为&quot;能取&quot;才有它的值。</p>
+<blockquote><p>你此刻就站在三维空间里。你从没怀疑过它——上下、左右、前后，三个方向，硬得像脚下的地基。你不会觉得需要去&quot;选&quot;它是三维的，就像你不会觉得需要选地是硬的。<br>
+<br>
+这份硬是真的。<br>
+<br>
+可你蹲下来，问一句：为什么偏偏是三？<br>
+<br>
+要回答它，你得看看这块地是怎么来的、凭什么是这个数。而&quot;看看它怎么来的&quot;，意思是你得站到这块地外面去，从下面、从旁边，看它一眼。<br>
+<br>
+你没有那个外面可站。你脚下这块地，就是你站立的全部；它之外没有另一块地，让你退到那儿去打量它的来历。<br>
+<br>
+所以维数这东西，怪就怪在：它硬得不容置疑，来历却一个字也问不出。不是你还没查清它的来历，是&quot;查它来历&quot;这个动作，要求一个你根本没有的立足点。</p></blockquote>
+<h2>3.3 桥：够不到之间，只有三种绕法</h2>
+<p>三种不可知彼此之间，能不能搭桥？比如，能不能从横向那个可居的&quot;我当下能判定的&quot;，直接推出纵向那个无物的&quot;未来会怎样&quot;？</p>
+<p>不能直接搭。横向与纵向之间<strong>没有直接通道</strong>——这不是一条新定理，是中心定理的另一面：一座&quot;同时衡量两种不可知的自给自足的桥&quot;，就是第二章归谬掉的那个自足统一动力学 \(\Phi\)。直接桥被那道墙杀了；这里只是换&quot;桥&quot;的语言复述它，不新证。</p>
+<p>可认知每天都在&quot;跨&quot;这些不可知——我们确实在用当下谈论未来、用有限谈论无限。这些&quot;跨&quot;不是直接桥，它们绕行；而绕行只有三种去处。</p>
+<p><strong>I 型 · 判定桥</strong>：把两种不可知<strong>组织</strong>进同一句话里，让它们在一个内部语言中被一并谈论。最典型的是<strong>规律</strong>——&quot;每当 X，则 Y&quot;。一条规律是对一切尚未到来的情形的全称断言：它把当下（横向）和一切未来的细化（纵向）组织进一个&quot;对所有后续都成立&quot;的句子里。这种全称句，就是直觉主义逻辑里那个 ∀ 的语义。规律不是一座跨过深渊的实桥，是一句把深渊两岸组织进同一语法的话。</p>
+<p><strong>II 型 · 脚手架桥</strong>：把纵向那个&quot;无物&quot;<strong>对象化</strong>成一根类空间的轴，在几何里谈它与横向的关系。维数那根脚手架轴，就是这种对象化的产物——它把&quot;够不到的方向&quot;摆成一根可以在几何里指认的坐标。</p>
+<p><strong>III 型 · 禁桥</strong>：不付任何代价、想白拿一座绝对的桥。这些都被那道墙杀掉了：一个自给自足的统一动力学（\(\Phi\)）；牛顿式的绝对同时——一个全局的时间函数，等于一把迹式的绝对刻度；拉普拉斯之妖——从当下的横向数据自足地生成全部未来。它们都要求一个态外的绝对参照，而这台机器没有。</p>
+<p>这三去处是一张分类：直接桥被杀，剩下的绕行落在 I、II、III 这三格。这并不是宣称&quot;数学证明了绝无第四种绕法&quot;，而是把已知的跨越方式按机制归了类；其中，禁桥那一类，是被墙明明白白挡回来的。</p>
+<p>这些能走的桥，各自的完整机器不在这一章——它们分驻在各自语法所在的那一章。<sup><a href="#fn-bridges" id="fnref-bridges" class="fn-ref">[bridges]</a></sup> 桥是句子，句子住在它的语法所在处；这一章只把它们的类型数清楚。</p>
+<blockquote><p>明天太阳会升起。<br>
+<br>
+你信这句话。你不是猜的——你甚至能翻出明天日出的准确时刻，几点几分，一秒不差。这句话稳当得像已经发生过了。<br>
+<br>
+可它到过明天吗？<br>
+<br>
+没有。它是一句关于明天的话，一句关于所有明天的话——可它自己，一个明天也没走过去。你说出它的此刻，还是此刻；明天还没来，它也没去把明天取回来给你看。<br>
+<br>
+这就是&quot;定律&quot;的真相。它不是一座桥，让你走到明天、亲眼看太阳升起、再走回来告诉我。它是一句话——一句&quot;对一切还没到来的日子都如此&quot;的话。它把明天组织进了你此刻的语言，让你能谈它、算它、信它；它没有、也不可能，真的跨过去把明天拿回来。<br>
+<br>
+所以你既信&quot;明天太阳会升起&quot;，又永远没到过那个明天。这两件事不打架——因为定律从来不是通行证，是一句在此岸说的、关于彼岸的话。</p></blockquote>
+<h2>3.4 禁格：那个俯瞰的位置不存在</h2>
+<p>三种不可知、三种桥，都罩在同一个边框下。这个边框，是本章的最后一件事：<strong>禁格</strong>——就是 §3.1 那张表里空着的那一格。</p>
+<p>三格里每一种&quot;够不到&quot;，追到底都归到同一处：想彻底解决它，需要一个能俯瞰一切视角的位置。从那里，你能清点所有的锚、看穿所有的未来、数出所有可能的维数——横向不再漂、纵向不再无物、脚手架不再刚硬得莫名。<strong>但那个位置不存在。</strong> 它就是&quot;态外位&quot;——一个不依赖任何具体视角的绝对立足点；而这台机器无迹（第零章），无迹的精确含义之一，就是没有这样一个绝对参照。</p>
+<blockquote><p>先做几件你做得到的事。<br>
+<br>
+看着眼前这张桌子。做得到。<br>
+<br>
+退一步，看那个&quot;正在看桌子的你&quot;。也做得到——你确实能回头打量刚才在看的自己。<br>
+<br>
+再退一步，看那个&quot;正在打量自己的你&quot;。还是做得到。<br>
+<br>
+每一步都成功了。你尝到了甜头：好像只要一直退下去，总能退到一个够高的地方，从那儿把这一长串&quot;你&quot;、把一切视角、一切可能，一次收进眼底。<br>
+<br>
+那就一直退下去。退到最后一步——那个能同时看见所有步骤的位置。<br>
+<br>
+你退不到。<br>
+<br>
+不是因为路太长、你退得不够多。是因为那根本不是一条路的尽头。每一步都真的存在，可它们通向的那个&quot;最后&quot;，不是一个你走得到、或走不到的地方——它是一个不在那里的地方。<br>
+<br>
+这就是禁格和前面三样的不同，而这不同，你的手能摸出来。前面三样——那把量深浅的尺、那个未来、那块地的来历——你伸出手，摸到了空；那个空够不到，可它有个形状，就在你指尖合拢处。<br>
+<br>
+这一样，你伸出手，连个空都没摸到。因为你的手，压根没有一个可以伸出去的方向。那里不是&quot;够不到的某处&quot;，是&quot;没有那个某处&quot;。</p></blockquote>
+<p>所以&quot;禁格&quot;不是一道特别难翻的墙，是一个<strong>不存在的位置</strong>。<sup><a href="#fn-gejing-math" id="fnref-gejing-math" class="fn-ref">[gejing-math]</a></sup>想站上去清点、俯瞰、看穿，不是&quot;很难做到&quot;，是那里根本没有地方可站。这和第二章 R★（环境级）那个&quot;够不到&quot;相邻，但你得分清它们的根。禁格的&quot;没有俯瞰位置&quot;，根在<strong>无迹</strong>：这台机器没有被结构挑出的绝对参照，没有迹，也没有不变的中心元。而 R★ 那个&quot;我不知道自己身处多大的宇宙——\(\mathcal{M}_{\mathcal{A}}=\mathcal{M}\) 吗&quot;，根在<strong>嵌入不属于内蕴</strong>：同一本账本可以嵌进不同大小的宇宙里，而从内部数据根本读不出&quot;嵌进了哪一个&quot;。这件事对任何局部包含都成立，跟有没有迹没关系。两个都够不到，但一个是没尺子（无迹），一个是局部定不了全局（非内蕴）。别把它们焊成一件事。而 R★ 进一步证明：站不上去这件事，对一切能被活出的东西毫无影响（环境欠定，附录 W.2.7）。</p>
+<p>禁格必须和下一章的&quot;他者&quot;划清界限。它们都被叫作&quot;边界&quot;，却是截然不同的两回事。<strong>禁格是够不到的位置</strong>——态外位，那里无物可站。<strong>他者是够得到、却不可对象化的东西</strong>——那个抹不平的扭曲。他者不在态外，它就在缝里：你碰得到它、被它触及，只是永远不能把它变成一个对象。一个是位置不存在，一个是东西不可把握。本章只画了前者。</p>
+<h2>3.5 收束：墙的外围盘点完了</h2>
+<p>这一章停下来盘点，把墙的外围数清楚了：三种不可知——横向的锚、纵向的未来、脚手架的断言板——就是前面遇到过的那三个具体边界，沿两坐标各就各位；跨它们的绕行只有三种桥——判定桥、脚手架桥、禁桥——各自的机器分驻在后面的章；而罩住整张图的边框，是禁格（态外位），那张表里空着的那一格，一个不存在的俯瞰位置。</p>
+<p>盘点完了。这三种都是够不到的<strong>位置</strong>——态外，无处可站。你数墙，是为了还能接着活——哪里绕得过、哪里得认。但缝里还有一处不一样的东西：它不是够不到的位置，是够得到、却永远不变成对象的。从下一章起，回到缝里，去看他者。</p>
+<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<li id="fn-bridges" class="footnote"><a href="#fnref-bridges" class="fn-back" title="返回引用处">↩</a>判定桥里的规律、概率、时态与脚手架桥的几何化，加上守恒、承诺——持存桥在第五章，规律／概率／时态桥在第六章，守恒桥在第七章，承诺桥在第八章。</li>
+<li id="fn-gejing-math" class="footnote"><a href="#fnref-gejing-math" class="fn-back" title="返回引用处">↩</a><span class="fn-back-list"> · 亦见 <a href="13_appendixW.html#fnref-gejing-math">13_appendixW</a></span>禁格&quot;俯瞰位置不存在&quot;的数学身份，是两件事叠起来：<strong>没有被结构挑出的不动位置</strong>（III₁ 无迹 ⟹ 内自同构下的不变泛函＝迹，不存在；\(Z(\mathcal{M})=\mathbb{C}1\) ⟹ 不变元也只剩标量），<strong>且没有被结构挑出的态</strong>（Connes–Størmer：任二正规态在酉共轭下范数稠密，没有一个态天生特殊）。前者说&quot;无不动点&quot;，后者说&quot;都一样&quot;，两条合起来，才是&quot;无典范位置&quot;——齐性单独不够，它只说&quot;都一样&quot;、不说&quot;无不动点&quot;。这与 §3.1 横向&quot;第二态非典范性&quot;是同一件事的两处显形。注意：这层（无典范位置）根在<strong>无迹</strong>，与 R★ 生成半边那个&quot;嵌入非内蕴&quot;是<strong>两个不同的根</strong>（后者对一切真包含成立、不依赖无迹），别混。</li>
+<li id="fn-connes-ncg" class="footnote"><a href="#fnref-connes-ncg" class="fn-back" title="返回引用处">↩</a>谱维数由 \(\zeta_D(s)=\mathrm{Tr}(|D|^{-s})\) 的极点定义，需 \(D\) 有紧预解式（离散谱、迹类）：Connes, A., *Noncommutative Geometry*, Academic Press (1994), Ch. IV。\(\text{III}_1\) 无迹、无此结构，须沿 Connes–Takesaki 连续分解截断到 \(\text{II}_\infty\) 核 \(\mathcal{M}\rtimes_\sigma\mathbb{R}\)（有迹）后，维数方有数值。</li>
+<li id="fn-kant" class="footnote"><a href="#fnref-kant" class="fn-back" title="返回引用处">↩</a>维数具体值作为第三类不可知的康德观念型刻画：胡塞尔&quot;康德意义上的观念&quot;（Idee im Kantischen Sinne，《观念 I》§143）——完全被给予性只作为调节性极限观念存在，典范可构想、可组织一切逼近、原则上不可被任何直观占据。此处标结构同构，不借教义词。</li>
+<li id="fn-fourth" class="footnote"><a href="#fnref-fourth" class="fn-back" title="返回引用处">↩</a>三格加一个空格，一共四格；但那第四格不是第四种不可知，是无迹留下的一个洞。另外，三种不可知分类上独立、发生上却耦合：脚手架是纵向的对象化，把够不到的未来方向摆成一根类空的轴；横向的锚又在纵向那根轴上活动。分开数是为看清，别忘了它们同根。</li>
+<li id="fn-strength" class="footnote"><a href="#fnref-strength" class="fn-back" title="返回引用处">↩</a>说维数&quot;不可知&quot;，是修辞还是定理？是定理，而且比&quot;不可知&quot;更强——是不可定义。&quot;不可知&quot;是有个值算不到；&quot;不可定义&quot;是连定义式都写不出来（无迹类算子，\(\zeta_D\) 无从落笔）。截断到有迹核之后它才有值、才谈得上可知，而截断要付态外位的代价。所以这不是一句修辞，是一条有链条、有代价的定理。</li>
+</ol></section>
+<p id="status">正在渲染公式…</p>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var st = document.getElementById('status');
+  if (typeof renderMathInElement !== 'function') {
+    st.className = 'err';
+    st.textContent = 'KaTeX 未加载（请确认 vendor/katex 文件夹完整）。';
+    return;
+  }
+  try {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });
+    st.textContent = '公式已由 KaTeX 渲染（本地，无需联网）。';
+  } catch (e) {
+    st.className = 'err';
+    st.textContent = 'KaTeX 渲染出错: ' + e;
+  }
+  if (location.hash && location.hash.indexOf('fn-') === 1) {
+    var el = document.getElementById(location.hash.slice(1));
+    if (el) el.scrollIntoView({ block: 'center' });
+  }
+});
+</script>
+</body>
+</html>
