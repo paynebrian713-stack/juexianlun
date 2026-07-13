@@ -1035,18 +1035,10 @@ def export_html(chapters, meta=None):
             body = linkify_ascii_diagram(body)
             body = linkify_w_refs(body)
         body = inject_scene_ids(body, html_name)
-        # 章末「下一章」→ 链接（正文内最后一次）+ 脚注前导航条
+        # 章末正文里最后一次「下一章」→ 跳转链接（不另加导航条，避免重复）
         if i + 1 < len(chapters):
-            next_html, next_ch, _ = chapters[i + 1]
+            next_html, _, _ = chapters[i + 1]
             body = linkify_ending_next_chapter(body, next_html)
-            nav = (f'<nav class="chapter-nav">'
-                   f'<a href="{html_mod.escape(next_html)}">'
-                   f'→ 下一章：{html_mod.escape(next_ch)}</a></nav>\n')
-            fn_pos = body.find('<section class="footnotes">')
-            if fn_pos >= 0:
-                body = body[:fn_pos] + nav + body[fn_pos:]
-            else:
-                body += nav
         write_html_page(os.path.join(OUT_HTML, html_name), short, body)
         index_items.append((html_name, idx_text))
         print(f"    {html_name}")
