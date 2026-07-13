@@ -8,19 +8,19 @@ OUT_HTML = f"{BASE}/docs"
 KATEX = "vendor/katex"
 
 files = [
-    (f"{BASE}/界限论_导论_可读重写_v0_32.md",         "导论"),
+    (f"{BASE}/界限论_导论_可读重写_v0_33.md",         "导论"),
     ("_零",                                             "第零章"),
     (f"{BASE}/界限论_第一章_可读重写_v0_21.md",         "第一章"),
-    (f"{BASE}/界限论_第二章_可读重写_v0_18.md",         "第二章"),
+    (f"{BASE}/界限论_第二章_可读重写_v0_19.md",         "第二章"),
     (f"{BASE}/界限论_第三章_可读重写_v1_4.md",          "第三章"),
-    (f"{BASE}/界限论_第四章_可读重写_v0.24.md",         "第四章"),
+    (f"{BASE}/界限论_第四章_可读重写_v0_24.md",         "第四章"),
     (f"{BASE}/界限论_第五章_可读重写_v0_13.md",          "第五章"),
     (f"{BASE}/界限论_第六章_可读重写_v0_21.md",         "第六章"),
     (f"{BASE}/界限论_第七章_可读重写_v0_26.md",         "第七章"),
     (f"{BASE}/界限论_第八章_可读重写_v0_14.md",         "第八章"),
     (f"{BASE}/界限论_第九章_可读重写_v0.14.md",         "第九章"),
     (f"{BASE}/界限论_尾声_可读重写_v0_12.md",           "尾声"),
-    (f"{BASE}/界限论_附录W_v7_9.md",                    "附录"),
+    (f"{BASE}/界限论_附录W_v8_3.md",                    "附录"),
 ]
 
 SAFE_NAME = {
@@ -162,7 +162,7 @@ def strip_footnotes_and_refs(text, ch_name=""):
 
 def load_chapter(file_path, ch_name):
     if file_path == "_零":
-        actual = f"{BASE}/界限论_第零章_可读重写_v0_32.md"
+        actual = f"{BASE}/界限论_第零章_可读重写_v0_35.md"
     else:
         actual = file_path
     with open(actual, encoding="utf-8") as f:
