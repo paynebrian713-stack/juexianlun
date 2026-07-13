@@ -18,8 +18,10 @@
   pre { background: #242420; padding: .75rem; overflow-x: auto; border-radius: 4px; color: #c8c4bc; }
   .nav { font-size: .88rem; margin-bottom: 1.2rem; color: #7a766e; }
   .nav a { color: #7eb8da; text-decoration: none; }
-  .math-block { text-align: center; margin: 1.2rem 0; }
-  .katex-display { margin: 1rem 0; overflow-x: auto; }
+  .math-block { text-align: center; margin: 1.2rem 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+  .math-block::-webkit-scrollbar { display: none; }
+  .katex-display { margin: 1rem 0; overflow-x: auto; scrollbar-width: none; }
+  .katex-display::-webkit-scrollbar { display: none; }
   a.fn-ref { color: #7eb8da; text-decoration: none; font-weight: 600; }
   a.fn-ref:hover { text-decoration: underline; }
   .footnotes { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #3a3a35; font-size: .92rem; }
@@ -47,9 +49,6 @@
   a.d-link:hover { text-decoration: underline; }
   a.w-ref { color: #7eb8da; text-decoration: none; }
   a.w-ref:hover { text-decoration: underline; }
-  .math-block { overflow-x: auto; overflow-y: hidden; }
-  .math-block::-webkit-scrollbar { height: 6px; }
-  .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
   .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
               font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
               padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
@@ -119,7 +118,7 @@
 <p>这一章做的事，就是把这件事从水里捞出来给你看：<strong>打桩</strong>——借 ℚ 的锐性、借落盘的投影，在流上标出 &quot;那次&quot;；<strong>转贷</strong>——把自己没断的绵延，披在东西身上。两个动作，一个用可数的桩借刻度，一个用活的连续借衔接，合起来就是一块<strong>断言板</strong>。底下没有常在的桥——板是搭上去的，承得住脚，不把缝填成实地。</p>
 <p>要立两句基调。<strong>其一</strong>，断言板也是无迹的后果：要在缝上搭一块板，就得<strong>假装</strong>底下有一根绝对的、连续的横梁可以搭上去；而无迹恰恰说，没有那根横梁。所以板是<strong>搭</strong>上去的，不是长出来的——底下没有常在的桥，板自己承重。<strong>其二</strong>，也是全章最要紧的一句：<strong>这一章给出的一切，都是从对易这一侧给出的。</strong></p>
 <p>这第二句，管着后面每一节。认知能接触到的，永远是那本对易的账本 \(\mathcal{A}_{\text{phys}}\)——一切都要经过那道把非对易的舞台压成对易读数的投影 \(E\)。而那道投影是有损的（\(\iota\circ E\neq\mathrm{id}\)，第二章的缝），它丢掉了非对易的那一部分。所以：下面讲的 &quot;物理规律&quot;，是物理规律在认知里显现的样子——是规律的认知，不是规律本身；下面讲的 &quot;身体&quot;，是身体在对易侧被认知到的样子——是身体的认知，不是身体本身。本框架描述的是认知通向世界的那条通路——它只在对易这一侧，够不到非对易的 &quot;物自身&quot;。这不是谦辞，是这台机器的构造决定的——记住它，后面判物理、讲身体，每一处都在这条线之内。</p>
-<p><sup><a href="#fn-assert" id="fnref-assert" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-assert')">[assert]</a></sup></p>
+<p><sup><a href="#fn-assert" id="fnref-assert" class="fn-a" data-fn="fn-assert">[assert]</a></sup></p>
 <blockquote><p>被活出来，所谓搭板，每天都在做。你说&quot;从这里到那里大概十分钟&quot;——你拿烙在你身上的几次遭遇（上次出门、到地铁站）当桩，拿你走着路时那段没断的绵延当连续，铺成一块能踩着过去的板。你说&quot;这张桌子是棕色的&quot;——你在身体能分出的颜色际遇里圈了一块，把那次遭遇钉成&quot;棕色&quot;。你说&quot;这个世界是三维的&quot;——你拿无数次在空间里的落盘当桩，拿你活着的绵延里那段从没断过的连续当底，搭了一座你能站上去的几何。每一句断言，每一件你认为&quot;就是这样&quot;的事，都是在缝上搭的一块板：底下没有常在的桥，板够厚、够稳、能走到下一次——那就够了。</p></blockquote>
 <p><strong>搭板之前，先看手里有什么，再看要借什么。</strong> 被动综合（§5.4）已经替认知压好了两样东西。一样是弥散基底（Cartan 对，\(\mathcal{A}_{\text{phys}}\cong L^\infty[0,1]\)，无原子的钝连续统）<sup><a href="#fn-takesaki" id="fnref-takesaki" class="fn-ref">[takesaki]</a></sup>；另一样是可数纤维（Feldman–Moore split 骨架）。两样合起来就是那些可数的桩和那道活的连续。**板吃得下可数的桩和活的连续，吃不下 \([\sigma]\)。** 板标可数性成几何与赋值，\([\sigma]\) 留在板外——那是他者。</p>
 <p><strong>要借的是轴。</strong> 理解流的模流 \(\sigma_t^{\omega^*}\) 自带参数 \(t\in\mathbb{R}\)——全机唯一一根锐实数轴（Stone 定理）。但 III₁ 没有节拍（\(S(\mathcal{M})=[0,\infty)\)）<sup><a href="#fn-connes-iii1" id="fnref-connes-iii1" class="fn-ref">[connes-iii1]</a></sup>——轴上没有原生刻度。要刻度就得从可数性（分辨）那一侧进口；连续那一侧也是——没有锐点，要锐就得从轴进口。<strong>双向进口是 III₁ 的定理级后果</strong>：III_λ 轴自带刻度，断言板可单墩；III₁ 轴无刻度、延展无锐点——双方各缺一半，必须双墩焊接。</p>
@@ -133,7 +132,7 @@
 <p>但真正决定这块板性质的，是<strong>另一道、更深的</strong>亏空。这块板——桩也好、贷也好——整个是搭在<strong>对易</strong>这一侧的；而它要去搭住的那道缝，来自<strong>非对易</strong>的机器。所以无论板搭得多完整，它对那台机器总欠着一笔压投丢掉的账：那个永远清不掉的残差 \(\mathrm{id}-\iota\circ E\neq0\)（第二章那道缝的代数身份）。这两道亏空别混：前一道是&quot;可数填不满弥散&quot;，钝这一侧内部的稀；后一道是&quot;对易补不平非对易&quot;，跨侧的欠——那道缝。要说死的是后一道，因为它决定了板到底是活是死：<strong>双墩衔接，够你稳稳走一步，但对那道缝，永远焊不到&quot;刚刚好&quot;。</strong> 一旦这道缝真被焊平、那笔残差清零——那就不是一块活的板了：它意味着非对易被彻底抹成对易、\([\sigma]\to0\)，也就是那个一切现成、点点可读、判定平凡成立的<strong>水晶棺</strong>（第四章）。<strong>缝焊不平，板才是活的；能把那道缝焊平的板，底下的世界已经死了。</strong> 所以这块板的诚实，恰恰在它承重却留缝：它让你走过去，但从不假装缝不在。</p>
 <blockquote><p>被活出来，这是你其实一直知道、却很少说破的一件事：任何一个你真正走得进去的世界——一段感情、一门手艺、一个人——都不是严丝合缝的。正是那点始终对不齐、始终差一口气的地方，让它还活着、还在动、还容得下你往里走。真要有一天它变得处处严整、再没有一处对不上、什么都解释得清清楚楚了，那不是圆满，是它在你手里变成了标本。缝，是活物的呼吸。</p></blockquote>
 <p>这条板每天都在搭。说一句 &quot;<strong>还在</strong>&quot;——一个音节，同时含一个隐桩——自上次起——和一笔隐贷——这段里没断。每说一次 &quot;还&quot;，铺一块微板。<strong>几何是 &quot;还&quot; 字的沉积。</strong></p>
-<p>那凭什么打桩加转贷搭出来的就能当真正的几何用？有一条硬定理撑着：Connes 的重构定理（交换情形）说，一套满足全部谱公理（A1–A6）的交换谱三元组，代数一定就是一个光滑流形上的函数<sup><a href="#fn-connes" id="fnref-connes" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-connes')">[connes]</a></sup>。打桩对应 A4（离散谱——把可数骨架钉成可清点的认同），转贷对应 A1–A3（横截导子族数目、度量权重、椭圆性——把态读白送的连续公理化）。合起来，恰好是 &quot;一个能用锐实数逐点读的几何连续统&quot; 的完整形式化。那条自古以来谁都没证明过的 Cantor–Dedekind 公理（&quot;几何直线与实数点点同构&quot;），在这里被明细化成了一串具体的账单——每一件都有它的来路和价签。</p>
+<p>那凭什么打桩加转贷搭出来的就能当真正的几何用？有一条硬定理撑着：Connes 的重构定理（交换情形）说，一套满足全部谱公理（A1–A6）的交换谱三元组，代数一定就是一个光滑流形上的函数<sup><a href="#fn-connes" id="fnref-connes" class="fn-a" data-fn="fn-connes">[connes]</a></sup>。打桩对应 A4（离散谱——把可数骨架钉成可清点的认同），转贷对应 A1–A3（横截导子族数目、度量权重、椭圆性——把态读白送的连续公理化）。合起来，恰好是 &quot;一个能用锐实数逐点读的几何连续统&quot; 的完整形式化。那条自古以来谁都没证明过的 Cantor–Dedekind 公理（&quot;几何直线与实数点点同构&quot;），在这里被明细化成了一串具体的账单——每一件都有它的来路和价签。</p>
 <p>但这条重构定理，也把板的限度证死了。两件事：</p>
 <p><strong>其一，充当，不等于为真。</strong> Connes 证的是：打桩加转贷恰好够让钝量充当锐实数逐点读的几何。它没证——也证不了——打桩加转贷为真。公理不可由两流推出，这一点可证。所以断言板可证是板形的：可证是搭上去的，不是长出来的。</p>
 <p><strong>其二，读的是点，信的是线。</strong> A4（打桩）只在可数骨架上逐点做认同；骨架之间那片连续的剩余，是靠 A1–A3（转贷）光滑地补上的。所以你读到的，只是你钉的桩；而桩之间连着一条连续的线——那半是你信上去的，是你把自己没断的绵延披在东西上的。<strong>读的是点，信的是线</strong>：板能让你在缝上走，但它不把缝填成实地。</p>
@@ -146,7 +145,7 @@
 <p>但你怎么知道？你永远够不到她眼里的那个&quot;棕&quot;。</p>
 <p>你不懂她——这是一层。你不懂&quot;你不懂她&quot;——这是第二层。你不懂&quot;你不懂&#x27;你不懂她&#x27;&quot;——这是第三层。</p>
 <p>到第三层时，你停了一下。你发现：第三层说的话，和第二层，没有新的区别。不是四个套娃、五个套娃，是——<strong>两个</strong>。再往上套，就塌回去了。</p>
-<p>为什么恰好两个？因为分歧的深度，由一样东西封顶：Cartan 对的完全不变量。这套语法（账本与它的正规化子结构）被 Feldman–Moore 完全分类，而那个分类的不变量止于二阶——群胚 \(\mathcal{R}\)（一阶：换乘、torsor）加上它的扭曲类 \([\sigma]\in H^2\)（二阶：他者）。分歧最多深到&quot;我不懂你&quot;这一层（那个抹不平的 \([\sigma]\)），再往上没有新的独立不变量。<strong>分歧是真的，但分歧不套娃。</strong><sup><a href="#fn-fmcap1" id="fnref-fmcap1" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-fmcap1')">[fmcap1]</a></sup><sup><a href="#fn-fmcap2" id="fnref-fmcap2" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-fmcap2')">[fmcap2]</a></sup></p>
+<p>为什么恰好两个？因为分歧的深度，由一样东西封顶：Cartan 对的完全不变量。这套语法（账本与它的正规化子结构）被 Feldman–Moore 完全分类，而那个分类的不变量止于二阶——群胚 \(\mathcal{R}\)（一阶：换乘、torsor）加上它的扭曲类 \([\sigma]\in H^2\)（二阶：他者）。分歧最多深到&quot;我不懂你&quot;这一层（那个抹不平的 \([\sigma]\)），再往上没有新的独立不变量。<strong>分歧是真的，但分歧不套娃。</strong><sup><a href="#fn-fmcap1" id="fnref-fmcap1" class="fn-a" data-fn="fn-fmcap1">[fmcap1]</a></sup><sup><a href="#fn-fmcap2" id="fnref-fmcap2" class="fn-a" data-fn="fn-fmcap2">[fmcap2]</a></sup></p>
 <p>这就是<strong>封顶定理（命题 7.2.7）</strong>。</p>
 <p>这带出两件事。第一件：公共世界不需要一个&quot;和谐&quot;的公设来撑。胡塞尔在《第五沉思》里，被那座&quot;我体会你、你体会我、我体会你体会我……&quot;无限迭代的塔困住，最后只好设一个&quot;和谐&quot;来兜底。本书不需要——因为结合律已经帮所有人封了顶。需要努力维持的，只有各自的身体、那个耗散稳态；公共性，不收费。</p>
 <p>第二件：公共账本 \(\mathcal{A}_{\text{phys}}\) 里，没有能动性。它是阿贝尔的，余圈恒等于一——谁也改不动它。能动性活在别处：活在你怎么读、怎么顶那道余圈、怎么挪你那个参考态 \(\omega_{\text{ext}}\)。从来没有&quot;改变客观世界&quot;这回事，只有换一种读法。而&quot;我改不动公共账本&quot;这件事，是<strong>我够不到那本账</strong>的证据——它够得成&quot;我改不动&quot;，却够不成&quot;他者一定存在&quot;的证明。这里要守住分寸：唯我论者有一个现成的回嘴——那本你改不动的账，也许正是你够不到的你自己。这道岔口在这套系统里判不了（第四章：他者是不是零，公理决定不了）。所以这里不是抓到了反驳唯我论的铁证，是撞上了一道<strong>不可判定</strong>：世界在我之外、还是那不过是我够不到的自己，两条路公理都不逼你选。本书在这道判不了的岔口上如实领受，不把&quot;我改不动&quot;冒充成&quot;他者存在&quot;的证明。交互是各人的行动落了盘、不可逆地沉积进公共账本（B1），别人再从账本里读到。交互经由那本谁都改不动的账本中介，谁也编辑不了谁的世界。</p>
@@ -158,7 +157,7 @@
 <p>这是一个结构上的必然。当观察者把自己也定位进自己画的那张图里，图上就留下一个洞——观察者没法作为一个对象，出现在自己的地图里（就像眼睛看不见正在看的自己）。这个洞，是画图这件事本身留下的。</p>
 <p>而为了遮住这个洞，织起来的那块补丁，就是身体、它的空间面，以及那个叙事的自我、它的时间面。&quot;我的&quot;&quot;我能&quot;&quot;我观察&quot;这三格，同源于这一个洞。所以身体不是世界里的又一个物件，是那块遮着&quot;我进不了自己地图&quot;这个洞的补丁。</p>
 <p>这里说的身体，是广义的身体——那块肉、那个承载着一切的耗散稳态。要先分清一件事，否则会认错。把这整块肉投到对易的一侧，得到的不是我的身体——是世界。我所认知的这个世界，就是那整块承载着一切的肉，在对易侧的影。那么狭义的、我此刻活着的这一具具体身体，又是什么的影？是那条&quot;身体套着身体&quot;的嵌套序列里、一个特殊的尖：整套自我维持的耗散结构，收拢到一个临界的节点上——这个节点一旦垮掉，整个耗散稳态就散了，那就是死。狭义的身体，就是这个&quot;一垮全散&quot;的临界尖，在对易侧被认知到的像。所以它同样是身体的认知、不是身体本身（又一次那条对易侧的红线）；而它之所以是会死的那一个，正因为它是那个&quot;一垮全散&quot;的临界节点的影——世界不随我一起死，因为世界是整块肉的影；而这一具身体会死，因为它是那个一垮全散的临界尖的影。它的完整代数——这个临界尖到底是哪个节点、我感为什么是一条有形状的谱、它怎么从肉镜出来——是第四、五卷的事。这里只给方向：我能，是那些能被登记进账本的部分；我感，是登记不进去、只在残差里涌动的部分——它不是一个数，是一条有形状的谱（不同的情绪，是这条谱不同的形状）。方向到此为止，公式留后卷。</p>
-<p><sup><a href="#fn-nesting" id="fnref-nesting" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-nesting')">[nesting]</a></sup></p>
+<p><sup><a href="#fn-nesting" id="fnref-nesting" class="fn-a" data-fn="fn-nesting">[nesting]</a></sup></p>
 <p>最后守一句红线：这块补丁（身体、叙事自我），和第二章那道缝、那个意向性，不是一回事——缝是意向性的普遍结构，补丁是为遮观察者之洞织的具体东西。别把两者焊在一起。</p>
 <blockquote><p>你从没有直接碰到过这个世界。你碰到的，永远是它撞在一层会饿、会疼、会累的东西上，那层东西再传给你的那一下。<br>
 <br>
@@ -172,9 +171,9 @@
 <h2 id="7-4-规律怎么被世界稳稳带着走-规范性">7.4 规律怎么被世界稳稳带着走：规范性</h2>
 <p>板搭好了，世界能站上去了。可还有一件事没交代：那些规律——物理的、社会的、你日常倚仗的——为什么能被这个一直在变的世界，稳稳地带着走，而不是每天散一次架？这一节讲三样机器，以及它们通向的那张还没填完的表。</p>
 <p>这三样机器，各自死守着一道防线（此处只标方向，不展全景）。第一样答&quot;规律为什么不散架&quot;：世界一直在变，可它带着一个不变的东西往前走，规律就搭在那个不变的东西上。第二样答&quot;这里的&#x27;规范&#x27;和物理学的规范是不是一回事&quot;：不是，而且差着层，绝不能焊。第三样答&quot;缓慢变化的世界怎么还稳得住&quot;：靠一种慢到跟得上的跟随。三样，一样一样来。</p>
-<p><strong>封顶</strong>（规律为什么不散架）：脉络一旦建起，内部的时间自洽延续、一个信息度规被保持住——那度规是相对熵在基线态 \(\omega^*\) 处的二阶结构（Fisher–Bures 信息度规）；这里的&quot;时间永恒&quot;不是外部的牛顿钟，是基线模流参数化的、脉络内自洽的时间。<strong>分层</strong>（这里的&quot;规范&quot;≠物理规范）：脉络的&quot;规范&quot;和杨–米尔斯那种物理规范，绝不是一回事，也不在一层——理解流那道单侧收缩是真收缩（严格压小、不可逆，\(U(s)\,\mathcal{N}\,U(s)^{*}\subsetneq\mathcal{N}\)），脉络的法化子是保住账本的酉元（\(u\,\mathcal{A}_{\text{phys}}\,u^{*}=\mathcal{A}_{\text{phys}}\)，成群、可逆），物理规范是纤维丛上的联络——一个是 \(\subsetneq\)、一个是 \(=\)、一个在另一层，三样分属三层、不能焊（曾有过用一个 cocycle 把脉络规范和物理规范统一的设想，已否决）。<strong>绝热</strong>（缓变世界为何稳）：规律要被缓慢变化的世界稳稳带着走，靠绝热跟随——但这里没有能级、没有能隙——模谱连续——跟随的对象是态、那个 KMS 平衡态、不是能级，衡量够不够慢的尺子是回归平衡率（第四章那个耗散稳态回到平衡的快慢）、不是谱隙；跃迁不是跳过一道坎，是绝热跟随失效、相对模谱的测度权重重排（这个&quot;测度权重重排&quot;是本框架对&quot;跃迁&quot;的代数刻画，不是搬标准量子绝热定理——那定理讲能级、这里无能级）。至于规范结构本身（法化子、物理规范群、耗散动力学），是<strong>待填的表、不是墙</strong>：锚存在、相对锚可以分类地给，只是那张表还没填完。它的表头是清楚的：物理的规范场落到这台机器上，是一个张量范畴的对偶，唯一对应一个规范群；而这张范畴要三样合起来才立得住——<strong>骨架</strong>由算子侧给（切法→账本→群胚→表示），<strong>成员名单</strong>由态侧的一次判定筛出（哪些表示算数，要选定一个真空才有真值），<strong>对称性</strong>由板给的维数定。三样缺一，范畴就立不住。<sup><a href="#fn-gauge" id="fnref-gauge" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-gauge')">[gauge]</a></sup></p>
-<p><sup><a href="#fn-chargeother" id="fnref-chargeother" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-chargeother')">[chargeother]</a></sup></p>
-<p>所以&quot;力天经地义&quot;不是世界的自明属性，是这三样恰好凑齐时，你回头看它、觉得它本来如此——又一道旧疤。往后真正的工程，是沿这三层各自分类、再把两条候选线焊成一个——那是第二卷的活；判据仍是全书那条铁律：相对切法能枚举出所有可能的&quot;力&quot;，哪一种是我们这个世界的，给不出。（三合的细目、三层分类的工具、以及本书相对非对易几何省在何处，见脚注 <sup><a href="#fn-gauge" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-gauge')">[gauge]</a></sup>。）去向→第二卷。</p>
+<p><strong>封顶</strong>（规律为什么不散架）：脉络一旦建起，内部的时间自洽延续、一个信息度规被保持住——那度规是相对熵在基线态 \(\omega^*\) 处的二阶结构（Fisher–Bures 信息度规）；这里的&quot;时间永恒&quot;不是外部的牛顿钟，是基线模流参数化的、脉络内自洽的时间。<strong>分层</strong>（这里的&quot;规范&quot;≠物理规范）：脉络的&quot;规范&quot;和杨–米尔斯那种物理规范，绝不是一回事，也不在一层——理解流那道单侧收缩是真收缩（严格压小、不可逆，\(U(s)\,\mathcal{N}\,U(s)^{*}\subsetneq\mathcal{N}\)），脉络的法化子是保住账本的酉元（\(u\,\mathcal{A}_{\text{phys}}\,u^{*}=\mathcal{A}_{\text{phys}}\)，成群、可逆），物理规范是纤维丛上的联络——一个是 \(\subsetneq\)、一个是 \(=\)、一个在另一层，三样分属三层、不能焊（曾有过用一个 cocycle 把脉络规范和物理规范统一的设想，已否决）。<strong>绝热</strong>（缓变世界为何稳）：规律要被缓慢变化的世界稳稳带着走，靠绝热跟随——但这里没有能级、没有能隙——模谱连续——跟随的对象是态、那个 KMS 平衡态、不是能级，衡量够不够慢的尺子是回归平衡率（第四章那个耗散稳态回到平衡的快慢）、不是谱隙；跃迁不是跳过一道坎，是绝热跟随失效、相对模谱的测度权重重排（这个&quot;测度权重重排&quot;是本框架对&quot;跃迁&quot;的代数刻画，不是搬标准量子绝热定理——那定理讲能级、这里无能级）。至于规范结构本身（法化子、物理规范群、耗散动力学），是<strong>待填的表、不是墙</strong>：锚存在、相对锚可以分类地给，只是那张表还没填完。它的表头是清楚的：物理的规范场落到这台机器上，是一个张量范畴的对偶，唯一对应一个规范群；而这张范畴要三样合起来才立得住——<strong>骨架</strong>由算子侧给（切法→账本→群胚→表示），<strong>成员名单</strong>由态侧的一次判定筛出（哪些表示算数，要选定一个真空才有真值），<strong>对称性</strong>由板给的维数定。三样缺一，范畴就立不住。<sup><a href="#fn-gauge" id="fnref-gauge" class="fn-a" data-fn="fn-gauge">[gauge]</a></sup></p>
+<p><sup><a href="#fn-chargeother" id="fnref-chargeother" class="fn-a" data-fn="fn-chargeother">[chargeother]</a></sup></p>
+<p>所以&quot;力天经地义&quot;不是世界的自明属性，是这三样恰好凑齐时，你回头看它、觉得它本来如此——又一道旧疤。往后真正的工程，是沿这三层各自分类、再把两条候选线焊成一个——那是第二卷的活；判据仍是全书那条铁律：相对切法能枚举出所有可能的&quot;力&quot;，哪一种是我们这个世界的，给不出。（三合的细目、三层分类的工具、以及本书相对非对易几何省在何处，见脚注 <sup><a href="#fn-gauge" class="fn-a" data-fn="fn-gauge">[gauge]</a></sup>。）去向→第二卷。</p>
 <h2 id="7-5-其余的板-一份方向清单">7.5 其余的板：一份方向清单</h2>
 <p>除了规范性，这块板还搭出了别的东西——维数、物理的定位、那些悖论的来源。这里不再层层拆解，只顺着它们标出最后的方向。</p>
 <p>回看第六章末尾，直觉撞上的那道缝——内部搭不出一根既连续又逐点可读的锐实数轴。这一章并没有把它填平，而是在它上面搭了一块借来的板（那块 \(D\)）。板搭上去，锐的连续统能用了，但<strong>板底下那道缝还在</strong>。它只是被一块付了&quot;态外位&quot;代价的板，暂时架住了。</p>
@@ -182,15 +181,15 @@
 <p><strong>力，合起来看。</strong> 先把散在前面两章的一件事，你其实已经在两个地方，分别摸到过它的两半。</p>
 <p>第四章那里，你摸到过一味<strong>内在的</strong>力：重。那不是谁在推你，是你把自己撑在离基线远处、不塌回去，从内部感到的那份费力（\(§4.5\)）。它普适、躲不掉、不挑对象——人人泡在里面，也没法&quot;不带&quot;它；自由下落的一刻它会消失，可见它从来不是外来的一记推，是&quot;我在这个位置上&quot;的自身重量。这一味走的是相对熵高度那条线，是我这一侧、单体的事。</p>
 <p>第六章那里，你摸到过另一味<strong>外在的</strong>力：每次要把世界落定，总有一股抗拒从对面顶回来（\(§6.0\)）。它挑对象——同一堵墙顶得住你的手、拦不住穿墙而过的东西，因为你俩&quot;带的不一样&quot;。这一味不是我撑自己的累，是我出手时、世界那一侧的不肯。</p>
-<p><strong>这两味的分界，恰好落在一条你早有体感的缝上：内在的重 vs 外在的抗拒。</strong> 而它有一个精确的根：内在那味能被&quot;落进自己的参照系&quot;消掉（下落即失重），所以它是我状态的属性、是几何那一路；外在那味换个参照系也消不掉（带电就是被顶），所以它是我与世界的关系、是要挑我&quot;带什么&quot;的那一路。你不必信物理才认得这条缝——你天天在活它：撑着自己的沉，和被什么顶回来的那一记，从来是两种质地。<sup><a href="#fn-physseam" id="fnref-physseam" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-physseam')">[physseam]</a></sup></p>
-<p>这条缝还能说得更透彻。有个疑问常在这里绊人：维持自己、被顶回来，落到底不都是&quot;落账&quot;这<strong>一个</strong>过程吗，凭什么分出两味？——凭这一个过程能被问两件不相干的事。问它<strong>多费劲</strong>（你这本总账离塌下去多远），答案<strong>不挑对象</strong>：不管你落的是什么，只认总量，所以它对谁都一样——这一问，就是重（引力）。问它<strong>落下的东西怎么合</strong>（你带的是哪种荷、它们怎么并怎么抵），答案<strong>挑对象</strong>：只认你带的那种荷——这一问，就是外在的力（规范）。一个认总账、不挑，一个挑荷、只认那一种，所以是两味。<sup><a href="#fn-twofaces" id="fnref-twofaces" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-twofaces')">[twofaces]</a></sup></p>
+<p><strong>这两味的分界，恰好落在一条你早有体感的缝上：内在的重 vs 外在的抗拒。</strong> 而它有一个精确的根：内在那味能被&quot;落进自己的参照系&quot;消掉（下落即失重），所以它是我状态的属性、是几何那一路；外在那味换个参照系也消不掉（带电就是被顶），所以它是我与世界的关系、是要挑我&quot;带什么&quot;的那一路。你不必信物理才认得这条缝——你天天在活它：撑着自己的沉，和被什么顶回来的那一记，从来是两种质地。<sup><a href="#fn-physseam" id="fnref-physseam" class="fn-a" data-fn="fn-physseam">[physseam]</a></sup></p>
+<p>这条缝还能说得更透彻。有个疑问常在这里绊人：维持自己、被顶回来，落到底不都是&quot;落账&quot;这<strong>一个</strong>过程吗，凭什么分出两味？——凭这一个过程能被问两件不相干的事。问它<strong>多费劲</strong>（你这本总账离塌下去多远），答案<strong>不挑对象</strong>：不管你落的是什么，只认总量，所以它对谁都一样——这一问，就是重（引力）。问它<strong>落下的东西怎么合</strong>（你带的是哪种荷、它们怎么并怎么抵），答案<strong>挑对象</strong>：只认你带的那种荷——这一问，就是外在的力（规范）。一个认总账、不挑，一个挑荷、只认那一种，所以是两味。<sup><a href="#fn-twofaces" id="fnref-twofaces" class="fn-a" data-fn="fn-twofaces">[twofaces]</a></sup></p>
 <p>真正要在这一节展开的，是<strong>外在</strong>那一味——因为它会长出这一章最后一块要点：规范结构。顺着&quot;它挑我带什么&quot;往下看：那个&quot;带什么&quot;，是<strong>荷</strong>——你携带的把手，决定哪些抗拒抓得住你。而荷不是孤立的：两个荷能并、能抵、能叠，合出来有确定的合法（同性相叠更强、异性相消、几个一起有合力）。<strong>你从来感觉不到一记孤立的力，你感到的力会合——而&quot;一批能按规则相合的把手&quot;，这个结构本身就有一个名字。</strong></p>
 <p><strong>物理。</strong> 从认知边界回看物理，是一次模板演示，不是物理理论。对称 = 焊痕，常数 = 汇率。经典物理与量子物理的分界，在语境概率的可黏合性：黏得起来→经典（全局柯尔莫哥洛夫测度），黏不起来→量子（contextuality 上同调障碍）。号差那个负号不能内生（Araki 半正定 + 惯性律）。元规则 M：反照，非解释非预言。去向→第二卷。</p>
 <p><strong>幽灵。</strong> 那些悖论感、佯谬感，共同来源是把搭起来的板当成了常在的桥。No-go 定理不是失败，是界碑——它标出的，正是那块被物理拆掉的对易性的边缘。去向→第八章（物理拆掉了什么）。</p>
-<p>顺着力走到尽头，就撞回了他者。你现在有了一张&quot;力的地图&quot;：凡是能被力顶到的、能标价的、能绕开或中和的，都是你还收得进账本的那部分——你的荷。把这张地图画到头，你会发现它总有个边：地图之外，还剩一片力够不到的地方。那里住的不是一种更强的力，是<strong>他者</strong>——那个你怎么使劲都顶不动、绕不开、也没法中和的剩余。能被你驯服的，回你以力；驯服不了的，回你以那处抹不平。<sup><a href="#fn-notother" id="fnref-notother" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-notother')">[notother]</a></sup>一个处处都能被顶动、处处能标价的世界，是长不出他者的；他者只住在&quot;受得住劲、却怎么也驯不服&quot;的地方。</p>
+<p>顺着力走到尽头，就撞回了他者。你现在有了一张&quot;力的地图&quot;：凡是能被力顶到的、能标价的、能绕开或中和的，都是你还收得进账本的那部分——你的荷。把这张地图画到头，你会发现它总有个边：地图之外，还剩一片力够不到的地方。那里住的不是一种更强的力，是<strong>他者</strong>——那个你怎么使劲都顶不动、绕不开、也没法中和的剩余。能被你驯服的，回你以力；驯服不了的，回你以那处抹不平。<sup><a href="#fn-notother" id="fnref-notother" class="fn-a" data-fn="fn-notother">[notother]</a></sup>一个处处都能被顶动、处处能标价的世界，是长不出他者的；他者只住在&quot;受得住劲、却怎么也驯不服&quot;的地方。</p>
 <blockquote><p>被活出来，这解释了一件很怪的事：为什么物理讲出来那么&quot;自然&quot;，像在描述一个本来就在那儿的世界；可你一旦把同一套目光转向自己、去剖自己的感受，却觉得那么&quot;强行&quot;，像在硬给一团东西安名字。是同一块断言板，只是两个年龄。朝外搭的那块，切的是早已沉积、结了痂的材料——桩打下去，缝早就愈合、藏好了，你看不见搭的痕迹，只觉得&quot;世界本来如此&quot;：那是一道旧疤。朝内搭的那块，切的是此刻还活着、还在涌动的残差——桩钉下去，缝当场裂开、当场喊疼，你眼睁睁看着自己在给一团说不清的东西安名字：那是一道新伤。物理是旧疤，内省是新伤——一个愈合得让你忘了它是搭的，一个还血淋淋地提醒你：所有的板，都是搭上去的。</p></blockquote>
 <p>三块亲手搭的板，加上规范性那三样机器、和这份方向清单，断言板的全貌就铺开了。搭板的纪律从头到尾没变：每块板底下，都没有一座常在的桥——板是搭上去的，承得住脚，但不把缝填成实地。</p>
-<p><sup><a href="#fn-cite" id="fnref-cite" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-cite')">[cite]</a></sup></p>
+<p><sup><a href="#fn-cite" id="fnref-cite" class="fn-a" data-fn="fn-cite">[cite]</a></sup></p>
 <p>力、荷、几何、规范——这一整章拆的，都是<strong>账本这一侧</strong>的结构：世界如何顶你、你带什么被顶、你把世界叠得多密而生出距离。可有一件事，这一整章（连同前面所有章）一直在用、却从没回头问过：账本本身——那份&quot;事实必须能同时、确定地摆在一起&quot;的底子——是从哪儿来的？世界 \(\text{III}_1\) 明明什么现成的事实都不给你，这份&quot;可以有事实&quot;的格式，是谁带进来的？它是全书的最后一个问题。这也是物理学最老的一个问题，换了副面孔。下一章。</p>
 <section class="footnotes"><h2>脚注</h2>
 <h3 class="fn-section">〔旁注〕</h3>
@@ -245,18 +244,22 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
-  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+  if (!e.target.closest('.fn-bubble')) {
     closeAllBubbles();
+  }
+  var fnA = e.target.closest('a.fn-a');
+  if (fnA && fnA.dataset.fn) {
+    e.preventDefault();
+    showFnBubble(fnA, fnA.dataset.fn);
   }
 });
 function closeAllBubbles() {
   document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
 }
-function showFnBubble(event, fid) {
+function showFnBubble(a, fid) {
   closeAllBubbles();
   var content = FN_CONTENT[fid];
   if (!content) return;
-  var a = event.currentTarget;
   var b = document.createElement('div');
   b.className = 'fn-bubble';
   b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
@@ -271,7 +274,6 @@ function showFnBubble(event, fid) {
   if (top + bRect.height > window.innerHeight - 12) {
     top = rect.top - bRect.height - 8;
     b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
-    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
   }
   b.style.left = left + 'px';
   b.style.top = top + 'px';

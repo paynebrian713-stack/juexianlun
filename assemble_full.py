@@ -55,8 +55,10 @@ HTML_SHELL = """<!DOCTYPE html>
   pre {{ background: #242420; padding: .75rem; overflow-x: auto; border-radius: 4px; color: #c8c4bc; }}
   .nav {{ font-size: .88rem; margin-bottom: 1.2rem; color: #7a766e; }}
   .nav a {{ color: #7eb8da; text-decoration: none; }}
-  .math-block {{ text-align: center; margin: 1.2rem 0; }}
-  .katex-display {{ margin: 1rem 0; overflow-x: auto; }}
+  .math-block {{ text-align: center; margin: 1.2rem 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }}
+  .math-block::-webkit-scrollbar {{ display: none; }}
+  .katex-display {{ margin: 1rem 0; overflow-x: auto; scrollbar-width: none; }}
+  .katex-display::-webkit-scrollbar {{ display: none; }}
   a.fn-ref {{ color: #7eb8da; text-decoration: none; font-weight: 600; }}
   a.fn-ref:hover {{ text-decoration: underline; }}
   .footnotes {{ margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #3a3a35; font-size: .92rem; }}
@@ -84,9 +86,6 @@ HTML_SHELL = """<!DOCTYPE html>
   a.d-link:hover {{ text-decoration: underline; }}
   a.w-ref {{ color: #7eb8da; text-decoration: none; }}
   a.w-ref:hover {{ text-decoration: underline; }}
-  .math-block {{ overflow-x: auto; overflow-y: hidden; }}
-  .math-block::-webkit-scrollbar {{ height: 6px; }}
-  .math-block::-webkit-scrollbar-thumb {{ background: #4a4a44; border-radius: 3px; }}
   .map-btn {{ position: fixed; top: .8rem; right: 1rem; z-index: 9999;
               font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
               padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
@@ -172,18 +171,22 @@ document.addEventListener('click', function(e) {{
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {{
     hideMap();
   }}
-  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {{
+  if (!e.target.closest('.fn-bubble')) {{
     closeAllBubbles();
+  }}
+  var fnA = e.target.closest('a.fn-a');
+  if (fnA && fnA.dataset.fn) {{
+    e.preventDefault();
+    showFnBubble(fnA, fnA.dataset.fn);
   }}
 }});
 function closeAllBubbles() {{
   document.querySelectorAll('.fn-bubble').forEach(function(b){{b.remove();}});
 }}
-function showFnBubble(event, fid) {{
+function showFnBubble(a, fid) {{
   closeAllBubbles();
   var content = FN_CONTENT[fid];
   if (!content) return;
-  var a = event.currentTarget;
   var b = document.createElement('div');
   b.className = 'fn-bubble';
   b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
@@ -198,7 +201,6 @@ function showFnBubble(event, fid) {{
   if (top + bRect.height > window.innerHeight - 12) {{
     top = rect.top - bRect.height - 8;
     b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
-    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
   }}
   b.style.left = left + 'px';
   b.style.top = top + 'px';
@@ -868,10 +870,8 @@ class PageConverter:
             def _rewrite_fn_ref(m):
                 fid = m.group(2)
                 if fid in a_fids:
-                    return re.sub(
-                        r'class="fn-ref"',
-                        'class="fn-a" onclick="event.preventDefault();showFnBubble(event,\'fn-' + fid + '\')"',
-                        m.group(0))
+                    return m.group(0).replace('class="fn-ref"',
+                        'class="fn-a" data-fn="fn-' + fid + '"')
                 return m.group(0)
 
             body = re.sub(

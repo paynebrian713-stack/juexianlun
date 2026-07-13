@@ -18,8 +18,10 @@
   pre { background: #242420; padding: .75rem; overflow-x: auto; border-radius: 4px; color: #c8c4bc; }
   .nav { font-size: .88rem; margin-bottom: 1.2rem; color: #7a766e; }
   .nav a { color: #7eb8da; text-decoration: none; }
-  .math-block { text-align: center; margin: 1.2rem 0; }
-  .katex-display { margin: 1rem 0; overflow-x: auto; }
+  .math-block { text-align: center; margin: 1.2rem 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+  .math-block::-webkit-scrollbar { display: none; }
+  .katex-display { margin: 1rem 0; overflow-x: auto; scrollbar-width: none; }
+  .katex-display::-webkit-scrollbar { display: none; }
   a.fn-ref { color: #7eb8da; text-decoration: none; font-weight: 600; }
   a.fn-ref:hover { text-decoration: underline; }
   .footnotes { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #3a3a35; font-size: .92rem; }
@@ -47,9 +49,6 @@
   a.d-link:hover { text-decoration: underline; }
   a.w-ref { color: #7eb8da; text-decoration: none; }
   a.w-ref:hover { text-decoration: underline; }
-  .math-block { overflow-x: auto; overflow-y: hidden; }
-  .math-block::-webkit-scrollbar { height: 6px; }
-  .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
   .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
               font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
               padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
@@ -118,12 +117,12 @@
 <h2 id="2-1-一个恒等式-两种读法-缓坡">2.1 一个恒等式，两种读法（缓坡）</h2>
 <p>两股共用同一道绵延，第一章立过。这道绵延本身有一个极简的结构。模流作用在算子上，有一个平凡的恒等式——第零章已埋过根：</p>
 <div class="math-block">\[\omega(\sigma_t(a))=(\omega\circ\sigma_t)(a).\]</div>
-<p>左边把时间挂在算子 \(a\) 上——<strong>算子在演化，态不动</strong>，这是<strong>算子读法</strong>，海森堡的视角。往实里说：这里那道流是基线的模流 \(\sigma_t=\sigma_t^{\omega^*}\)，它的生成元 \(\log\Delta_{\omega^*}\) 就是这个系统的内禀时间。所以算子读法，是拿一个稳定的参考态，去看观测量、那把尺子，沿这道内禀时钟自己的演化——把尺子一步步搬到不同的时刻上、再拿定住的视角去读它。<sup><a href="#fn-history" id="fnref-history" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-history')">[history]</a></sup></p>
+<p>左边把时间挂在算子 \(a\) 上——<strong>算子在演化，态不动</strong>，这是<strong>算子读法</strong>，海森堡的视角。往实里说：这里那道流是基线的模流 \(\sigma_t=\sigma_t^{\omega^*}\)，它的生成元 \(\log\Delta_{\omega^*}\) 就是这个系统的内禀时间。所以算子读法，是拿一个稳定的参考态，去看观测量、那把尺子，沿这道内禀时钟自己的演化——把尺子一步步搬到不同的时刻上、再拿定住的视角去读它。<sup><a href="#fn-history" id="fnref-history" class="fn-a" data-fn="fn-history">[history]</a></sup></p>
 <p>右边把时间挂在态 \(\omega\) 上——<strong>算子不动，态在演化</strong>，这是<strong>态读法</strong>，薛定谔的视角。它不是含糊的&quot;我的主观在流&quot;，是精确的：那个作参照的态 \(\omega_{\text{ext}}\) 本身在被改写，是他者的临到、对我这个参考态的影响。</p>
-<p>两边严格相等，是同一件事——但读法不同，指向的东西就不同。这两读通向全书两条主干：态读法，那个 \(\omega_{\text{ext}}\) 在变的侧，通向<strong>能动性</strong>；算子读法，那个 \(a\) 在演化、态定住的侧，通向<strong>历史一致性</strong>。同一个第二态过程，态读是被活的能动、算子读是客观的历史——这是全书那对&quot;两读&quot;的精确根。<sup><a href="#fn-twomains" id="fnref-twomains" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-twomains')">[twomains]</a></sup></p>
-<p>这里必须划定一条死线：两读的对偶，仅仅是<strong>求值</strong>的对偶——同一个量，挂在算子上还是挂在态上，两读<strong>算出同一个数</strong>——这正是那道恒等式说的。它不是<strong>造结构</strong>的对偶。造结构——子代数、账本、窗口这些——原生在算子这一侧；态这一侧原生的，是过程——松弛、漂移、被活出的体验。所以别指望态那一侧能造出一个和算子侧对称的几何镜像来——那面镜子不存在，也不该存在。<sup><a href="#fn-nomirror" id="fnref-nomirror" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-nomirror')">[nomirror]</a></sup></p>
-<p>这个恒等式本身空无一物，就是结合律。它的分量全在&quot;时间到底归谁&quot;这个追问上：同一道演化，可以读成&quot;世界在变&quot;，也可以读成&quot;我在流&quot;，而这两读之间差着的，是一个不可活的模位移。<sup><a href="#fn-shift" id="fnref-shift" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-shift')">[shift]</a></sup></p>
-<p><strong>这道恒等式怎么把两股分开？</strong> 靠锚。基线态 \(\omega^*\)，全书的第一个态、第零章钉死的那个基线锚，是一个分拣器：对于那些<strong>被学习彻底滤掉</strong>的算子 \(a_\perp\)——精确地说，落在条件期望核里、\(E(a_\perp)=0\) 的那些——\(\omega^*\) 有一个性质： \[\omega^*(\sigma_t(a_\perp))\equiv 0\]<sup><a href="#fn-filter" id="fnref-filter" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-filter')">[filter]</a></sup> 于是用算子读法、加上锚，只留下学习流那一扇，即落进 \(\mathcal{A}_{\text{phys}}\) 的那部分；用态读法，才读得到偏离的那部分，即理解流的余圈。<strong>两股不是被一个公式关联起来的，是被锚分拣开的</strong>——同一道流，锚一分拣，就分出朝前的一扇和朝后的一扇。</p>
+<p>两边严格相等，是同一件事——但读法不同，指向的东西就不同。这两读通向全书两条主干：态读法，那个 \(\omega_{\text{ext}}\) 在变的侧，通向<strong>能动性</strong>；算子读法，那个 \(a\) 在演化、态定住的侧，通向<strong>历史一致性</strong>。同一个第二态过程，态读是被活的能动、算子读是客观的历史——这是全书那对&quot;两读&quot;的精确根。<sup><a href="#fn-twomains" id="fnref-twomains" class="fn-a" data-fn="fn-twomains">[twomains]</a></sup></p>
+<p>这里必须划定一条死线：两读的对偶，仅仅是<strong>求值</strong>的对偶——同一个量，挂在算子上还是挂在态上，两读<strong>算出同一个数</strong>——这正是那道恒等式说的。它不是<strong>造结构</strong>的对偶。造结构——子代数、账本、窗口这些——原生在算子这一侧；态这一侧原生的，是过程——松弛、漂移、被活出的体验。所以别指望态那一侧能造出一个和算子侧对称的几何镜像来——那面镜子不存在，也不该存在。<sup><a href="#fn-nomirror" id="fnref-nomirror" class="fn-a" data-fn="fn-nomirror">[nomirror]</a></sup></p>
+<p>这个恒等式本身空无一物，就是结合律。它的分量全在&quot;时间到底归谁&quot;这个追问上：同一道演化，可以读成&quot;世界在变&quot;，也可以读成&quot;我在流&quot;，而这两读之间差着的，是一个不可活的模位移。<sup><a href="#fn-shift" id="fnref-shift" class="fn-a" data-fn="fn-shift">[shift]</a></sup></p>
+<p><strong>这道恒等式怎么把两股分开？</strong> 靠锚。基线态 \(\omega^*\)，全书的第一个态、第零章钉死的那个基线锚，是一个分拣器：对于那些<strong>被学习彻底滤掉</strong>的算子 \(a_\perp\)——精确地说，落在条件期望核里、\(E(a_\perp)=0\) 的那些——\(\omega^*\) 有一个性质： \[\omega^*(\sigma_t(a_\perp))\equiv 0\]<sup><a href="#fn-filter" id="fnref-filter" class="fn-a" data-fn="fn-filter">[filter]</a></sup> 于是用算子读法、加上锚，只留下学习流那一扇，即落进 \(\mathcal{A}_{\text{phys}}\) 的那部分；用态读法，才读得到偏离的那部分，即理解流的余圈。<strong>两股不是被一个公式关联起来的，是被锚分拣开的</strong>——同一道流，锚一分拣，就分出朝前的一扇和朝后的一扇。</p>
 <blockquote><p>看着窗外的光，一点点暗下去。<br>
 <br>
 读它一遍：光在变。天色一格一格沉下去——这是那边的事，和你无关，换谁来看都一样。<br>
@@ -136,18 +135,18 @@
 <br>
 没有那个位置。<br>
 <br>
-一样东西只有两读，没有第三面。你每读一次，就已经站进了某一读里：要么站光那边，要么站你这边，没有一个不站队的看法。那个把&quot;光在变&quot;和&quot;我在变&quot;接成同一件事的东西，你读不到——你只读得到它的两面。它不在任何一面上；可它也不是第三样东西，好让你绕到它跟前去看。它就是&quot;两面原是一件事&quot;这回事，而这回事，没有一个面朝着你。<sup><a href="#fn-pj3" id="fnref-pj3" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-pj3')">[pj3]</a></sup></p></blockquote>
-<p>看一支飞行的箭，就能看清这两读是怎么混在一起的。&quot;箭在运动&quot;——这是把时间挂在算子上，读出对象正沿着内禀时钟演化——noema，算子读法面；可你若把每一个瞬间切片单独拿出来，每一片都如实报告&quot;箭在这里，没动&quot;。运动感不在任何一个切片里，它是&quot;参考态在被拖着走&quot;——noesis，态读法面——叠在切片序列上读出来的。所谓&quot;箭的运动&quot;，是两读的混合：算子读法的切片，对象在各时刻的定格，加上态读法的流，参考态被拖着走。<sup><a href="#fn-film" id="fnref-film" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-film')">[film]</a></sup></p>
+一样东西只有两读，没有第三面。你每读一次，就已经站进了某一读里：要么站光那边，要么站你这边，没有一个不站队的看法。那个把&quot;光在变&quot;和&quot;我在变&quot;接成同一件事的东西，你读不到——你只读得到它的两面。它不在任何一面上；可它也不是第三样东西，好让你绕到它跟前去看。它就是&quot;两面原是一件事&quot;这回事，而这回事，没有一个面朝着你。<sup><a href="#fn-pj3" id="fnref-pj3" class="fn-a" data-fn="fn-pj3">[pj3]</a></sup></p></blockquote>
+<p>看一支飞行的箭，就能看清这两读是怎么混在一起的。&quot;箭在运动&quot;——这是把时间挂在算子上，读出对象正沿着内禀时钟演化——noema，算子读法面；可你若把每一个瞬间切片单独拿出来，每一片都如实报告&quot;箭在这里，没动&quot;。运动感不在任何一个切片里，它是&quot;参考态在被拖着走&quot;——noesis，态读法面——叠在切片序列上读出来的。所谓&quot;箭的运动&quot;，是两读的混合：算子读法的切片，对象在各时刻的定格，加上态读法的流，参考态被拖着走。<sup><a href="#fn-film" id="fnref-film" class="fn-a" data-fn="fn-film">[film]</a></sup></p>
 <h2 id="2-2-中心定理-两股不能自给自足地合并-墙">2.2 中心定理：两股不能自给自足地合并（墙）</h2>
 <p>缓坡走完，上墙。</p>
 <p>你想只靠自己，给自己活出的这套，发一张&quot;它成立&quot;的证书——而这堵墙，就是它发不出来。</p>
-<p><strong>定理（视角不可内生 / 中心定理）</strong>：设 \(\mathcal{M}\) 为 \(\text{III}_1\) 因子，两股流在场——被抛前件，承第一章。则任何与两股兼容的统一衡量泛函 \(\Phi\)——以及一切以两股为构件的动力学过程——其源头对基线态 \(\omega^*\) 提出<strong>互斥的要求</strong>：\(\omega^*\) 被同时要求充当&quot;待生成的产物&quot;与&quot;已预设的前提&quot;。调和这一互斥，需要一个态外的不变参照；在无迹的结构上没有这样的参照，故互斥无法调和——自给自足的统一动力学不可完善地定义。证在附录 W.2，A 级<sup><a href="#fn-w3" id="fnref-w3" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-w3')">[w3]</a></sup>。</p>
-<p>互斥的精确形式是一个循环。\(\omega^*\) 由第零章那道印记极小化&quot;生成&quot;，是印记钉出来的产物（0.C）。可两股流又都<strong>预设</strong> \(\omega^*\)：学习流的相对熵尺 \(S(\,\cdot\,\|\omega^*)\) 拿 \(\omega^*\) 当尺子，理解流的模流 \(\sigma_t^{\omega^*}\) 拿 \(\omega^*\) 当锚。同一个 \(\omega^*\)，既是待生成的产物、又是已预设的前提——这两个角色互斥，得由两个态分摊：一个待生成、一个当不变参照。而无迹的结构只给得出一个态，供不出第二个不变参照。于是循环合不拢，统一动力学撞墙。<sup><a href="#fn-engine" id="fnref-engine" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-engine')">[engine]</a></sup></p>
+<p><strong>定理（视角不可内生 / 中心定理）</strong>：设 \(\mathcal{M}\) 为 \(\text{III}_1\) 因子，两股流在场——被抛前件，承第一章。则任何与两股兼容的统一衡量泛函 \(\Phi\)——以及一切以两股为构件的动力学过程——其源头对基线态 \(\omega^*\) 提出<strong>互斥的要求</strong>：\(\omega^*\) 被同时要求充当&quot;待生成的产物&quot;与&quot;已预设的前提&quot;。调和这一互斥，需要一个态外的不变参照；在无迹的结构上没有这样的参照，故互斥无法调和——自给自足的统一动力学不可完善地定义。证在附录 W.2，A 级<sup><a href="#fn-w3" id="fnref-w3" class="fn-a" data-fn="fn-w3">[w3]</a></sup>。</p>
+<p>互斥的精确形式是一个循环。\(\omega^*\) 由第零章那道印记极小化&quot;生成&quot;，是印记钉出来的产物（0.C）。可两股流又都<strong>预设</strong> \(\omega^*\)：学习流的相对熵尺 \(S(\,\cdot\,\|\omega^*)\) 拿 \(\omega^*\) 当尺子，理解流的模流 \(\sigma_t^{\omega^*}\) 拿 \(\omega^*\) 当锚。同一个 \(\omega^*\)，既是待生成的产物、又是已预设的前提——这两个角色互斥，得由两个态分摊：一个待生成、一个当不变参照。而无迹的结构只给得出一个态，供不出第二个不变参照。于是循环合不拢，统一动力学撞墙。<sup><a href="#fn-engine" id="fnref-engine" class="fn-a" data-fn="fn-engine">[engine]</a></sup></p>
 <p>这里要把定理的分寸钉死，一个字都不能多。</p>
 <p><strong>其一，这不是&quot;统一泛函不存在&quot;。</strong> 给定一个外部的 \(\omega^*\) 当不变参照，统一的衡量泛函写得出来——相对熵族加模流时间轴，见附录 W.2.3。定理说的是它<strong>不能自给自足</strong>——它必须外接一个视角内生不出来的参照。矛盾在&quot;没有态外的位置&quot;，不在&quot;泛函写不出&quot;。</p>
-<p><strong>其二，前件是&quot;此刻有一具体的两股配对在场&quot;。</strong> 这里要摆准一件事的分寸：<strong>两股能分，是本书的讨论范围前件，不是一条结构定理。</strong> 诚实地说，分两步看。第一步是定理：任一非平凡 \(\text{III}_1\) 因子（包括超有限的 \(R_\infty\)）模流都非内、绵延都随之而生。可第二步——&quot;绵延在场，就一定分得出双侧保持的一扇与严格单侧的一扇&quot;——<strong>不是定理，是一个尚开放的问题</strong><sup><a href="#fn-split" id="fnref-split" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-split')">[split]</a></sup>。</p>
+<p><strong>其二，前件是&quot;此刻有一具体的两股配对在场&quot;。</strong> 这里要摆准一件事的分寸：<strong>两股能分，是本书的讨论范围前件，不是一条结构定理。</strong> 诚实地说，分两步看。第一步是定理：任一非平凡 \(\text{III}_1\) 因子（包括超有限的 \(R_\infty\)）模流都非内、绵延都随之而生。可第二步——&quot;绵延在场，就一定分得出双侧保持的一扇与严格单侧的一扇&quot;——<strong>不是定理，是一个尚开放的问题</strong><sup><a href="#fn-split" id="fnref-split" class="fn-a" data-fn="fn-split">[split]</a></sup>。</p>
 <p>所以本书不宣称&quot;处处必能分&quot;，只主张&quot;<strong>凡这样一具体两股配对在场处</strong>，结论成立&quot;。至于&quot;分成的是哪一对 \((\mathcal{A}_{\text{phys}},\mathcal{N})\)&quot;——这一个具体的账本、这一个具体的理解窗口——更是被抛的经验内容：公理连&quot;能分&quot;都不硬性给出，更给不出&quot;分成了这一具体对&quot;。所以定理是&quot;凡有一具体两股配对在场处，统一必外接&quot;——它把前件老实标在门口，不把&quot;能分&quot;偷偷升成结论。</p>
-<p><strong>其三，不是&quot;两股不可兼得&quot;，是&quot;想自给自足地兼得，就得先有一把绝对的尺&quot;。</strong> 两股<strong>可以</strong>被一个自给自足的统一动力学同时驱动——前提是这台机器<strong>有迹</strong>，有一把不依赖任何视角的绝对尺子。可&quot;有迹&quot;恰恰是这台活机器的反面。那就是尾声那具&quot;水晶棺&quot;，是公理 I（无迹）彻底排除掉的那一类。见证&quot;能兼得&quot;的，是有迹的半有限因子<sup><a href="#fn-witness" id="fnref-witness" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-witness')">[witness]</a></sup>；一旦守在无迹里、守在活着这一边，统一动力学就永远不可自给。所以不是&quot;不可兼得&quot;，是&quot;<strong>兼得 ⟺ 有迹 ⟺ 离开这台活机器</strong>&quot;<sup><a href="#fn-rinfty" id="fnref-rinfty" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-rinfty')">[rinfty]</a></sup>。</p>
+<p><strong>其三，不是&quot;两股不可兼得&quot;，是&quot;想自给自足地兼得，就得先有一把绝对的尺&quot;。</strong> 两股<strong>可以</strong>被一个自给自足的统一动力学同时驱动——前提是这台机器<strong>有迹</strong>，有一把不依赖任何视角的绝对尺子。可&quot;有迹&quot;恰恰是这台活机器的反面。那就是尾声那具&quot;水晶棺&quot;，是公理 I（无迹）彻底排除掉的那一类。见证&quot;能兼得&quot;的，是有迹的半有限因子<sup><a href="#fn-witness" id="fnref-witness" class="fn-a" data-fn="fn-witness">[witness]</a></sup>；一旦守在无迹里、守在活着这一边，统一动力学就永远不可自给。所以不是&quot;不可兼得&quot;，是&quot;<strong>兼得 ⟺ 有迹 ⟺ 离开这台活机器</strong>&quot;<sup><a href="#fn-rinfty" id="fnref-rinfty" class="fn-a" data-fn="fn-rinfty">[rinfty]</a></sup>。</p>
 <blockquote><p>你在看一个你很熟的人。<br>
 <br>
 你想同时做两件事：看清她此刻的脸——这一刻的神情、光打在她脸上的样子；又想起她的过去——你们一起走过的那些年，她怎么一路变成此刻这个样子。<br>
@@ -165,15 +164,15 @@
 所以两股合不成一条自足的量法。不是你还没找到那把尺，是任何一把你立得起来的尺，都得先站在一个它自己够不到的视角上。而那个视角，你挣不来。</p></blockquote>
 <h2 id="2-3-物理世界-相对于视角-且视角无法自给">2.3 物理世界：相对于视角，且视角无法自给</h2>
 <p id="scene-heng">有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了——但要先说清它相对于什么。</p>
-<p>学习流压出的账本 \(\mathcal{A}_{\text{phys}}\)（第一章）是一个对易截面：可反复指认、可共享的事实。理解流的因果窗口 \(\mathcal{N}\) 展开可理解的脉络。两者在一个<strong>舞台</strong>上并置，这个舞台是账本的正规化子生成的正则包 \[\mathcal{M}_{\mathcal{A}}:=\mathcal{N}(\mathcal{A}_{\text{phys}})''\]<sup><a href="#fn-normalizer" id="fnref-normalizer" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-normalizer')">[normalizer]</a></sup> 一个视角，就是一个配对 \((\omega^*,\mathcal{N})\)；给定它，两股就在这个舞台内剪辑出<strong>一条路径</strong>——所谓&quot;物理世界&quot;，就是给定视角后剪出的这一条路径，落在三层包含之间：</p>
+<p>学习流压出的账本 \(\mathcal{A}_{\text{phys}}\)（第一章）是一个对易截面：可反复指认、可共享的事实。理解流的因果窗口 \(\mathcal{N}\) 展开可理解的脉络。两者在一个<strong>舞台</strong>上并置，这个舞台是账本的正规化子生成的正则包 \[\mathcal{M}_{\mathcal{A}}:=\mathcal{N}(\mathcal{A}_{\text{phys}})''\]<sup><a href="#fn-normalizer" id="fnref-normalizer" class="fn-a" data-fn="fn-normalizer">[normalizer]</a></sup> 一个视角，就是一个配对 \((\omega^*,\mathcal{N})\)；给定它，两股就在这个舞台内剪辑出<strong>一条路径</strong>——所谓&quot;物理世界&quot;，就是给定视角后剪出的这一条路径，落在三层包含之间：</p>
 <div class="math-block">\[\mathcal{A}_{\text{phys}}\ \subseteq\ (\text{这一个视角剪出的路径})\ \subseteq\ \mathcal{M}_{\mathcal{A}}.\]</div>
 <p>底层是对易的账本（压到底的化石层），顶层是舞台，路径在两者之间。</p>
-<p>**要害在于：舞台随视角变，视角无关的只有那个被给予的因子 \(\mathcal{M}\)。** 换一个视角 \((\omega^*,\mathcal{N})\)，连舞台 \(\mathcal{M}_{\mathcal{A}}\) 带路径一起换。所以&quot;物理世界&quot;从一开始就是相对于视角的——它不是一个绝对唯一的世界，是某个视角剪出的一条路径。<sup><a href="#fn-physworld" id="fnref-physworld" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-physworld')">[physworld]</a></sup>（而那个视角无关的 \(\mathcal{M}\) 本身，也并不藏着一份&quot;绝对客观&quot;的底稿——它是<strong>因子</strong>，中心平凡，里面没有一个对谁都一样、被给予之前就固定好的经典标签。<sup><a href="#fn-factorobj" id="fnref-factorobj" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-factorobj')">[factorobj]</a></sup>）</p>
+<p>**要害在于：舞台随视角变，视角无关的只有那个被给予的因子 \(\mathcal{M}\)。** 换一个视角 \((\omega^*,\mathcal{N})\)，连舞台 \(\mathcal{M}_{\mathcal{A}}\) 带路径一起换。所以&quot;物理世界&quot;从一开始就是相对于视角的——它不是一个绝对唯一的世界，是某个视角剪出的一条路径。<sup><a href="#fn-physworld" id="fnref-physworld" class="fn-a" data-fn="fn-physworld">[physworld]</a></sup>（而那个视角无关的 \(\mathcal{M}\) 本身，也并不藏着一份&quot;绝对客观&quot;的底稿——它是<strong>因子</strong>，中心平凡，里面没有一个对谁都一样、被给予之前就固定好的经典标签。<sup><a href="#fn-factorobj" id="fnref-factorobj" class="fn-a" data-fn="fn-factorobj">[factorobj]</a></sup>）</p>
 <h3 id="那个视角-自己挣不来">那个视角，自己挣不来</h3>
 <p>给定视角，两股就把路径剪出来了。但视角本身——那个配对里的态——从哪来？</p>
 <p>它是一个真态：\(\mathcal{M}\) 上的忠实正规态 \(\omega_{\text{ext}}\)，不是虚构的记号。但它<strong>不稳定</strong>：换一个场景就换一个，随 Connes 余圈 \([D\omega_{\text{ext}}:D\omega^*]_t\) 漂移，没有典范的选法。它顶的正是中心定理那道缺口——统一衡量必须外接的那个不可内生参照。而它之所以&quot;不可内生&quot;，不是因为它不存在——它是真态——是因为它要扮的角色——一个全局一致的、跨视角的绝对称量——等价于一把迹，而这台机器无迹。</p>
-<p>这里有一个看起来自相矛盾的疑问，要正面接住：既然用了 \(\omega_{\text{ext}}\) 这个真态，又说没有迹，不冲突吗？不冲突，因为<strong>有态不等于有迹</strong>。这台机器上有大把忠实正规态，\(\omega^*\)、\(\omega_{\text{ext}}\) 都是真态——态是充裕的。但没有一个态能扮&quot;全局一致的绝对尺子&quot;那个角色：那个角色等价于一把半有限迹，\(\text{III}_1\) 恰恰没有。态是局部的、随余圈漂的参照；迹是全局的、酉不变的绝对尺。前者这台机器有很多，后者一个也没有。\(\omega_{\text{ext}}\) 的真实存在，和它扮不了那把全局迹，在同一个代数里安然共存。<sup><a href="#fn-twostates" id="fnref-twostates" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-twostates')">[twostates]</a></sup></p>
-<p>到这里，要把一件贯穿全书的结构点破。机器上现在有了<strong>两个态</strong>：基线 \(\omega^*\)——第零章钉死的第一个态，生成绵延，单靠它只写得出两流——和这个外接的参考态 \(\omega_{\text{ext}}\)，那第二个态、那个视角。往后一切度量、判定、历史、&quot;我&quot;，都是这<strong>两个态的合作</strong>：基线给时间——模流搬尺子；视角给读数——判定与可见。这也解释了为什么 Connes 余圈 \([D\,\cdot:D\omega^*]\) 会在全书无处不在——余圈本来就是<strong>两个态之间</strong>的相对扭曲，凡出现它，就是这两个态在打交道。<sup><a href="#fn-cocycle" id="fnref-cocycle" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-cocycle')">[cocycle]</a></sup></p>
+<p>这里有一个看起来自相矛盾的疑问，要正面接住：既然用了 \(\omega_{\text{ext}}\) 这个真态，又说没有迹，不冲突吗？不冲突，因为<strong>有态不等于有迹</strong>。这台机器上有大把忠实正规态，\(\omega^*\)、\(\omega_{\text{ext}}\) 都是真态——态是充裕的。但没有一个态能扮&quot;全局一致的绝对尺子&quot;那个角色：那个角色等价于一把半有限迹，\(\text{III}_1\) 恰恰没有。态是局部的、随余圈漂的参照；迹是全局的、酉不变的绝对尺。前者这台机器有很多，后者一个也没有。\(\omega_{\text{ext}}\) 的真实存在，和它扮不了那把全局迹，在同一个代数里安然共存。<sup><a href="#fn-twostates" id="fnref-twostates" class="fn-a" data-fn="fn-twostates">[twostates]</a></sup></p>
+<p>到这里，要把一件贯穿全书的结构点破。机器上现在有了<strong>两个态</strong>：基线 \(\omega^*\)——第零章钉死的第一个态，生成绵延，单靠它只写得出两流——和这个外接的参考态 \(\omega_{\text{ext}}\)，那第二个态、那个视角。往后一切度量、判定、历史、&quot;我&quot;，都是这<strong>两个态的合作</strong>：基线给时间——模流搬尺子；视角给读数——判定与可见。这也解释了为什么 Connes 余圈 \([D\,\cdot:D\omega^*]\) 会在全书无处不在——余圈本来就是<strong>两个态之间</strong>的相对扭曲，凡出现它，就是这两个态在打交道。<sup><a href="#fn-cocycle" id="fnref-cocycle" class="fn-a" data-fn="fn-cocycle">[cocycle]</a></sup></p>
 <blockquote><p>此刻有一个你，正在看这行字。<br>
 <br>
 试着回头看看那个正在看的你。不是看字——是看那个&quot;正在看&quot;的你自己。抓住它。<br>
@@ -189,21 +188,21 @@
 视角是你的，你却挣不来它，也退不到它背后。这就是中心定理那行冷冰冰的&quot;不可内生&quot;，落到你身上的样子。</p></blockquote>
 <h3 id="正则性-三层-一个都不欠">正则性：三层，一个都不欠</h3>
 <p>关于账本&quot;正则不正则&quot;这个技术地基，我们分三层说清，一个也不欠。</p>
-<p><strong>第一层，构造级——白拿的。</strong> 在舞台 \(\mathcal{M}_{\mathcal{A}}\) 内部，\(\mathcal{A}_{\text{phys}}\) 按构造就是正则的——舞台正是它的正规化子生成的，\((\mathcal{M}_{\mathcal{A}},\mathcal{A}_{\text{phys}})\) 构成一个正则配对。账本再具备极大性时——即与它相容的都已登记<sup><a href="#fn-maximal" id="fnref-maximal" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-maximal')">[maximal]</a></sup>——这就是一个 Cartan 对，第四章的他者内核 \([\sigma]\) 在其上由 Feldman–Moore 完全严格地定义。要点出一件后面要用的事：他者的<strong>典范性</strong>只靠账本对易这一条、不靠极大；极大与否，只决定他者是否与规范荷干净分开<sup><a href="#fn-canon" id="fnref-canon" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-canon')">[canon]</a></sup>。这一层完全严格，不欠任何开放问题。</p>
+<p><strong>第一层，构造级——白拿的。</strong> 在舞台 \(\mathcal{M}_{\mathcal{A}}\) 内部，\(\mathcal{A}_{\text{phys}}\) 按构造就是正则的——舞台正是它的正规化子生成的，\((\mathcal{M}_{\mathcal{A}},\mathcal{A}_{\text{phys}})\) 构成一个正则配对。账本再具备极大性时——即与它相容的都已登记<sup><a href="#fn-maximal" id="fnref-maximal" class="fn-a" data-fn="fn-maximal">[maximal]</a></sup>——这就是一个 Cartan 对，第四章的他者内核 \([\sigma]\) 在其上由 Feldman–Moore 完全严格地定义。要点出一件后面要用的事：他者的<strong>典范性</strong>只靠账本对易这一条、不靠极大；极大与否，只决定他者是否与规范荷干净分开<sup><a href="#fn-canon" id="fnref-canon" class="fn-a" data-fn="fn-canon">[canon]</a></sup>。这一层完全严格，不欠任何开放问题。</p>
 <p><strong>第二层，适配级——随锚生灭、不可携带。</strong> &quot;\(\mathcal{A}_{\text{phys}}\) 对哪个态正则&quot;是个相对问题：账本是当前这个锚的学习流沉积的，故对当前锚模不变——这正是 Takesaki 定理的精确判据：</p>
 <div class="math-block">\[\sigma_t^{\omega^*}(\mathcal{A}_{\text{phys}})=\mathcal{A}_{\text{phys}}\ \iff\ \exists\,E:\mathcal{M}\to\mathcal{A}_{\text{phys}}\ \text{保态正规条件期望}\]</div>
 <p>模不变等价于保态期望存在，第一章 §1.2 已证。换一个锚，旧账本一般不再对新流模不变，于是它不是新锚的账本，必须重新沉积。所以正则性（适配义）随锚生、随锚灭，不能跨锚携带——这正是第一章&quot;参照不可回&quot;（B1）在正则性这个寄存器上的样子，也是第八章多舞台转化的门。</p>
-<p><strong>第三层，环境级——态外位，消解，不欠。</strong> 那&quot;\(\mathcal{A}_{\text{phys}}\) 在整个 \(\mathcal{M}\) 里是不是 Cartan&quot;呢？这个问题如今可以拆成两半。极大那一半——\(\mathcal{M}\) 里还有没有与我全部账目相容却未登记的东西——完全是舞台内部的事，一行恒等式就判定了，不必俯瞰 \(\mathcal{M}\)<sup><a href="#fn-maximalid" id="fnref-maximalid" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-maximalid')">[maximalid]</a></sup>。真正够不到的是另一半：舞台是不是已经就是全部，即 \(\mathcal{M}_{\mathcal{A}}=\mathcal{M}\) 这个&quot;生成&quot;问题。回答它，需要从外面清点我一切操作之外还有没有东西——那是态外位，是一片禁区（第三章）。本书不回答它，而且可以证明：它的答案不接触任何能被登记、被理解、被活出的东西。</p>
+<p><strong>第三层，环境级——态外位，消解，不欠。</strong> 那&quot;\(\mathcal{A}_{\text{phys}}\) 在整个 \(\mathcal{M}\) 里是不是 Cartan&quot;呢？这个问题如今可以拆成两半。极大那一半——\(\mathcal{M}\) 里还有没有与我全部账目相容却未登记的东西——完全是舞台内部的事，一行恒等式就判定了，不必俯瞰 \(\mathcal{M}\)<sup><a href="#fn-maximalid" id="fnref-maximalid" class="fn-a" data-fn="fn-maximalid">[maximalid]</a></sup>。真正够不到的是另一半：舞台是不是已经就是全部，即 \(\mathcal{M}_{\mathcal{A}}=\mathcal{M}\) 这个&quot;生成&quot;问题。回答它，需要从外面清点我一切操作之外还有没有东西——那是态外位，是一片禁区（第三章）。本书不回答它，而且可以证明：它的答案不接触任何能被登记、被理解、被活出的东西。</p>
 <p>这最后一层，有一个精确的命题（证在附录 W.2.7）<sup><a href="#fn-rstar" id="fnref-rstar" class="fn-ref">[rstar]</a></sup>：</p>
 <p><strong>命题 R★（舞台完备性 / 环境欠定）</strong>：第一人称的全部数据——账本上登记的、舞台内动力学操作的、被活的绵延——只依赖于舞台连同它上面的基线态 \((\mathcal{M}_{\mathcal{A}},\ \omega^*|_{\mathcal{M}_{\mathcal{A}}})\)。任意两个把这个舞台包含在内、且在舞台上限制到同一基线态的更大环境，生成<strong>逐字相同</strong>的第一人称数据。换句话说：环境超出舞台的那部分，在账本上零指纹、在绵延里零手感。</p>
-<p>所以&quot;我当下的模流反推出的到底是哪一个 \(\mathcal{M}\)&quot;，没有第一人称答案——对于一切能被登记、被理解、被活出来的东西来说，舞台，就是世界的全部代数。这不是一句形而上的断言——说&quot;舞台就是世界&quot;越界了——而是严谨地指明：环境被一切&quot;被活之物&quot;所欠定。一个对一切可活数据都无差别的问题，不在本书射程之内。<sup><a href="#fn-decoherence" id="fnref-decoherence" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-decoherence')">[decoherence]</a></sup></p>
+<p>所以&quot;我当下的模流反推出的到底是哪一个 \(\mathcal{M}\)&quot;，没有第一人称答案——对于一切能被登记、被理解、被活出来的东西来说，舞台，就是世界的全部代数。这不是一句形而上的断言——说&quot;舞台就是世界&quot;越界了——而是严谨地指明：环境被一切&quot;被活之物&quot;所欠定。一个对一切可活数据都无差别的问题，不在本书射程之内。<sup><a href="#fn-decoherence" id="fnref-decoherence" class="fn-a" data-fn="fn-decoherence">[decoherence]</a></sup></p>
 <h2 id="2-4-缝-合不上的那道亏量">2.4 缝：合不上的那道亏量</h2>
 <p>两股合不成一条自足的动力学。这道&quot;合不成&quot;，在舞台上有一个最干净的代数见证。</p>
 <p>学习流的压缩是舞台到账本的条件期望 \(E:\mathcal{M}_{\mathcal{A}}\to\mathcal{A}_{\text{phys}}\)；它存在，因为账本在舞台内模不变，第一章 §1.2 已证。把压下去的再包含回舞台，\(\iota:\mathcal{A}_{\text{phys}}\hookrightarrow\mathcal{M}_{\mathcal{A}}\)。复合这两步：</p>
 <div class="math-block">\[\iota\circ E\ \neq\ \mathrm{id}_{\mathcal{M}_{\mathcal{A}}}.\]</div>
-<p>不等，而且严格。因为 \(E\) 把舞台投到对易的账本时，丢掉了非对易的信息；再包含回去，只能恢复 \(\mathcal{A}_{\text{phys}}\)，重建不出整个舞台。\(\iota\circ E\) 的像是 \(\mathcal{A}_{\text{phys}}\)，真小于 \(\mathcal{M}_{\mathcal{A}}\)——只要舞台严格大于账本，即只要真有理解在发生。这个&quot;压下去再拿回来、拿不回全部&quot;的亏量，就是那道合不上的缝。<sup><a href="#fn-norepair" id="fnref-norepair" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-norepair')">[norepair]</a></sup></p>
+<p>不等，而且严格。因为 \(E\) 把舞台投到对易的账本时，丢掉了非对易的信息；再包含回去，只能恢复 \(\mathcal{A}_{\text{phys}}\)，重建不出整个舞台。\(\iota\circ E\) 的像是 \(\mathcal{A}_{\text{phys}}\)，真小于 \(\mathcal{M}_{\mathcal{A}}\)——只要舞台严格大于账本，即只要真有理解在发生。这个&quot;压下去再拿回来、拿不回全部&quot;的亏量，就是那道合不上的缝。<sup><a href="#fn-norepair" id="fnref-norepair" class="fn-a" data-fn="fn-norepair">[norepair]</a></sup></p>
 <p>别把这道缝当成&quot;你还不够强、将来能补&quot;的欠缺：否决是结构性的，不是你还不够强。</p>
-<p>**这道缝只需要两样东西。一样是无迹：两股不可被统一判准描述。一样是有理解：舞台严格大于账本。它不需要他者非平凡 \([\sigma]\neq0\)。** 这一点要紧——它把本章的&quot;缝&quot;和后面的&quot;他者&quot;分开：缝更普遍，任何有理解、且无迹的世界都有这道缝；他者（第四章）是这道缝里的一种特殊内核，那个抹不平的扭曲。缝在，意向性就在；他者在不在，是另一回事。<sup><a href="#fn-twolayers" id="fnref-twolayers" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-twolayers')">[twolayers]</a></sup></p>
+<p>**这道缝只需要两样东西。一样是无迹：两股不可被统一判准描述。一样是有理解：舞台严格大于账本。它不需要他者非平凡 \([\sigma]\neq0\)。** 这一点要紧——它把本章的&quot;缝&quot;和后面的&quot;他者&quot;分开：缝更普遍，任何有理解、且无迹的世界都有这道缝；他者（第四章）是这道缝里的一种特殊内核，那个抹不平的扭曲。缝在，意向性就在；他者在不在，是另一回事。<sup><a href="#fn-twolayers" id="fnref-twolayers" class="fn-a" data-fn="fn-twolayers">[twolayers]</a></sup></p>
 <p>要钉死一句分寸：这道亏量是意向性的<strong>位置</strong>，不是意向性<strong>本身</strong>。\(\iota\circ E\neq\mathrm{id}\) 是一个可写得下的数学事实，它标出意向性栖居之处，标不出意向性是什么——写&quot;亏量非零、为意向性腾出位置&quot;是对的，写&quot;意向性＝亏量&quot;是错的。</p>
 <blockquote><p>试着把你此刻正经历的这件事，完整地说给一个人听。<br>
 <br>
@@ -252,7 +251,7 @@
 <p>把本章收拢。第一章立了两股各自的结构；本章问它们能不能自给自足地合并，答案是不能——统一衡量必须外接一个视角内生不出来的参照（中心定理），而那个参照是真态却扮不了全局的迹（有态≠有迹）。物理世界因此相对于视角，视角本身挣不来；舞台之外的环境，第一人称一律欠定（R★）。这一切合起来，就是那道压不下去的缝，\(\iota\circ E\neq\mathrm{id}\)。</p>
 <p>这道缝，是全书&quot;给位置、不给等式&quot;的原型。中心定理没有定义意向性——它做的是相反的事：它证明了客体化必然缝不拢，于是为那个缝不进任何&quot;某物&quot;的活余项，腾出了一个精确的、可被指认的位置。意向性住在那里，而数学只走到门口。</p>
 <p>缝合不拢，也就说明认知有一圈够不到的边界。在真正踏进缝里、去看那个更特别的东西（他者）之前，先停一下——把这一圈够不到的边界数清楚。它们恰好是三种，围着一个空着的位置。下一章盘点。</p>
-<p>*v0.14 终稿处理（Fable）：两件事。①<strong>落改二呼应（对齐附录 v6.6 条256）</strong>——§2.3&quot;视角无关的只有因子 \(\mathcal{M}\)&quot;处补一句+<sup><a href="#fn-factorobj" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-factorobj')">[factorobj]</a></sup> 脚注：那个视角无关的 \(\mathcal{M}\) 本身也不藏&quot;绝对客观&quot;底稿，它是因子[中心平凡]、里面没有对谁都一样、被给予前就固定的经典标签；点破因子性 ⟺ 无非平凡绝对客观量[G5]，因子与&quot;无绝对客观/无上帝视角&quot;是同一命题两说法。分寸守：保持因子为公理、不声称从哲学断言推出（不搭现象学→代数桥、守元规则 M），只点等价。②<strong>清末尾过程沿革注</strong>——删 v0.4→v0.13 的 12 条协作过程记录（姿态层/术语对齐/养场景/括号清洗/数学修订各版），<sup><a href="#fn-static-dyn" class="fn-ref">[static-dyn]</a></sup> 脚注归位脚注区（原掉队在沿革注后）。正文/定理/红线（意向性=缝 PJ3 三处/有态≠有迹/中心定理三分寸）零改。*</p>
+<p>*v0.14 终稿处理（Fable）：两件事。①<strong>落改二呼应（对齐附录 v6.6 条256）</strong>——§2.3&quot;视角无关的只有因子 \(\mathcal{M}\)&quot;处补一句+<sup><a href="#fn-factorobj" class="fn-a" data-fn="fn-factorobj">[factorobj]</a></sup> 脚注：那个视角无关的 \(\mathcal{M}\) 本身也不藏&quot;绝对客观&quot;底稿，它是因子[中心平凡]、里面没有对谁都一样、被给予前就固定的经典标签；点破因子性 ⟺ 无非平凡绝对客观量[G5]，因子与&quot;无绝对客观/无上帝视角&quot;是同一命题两说法。分寸守：保持因子为公理、不声称从哲学断言推出（不搭现象学→代数桥、守元规则 M），只点等价。②<strong>清末尾过程沿革注</strong>——删 v0.4→v0.13 的 12 条协作过程记录（姿态层/术语对齐/养场景/括号清洗/数学修订各版），<sup><a href="#fn-static-dyn" class="fn-ref">[static-dyn]</a></sup> 脚注归位脚注区（原掉队在沿革注后）。正文/定理/红线（意向性=缝 PJ3 三处/有态≠有迹/中心定理三分寸）零改。*</p>
 <section class="footnotes"><h2>脚注</h2>
 <h3 class="fn-section">〔旁注〕</h3>
 <ol class="footnotes">
@@ -313,18 +312,22 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
-  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+  if (!e.target.closest('.fn-bubble')) {
     closeAllBubbles();
+  }
+  var fnA = e.target.closest('a.fn-a');
+  if (fnA && fnA.dataset.fn) {
+    e.preventDefault();
+    showFnBubble(fnA, fnA.dataset.fn);
   }
 });
 function closeAllBubbles() {
   document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
 }
-function showFnBubble(event, fid) {
+function showFnBubble(a, fid) {
   closeAllBubbles();
   var content = FN_CONTENT[fid];
   if (!content) return;
-  var a = event.currentTarget;
   var b = document.createElement('div');
   b.className = 'fn-bubble';
   b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
@@ -339,7 +342,6 @@ function showFnBubble(event, fid) {
   if (top + bRect.height > window.innerHeight - 12) {
     top = rect.top - bRect.height - 8;
     b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
-    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
   }
   b.style.left = left + 'px';
   b.style.top = top + 'px';
