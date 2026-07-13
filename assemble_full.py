@@ -1046,6 +1046,28 @@ def export_html(chapters, meta=None):
   li {{ padding: .25rem 0; border-bottom: 1px solid #2a2a26; }}
   li:last-child {{ border-bottom: none; }}
   .note {{ color: #7a766e; font-size: .88rem; margin-top: 1.8rem; }}
+  .map-btn {{ position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }}
+  .map-btn:hover {{ color: #fff; background: rgba(40,40,35,.92); }}
+  #map-overlay {{ display: none; position: fixed; top: 0; right: 0; z-index: 10000;
+                  width: auto; max-width: 80vw; min-width: 480px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }}
+  #map-overlay.active {{ display: block; }}
+  .map-container {{ position: relative; background: #1e1e1c; border-radius: 12px;
+                    padding: 0 0 .6rem 0; }}
+  .map-titlebar {{ display: flex; justify-content: space-between; align-items: center;
+                   padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #3a3a35; }}
+  .map-titlebar a {{ color: #7eb8da; text-decoration: none; font-size: .9rem; }}
+  .map-titlebar a:hover {{ text-decoration: underline; }}
+  .map-close {{ font-size: 1.5rem; color: #8a867e; cursor: pointer; background: none;
+                border: none; line-height: 1; padding: 0 .15rem; }}
+  .map-close:hover {{ color: #e0dcd4; }}
+  .map-svg-wrap {{ padding: 1.4rem 1.6rem 0 1.6rem; }}
+  .map-svg-wrap object {{ width: 100%; display: block; }}
   @media (max-width: 600px) {{
     body {{ font-size: .95rem; padding: 0 .8rem; margin: 1rem auto; }}
     h1 {{ font-size: 1.25rem; }}
@@ -1054,11 +1076,39 @@ def export_html(chapters, meta=None):
   }}
 </style></head>
 <body>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
 <h1>《界限论》阅读器</h1>
 {subtitle_block}<ul>{links}</ul>
 <p class="note">用 Chrome / Edge 打开即可阅读（本地 KaTeX，无需联网）。<br>
 脚注可点击跳转；跨章引用会自动跳到对应章节。<br>
 生成：{datetime.now():%Y-%m-%d %H:%M}</p>
+<div id="map-overlay">
+ <div class="map-container">
+  <div class="map-titlebar">
+   <span style="color:#8a867e;font-size:.9rem">主线图景</span>
+   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  </div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
+ </div>
+</div>
+<script>
+function showMap() {{
+  document.getElementById('map-overlay').classList.add('active');
+}}
+function hideMap() {{
+  document.getElementById('map-overlay').classList.remove('active');
+}}
+document.addEventListener('keydown', function(e) {{
+  if (e.key === 'Escape') hideMap();
+}});
+document.addEventListener('click', function(e) {{
+  var ov = document.getElementById('map-overlay');
+  var btn = document.querySelector('.map-btn');
+  if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {{
+    hideMap();
+  }}
+}});
+</script>
 </body></html>"""
     with open(f"{OUT_HTML}/index.html", 'w', encoding='utf-8', newline='\n') as f:
         f.write(index)
