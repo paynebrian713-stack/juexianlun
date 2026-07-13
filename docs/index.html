@@ -76,7 +76,7 @@
     <li><a href="13_appendixW.html">附录</a></li></ul>
 <p class="note">用 Chrome / Edge 打开即可阅读（本地 KaTeX，无需联网）。<br>
 脚注可点击跳转；跨章引用会自动跳到对应章节。<br>
-生成：2026-07-14 03:52</p>
+生成：2026-07-14 03:59</p>
 <div id="map-overlay">
  <div class="map-container">
   <div class="map-titlebar">
@@ -102,8 +102,10 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
   var btn = document.querySelector('.map-btn');
-  if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
-    hideMap();
+  if (ov.classList.contains('active') && e.target !== btn) {
+    if (!ov.contains(e.target) || !e.target.closest('.map-container')) {
+      hideMap();
+    }
   }
 });
 </script>

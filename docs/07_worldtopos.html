@@ -328,8 +328,10 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
   var btn = document.querySelector('.map-btn');
-  if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
-    hideMap();
+  if (ov.classList.contains('active') && e.target !== btn) {
+    if (!ov.contains(e.target) || !e.target.closest('.map-container')) {
+      hideMap();
+    }
   }
   if (!e.target.closest('.fn-bubble')) {
     closeAllBubbles();
