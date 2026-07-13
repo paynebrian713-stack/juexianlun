@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第三章</h1>
 <p>上一章那道墙，把&quot;两股缝成一条&quot;的路堵死了。缝合不拢，就等于说：认知有一圈够不到的边界。</p>
 <p>这一章不往前走。中心定理那道墙很硬，走过之后得有个慢拍——先停下来，把这圈边界数清楚：它们恰好是三种，围着一个空着的位置。数完，下一章再回到缝里，去看那处更特别的东西——他者。</p>
@@ -73,7 +91,7 @@
 <p>到这里，&quot;认知够不到某些东西&quot;已经撞见过几次：视角挣不来（第二章）、未来定义不出（第一章）、还有维数那种&quot;问它凭什么是这个数、就得站到世界外去&quot;的够不到（第二章 R★ 已埋过根）。这一章要做的，就是把这些&quot;够不到&quot;数清楚、归好类——待会儿会看到，它们分别就是横向的锚、纵向的未来、维数的脚手架。</p>
 <p>先说清一件事，免得后面混。本章讲的是<strong>够不到的位置</strong>——那些俯瞰性的、态外的位置，根本不存在；不是<strong>够得到、却不可对象化的东西</strong>——那个抹不平的他者。前者是本章的&quot;禁格&quot;，后者是第四章的他者。两者都叫&quot;边界&quot;，但一个是位置不存在，一个是东西不可把握，分属两章。</p>
 <h2 id="3-1-三种不可知-就是前面遇到过的那三个">3.1 三种不可知，就是前面遇到过的那三个</h2>
-<p>把认知够不到的边界数一数，会发现：它们<strong>就是前面已经撞见过的那三个具体的够不到</strong>。</p>
+<p id="scene-sanzhong">把认知够不到的边界数一数，会发现：它们<strong>就是前面已经撞见过的那三个具体的够不到</strong>。</p>
 <p>先说清&quot;三种&quot;是按什么数的。这一章的三种，是沿两个坐标分的——<strong>补给物能不能被典范地给出</strong>，以及<strong>那个位置能不能被占据（可居）</strong>。要注意，这和另一种按&quot;够不到的性质&quot;来分的表，不是同一张。两张表看的是同一批边界的不同侧面。<strong>这一章数的，是位置的可居与典范，而不是性质。</strong> 有意思的是，本章这三种不可知，恰好各占了另一种表的一个类型：横向是判定不了（锚没法选），纵向是无物（还没发生），脚手架是病句（硬把钝的当锐的用）。把它们摆在一起，是为了看清&quot;能不能居、典不典范&quot;这个侧面，并不意味着它们是同一种东西。</p>
 <p><strong>横向不可知，就是参考态的锚。</strong> 判定任何一件事，都得先固定一个判定用的参照——判定锚 \(\omega_{\text{ext}}\)，也就是第二章那个外接的第二个态。这个判定锚<strong>可居</strong>：你判定时，总已经站在某个锚上。但它<strong>非典范</strong>：该用哪个锚，没有结构挑定的答案，那些候选随 Connes 余圈漂移，没有一个是天生的原点。这其实是全书<strong>第一个被认出</strong>的不可知——而且&quot;不可知&quot;这个概念本身就从这里起源（要区分：横向是时间序上<strong>第一个被认出</strong>的；而它们共同的<strong>来源</strong>，是那个无迹的禁格，见 §3.4——那是逻辑序上的根）。无迹，意味着没有态外位、没有一把不依赖任何态的绝对尺子；于是判定必须外接第二个态当参照，而这第二个态永远选不出典范的那一个。<strong>第一个不可知，就是这个第二态的非典范性</strong>；后面两种不可知——未来、脚手架——都是照着这个原型认出来的。</p>
 <p><strong>纵向不可知，就是未来。</strong> 未来的窗口 \(\sigma_{+\lambda}(\mathcal{N})\) 需要当下之外、尚未被给予的材料。那里<strong>无物</strong>，谈不上典范不典范，也无处可居。未来不是&quot;难算的已有之物&quot;，是&quot;还没有的东西&quot;。</p>
@@ -170,16 +188,38 @@
 <h2 id="3-5-收束-墙的外围盘点完了">3.5 收束：墙的外围盘点完了</h2>
 <p>这一章停下来盘点，把墙的外围数清楚了：三种不可知——横向的锚、纵向的未来、脚手架的断言板——就是前面遇到过的那三个具体边界，沿两坐标各就各位；跨它们的绕行只有三种桥——判定桥、脚手架桥、禁桥——各自的机器分驻在后面的章；而罩住整张图的边框，是禁格（态外位），那张表里空着的那一格，一个不存在的俯瞰位置。</p>
 <p>盘点完了。这三种都是够不到的<strong>位置</strong>——态外，无处可站。你数墙，是为了还能接着活——哪里绕得过、哪里得认。但缝里还有一处不一样的东西：它不是够不到的位置，是够得到、却永远不变成对象的。从下一章起，回到缝里，去看他者。</p>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-bridges" class="footnote"><a href="#fnref-bridges" class="fn-back" title="返回引用处">↩</a>判定桥里的规律、概率、时态与脚手架桥的几何化，加上守恒、承诺——持存桥在第五章，规律／概率／时态桥在第六章，守恒桥在第七章，承诺桥在第八章。</li>
 <li id="fn-gejing-math" class="footnote"><a href="#fnref-gejing-math" class="fn-back" title="返回引用处">↩</a><span class="fn-back-list"> · 亦见 <a href="13_appendixW.html#fnref-gejing-math">13_appendixW</a></span>禁格&quot;俯瞰位置不存在&quot;的数学身份，是两件事叠起来：<strong>没有被结构挑出的不动位置</strong>（III₁ 无迹 ⟹ 内自同构下的不变泛函＝迹，不存在；\(Z(\mathcal{M})=\mathbb{C}1\) ⟹ 不变元也只剩标量），<strong>且没有被结构挑出的态</strong>（Connes–Størmer：任二正规态在酉共轭下范数稠密，没有一个态天生特殊）。前者说&quot;无不动点&quot;，后者说&quot;都一样&quot;，两条合起来，才是&quot;无典范位置&quot;——齐性单独不够，它只说&quot;都一样&quot;、不说&quot;无不动点&quot;。这与 §3.1 横向&quot;第二态非典范性&quot;是同一件事的两处显形。注意：这层（无典范位置）根在<strong>无迹</strong>，与 R★ 生成半边那个&quot;嵌入非内蕴&quot;是<strong>两个不同的根</strong>（后者对一切真包含成立、不依赖无迹），别混。</li>
-<li id="fn-connes-ncg" class="footnote"><a href="#fnref-connes-ncg" class="fn-back" title="返回引用处">↩</a>谱维数由 \(\zeta_D(s)=\mathrm{Tr}(|D|^{-s})\) 的极点定义，需 \(D\) 有紧预解式（离散谱、迹类）：Connes, A., *Noncommutative Geometry*, Academic Press (1994), Ch. IV。\(\text{III}_1\) 无迹、无此结构，须沿 Connes–Takesaki 连续分解截断到 \(\text{II}_\infty\) 核 \(\mathcal{M}\rtimes_\sigma\mathbb{R}\)（有迹）后，维数方有数值。</li>
 <li id="fn-kant" class="footnote"><a href="#fnref-kant" class="fn-back" title="返回引用处">↩</a>维数具体值作为第三类不可知的康德观念型刻画：胡塞尔&quot;康德意义上的观念&quot;（Idee im Kantischen Sinne，《观念 I》§143）——完全被给予性只作为调节性极限观念存在，典范可构想、可组织一切逼近、原则上不可被任何直观占据。此处标结构同构，不借教义词。</li>
 <li id="fn-fourth" class="footnote"><a href="#fnref-fourth" class="fn-back" title="返回引用处">↩</a>三格加一个空格，一共四格；但那第四格不是第四种不可知，是无迹留下的一个洞。另外，三种不可知分类上独立、发生上却耦合：脚手架是纵向的对象化，把够不到的未来方向摆成一根类空的轴；横向的锚又在纵向那根轴上活动。分开数是为看清，别忘了它们同根。</li>
 <li id="fn-strength" class="footnote"><a href="#fnref-strength" class="fn-back" title="返回引用处">↩</a>说维数&quot;不可知&quot;，是修辞还是定理？是定理，而且比&quot;不可知&quot;更强——是不可定义。&quot;不可知&quot;是有个值算不到；&quot;不可定义&quot;是连定义式都写不出来（无迹类算子，\(\zeta_D\) 无从落笔）。截断到有迹核之后它才有值、才谈得上可知，而截断要付态外位的代价。所以这不是一句修辞，是一条有链条、有代价的定理。</li>
-</ol></section>
+</ol>
+<h3 class="fn-section">〔文献〕</h3>
+<ol class="footnotes">
+<li id="fn-connes-ncg" class="footnote"><a href="#fnref-connes-ncg" class="fn-back" title="返回引用处">↩</a>谱维数由 \(\zeta_D(s)=\mathrm{Tr}(|D|^{-s})\) 的极点定义，需 \(D\) 有紧预解式（离散谱、迹类）：Connes, A., *Noncommutative Geometry*, Academic Press (1994), Ch. IV。\(\text{III}_1\) 无迹、无此结构，须沿 Connes–Takesaki 连续分解截断到 \(\text{II}_\infty\) 核 \(\mathcal{M}\rtimes_\sigma\mathbb{R}\)（有迹）后，维数方有数值。</li>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

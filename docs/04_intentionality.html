@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第二章</h1>
 <p>答案是：不能。</p>
 <p>而这个&quot;不能&quot;，恰恰是意向性栖身的地方。这是全书第一道墙。承重的证明在附录 W，正文只作冷陈述，再把它接回你自己。</p>
@@ -122,12 +140,12 @@
 <br>
 所以两股合不成一条自足的量法。不是你还没找到那把尺，是任何一把你立得起来的尺，都得先站在一个它自己够不到的视角上。而那个视角，你挣不来。</p></blockquote>
 <h2 id="2-3-物理世界-相对于视角-且视角无法自给">2.3 物理世界：相对于视角，且视角无法自给</h2>
-<p>有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了——但要先说清它相对于什么。</p>
+<p id="scene-heng">有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了——但要先说清它相对于什么。</p>
 <p>学习流压出的账本 \(\mathcal{A}_{\text{phys}}\)（第一章）是一个对易截面：可反复指认、可共享的事实。理解流的因果窗口 \(\mathcal{N}\) 展开可理解的脉络。两者在一个<strong>舞台</strong>上并置，这个舞台是账本的正规化子生成的正则包 \[\mathcal{M}_{\mathcal{A}}:=\mathcal{N}(\mathcal{A}_{\text{phys}})''\]<sup><a href="#fn-normalizer" id="fnref-normalizer" class="fn-ref">[normalizer]</a></sup> 一个视角，就是一个配对 \((\omega^*,\mathcal{N})\)；给定它，两股就在这个舞台内剪辑出<strong>一条路径</strong>——所谓&quot;物理世界&quot;，就是给定视角后剪出的这一条路径，落在三层包含之间：</p>
 <div class="math-block">\[\mathcal{A}_{\text{phys}}\ \subseteq\ (\text{这一个视角剪出的路径})\ \subseteq\ \mathcal{M}_{\mathcal{A}}.\]</div>
 <p>底层是对易的账本（压到底的化石层），顶层是舞台，路径在两者之间。</p>
 <p>**要害在于：舞台随视角变，视角无关的只有那个被给予的因子 \(\mathcal{M}\)。** 换一个视角 \((\omega^*,\mathcal{N})\)，连舞台 \(\mathcal{M}_{\mathcal{A}}\) 带路径一起换。所以&quot;物理世界&quot;从一开始就是相对于视角的——它不是一个绝对唯一的世界，是某个视角剪出的一条路径。<sup><a href="#fn-physworld" id="fnref-physworld" class="fn-ref">[physworld]</a></sup>（而那个视角无关的 \(\mathcal{M}\) 本身，也并不藏着一份&quot;绝对客观&quot;的底稿——它是<strong>因子</strong>，中心平凡，里面没有一个对谁都一样、被给予之前就固定好的经典标签。<sup><a href="#fn-factorobj" id="fnref-factorobj" class="fn-ref">[factorobj]</a></sup>）</p>
-<h3>那个视角，自己挣不来</h3>
+<h3 id="那个视角-自己挣不来">那个视角，自己挣不来</h3>
 <p>给定视角，两股就把路径剪出来了。但视角本身——那个配对里的态——从哪来？</p>
 <p>它是一个真态：\(\mathcal{M}\) 上的忠实正规态 \(\omega_{\text{ext}}\)，不是虚构的记号。但它<strong>不稳定</strong>：换一个场景就换一个，随 Connes 余圈 \([D\omega_{\text{ext}}:D\omega^*]_t\) 漂移，没有典范的选法。它顶的正是中心定理那道缺口——统一衡量必须外接的那个不可内生参照。而它之所以&quot;不可内生&quot;，不是因为它不存在——它是真态——是因为它要扮的角色——一个全局一致的、跨视角的绝对称量——等价于一把迹，而这台机器无迹。</p>
 <p>这里有一个看起来自相矛盾的疑问，要正面接住：既然用了 \(\omega_{\text{ext}}\) 这个真态，又说没有迹，不冲突吗？不冲突，因为<strong>有态不等于有迹</strong>。这台机器上有大把忠实正规态，\(\omega^*\)、\(\omega_{\text{ext}}\) 都是真态——态是充裕的。但没有一个态能扮&quot;全局一致的绝对尺子&quot;那个角色：那个角色等价于一把半有限迹，\(\text{III}_1\) 恰恰没有。态是局部的、随余圈漂的参照；迹是全局的、酉不变的绝对尺。前者这台机器有很多，后者一个也没有。\(\omega_{\text{ext}}\) 的真实存在，和它扮不了那把全局迹，在同一个代数里安然共存。<sup><a href="#fn-twostates" id="fnref-twostates" class="fn-ref">[twostates]</a></sup></p>
@@ -145,7 +163,7 @@
 这个从早到晚替你看着一切的视角，是真的——你确实正站在某处看；也是你的——没有谁替你站。可它从哪来、为什么偏是这一个，你答不上；你想退到它背后、给它找个根，那个&quot;退&quot;本身又是它做的。<br>
 <br>
 视角是你的，你却挣不来它，也退不到它背后。这就是中心定理那行冷冰冰的&quot;不可内生&quot;，落到你身上的样子。</p></blockquote>
-<h3>正则性：三层，一个都不欠</h3>
+<h3 id="正则性-三层-一个都不欠">正则性：三层，一个都不欠</h3>
 <p>关于账本&quot;正则不正则&quot;这个技术地基，我们分三层说清，一个也不欠。</p>
 <p><strong>第一层，构造级——白拿的。</strong> 在舞台 \(\mathcal{M}_{\mathcal{A}}\) 内部，\(\mathcal{A}_{\text{phys}}\) 按构造就是正则的——舞台正是它的正规化子生成的，\((\mathcal{M}_{\mathcal{A}},\mathcal{A}_{\text{phys}})\) 构成一个正则配对。账本再具备极大性时——即与它相容的都已登记<sup><a href="#fn-maximal" id="fnref-maximal" class="fn-ref">[maximal]</a></sup>——这就是一个 Cartan 对，第四章的他者内核 \([\sigma]\) 在其上由 Feldman–Moore 完全严格地定义。要点出一件后面要用的事：他者的<strong>典范性</strong>只靠账本对易这一条、不靠极大；极大与否，只决定他者是否与规范荷干净分开<sup><a href="#fn-canon" id="fnref-canon" class="fn-ref">[canon]</a></sup>。这一层完全严格，不欠任何开放问题。</p>
 <p><strong>第二层，适配级——随锚生灭、不可携带。</strong> &quot;\(\mathcal{A}_{\text{phys}}\) 对哪个态正则&quot;是个相对问题：账本是当前这个锚的学习流沉积的，故对当前锚模不变——这正是 Takesaki 定理的精确判据：</p>
@@ -211,7 +229,9 @@
 <p>这道缝，是全书&quot;给位置、不给等式&quot;的原型。中心定理没有定义意向性——它做的是相反的事：它证明了客体化必然缝不拢，于是为那个缝不进任何&quot;某物&quot;的活余项，腾出了一个精确的、可被指认的位置。意向性住在那里，而数学只走到门口。</p>
 <p>缝合不拢，也就说明认知有一圈够不到的边界。在真正踏进缝里、去看那个更特别的东西（他者）之前，先停一下——把这一圈够不到的边界数清楚。它们恰好是三种，围着一个空着的位置。下一章盘点。</p>
 <p>*v0.14 终稿处理（Fable）：两件事。①<strong>落改二呼应（对齐附录 v6.6 条256）</strong>——§2.3&quot;视角无关的只有因子 \(\mathcal{M}\)&quot;处补一句+<sup><a href="#fn-factorobj" class="fn-ref">[factorobj]</a></sup> 脚注：那个视角无关的 \(\mathcal{M}\) 本身也不藏&quot;绝对客观&quot;底稿，它是因子[中心平凡]、里面没有对谁都一样、被给予前就固定的经典标签；点破因子性 ⟺ 无非平凡绝对客观量[G5]，因子与&quot;无绝对客观/无上帝视角&quot;是同一命题两说法。分寸守：保持因子为公理、不声称从哲学断言推出（不搭现象学→代数桥、守元规则 M），只点等价。②<strong>清末尾过程沿革注</strong>——删 v0.4→v0.13 的 12 条协作过程记录（姿态层/术语对齐/养场景/括号清洗/数学修订各版），<sup><a href="#fn-static-dyn" class="fn-ref">[static-dyn]</a></sup> 脚注归位脚注区（原掉队在沿革注后）。正文/定理/红线（意向性=缝 PJ3 三处/有态≠有迹/中心定理三分寸）零改。*</p>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-filter" class="footnote"><a href="#fnref-filter" class="fn-back" title="返回引用处">↩</a>因为 \(\omega^*=\omega^*\circ E\)，且模流保持 \(\ker E\)。</li>
 <li id="fn-history" class="footnote"><a href="#fnref-history" class="fn-back" title="返回引用处">↩</a>这正是后面&quot;历史&quot;的造法：\(P(t)=\sigma_t^{\omega^*}(P)\)，把尺子搬到不同时刻、串成一段历史（第五章）。</li>
 <li id="fn-twomains" class="footnote"><a href="#fnref-twomains" class="fn-back" title="返回引用处">↩</a>说细一点，供后面反复引用。态读法这一侧：参考态相对基线的那道余圈 \([D\omega_{\text{ext}}:D\omega^*]_t\) 的变化，就是态在动——而这道余圈——&quot;我怎么读&quot;——是唯一不被起点与他者锁死的那一样：起点被抛、他者被给予，都顶不动，而&quot;怎么读&quot;可以主动去调。所以能动性住在这一侧（也是 topos 里&quot;下一次判断&quot;落的那一侧）。算子读法这一侧：拿定住的 \(\omega_{\text{ext}}\) 去读搬运过的尺子串（\(D(\alpha,\beta)=\omega_{\text{ext}}(C_\alpha^\dagger C_\beta)\)，第五章），就是算子在动、态不动（也是 topos 里&quot;一次观察&quot;落的那一侧）。第四、五章会把这对读法钉成 QDS 与历史一致性的同一过程两面。</li>
@@ -234,12 +254,32 @@
 <li id="fn-twostates" class="footnote"><a href="#fnref-twostates" class="fn-back" title="返回引用处">↩</a>也要把 \(\omega_{\text{ext}}\) 和 \(\omega^*\) 分清：\(\omega^*\) 是第零章被印记钉死的基线背景，作相对熵归一锚、模流锚，不携带视角；\(\omega_{\text{ext}}\) 是做跨视角统一称量时被迫外接的那个态，携带视角、不稳定。两个态，两种职能。</li>
 <li id="fn-cocycle" class="footnote"><a href="#fnref-cocycle" class="fn-back" title="返回引用处">↩</a>全书统一以基线 \(\omega^*\) 为右位基准写余圈（\([D\,\cdot:D\omega^*]\)），方向不反，视角不漂。</li>
 <li id="fn-maximalid" class="footnote"><a href="#fnref-maximalid" class="fn-back" title="返回引用处">↩</a>那行恒等式是 \(\mathcal{A}_{\text{phys}}'\cap\mathcal{M}=\mathcal{A}_{\text{phys}}'\cap\mathcal{M}_{\mathcal{A}}\)（附录 W）——账本在整个 \(\mathcal{M}\) 里的相对交换子，与它在舞台里的相对交换子相等，故极大与否是舞台内部就能判的事。</li>
-<li id="fn-rstar" class="footnote"><a href="#fnref-rstar" class="fn-back" title="返回引用处">↩</a>命题 R★ 的完整证明见附录 W.2.7（R1–R8，除可及性读法外全 A 级）。承重全是标准件的组装：模不变 ⟺ 保态条件期望存在（Takesaki, *J. Funct. Anal.* <strong>9</strong> (1972), 306–321）＋保态条件期望唯一性＋塔式分解 \(E_0=E_0|_{\mathcal{M}_{\mathcal{A}}}\circ E_{\text{st}}\)（环境期望经舞台因子化：由条件期望的唯一性，两步合一步，故环境剩余在账本上零指纹）。R1–R8 全 A 级。</li>
 <li id="fn-decoherence" class="footnote"><a href="#fnref-decoherence" class="fn-back" title="返回引用处">↩</a>对物理学家一句：这与优选基／退相干问题相邻，但不同层——本书不作动力学退相干的主张，账本对锚的相对性正是要点，不存在被宣称的绝对指针基。</li>
 <li id="fn-static-dyn" class="footnote"><a href="#fnref-static-dyn" class="fn-back" title="返回引用处">↩</a>上一章证的是<strong>静态</strong>的：连一个能同时装下两股的<strong>子代数</strong>都没有——双侧保持与严格单侧天生互斥。本章证的是<strong>动态</strong>的：就算退而求其次、不要一个兼得的对象，只想用一个自给自足的<strong>动力学过程</strong>把两股联起来，也办不到。&quot;合不成&quot;三字，从&quot;找不到兼得的静态对象&quot;推到&quot;写不出自足的过程&quot;。</li>
-</ol></section>
+</ol>
+<h3 class="fn-section">〔文献〕</h3>
+<ol class="footnotes">
+<li id="fn-rstar" class="footnote"><a href="#fnref-rstar" class="fn-back" title="返回引用处">↩</a>命题 R★ 的完整证明见附录 W.2.7（R1–R8，除可及性读法外全 A 级）。承重全是标准件的组装：模不变 ⟺ 保态条件期望存在（Takesaki, *J. Funct. Anal.* <strong>9</strong> (1972), 306–321）＋保态条件期望唯一性＋塔式分解 \(E_0=E_0|_{\mathcal{M}_{\mathcal{A}}}\circ E_{\text{st}}\)（环境期望经舞台因子化：由条件期望的唯一性，两步合一步，故环境剩余在账本上零指纹）。R1–R8 全 A 级。</li>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

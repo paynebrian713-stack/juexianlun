@@ -81,10 +81,28 @@ HTML_SHELL = """<!DOCTYPE html>
   .diagram code {{ background: none; padding: 0; }}
   a.d-link {{ color: #7eb8da; text-decoration: none; }}
   a.d-link:hover {{ text-decoration: underline; }}
+  a.w-ref {{ color: #7eb8da; text-decoration: none; }}
+  a.w-ref:hover {{ text-decoration: underline; }}
   .math-block {{ overflow-x: auto; overflow-y: hidden; }}
   .math-block::-webkit-scrollbar {{ height: 6px; }}
   .math-block::-webkit-scrollbar-thumb {{ background: #4a4a44; border-radius: 3px; }}
-  .math-block::-webkit-scrollbar-thumb:hover {{ background: #6a6a62; }}
+  .map-btn {{ font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }}
+  .map-btn:hover {{ color: #e0dcd4; text-decoration: underline; }}
+  #map-overlay {{ display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }}
+  #map-overlay.active {{ display: flex; }}
+  .map-container {{ position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }}
+  .map-close {{ position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }}
+  .map-close:hover {{ color: #1b1b18; }}
+  .map-hint {{ text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }}
+  .fn-section {{ font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }}
+  .fn-section:first-child {{ margin-top: .1rem; }}
   #status {{ font-size: .85rem; color: #7a766e; margin-top: 2rem; }}
   #status.err {{ color: #d86; }}
   table {{ border-collapse: collapse; }}
@@ -102,10 +120,26 @@ HTML_SHELL = """<!DOCTYPE html>
 <script defer src="{katex}/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 {body}
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {{
+  document.getElementById('map-overlay').classList.add('active');
+}}
+function hideMap() {{
+  document.getElementById('map-overlay').classList.remove('active');
+}}
+document.addEventListener('keydown', function(e) {{
+  if (e.key === 'Escape') hideMap();
+}});
 document.addEventListener('DOMContentLoaded', function() {{
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {{
@@ -265,6 +299,62 @@ def toc_html(headings):
         for h, t in headings
     )
     return f'<div class="toc"><strong>目录（可点击跳转）</strong><ul>\n{items}\n</ul></div>\n'
+
+
+def w_ref_anchor(ref, *, use_lemma_alias=True):
+    """W.x.y 标签 → HTML 锚点 id（与 heading_anchor 同规则）。"""
+    ref = ref.strip()
+    if use_lemma_alias and ref == 'W.2.1':
+        return 'w-1-star'  # 无凸显态引理：正文称 W.2.1，节号 W.1.★
+    m = re.match(r'(W[\d.★]+)', ref)
+    if not m:
+        return None
+    return m.group(1).lower().replace('.', '-').replace('★', 'star').rstrip('-')
+
+
+def linkify_w_refs(html):
+    """附录内 W.x / [第 W.x 节] → 锚点链接（跳过已有链接与 pre/code）。"""
+    chunks = re.split(r'(<a\b[^>]*>.*?</a>|<pre\b[^>]*>.*?</pre>)', html, flags=re.S)
+    ph = '⟦WREF:{}⟧'
+
+    def link_chunk(text):
+        slots = {}
+
+        def put(label, href, display=None):
+            key = len(slots)
+            slots[key] = (
+                f'<a href="#{href}" class="w-ref">{display or label}</a>'
+            )
+            return ph.format(key)
+
+        text = re.sub(
+            r'\[第 (W\.\d+(?:\.\d+)*) 节\]',
+            lambda m: put(m.group(1), w_ref_anchor(m.group(1)), f'第 {m.group(1)} 节'),
+            text,
+        )
+        text = re.sub(
+            r'(?<![">=\w])(W\.\d+\.\d+(?:\.\d+)?–(?:W\.)?\d+(?:\.\d+)*)',
+            lambda m: put(
+                m.group(1),
+                w_ref_anchor(re.match(r'(W\.\d+)', m.group(1)).group(1), use_lemma_alias=False),
+            ),
+            text,
+        )
+        text = re.sub(
+            r'(?<![">=\w])(W\.\d+(?:\.\d+){0,2})(?![\w.])',
+            lambda m: (
+                put(m.group(1), w_ref_anchor(m.group(1)))
+                if w_ref_anchor(m.group(1)) else m.group(1)
+            ),
+            text,
+        )
+        for key, link in slots.items():
+            text = text.replace(ph.format(key), link)
+        return text
+
+    for i in range(0, len(chunks), 2):
+        chunks[i] = link_chunk(chunks[i])
+    return ''.join(chunks)
 
 
 DPIAGRAM_REPLACE = [
@@ -470,6 +560,69 @@ class FootnoteIndex:
         return links
 
 
+# ── 脚注分类（旁注 A / 文献 B）──────────────────────────────
+
+_BIB_JOURNALS = [
+    'Springer', 'Comm. Math. Phys.', 'J. Funct. Anal.', 'Publ. RIMS',
+    'Ann. Sci.', 'Trans. AMS', 'Invent. Math.', 'Nature', 'Phys. Rev.',
+    'arXiv', 'Proc.', 'Univ. Press', 'LNM', 'Zbl', 'Rev. Math. Phys.',
+    'Proc. Japan Acad.', 'J. Reine Angew. Math.', 'Ann. of Math.',
+    'Duke Math. J.', 'Pacific J. Math.', 'Mem. AMS', 'Lecture Notes',
+    'Cambridge', 'Oxford', 'Princeton', 'Harvard', 'MIT Press',
+    'World Scientific', 'Birkhäuser', 'Academic Press', 'North-Holland',
+    'Ergebnisse', 'Grundlehren', 'Studies in', 'J. Math. Phys.',
+    'Lett. Math. Phys.', 'J. Operator Theory', 'Math. Ann.',
+    'Math. Z.', 'C. R. Acad. Sci.', 'Acta Math.',
+    'Int. J. Theor. Phys.', 'J. Math. Phys.', 'Rev. Mod. Phys.',
+    'Math. Scand.', 'J. London Math.', 'Bull. AMS', 'Notices AMS',
+    'Phil. Trans.', 'Nature Phys.',
+]
+
+_BIB_AUTHOR_RE = re.compile(
+    r'[A-Z][a-zà-ü]+(?:-[A-Z][a-zà-ü]+)?,\s+[A-Z]\.'
+)
+
+_BIB_YEAR_RE = re.compile(r'\b(1[89]\d{2}|20[0-2]\d)\b')
+
+_BIB_PAGES_RE = re.compile(r'\d{2,5}[–-]\d{2,5}')
+
+_BIB_DOI_ARXIV_RE = re.compile(r'\b(?:[Dd][Oo][Ii]|arXiv|arxiv)\b')
+
+
+def _has_bibliographic_body(text):
+    """Check if footnote body is predominantly bibliographic.
+    Key signal: a known journal keyword near a 4-digit year."""
+    clean = re.sub(r'⟦MATH:?\d+⟧', '', text)
+    if not _BIB_YEAR_RE.search(clean):
+        return False
+    return any(kw in clean for kw in _BIB_JOURNALS)
+
+
+def _has_substantial_explanation(text):
+    """Check if footnote has substantive Chinese explanation."""
+    clean = re.sub(r'⟦MATH:?\d+⟧', '', text)
+    # Bold markers with Chinese content (lowered to catch **无迹**, **要点** etc)
+    if re.search(r'\*\*[\u4e00-\u9fff]{2,}', clean):
+        return True
+    # Substantial Chinese text segments
+    segments = re.findall(r'[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]{20,}', clean)
+    if sum(len(s) for s in segments) > 140:
+        return True
+    # Explicit philosophical/explanatory markers
+    if re.search(r'(要点|注意|诚实|分寸|红线|边界|前提|必须|不能|不要|切勿|须知|界限|不宣称|不承担|不证明|不保证)', clean):
+        return True
+    return False
+
+
+def classify_footnote(body_text):
+    """Classify footnote as 'A' (旁注) or 'B' (文献)."""
+    if not _has_bibliographic_body(body_text):
+        return 'A'
+    if _has_substantial_explanation(body_text):
+        return 'A'
+    return 'B'
+
+
 class PageConverter:
     def __init__(self, html_name, fn_index):
         self.html_name = html_name
@@ -522,7 +675,7 @@ class PageConverter:
                 back_html = f'<span class="fn-back-list"> · 亦见 {extra}</span>'
             back_html = parts[0] + back_html if parts else ''
         self.footnote_items.append(
-            (fid, f'<li id="fn-{fid}" class="footnote">{back_html}{content}</li>')
+            (fid, f'<li id="fn-{fid}" class="footnote">{back_html}{content}</li>', body)
         )
 
     def md_to_html(self, text):
@@ -586,8 +739,14 @@ class PageConverter:
                 i += 1
                 continue
 
-            if stripped.startswith('### '):
-                out.append(f'<h3>{self.fmt_inline(stripped[4:])}</h3>')
+            if stripped.startswith('#### '):
+                h4_text = stripped[5:]
+                h4_id = heading_anchor(h4_text)
+                out.append(f'<h4 id="{h4_id}">{self.fmt_inline(h4_text)}</h4>')
+            elif stripped.startswith('### '):
+                h3_text = stripped[4:]
+                h3_id = heading_anchor(h3_text)
+                out.append(f'<h3 id="{h3_id}">{self.fmt_inline(h3_text)}</h3>')
             elif stripped.startswith('## '):
                 h2_text = stripped[3:]
                 h2_id = heading_anchor(h2_text)
@@ -623,16 +782,60 @@ class PageConverter:
         flush_quote()
         body = restore_math('\n'.join(out), math_store)
         if self.footnote_items:
-            items = '\n'.join(
-                restore_math(html, math_store) for _, html in self.footnote_items
-            )
-            body += f'\n<section class="footnotes"><h2>脚注</h2><ol class="footnotes">\n{items}\n</ol></section>'
+            a_htmls = []
+            b_htmls = []
+            for fid, html, raw_body in self.footnote_items:
+                html = restore_math(html, math_store)
+                if classify_footnote(raw_body) == 'A':
+                    a_htmls.append(html)
+                else:
+                    b_htmls.append(html)
+            parts = []
+            if a_htmls:
+                parts.append('<h3 class="fn-section">〔旁注〕</h3>\n<ol class="footnotes">\n' +
+                             '\n'.join(a_htmls) + '\n</ol>')
+            if b_htmls:
+                parts.append('<h3 class="fn-section">〔文献〕</h3>\n<ol class="footnotes">\n' +
+                             '\n'.join(b_htmls) + '\n</ol>')
+            body += '\n<section class="footnotes"><h2>脚注</h2>\n' + '\n'.join(parts) + '\n</section>'
         return body
 
 
 def write_html_page(path, title, body_html):
     with open(path, 'w', encoding='utf-8', newline='\n') as f:
         f.write(HTML_SHELL.format(title=html_mod.escape(title), body=body_html, katex=KATEX))
+
+
+# ── 主线图景场景锚点注入 ──────────────────────────────────
+
+SCENE_ID_MAP = {
+    '02_start.html':           {'scene-wuji':     '导论把你带到了&quot;没有尺子&quot;的门口。'},
+    '07_worldtopos.html':      {'scene-lishi':    '现在来看看&quot;历史&quot;到底是怎么成立的。'},
+    '05_unknowable.html':      {'scene-sanzhong': '把认知够不到的边界数一数'},
+    '04_intentionality.html':  {'scene-heng':     '有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了'},
+    '03_twostreams.html':      {'scene-zong':     '<strong>为什么理解流只能倒着写。</strong>'},
+    '09_assertion.html':       {'scene-dui':      '搭板就是干两件事：<strong>打桩</strong>'},
+    '06_theother.html':        {'scene-taren':    '先问一个人人都问过的问题：为什么我永远不能真正知道你在想什'},
+    '10_classicalworld.html':  {'scene-xianshi':  '这是一个方向的彻底反转。'},
+    '12_epilogue.html':        {'scene-songshou': '所以松开那个锚，不是失去你。'},
+}
+
+
+def inject_scene_ids(body, html_name):
+    targets = SCENE_ID_MAP.get(html_name, {})
+    for sid, marker in targets.items():
+        idx = body.find(marker)
+        if idx < 0:
+            continue
+        p_start = body.rfind('<p', 0, idx)
+        if p_start < 0:
+            continue
+        tag_end = body.find('>', p_start)
+        tag = body[p_start:tag_end + 1]
+        if 'id=' in tag:
+            continue
+        body = body[:p_start + 2] + f' id="{sid}"' + body[p_start + 2:]
+    return body
 
 
 def export_html(chapters, meta=None):
@@ -655,10 +858,9 @@ def export_html(chapters, meta=None):
                 '', body, count=1)
             body = linkify_chapter_map(body, chapter_links)
         if ch_name == "附录":
-            heads = extract_h2_headings(md)
-            toc = toc_html(heads)
-            body = body.replace('</h1>', f'</h1>\n{toc}', 1)
             body = linkify_ascii_diagram(body)
+            body = linkify_w_refs(body)
+        body = inject_scene_ids(body, html_name)
         write_html_page(os.path.join(OUT_HTML, html_name), short, body)
         index_items.append((html_name, idx_text))
         print(f"    {html_name}")

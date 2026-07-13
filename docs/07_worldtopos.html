@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第五章</h1>
 <p>前四章的一切——两流、缝、他者——都还在单独一个视角里。这一章看它们怎么缝成一个&quot;世界&quot;、一段&quot;历史&quot;。从学习流沉积的账本开始，一步步长到&quot;一个世界&quot;的范畴化定义；再看这个世界里的&quot;历史&quot;是怎么回事，那个&quot;坚固的东西还在&quot;是怎么读出来的，以及那个做着一切衡量的&quot;我&quot;到底坐在哪里。</p>
 <h2 id="5-0-承接-一个世界不是现成的">5.0 承接：一个世界不是现成的</h2>
@@ -126,7 +144,7 @@
 <p>三层分清：被动综合（自动沉淀）／历史一致性——即<strong>核对</strong>（纯粹的<strong>反身</strong>：照、可以不裁；保态、不动参照），而<strong>反思</strong>是核对之上再动一步的<strong>裁决</strong>（落盘、才动参照）／身体，那个带能动维度的基底。别把它们混成一团&quot;身体的被动性&quot;——它们是不同的层；尤其别把核对和裁决压成一件事：一个只照、世界照旧，一个才落账、我被改。</p>
 <p>要把这些接到全书那个更根本的分别上：<strong>分水岭，就是一个态与两个态的分别。</strong> 被动综合（Stage 1）只用一个态——基线，它铺开流、自动沉积，还没有第二个态进来做参照。核对（Stage 2）是第二个态进场：一个视角被立起来，用它去<strong>照</strong>过去。而 Stage 2 里还分两种用法——只<strong>照</strong>、不裁，和照完再<strong>裁</strong>；Stage 2 的大部分时光是照，反思是偶尔的裁。两个 Stage 的区分，就是一个态与两个态的区分<sup><a href="#fn-stage12" id="fnref-stage12" class="fn-ref">[stage12]</a></sup>。而身体，是这个第二态得以立着、对抗耗散的承载。</p>
 <h2 id="5-5-历史-永远用今天的尺子量昨天">5.5 历史：永远用今天的尺子量昨天</h2>
-<p>现在来看看&quot;历史&quot;到底是怎么成立的。先破除一个直觉：人们总以为&quot;回到过去&quot;是把状态倒回去——好像有一台机器能把此刻的态调回昨天的态。<strong>没有这回事。</strong> 钉死在当下的，是<strong>今天的视角</strong>——那个第二态 \(\omega_{\text{ext}}\) 此刻的样子——昨天的视角早已随耗散散了（B1，参照不可回），倒不回来；能倒的，只有<strong>尺子</strong>（算子）。至于基线态 \(\omega^*\)，它本就被自己的模流保持不变（KMS），从来就没&quot;动&quot;过，也谈不上倒回。所以&quot;倒回过去&quot;两头都不通：视角回不去——它耗散了；基线不用回——它从没动。</p>
+<p id="scene-lishi">现在来看看&quot;历史&quot;到底是怎么成立的。先破除一个直觉：人们总以为&quot;回到过去&quot;是把状态倒回去——好像有一台机器能把此刻的态调回昨天的态。<strong>没有这回事。</strong> 钉死在当下的，是<strong>今天的视角</strong>——那个第二态 \(\omega_{\text{ext}}\) 此刻的样子——昨天的视角早已随耗散散了（B1，参照不可回），倒不回来；能倒的，只有<strong>尺子</strong>（算子）。至于基线态 \(\omega^*\)，它本就被自己的模流保持不变（KMS），从来就没&quot;动&quot;过，也谈不上倒回。所以&quot;倒回过去&quot;两头都不通：视角回不去——它耗散了；基线不用回——它从没动。</p>
 <p>说清楚。核对过去发生了什么，我用的是<strong>此刻手里的一组判准</strong>——当下账本里的一组投影 \(\{P_i\}\subset\mathcal{A}_{\text{phys}}\)（注意：是算子、是尺子，不是态）。要&quot;量过去&quot;，就把这把当下的尺子沿模流搬运到过去的位置：</p>
 <div class="math-block">\[P_i(t)=\sigma_t^{\omega^*}(P_i).\]</div>
 <p>搬的是算子（尺子），态 \(\omega^*\) 始终钉在当下。于是所谓&quot;一段历史&quot;，就是<strong>今天的这把尺子，量在过去各个影像上，得到的一串彼此相容的读数</strong>。</p>
@@ -187,7 +205,9 @@
 <p>到这里，世界立起来了，历史立起来了，那个&quot;我&quot;也落了座。</p>
 <p>这一章其实交出了<strong>两本账</strong>。一本是<strong>算子读</strong>的——成立的某物、可对齐的历史、坐下来的世界：客观的那一面。一本是<strong>态读</strong>的——改写我的创伤、漂移不定的&quot;我&quot;：被活的那一面。同一个过程，两种读法，两本账。</p>
 <p>这个缝出来的世界，有了它自己的内部结构，一套内部的语言。而这套语言会自己长出逻辑——而你的直觉，会先从<strong>算子读的那本账</strong>起步。它会长成什么样的逻辑，又会在什么地方，撞见它自己合不上的东西？下一章。</p>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-tracefree5" class="footnote"><a href="#fnref-tracefree5" class="fn-back" title="返回引用处">↩</a>这里有一处不是技术细节、而是主线的又一次显形，要点破。标准的退相干泛函，物理学里写成 \(D(\alpha,\beta)=\mathrm{tr}(C_\alpha^{\dagger}\rho\,C_\beta)\)，用的是一把<strong>迹</strong>。可这台机器无迹——迹写不出来（第零章）。所以判据必须落到<strong>第二态</strong> \(\omega_{\text{ext}}\) 上。这不是随手的技术替换，是&quot;没有绝对刻度&quot;在历史判据上的又一次显形：连&quot;这段历史站不站得住、能不能当客观的过去来讲&quot;这么根本的一判，都没有一把绝对的尺子可用，只能相对一个会漂的锚来判。无迹拿走了那把迹，这里又见一次。</li>
 <li id="fn-readsec5" class="footnote"><a href="#fnref-readsec5" class="fn-back" title="返回引用处">↩</a>若把这个 \(D\) 写成基线 \(\omega^*\) 上的，它 KMS 不变、不漂，&quot;判据显含锚且漂&quot;就落空了，历史也就和第一个不可知脱了钩——所以判据必须读第二态。</li>
 <li id="fn-natobj" class="footnote"><a href="#fnref-natobj" class="fn-back" title="返回引用处">↩</a>数学上，它是 topos 内部的自然数对象，名字后面会用到；此刻只需记住它是借来的、不是涌现的。</li>
@@ -209,9 +229,26 @@
 <li id="fn-pointfree" class="footnote"><a href="#fnref-pointfree" class="fn-back" title="返回引用处">↩</a>无点（pointfree/localic）测度论与无点谱：世界 topos 底层 locale 无足够 \(\mathbf{Set}\)-点，测度与逻辑须无点式处理（Pavlov 的无点测度论方向）。&quot;无点&quot;不蕴含&quot;无全局截面&quot;（全局截面 \(F(1)\) 仍存在，见 §5.6 某物）。全部技术（无点谱、Jech–Takeuti 布尔值模型对照）入附录。</li>
 <li id="fn-gmh" class="footnote"><a href="#fnref-gmh" class="fn-back" title="返回引用处">↩</a>一致历史／退相干泛函，Gell-Mann–Hartle 原始版用迹 \(D(\alpha,\beta)=\mathrm{tr}(C_\alpha^\dagger\rho\,C_\beta)\)；**本书用态版 \(\omega_{\text{ext}}(C_\alpha^\dagger C_\beta)\)，因这台机器无迹、迹版写不出来**（正文已点明这是&quot;无绝对刻度&quot;在历史判据上的显形，非技术替换）。判定读第二态 \(\omega_{\text{ext}}\)。中档退相干条件 \(D(\alpha,\beta)=0\ (\alpha\neq\beta)\)（实虚部皆零，medium decoherence）：Gell-Mann, M., Hartle, J. B., &quot;Classical equations for quantum systems,&quot; *Phys. Rev. D* <strong>47</strong> (1993), 3345–3382。本书用中档 \(D=0\)，不用弱档 \(\mathrm{Re}\,D=0\)。类算子 \(C_\alpha\)＝当下投影 \(\{P_i\}\subset\mathcal{A}_{\text{phys}}\) 经 \(P_i(t)=\sigma_t^{\omega^*}(P_i)\)（基线模流搬运）后的时序乘积。两态各司其职：\(\sigma_t^{\omega^*}\)（第一态）搬尺子给时间／\(\omega_{\text{ext}}\)（第二态）读数给判定。</li>
 <li id="fn-wu" class="footnote"><a href="#fnref-wu" class="fn-back" title="返回引用处">↩</a>某物三层：Urimpression（原印象／现量输入）→ Konstitution（构成／\(E\) 的压缩动作）→ Gegenstand（对象极／不变核），加历史一致性给的持存桥（对象跨时持存）——胡塞尔《观念 I》给了对象极的现象学、缺持存的机制，本书补以历史一致性（\(D=0\) 的跨时对齐）。层论对照（局部显现＝预层／黏合＝群胚余圈 \(D=0\)／noema＝无点世界上的全局截面，但 \(\iota\circ E\neq\mathrm{id}\)、且载 \(H^2\)）见正文 §5.6 与附录。列维纳斯 traumatisme（创伤）作态读挂靠，非承重。</li>
-</ol></section>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

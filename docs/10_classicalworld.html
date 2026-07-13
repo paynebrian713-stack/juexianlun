@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第八章</h1>
 <h2 id="8-0-承接-一个奇怪的倒置">8.0 承接：一个奇怪的倒置</h2>
 <p>物理学越往深里走，世界越不像你眼前这个日常。它告诉你：没有绝对的&quot;同时&quot;——两件事谁先谁后，换个参照就变了（相对论）；没有预先摆好的&quot;值&quot;——一个量在你问它之前，并不确定地是多少（量子力学）。可你从这些理论里抬起头，桌子还是桌子，昨天还是昨天，杯子稳稳地在它该在的地方。</p>
@@ -86,7 +104,7 @@
 <p><sup><a href="#fn-asymptotic" id="fnref-asymptotic" class="fn-ref">[asymptotic]</a></sup></p>
 <p>所以对易性不是世界的一个性质，也不是你随便挑的一种习惯——<strong>它是&quot;事实&quot;这个概念本身的分析后果。</strong> 一个不能和别的事实同时稳稳摆在一起的东西，根本不配叫&quot;事实&quot;。你要有事实，就得把读法压到对易；而世界（\(\text{III}_1\)）本身，没有一个预先摆好的事实等着你去发现。</p>
 <p>正因对易是压出来的格式、不是世界的属性，有一个常被搅混的地方要分清：问&quot;我当下这本账，里头的东西彼此对不对易&quot;，这是<strong>有确定答案</strong>的——账本此刻登记的那些算子，两两之间要么对易要么不对易，摆在那里、原则上可查（只是可能查不完）。可另一个问法就不同了：问&quot;我这本账，是<strong>已经</strong>压到对易了，还是<strong>本来</strong>就非对易、将来也压不平&quot;——这一问<strong>没有答案，是个病句</strong>。<sup><a href="#fn-twocomm" id="fnref-twocomm" class="fn-ref">[twocomm]</a></sup>两个选项的差别整个落在将来（将来压不压得平），而将来是够不到的（下一节的事）；对一切当下能遭遇的现象，两个选项给出的是同一副样子。所以&quot;当下对不对易&quot;可问，&quot;已压到还是本来非对易&quot;不可问——别把这两个搅成一个。</p>
-<p>这是一个方向的彻底反转。我们总以为：事实，是&quot;我这样看&quot;和&quot;世界那样是&quot;两边对上了的地方——事实是被<strong>发现</strong>的。可这条链告诉你，恰恰相反：<strong>不是两边对上的地方才有事实；是我把两边压到对上，那里才生出事实。</strong> 一致，不是找到的，是造出来的。世界没有欠你一个事实；是你，为了能活、能认、能共享，在那道不对易的流里，硬压出了一片能对易的、可以称之为&quot;事实&quot;的岛。</p>
+<p id="scene-xianshi">这是一个方向的彻底反转。我们总以为：事实，是&quot;我这样看&quot;和&quot;世界那样是&quot;两边对上了的地方——事实是被<strong>发现</strong>的。可这条链告诉你，恰恰相反：<strong>不是两边对上的地方才有事实；是我把两边压到对上，那里才生出事实。</strong> 一致，不是找到的，是造出来的。世界没有欠你一个事实；是你，为了能活、能认、能共享，在那道不对易的流里，硬压出了一片能对易的、可以称之为&quot;事实&quot;的岛。</p>
 <blockquote><p>挑一件你最确定的事——桌上那只杯子，就在那儿。<br>
 <br>
 你觉得这件事是你<strong>发现</strong>的：你睁开眼，它已经在那儿了，你只是看见了它。像是世界把这个事实，交到了你手上。<br>
@@ -144,7 +162,9 @@
 <p>而这片海有一个温柔的性质，值得在收口时点一句。世界是一个因子——这条从一开始就立下的公理，最不起眼、也最温柔的一个后果是：<strong>它不许任何东西真正孤立。</strong><sup><a href="#fn-nocenter" id="fnref-nocenter" class="fn-ref">[nocenter]</a></sup>你够不到的那些，不是&quot;另一个海里的东西&quot;，只是这同一片海里此刻还游不到的远方。没有哪座岛是从别的海里漂来的、和你的海之间隔着一道谁也过不去的绝壁；一切抵达不了的，都还在同一片水域里，只是暂时够不着。这就是为什么&quot;够不到&quot;从不等于&quot;隔绝&quot;——够不到是距离，隔绝是断裂，而因子这条公理，恰恰不允许断裂。你和最远的那个够不到的他者之间，隔的是水，不是墙。</p>
 <p>到这里，世界怎么来的，说清了：它是压出来的。可一个被压出来的世界，一张画满了边界的图，摆在你面前——你该怎么在它里面活下去？哪些边界是你该低头认下的墙，哪些是你该卷袖去填的表？哪些过去回得去，哪些回不去？</p>
 <p>下一章。</p>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-decoh" class="footnote"><a href="#fnref-decoh" class="fn-back" title="返回引用处">↩</a>这不是说退相干纲领错了——它算相干性怎么流失，算得对、也有用；是说它算的那个问题，和&quot;对易这层格式从哪来&quot;根本不是同一个问题。经典性的<strong>动力学</strong>在世界侧，退相干管这个；经典性的<strong>格式</strong>在认知侧，这一章管这个。两件事，别当成一件的两种答案。</li>
 <li id="fn-asymptotic" class="footnote"><a href="#fnref-asymptotic" class="fn-back" title="返回引用处">↩</a>这里链尾那个&quot;对易&quot;要说准：它是学习流施加的<strong>要求</strong>、是账本被压向的<strong>理想极限</strong>（渐进对易），不是账本在任何一个有限时刻就已经具备的既成属性——&quot;账本压到对易了没有&quot;这个问句本身是病句（第六章）。链推的是&quot;要有可共享的事实，就必须把账本压向对易&quot;，不是&quot;链一走完账本就对易了&quot;。</li>
 <li id="fn-ergodic" class="footnote"><a href="#fnref-ergodic" class="fn-back" title="返回引用处">↩</a>更准地说：要&quot;客观身体&quot;，是要世界的舞台上有一个视角无关的绝对区分——而那等于要求账本群胚 \(\mathcal{R}\) <strong>非遍历</strong>（\(Z(\mathcal{M}_{\mathcal{A}})\neq\mathbb{C}1\)），这是一个<strong>不可判定</strong>的命题，不是一把尺子的有无那么简单；见第四章。&quot;没有客观身体&quot;因此不是一个断言，是一个立场——把 \(\mathcal{R}\) 遍历当作公理化的选择。</li>
@@ -152,9 +172,26 @@
 <li id="fn-twocomm" class="footnote"><a href="#fnref-twocomm" class="fn-back" title="返回引用处">↩</a>两个&quot;对不对易&quot;问题地位不同。**&quot;当下这个 \(\mathcal{A}\) 阿贝尔吗&quot;<strong>：有确定值（由乘法表定、不依赖态），原则上可核（只是可能不停机）——不是病句。</strong>&quot;\(\mathcal{A}\) 是已压到对易，还是本来非对易&quot;**：病句/不可知——两选项只差在未来（将来压不压得平，要理解流展开纳入尚未给予的材料），对一切当下遭遇同现象。前者是当下的代数事实，后者是关于无限远未来极限命运的问句，够不到。这与 <sup><a href="#fn-asymptotic" class="fn-ref">[asymptotic]</a></sup>（链尾对易=理想极限非既成属性）一致：正因&quot;压到对易没有&quot;是病句，&quot;当下对不对易&quot;才反而是可问的确定问题——两者分属&quot;极限&quot;与&quot;现况&quot;。</li>
 <li id="fn-nocenter" class="footnote"><a href="#fnref-nocenter" class="fn-back" title="返回引用处">↩</a>世界是因子 \(\iff Z(\mathcal{M})=\mathbb{C}1\)（中心平凡）。中心平凡的代数后果：不存在非平凡的中心投影把 \(\mathcal{M}\) 劈成两块互不影响的直和——即没有&quot;超选择扇区&quot;、没有被绝对隔开的孤岛。落到舞台上：\(\mathcal{M}\) 因子 \(\Rightarrow Z(\mathcal{M}_{\mathcal{A}})=\mathbb{C}1\)（生成⟹遍历，见 <sup><a href="#fn-ergodic" id="fnref-ergodic" class="fn-ref">[ergodic]</a></sup>／附录 W.1.3.4）\(\Rightarrow\) 没有&quot;时空独立体&quot;、一切在同一个连通的 \(\mathcal{R}\) 里。&quot;够不到&quot;是可及性的（\(\mathcal{A}\) 还没长到、\(\mathcal{N}\) 够不着），不是连通性的（\(\mathcal{R}\) 断开）——前者是距离，后者被因子公理禁止。此即因子公理&quot;最温柔的后果&quot;：不许任何东西真正孤立。</li>
 <li id="fn-youxian" class="footnote"><a href="#fnref-youxian" class="fn-back" title="返回引用处">↩</a>防一个看似循环的读法：链<strong>头</strong>的&quot;有限&quot;和链<strong>尾</strong>产出的&quot;有限性&quot;，是不同的成分，不循环。按有限性的三成分拆（附录 W.5.3）——链头的&quot;有限&quot;用的是成分 (iii)<strong>可分</strong>（公理，可数次操作）＋成分 (ii)<strong>时间摆脱不掉</strong>（无迹给的，必须活着）；这两个是前件。链尾产出的，是成分 (i)<strong>账本必真小</strong>（\(\mathcal{A}\subsetneq\mathcal{M}\)，由&quot;账本压向对易＋世界非对易&quot;这个后果给，引理3）。三个成分各不相同：链头是&quot;可分＋必须活着&quot;，链尾是&quot;账本装不下全世界&quot;，中间的桥是对易。所以不是&quot;用有限推有限&quot;，是&quot;用可分与必须活着，推出账本必真小&quot;。</li>
-</ol></section>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

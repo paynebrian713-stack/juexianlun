@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第七章</h1>
 <p>上一章末尾，你的直觉握着 ℚ 的锐性，想往前搭一个连续的世界——做 Dedekind 分割，跨进钝的领地，发现点性态度在内部兑现不了。它撞见了那道缝。这一章，把搭板从水里捞出来——打桩，和转贷。两座桥，焊在唯一的轴上，在缝上承重。你平日当作现成世界去用的那些东西——几何、规范、物理里的定位——撕开来，底下就是这块你没看见自己在搭的板。<strong>要先说死一件贯穿全章的事：这一章给出的一切——物理规律也好、身体也好——都是从对易这一侧给出的，是对它们的认知，不是它们本身。</strong> 承重定理给出处；判物理只做模板演示（边界反照物理困境，不是物理理论），系统展开全部留第二卷。</p>
 <h2 id="7-0-承接-缝你已经拆开了-板你其实一直在搭">7.0 承接：缝你已经拆开了，板你其实一直在搭</h2>
@@ -82,7 +100,7 @@
 <p><strong>搭板之前，先看手里有什么，再看要借什么。</strong> 被动综合（§5.4）已经替认知压好了两样东西。一样是弥散基底（Cartan 对，\(\mathcal{A}_{\text{phys}}\cong L^\infty[0,1]\)，无原子的钝连续统）<sup><a href="#fn-takesaki" id="fnref-takesaki" class="fn-ref">[takesaki]</a></sup>；另一样是可数纤维（Feldman–Moore split 骨架）。两样合起来就是那些可数的桩和那道活的连续。**板吃得下可数的桩和活的连续，吃不下 \([\sigma]\)。** 板标可数性成几何与赋值，\([\sigma]\) 留在板外——那是他者。</p>
 <p><strong>要借的是轴。</strong> 理解流的模流 \(\sigma_t^{\omega^*}\) 自带参数 \(t\in\mathbb{R}\)——全机唯一一根锐实数轴（Stone 定理）。但 III₁ 没有节拍（\(S(\mathcal{M})=[0,\infty)\)）<sup><a href="#fn-connes-iii1" id="fnref-connes-iii1" class="fn-ref">[connes-iii1]</a></sup>——轴上没有原生刻度。要刻度就得从可数性（分辨）那一侧进口；连续那一侧也是——没有锐点，要锐就得从轴进口。<strong>双向进口是 III₁ 的定理级后果</strong>：III_λ 轴自带刻度，断言板可单墩；III₁ 轴无刻度、延展无锐点——双方各缺一半，必须双墩焊接。</p>
 <h2 id="7-1-搭一块板-打桩-和转贷">7.1 搭一块板：打桩，和转贷</h2>
-<p>搭板就是干两件事：<strong>打桩</strong>，和<strong>转贷</strong>。一件事用 ℚ 的锐性借刻度，一件事用活的连续借衔接。两件事缺一不可。</p>
+<p id="scene-dui">搭板就是干两件事：<strong>打桩</strong>，和<strong>转贷</strong>。一件事用 ℚ 的锐性借刻度，一件事用活的连续借衔接。两件事缺一不可。</p>
 <p>**第一件事：打桩（\(D_F\)）。** 算子读给了你分辨——每一次 \(D=0\) 落盘，都铸出一枚可指认的投影（\(P_i\)，§5.5 的尺子原料）。这份锐性传到 ℚ：每一个标记都非此即彼，每一个落盘都铁板钉钉。但流本身没有刻度——III₁ 无节拍，轴上标不出 &quot;坐标 3.7&quot;。你伸手够到的，永远是一次落盘本身：&quot;自那通电话之后&quot;&quot;自上次见到起&quot;。<strong>拿 ℚ 的锐性——落盘的投影——当刻度，钉进没有原生格点的流。</strong> 这就是打桩。数学上，它就是 \(P_i(t_n)\) 里的那个 \(t_n\)：一枚落盘的投影被模流搬运、在流上刻下一处可数的锚。值（耦合常数、质量比）是轴上借来的锐数，派给每根桩。打桩打的不是 &quot;空间&quot;——打桩打的，是让 ℚ 的锐性在流上有了第一处锚。铸桩的是算子读的确定性：落盘给了 &quot;是什么&quot;，锐性传到 ℚ 给了 &quot;第几个&quot;——桩就是这两样的合体。这里要守一句分寸：\(D_F\) 的离散骨架（A4）<strong>可证是装上去的、不是取出来的</strong>——模流生成元 \(\log\Delta\) 谱连续，原生 D 候选可证不满足 A4（紧预解式失败）<sup><a href="#fn-connes-iii1" class="fn-ref">[connes-iii1]</a></sup>；那份可数的离散，是搭上去的假设，不是从流里读出来的固有结构。</p>
 <p>**第二件事：转贷（\(D_M\)）。** 桩打进流了。可桩与桩之间还隔着一片空——两次见到杯子之间，杯子并没有被看到。上一章末尾那个 &quot;还在&quot; 讲的正是这里：你把自己 &quot;一直连着走&quot; 的那份连续，过户给了杯子。这份连续是态读白送的——Connes 余圈对 \(t\) 强连续，轴的方向上，先后顺序从没断过。<strong>把被给予的连续，披在东西身上——这就是转贷。</strong>数学上，它就是被模流 \(\sigma_t\) 搬运的投影之间、由轴填满的那片连续。A1（选方向数，把轴向劈成横截维数）、A2（给方向配边长）、A3（保光滑）——把这三步公理化，就是把你贷出去的连续，写成别人也能认的条文。<strong>转贷转的，就是这个 &quot;我信它们连着，把它们说成公共的&quot; 那一层信。</strong></p>
 <p>这两件事干的不是一件。打桩打的是 &quot;第几个&quot; 和 &quot;落在哪&quot;——桩是钉在流上的落盘投影。转贷转的是 &quot;这段没断&quot;——贷是披在桩之间的自己的绵延。<strong>打桩给了可数的标记——ℚ 的锐性，落盘的确定；转贷给了标记之间那片连续——态读白送的先后，被给予的衔接。</strong> 没有打桩，流是一块没有刻度的布。没有转贷，桩就是一盘散沙——只有桩，没有连着的东西。</p>
@@ -150,10 +168,10 @@
 <p>三块亲手搭的板，加上规范性那三样机器、和这份方向清单，断言板的全貌就铺开了。搭板的纪律从头到尾没变：每块板底下，都没有一座常在的桥——板是搭上去的，承得住脚，但不把缝填成实地。</p>
 <p><sup><a href="#fn-cite" id="fnref-cite" class="fn-ref">[cite]</a></sup></p>
 <p>力、荷、几何、规范——这一整章拆的，都是<strong>账本这一侧</strong>的结构：世界如何顶你、你带什么被顶、你把世界叠得多密而生出距离。可有一件事，这一整章（连同前面所有章）一直在用、却从没回头问过：账本本身——那份&quot;事实必须能同时、确定地摆在一起&quot;的底子——是从哪儿来的？世界 \(\text{III}_1\) 明明什么现成的事实都不给你，这份&quot;可以有事实&quot;的格式，是谁带进来的？它是全书的最后一个问题。这也是物理学最老的一个问题，换了副面孔。下一章。</p>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-connes" class="footnote"><a href="#fnref-connes" class="fn-back" title="返回引用处">↩</a>断言板双墩：\(D_F\)（打桩·算子读：ℚ 锐→离散投影钉进流，A4 离散骨架 + A6 内部耦合）／\(D_M\)（转贷·态读：余圈强连续→被给予的连续披在东西身上，A1–A3 几何公理），同一 GAP 两不可互约半边、合成&quot;测量&quot;。板 = 让第六章&quot;点性态度在内部兑现不了&quot;的借条生效的机器。充当性＝Connes 重构定理（交换情形）：满足谱公理 A1–A6 的交换谱三元组，代数必为紧光滑流形 \(C^\infty(M)\)——Connes, A., &quot;On the spectral characterization of manifolds,&quot; *J. Noncommut. Geom.* <strong>7</strong> (2013), 1–82（arXiv:0810.2088）⟹ D 包 ⟺ 点流形＝Cantor–Dedekind 无源公理的明细化。<strong>限定</strong>：充当≠为真（公理恰够用、不证为真；公理不可由两流推出，这是可证的）；A4 认同只在可数骨架逐点、骨架间连续由 A1–A3 插值（读点信线）。横截残余＝A1–A4 四独立假设；维数具体值落在 A1–A4，皆搭上去。</li>
-<li id="fn-fisher" class="footnote">信息度规＝相对熵 \(S(\cdot\|\omega^*)\) 在 \(\omega^*\) 处的二阶结构（Hessian）＝量子 Fisher/Bures 度规：Petz, D., *Monotone metrics on matrix spaces*, Linear Algebra Appl. <strong>244</strong> (1996), 81–96；Petz, D., Sudár, Cs., *Geometries of quantum states*, J. Math. Phys. <strong>37</strong> (1996), 2662–2673。命题7.2.7 承重于此。&quot;时间永恒&quot;＝基线态模流参数化的脉络内自洽时间，非牛顿绝对时间。</li>
-<li id="fn-dr" class="footnote">规范群来自超选择扇区张量范畴：Doplicher, S., Roberts, J. E., &quot;Why there is a field algebra with a compact gauge group describing the superselection structure in particle physics,&quot; *Comm. Math. Phys.* <strong>131</strong> (1990), 51–107（≥3 维对称张量范畴≅\(\mathrm{Rep}(G)\)）。本书引用未分类张量范畴（第二卷+）；此为&quot;锚存在、相对可分类、待总结&quot;型，异于维数的&quot;锚（迹）可证不存在、不可定义&quot;型。</li>
 <li id="fn-context" class="footnote">语境概率不可黏合成全局联合分布＝contextuality，有上同调刻画：Abramsky, S., Brandenburger, A., &quot;The sheaf-theoretic structure of non-locality and contextuality,&quot; *New J. Phys.* <strong>13</strong> (2011), 113036。<strong>分寸</strong>：标准（有限测量）情形已证；无迹 von Neumann 完整版＝纲领、非承重。contextuality 障碍 ≠ Cartan 扭曲 \([\sigma]\)（同一语境结构上两个不同上同调对象，不混）。</li>
 <li id="fn-araki" class="footnote">号差不可内生：Araki 相对熵在实切空间的 Hessian 严格半正定 ＋ Sylvester 惯性律 ⟹ 无洛伦兹负号（须复化 Wick 或外接对合 Krein 结构）。承重＝Hessian 半正定（Petz）＋惯性律（线性代数）；&quot;须复化/Krein&quot;是边界定位，非物理预言（元规则 M）。</li>
 <li id="fn-gauge" class="footnote"><a href="#fnref-gauge" class="fn-back" title="返回引用处">↩</a>张量范畴三合细目（结构对应·元规则 M，非直接引 AQFT）：<strong>①骨架（算子侧）</strong>——选定切法得 \(\mathcal{A}_{\text{phys}}\)，Feldman–Moore 长出群胚 \(\mathcal{R}\)（携扭 \([\sigma]\)）；群胚表示＋相对张量积（Connes fusion）＝对象/态射/乘法/结合子。（注：结合子住 \(H^3\)、与他者 \([\sigma]\in H^2\) 分属不同阶与不同方向——底 vs 纤维，早先&quot;结合子=他者&quot;的设想已否决,见 <sup><a href="#fn-gaugeface" id="fnref-gaugeface" class="fn-ref">[gaugeface]</a></sup>。）<strong>②成员（态侧判定）</strong>——物理要的是相对某真空的超选扇区；判者＝选定的参考态（真空），判据＝相对真空能否局域比较（DHR），无选定态则“范畴有哪些对象”无真值。<strong>③对称性（板侧）</strong>——对称（\(d\geq3+1\)）⟹紧群，辫化（低维）⟹量子群/任意子（DHR 统计维数）；连“局域”“类空分离”这些筛扇区的词都要板搭出几何才可表述⟹规范性只能板后预告。<strong>三层分类（第二卷）</strong>：骨架层（Cartan 对/群胚/\(H^2\) 上同调）／成员层（Doplicher–Roberts 超选：对称张量范畴↔紧群、辫化↔量子群）／对称层（维数→统计维数）；★焊接（群胚表示范畴 vs DHR 扇区范畴两候选线怎么焊、哪条是物理的家）＝待填核心未解项。<strong>分层不焊</strong>：脉络法化子（\(u\mathcal{A}u^*=\mathcal{A}\)，成群）≠杨–米尔斯纤维丛联络（cocycle 统一已否决）。<strong>诚实边界</strong>：DHR/DR 是 AQFT 网定理、本书非网⟹结构对应非引用；不导具体范畴（标准模型 \(\mathbb{C}\oplus\mathbb{H}\oplus M_3\)＝待填）。<strong>相对 NCG 省处</strong>：NCG 手选有限代数 \(\mathcal{A}_F\)，本书归约到“选哪个切法”上游（\(\mathcal{A}_F\)＝群胚迷向）——省假设位置、未导出物理。Doplicher–Roberts (1990)；DHR；Feldman–Moore。</li>
@@ -167,11 +185,33 @@
 <li id="fn-chargeother" class="footnote"><a href="#fnref-chargeother" class="fn-back" title="返回引用处">↩</a>这里顺手接一个前面欠下的问题：力，和那个够不到的他者，到底什么关系？——在这张语法里看得最清，但要说准，别把它们排成高低。<strong>荷</strong>，是你携带的把手：可增可减、能相抵，甚至能不带（中性就不被那种力抓）；力抓的就是你的荷，是一笔<strong>价格</strong>——可付、可绕、可中和。<strong>他者</strong>不是荷的一种、也不是荷的&quot;更高一层&quot;；它压根住在另一个方向：荷是账本里那些<strong>还能被你认全、被你收进来</strong>的内部把手，他者是账本这套关系<strong>本身</strong>那处换任何标签都抹不平的扭。一个是你还没清点完的自己（收得进，所以能标价），一个是怎么也收不进的剩余（收不进，所以是墙）。<strong>所以力和他者不是差一整阶、不是一个低一个高——是横竖两个方向：荷在你带的把手那一路，他者在账本关系的扭那一路，两路之间没有一把梯子把它们连成上下。</strong> 感到一记力，永远不是遭遇他者——力顶你、可绕、可中和；他者掀不平、改标签也消不掉。这就是上一节那把&quot;价格与墙&quot;的刀，落到规范这一处的精确形。</li>
 <li id="fn-nesting" class="footnote"><a href="#fnref-nesting" class="fn-back" title="返回引用处">↩</a>说清这条&quot;身体套着身体&quot;的序。一个身体里可以嵌着子系统的小身体，器官在机体里、机体又在更大的整体里——这一层层的嵌套，翻到算子那一侧看，对应上一章直觉里的那条细化序，对应&quot;对一切后续细化都成立&quot;里量的那个序：嵌套的身体和直觉的全称，在此<strong>对应</strong>（此对应目前是方向性的结构同型，完整的同一性——给出两序之间的映射——留后卷）。而刚才说的狭义身体，正是这条序上那个临界尖的投影——它不是另起一根轴。投影是同一道投影（都是投到对易侧）：投在整块肉上，得到的是世界；投在这条序的临界尖上，得到的是这一具身体。狭义身体，就坐在&quot;投影&quot;和&quot;细化序&quot;的这个交点上。完整展开，都在后卷。</li>
 <li id="fn-assert" class="footnote"><a href="#fnref-assert" class="fn-back" title="返回引用处">↩</a>还有一句接上一章：断言板断言的，是那些已经退相干、被历史一致性 \(D=0\) 定下来的确定命题。没有 \(D\) 定下来的内容，断言板就没有东西可断言——上一章埋的那条线索，在这里兑现。</li>
+</ol>
+<h3 class="fn-section">〔文献〕</h3>
+<ol class="footnotes">
+<li id="fn-fisher" class="footnote">信息度规＝相对熵 \(S(\cdot\|\omega^*)\) 在 \(\omega^*\) 处的二阶结构（Hessian）＝量子 Fisher/Bures 度规：Petz, D., *Monotone metrics on matrix spaces*, Linear Algebra Appl. <strong>244</strong> (1996), 81–96；Petz, D., Sudár, Cs., *Geometries of quantum states*, J. Math. Phys. <strong>37</strong> (1996), 2662–2673。命题7.2.7 承重于此。&quot;时间永恒&quot;＝基线态模流参数化的脉络内自洽时间，非牛顿绝对时间。</li>
+<li id="fn-dr" class="footnote">规范群来自超选择扇区张量范畴：Doplicher, S., Roberts, J. E., &quot;Why there is a field algebra with a compact gauge group describing the superselection structure in particle physics,&quot; *Comm. Math. Phys.* <strong>131</strong> (1990), 51–107（≥3 维对称张量范畴≅\(\mathrm{Rep}(G)\)）。本书引用未分类张量范畴（第二卷+）；此为&quot;锚存在、相对可分类、待总结&quot;型，异于维数的&quot;锚（迹）可证不存在、不可定义&quot;型。</li>
 <li id="fn-takesaki" class="footnote"><a href="#fnref-takesaki" class="fn-back" title="返回引用处">↩</a>弥散交换 von Neumann 代数 ≅ \(L^\infty[0,1]\)：可分希尔伯特空间上无原子的交换 von Neumann 代数同构于 \([0,1]\) 上的 \(L^\infty\)（标准分类定理）。Takesaki, M., *Theory of Operator Algebras*, Vol. I, Springer (1979), Ch. III §1。正文中 \(\mathcal{A}_{\text{phys}}\) 弥散＝III 型强制（MASA 无极小投影）。</li>
 <li id="fn-connes-iii1" class="footnote"><a href="#fnref-connes-iii1" class="fn-back" title="返回引用处">↩</a>III₁ 因子 ⟺ Connes 谱 \(S(\mathcal{M})=[0,\infty)\)：Connes, A., &quot;Une classification des facteurs de type III,&quot; *Ann. Sci. Éc. Norm. Supér.* (4) <strong>6</strong> (1973), 133–252. Zbl 0274.46050。III_λ 的模谱为格点 \(\{\lambda^n\}\)（有节拍），III₁ 的模谱为 \([0,\infty)\)（无节拍）——&quot;轴无原生刻度&quot;的数学根。</li>
-</ol></section>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>导论</h1>
 <h2 id="一-你拿不出来的那个此刻">一、你拿不出来的那个此刻</h2>
 <p>有一样东西，你此刻正待在它里面，却永远没法把它拿出来，摆到我面前给我看。</p>
@@ -152,7 +170,9 @@
 <br>
 <strong>一句关于账目的话。</strong> 全书只在四处伸手，其余都是定理：四件被抛、一条计数公理、一笔向实无穷借来的账、一个把&quot;直线就是实数&quot;明细化的假设包。这四处之外，凡结论皆自地基长出。</p></blockquote>
 <h2 id="脚注">脚注</h2>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-fossil" class="footnote"><a href="#fnref-fossil" class="fn-back" title="返回引用处">↩</a>化石不是修辞。第一章会给它一个严格的身份：那些已经凝固、因此才传得过去的事实。</li>
 <li id="fn-ti-body" class="footnote"><a href="#fnref-ti-body" class="fn-back" title="返回引用处">↩</a>这台摆渡机器怎么搭起它那个&quot;对谁都一样&quot;的客观面、又怎么一次次核对修正，是第五章（历史一致性）与第七章（断言板）的事。</li>
 <li id="fn-projection-shape" class="footnote"><a href="#fnref-projection-shape" class="fn-back" title="返回引用处">↩</a>这里说的&quot;投影&quot;&quot;失真&quot;不是文学比喻。后面会看到，它有一副精确的数学形状：一个丰富的结构，为什么原则上没法被任何单一视角一次装下。</li>
@@ -161,9 +181,26 @@
 <li id="fn-step-three" class="footnote"><a href="#fnref-step-three" class="fn-back" title="返回引用处">↩</a>这一步留到其三。</li>
 <li id="fn-four-step" class="footnote"><a href="#fnref-four-step" class="fn-back" title="返回引用处">↩</a>四步的机理在第二章与附录 W；导论只给这一句结论。</li>
 <li id="fn-ch4-proof" class="footnote"><a href="#fnref-ch4-proof" class="fn-back" title="返回引用处">↩</a>这两句在此只给地位，证明在第四章。</li>
-</ol></section>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第四章</h1>
 <p>上一章数清了缝够不到的<strong>位置</strong>。但缝里还有一处不一样的东西——它不是够不到的位置，也不是一个待在那里的对象，是一处你碰得到、被它触及、却永远抹不平、永远不能变成对象的扭曲。</p>
 <p>那就是他者。这一章先用一个最切身的问题把它钩住——为什么我永远不知道你在想什么——再给它的结构，最后走到身体与感受。有一句话要先立在门口，因为它防的是全书最危险的误读：他者作为被给予的既成事实，本书<strong>标出它、不推导它</strong>。</p>
@@ -75,7 +93,7 @@
 <p>他者也是无迹的一张脸。前面几章的无迹是&quot;有态却没有一把全局的尺&quot;；到了人与人之间，无迹留下的，是这处两个人共享同一个世界、却有一样东西怎么也对不平的内核。这一章就沿着这处扭曲，从最切身的地方走到最结构的地方。</p>
 <p>在看清它的结构之前，得先看清那三样操持。一道被给予的绵延，被以三种方式操持——学习流把当下压成对易的事实，理解流顺着往回展开脉络，还有第三样：一层不可逆的松弛，把前两者的产物沉淀成稳定的印记（第一章 §1.6 露过头的那个）。这三样操持之间没有一把统一的判准去衡量（贯穿三者的模流不变标量判准，在 \(\text{III}_1\) 上退化为常数——Connes–Størmer<sup><a href="#fn-cs4" id="fnref-cs4" class="fn-ref">[cs4]</a></sup>）。他者、身体、感受，都长在这三样操持的结构里。</p>
 <h2 id="4-1-为什么我永远不知道你在想什么">4.1 为什么我永远不知道你在想什么</h2>
-<p>先问一个人人都问过的问题：为什么我永远不能真正知道你在想什么？</p>
+<p id="scene-taren">先问一个人人都问过的问题：为什么我永远不能真正知道你在想什么？</p>
 <p>你加大分辨、换角度、想把他活成你能理解的样子——你在做你一直做的事：把对不上的，纳进来。这一次，纳不进。</p>
 <p>日常的答案是&quot;我读不到你的脑子&quot;。但这里有个更深、且能精确说清的答案：它无关读取技术，而关乎信息本身的不可逆。</p>
 <p>我能接触到你的，是你外显的读数——你说的话、做的事、露出的表情，这些都落在可共享的对易账本上（你的 \(\mathcal{A}_{\text{phys}}\)）。而你的完整内里，是你那个非对易的舞台 \(\mathcal{M}_{\mathcal{A}}\)。从内里到外显，中间隔着一道压缩：把非对易的内里投到对易的读数上，是一个条件期望 \(E\)。</p>
@@ -218,7 +236,9 @@
 <p>面对他者，怎么回应？这里没有脚本。回应他者，是在一个跨越两股流、没有统一判准的地方落下一步——你不是在&quot;对&quot;和&quot;错&quot;之间做选择（选对错，需要一把统一的尺），你是在无对错可判的悬空处，依旧落下一步。这一步的不被决定，不是任性的自由，是&quot;没有现成脚本可依&quot;——取法不被决定；它只需要&quot;跨两股无统一判准&quot;这一点，不需要他者非平凡、也不靠他者有几种样子。</p>
 <p>最后留一个价值上的岔路，本书只标出、不裁决。&quot;我&quot;是原初差异满溢里被攥紧的一道差异，和他者同质——差别只在被攥住与否。有一条路（列维纳斯）说：他者高于我，我永远先亏欠他者——这是保住那个同一的&quot;我&quot;、站在它上面读出的伦理不对称。另有一条路（静修的方向）说：我与他者本是平等的、同为满溢之道，松开那道攥紧就认出这平等。这两条路方向相反，是价值的选择，不是机器能判的——本书标出这个岔口，把选择留给读者。（切莫把这两条焊在一起：一条保住我、一条松开我，走的是相反的方向。）</p>
 <p>到此，两流、缝、他者，都还在单独一个视角里。而他者不只是我够不到的内里——那次遭遇还在我身上留下了一道抹不掉的印记：它永久地改变了我。我的这个视角，被那次触及不可逆地挪了位（就是第一章那个&quot;参照不可回&quot;）。列维纳斯把这叫作一次<strong>创伤</strong>（traumatisme）——他者先于我的任何选择、从我的外面，不可逆地击中并重构了我。这道&quot;他者永远改变了我&quot;，下一章会看到，正是同一件事的另一种读法——把时间读在我的态上，而不是读在世界的对象上。而且这道创伤有深浅：浅时，它只是挪动我的参照，改变我；深到一定程度，它不只改变我，还会掀翻并重新奠定我的整个世界——那，就是下一章里&quot;世界作为一个 topos&quot;可以被重置的那个事件。同一道创伤，浅则改我、深则重奠我的世界。这些怎么缝成一个稳定的&quot;世界&quot;、一段能回溯的&quot;历史&quot;（以及这历史怎么会被一次够深的创伤重奠）？下一章。</p>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-state3" class="footnote"><a href="#fnref-state3" class="fn-back" title="返回引用处">↩</a>态侧&quot;三样家当&quot;的精确形：其一，相对熵 \(S(\omega_{\text{ext}}\,\|\,\omega^*)\)（两态差多远）；其二，余圈 \([D\omega_{\text{ext}}:D\omega^*]_t\)（从基线到参照怎么拧过去，一阶）；其三，每个态各自模流的不动点（中心化子）——模流遍历时（\(\text{III}_1\) 典型情形）它退化为标量 \(\mathbb{C}1\)、只剩前两样，非遍历时才有非平凡内容。一个精确的说法：凡&quot;对账本 \(\mathcal{A}\) 限制相同&quot;的态是<strong>一整族</strong>，态这一侧看不出自己是哪一个、也就不知道自己到底是谁——它握着两态间的相对结构，握不住任何作为对象的子代数。</li>
 <li id="fn-chunseed" class="footnote"><a href="#fnref-chunseed" class="fn-back" title="返回引用处">↩</a>这颗种子的展开：连续的浓淡是原生的、锐的记号是凿出来的；它们怎么被搭成一根&quot;看着连续又能逐点读&quot;的实数轴，是第七章那块板的事。还要防一句：这片浓淡的连续，和松弛的不可逆，是<strong>两根不同的轴</strong>——一个是&quot;横着切永远切不到底&quot;的弥散，一个是&quot;纵着走回不来&quot;的方向，别把它们卷成一团。</li>
 <li id="fn-cs4" class="footnote"><a href="#fnref-cs4" class="fn-back" title="返回引用处">↩</a>三种操持无统一判准：一把&quot;贯穿三者的判准&quot;要求一个在内自同构下不变的标量（不变泛函或不变元）——而内自同构下的不变泛函 = 迹、不变元 = 中心元；\(\text{III}_1\) <strong>无迹</strong>（第零章）<strong>且中心平凡</strong> \(Z(\mathcal{M})=\mathbb{C}1\)，故这样的标量只剩常数，退化。<strong>承重是&quot;无迹＋中心平凡&quot;（层2：无不动点）</strong>。Connes–Størmer（*J. Funct. Anal.* <strong>28</strong> (1978), 187–196，\(\text{III}_1\) 态空间齐性、酉轨道稠密）作<strong>旁证</strong>——它说&quot;诸态都一样、无一被凸显&quot;，佐证无特殊判准；但它单独只给&quot;齐性&quot;、不给&quot;无不动点&quot;，后者由无迹给。二者分工：无迹给&quot;无不动点&quot;、Connes–Størmer 给&quot;齐性&quot;，缺一不成&quot;无典范位置&quot;。</li>
@@ -233,7 +253,6 @@
 <li id="fn-solipreading" class="footnote"><a href="#fnref-solipreading" class="fn-back" title="返回引用处">↩</a>因子类型（III₁）是代数事实（公理 I，或由理解流在场的代数刻画推出）；唯我论／非唯我论是加在同一结构上的现象学解读，二者不同层，解读不改变因子类型。附录 W.2.6 耦合注把这一点钉死：那里&quot;标准 HSMI ⟹ III₁&quot;是<strong>代数条件</strong>推出类型，不是&quot;非唯我论解读&quot;推出类型——能逼出 III₁ 的是那个代数结构，不是选了哪种解读。</li>
 <li id="fn-petzcare" class="footnote"><a href="#fnref-petzcare" class="fn-back" title="返回引用处">↩</a>一句分寸话，因为它容易被写过头：承重的是数据处理不等式那个方向——压缩掉信息、且一般严格——在 \(\text{III}_1\) 上无条件成立。反方向的&quot;精确复原&quot;（Petz 映射、Universal Recovery 的定量界）在无迹 \(\text{III}_1\) 上并非无条件、需附加代数条件；本书只取保守一侧：忠实压缩一般不可逆、近似复原有消不掉的残差。这足以支撑&quot;够不到你的内里&quot;，不依赖任何 \(\text{III}_1\) 上的强复原声称。</li>
 <li id="fn-qmscare" class="footnote"><a href="#fnref-qmscare" class="fn-back" title="返回引用处">↩</a>对数学家说清：这不是 \(B(\mathcal{H})\) 上那种带标准 Lindblad 生成元的半群；在无迹 \(\text{III}_1\) 上，它是一个正规的、完全正的量子马尔可夫半群，生成元形式更一般，本书用其一般框架、不套 Type I 的具体公式。详见 <sup><a href="#fn-qms" id="fnref-qms" class="fn-ref">[qms]</a></sup>。</li>
-<li id="fn-dpi4" class="footnote"><a href="#fnref-dpi4" class="fn-back" title="返回引用处">↩</a>数据处理不等式（相对熵在条件期望/正规 UCP 映射下单调不增）在任意 von Neumann 代数上成立：Uhlmann, A., *Relative entropy and the Wigner–Yanase–Dyson–Lieb concavity in an interpolation theory*, Comm. Math. Phys. <strong>54</strong> (1977), 21–32；Araki, H., *Relative entropy of states of von Neumann algebras*, Publ. RIMS <strong>11</strong> (1976), 809–833。含 \(\text{III}_1\)，无条件。</li>
 <li id="fn-petz" class="footnote"><a href="#fnref-petz" class="fn-back" title="返回引用处">↩</a>精确复原：数据处理不等式取等 \(\iff\) 存在 Petz 复原映射精确还原（Petz, D., *Comm. Math. Phys.* <strong>105</strong> (1986), 123–131）；一般不等号时的定量残差界（Universal Recovery）见 Junge–Renner–Sutter–Wilde–Winter, *Ann. Henri Poincaré* <strong>19</strong> (2018), 2955–2978。<strong>分寸</strong>：这些定量结果主要在有限维/有迹情形；无迹 \(\text{III}_1\) 上 Petz 型强复原非无条件、需附加代数条件。本书只用保守侧面——忠实压缩一般不可逆、近似复原有消不掉残差——不依赖 \(\text{III}_1\) 上的强复原。承重是 DPI（<sup><a href="#fn-dpi4" class="fn-ref">[dpi4]</a></sup>），非精确复原。</li>
 <li id="fn-star" class="footnote"><a href="#fnref-star" class="fn-back" title="返回引用处">↩</a>这里要对认真的读者交一句底：元定理 W 这个&quot;独立性&quot;本身，押在一个尚未证明的开放问题上——记作 \((\star)\)：存在一个 \(\text{III}_1\) 的遍历舞台，其上 \([\sigma]\) 真的非零。\((\star)\) 是承重级的开放问题（附录 W）。倘若 \((\star)\) 竟为假——即所有这样的舞台都只能有 \([\sigma]=0\)——那么他者的代数落点就恒为零、本章这条线就空转了。但请注意：**即便如此，缝本身（第二章那道 \(\iota\circ E\neq\mathrm{id}\)）不受影响**——他者作为&quot;缝里抹不平的内核&quot;这个更强的形态可能空,但&quot;有理解就有缝、缝里有够不到的你&quot;这个基本事实，是无迹直接给的、不押在 \((\star)\) 上。所以：他者的<strong>基本他者性</strong>站在磐石上，他者的<strong>代数刚性刻画</strong>押在 \((\star)\) 上——两者的承重级别不同，本章据实标出。</li>
 <li id="fn-sameR" class="footnote"><a href="#fnref-sameR" class="fn-back" title="返回引用处">↩</a>说清一处，免得和别处撞车：这里的&quot;高一阶&quot;是**同一个账本关系 \(\mathcal{R}\) 上**的 \(H^1\) 对 \(H^2\)，同域分级，合法；它<strong>不是</strong>第零章那个被否掉的、跨不同定义域的&quot;差一整阶&quot;——那处比的是模流轴 \(\mathbb{R}\) 上的余圈与账本群胚 \(\mathcal{R}\) 上的余圈，两座无桥的塔，不可比阶。此处两者同住 \(\mathcal{R}\)，才谈得上&quot;高一阶&quot;。</li>
@@ -244,18 +263,39 @@
 <li id="fn-recut" class="footnote"><a href="#fnref-recut" class="fn-back" title="返回引用处">↩</a>换账本 \(\mathcal{A}\)（重切割）⟹换 \(\mathcal{R}\)⟹\([\sigma]\) 可变，甚至可为零。但这是&quot;不同世界&quot;（不在本节&quot;同一个世界&quot;的定义内）：新账本里是另一套他者判定，不是原他者被抹平。同一账本内 \([\sigma]\) 公共、跨账本 \([\sigma]\) 可变，分界就是&quot;同一个 \(\mathcal{A}\)&quot;。他者相对账本切法、不相对 \(\mathcal{M}\)——它是 \((\mathcal{A},\mathcal{M})\) 配对的属性，不是 \(\mathcal{M}\) 单独的属性。</li>
 <li id="fn-ucalc" class="footnote"><a href="#fnref-ucalc" class="fn-back" title="返回引用处">↩</a>&quot;从我到他&quot;的搬运是一个法化子酉元 \(u\)（\(\mathcal{N}(\mathcal{A})\) 中）。它分两部分：<strong>可换算面</strong>=视角差，搬锚（换参考态 \(\omega_{\text{ext}}\)）+ 搬光锥（换因果窗口 \(\mathcal{N}\)），用 \(u\) 可逐一抵平、不带来新信息（把搬锚/搬光锥进一步对应到&quot;位置类/速度类&quot;物理量，仍在推、未定，此处不预支，守元规则 M）；<strong>不可换算面</strong>=\(u\) 搬不齐的剩余（\([\sigma]\)，抹不平的连法），消不掉。他者性 = 不可换算的剩余；参考系差可换算、不算他者性、不逼重切。逼重切 \(\mathcal{A}\) 的是&quot;新连法&quot;（把两处本以为无关的现象连成同一结构，含新信息），不是&quot;新参考系&quot;（伽利略/洛伦兹变换可换算、无新物理）。此条是 §4.6&quot;力=可吸收部分之名、他者=硬币之外掉不进口袋那个&quot;在&quot;视角差&quot;侧的对应细化：可换算的视角差 \(\subsetneq\) 可吸收的荷（<strong>真包含</strong>、非等同）——视角差只是荷里&quot;纯坐标&quot;那一块（换参考系即抵平、不含新物理）；可吸收的荷还含&quot;要学一学才抹平、但确实抹得平&quot;的非坐标部分。两者都不逼重切、都不是他者性，但别把&quot;可换算视角差&quot;当成&quot;可吸收荷&quot;的全部。</li>
 <li id="fn-encounter" class="footnote"><a href="#fnref-encounter" class="fn-back" title="返回引用处">↩</a>&quot;遭遇顺序&quot;依赖 \(\mathcal{N}\)（因果窗口）：不同因果位置先纳入的算子集合不同，故先撞见的抹不平不同。而&quot;他者是谁&quot;（\([\sigma]\)）由 \((\mathcal{A},\mathcal{M})\) 定、不依赖 \(\mathcal{N}\)（见 <sup><a href="#fn-notN" class="fn-ref">[notN]</a></sup>）。两者分层：遭遇是视角的（依赖参考系），他者性是客观的（不依赖参考系）。这与 §4.2½ 主结论（他者公共、缝内私有）一致——遭遇顺序落在&quot;私有/视角&quot;侧，他者判定落在&quot;公共&quot;侧。</li>
-<li id="fn-fm" class="footnote"><a href="#fnref-fm" class="fn-back" title="返回引用处">↩</a>他者内核＝ Cartan 对 \((\mathcal{M}_{\mathcal{A}},\mathcal{A}_{\text{phys}})\) 的 Feldman–Moore 扭曲类 \([\sigma]\in H^2(\mathcal{R},\mathbb{T})\)：Feldman, J., Moore, C. C., *Trans. AMS* <strong>234</strong> (1977), 289–324（及 325–359）。前件（Cartan 对、可数标准 Borel 等价关系）由命题 R★（附录 W.2.7，其 R3＝舞台 Cartan 对）构造级与公理可分性供给。\([\sigma]\) 取值独立于公理＝元定理 W（附录）。</li>
 <li id="fn-j" class="footnote"><a href="#fnref-j" class="fn-back" title="返回引用处">↩</a>\(J\mathcal{N}J=\mathcal{N}'\)（模共轭把窗口映到对偶）与 \(J\) 反转能量符号皆为 Tomita–Takesaki 标准结论；理解流为正能量单侧半群（Borchers，第一章），故无法经 \(J\) 跨到对偶侧。唯我论两叉的第二叉（此叉）硬；第一叉（单侧半群因果不可达）标 A 方向、未完全形式化。</li>
 <li id="fn-qms" class="footnote"><a href="#fnref-qms" class="fn-back" title="返回引用处">↩</a>正规量子马尔可夫半群（von Neumann 代数上完全正、保单位、正规的单参数半群）：Christensen, E., Evans, D. E., *Cohomology of operator algebras and quantum dynamical semigroups*, J. London Math. Soc. (2) <strong>20</strong> (1979), 358–368。<strong>分寸</strong>：标准 GKSL/Lindblad 显式生成元公式是有界生成元、Type I（\(B(\mathcal{H})\)）情形；无迹 \(\text{III}_1\) 上生成元结构更一般，本书用一般框架、不套 Type I 公式。</li>
 <li id="fn-db" class="footnote"><a href="#fnref-db" class="fn-back" title="返回引用处">↩</a>量子细致平衡／KMS-对称性相对于基线态（第一个态 \(\omega^*\)）的模结构定义：量子马尔可夫半群以 \(\omega\) 为不变态并满足细致平衡，其生成元须相对于 \(\omega\) 的模流 \(\sigma_t^\omega\) 对称（KMS/GNS 对称），并由相对模结构的 Dirichlet 形式刻画——Cipriani, F., *Dirichlet forms and Markovian semigroups on standard forms of von Neumann algebras*, J. Funct. Anal. <strong>147</strong> (1997), 259–300；Fagnola, F., Umanità, V., *Generic quantum Markov semigroups, cyclic cocycles, and the Dirichlet form*, Comm. Math. Phys. <strong>298</strong> (2010), 795–832；Carlen, E. A., Maas, J., *Gradient flow and entropy inequalities for quantum Markov semigroups with detailed balance*, J. Funct. Anal. <strong>273</strong> (2017), 1810–1869。<strong>要点</strong>：\(\text{III}_1\) 上 QMS 无独立于参照的通用生成元公式，其容许类相对 \(\omega^*\) 的模结构按类型分类，非单一公式。（与文小刚拓扑序&quot;靠结构/相分类、非局部序参量公式&quot;仅作类比挂靠，不作数学承重。）</li>
 <li id="fn-phidep" class="footnote"><a href="#fnref-phidep" class="fn-back" title="返回引用处">↩</a>这也顺带说清一件事：\(\Phi_t\) 依赖的是第零章那个被印记钉死的 \(\omega^*\)，不依赖后面第五章的历史一致性；恰恰相反，第五章那套历史一致性的反身校准，是跑在 \(\Phi_t\) 撑起的这个稳态身体上的。</li>
 <li id="fn-deathhistory" class="footnote"><a href="#fnref-deathhistory" class="fn-back" title="返回引用处">↩</a>还有一层后果留到下一章说清：第二态一旦并入那个不主动做区分的基线，它在账本 \(\mathcal{A}_{\text{phys}}\) 上原本维持的历史一致性也随之崩掉——态的对齐与历史的失序，是同一次死的两张脸。而历史失序这一侧还有一个更硬的结构根：两态并到一起，那道居间调整的余圈 \([D\omega_{\text{ext}}:D\omega^*]\) 就平凡了，历史对齐所依的那层自由度归零，于是那个一直都在、平时被绕过去的他者内核 \([\sigma]\) 暴露为绝对的障碍——死，在世界那一侧，就是绕过他者的余地耗尽。详见下一章。</li>
 <li id="fn-prig" class="footnote"><a href="#fnref-prig" class="fn-back" title="返回引用处">↩</a>远离平衡的耗散结构须持续做功维持、停止输入则结构坍缩：Prigogine, I., *Introduction to Thermodynamics of Irreversible Processes* (3rd ed.), Wiley (1967)；Nicolis, G., Prigogine, I., *Self-Organization in Non-Equilibrium Systems*, Wiley (1977)。此处&quot;远离平衡&quot;＝第二态与基线的余圈 \([D\omega_{\text{ext}}:D\omega^*]_t\) 非平凡（\(\omega_{\text{ext}}\) 是量子马尔可夫半群的非 KMS 不动态）；&quot;停喂＝死&quot;＝该余圈趋平凡、第二态塌回基线＝两态结构坍缩成单态。<strong>不表述为&quot;一个态弛豫回其平衡/滑向迹态&quot;</strong>（那是 Type I 单态思维；\(\text{III}_1\) 无迹态、无唯一平衡态可弛豫）。</li>
-<li id="fn-spohn" class="footnote"><a href="#fnref-spohn" class="fn-back" title="返回引用处">↩</a>相对熵单调（量子 H 定理）：以 \(\omega^*\) 为忠实正规不变态的正规量子马尔可夫半群，其相对熵 \(t\mapsto S(D_{*t}\varphi\,\|\,\omega^*)\) 单调不增——Spohn, H., *Entropy production for quantum dynamical semigroups*, J. Math. Phys. <strong>19</strong> (1978), 1227–1230；Frigerio, A., *Stationary states of quantum dynamical semigroups*, Comm. Math. Phys. <strong>63</strong> (1978), 269–276。根＝Araki 相对熵在正规 UCP 映射下的 Uhlmann 单调性（Uhlmann, A., *Relative entropy and the Wigner–Yanase–Dyson–Lieb concavity in an interpolation theory*, Comm. Math. Phys. <strong>54</strong> (1977), 21–32；Araki, H., *Relative entropy of states of von Neumann algebras*, Publ. RIMS <strong>11</strong> (1976), 809–833），在无迹 \(\text{III}_1\) 上成立（用 Araki 相对熵，非迹版）。遍历（不动核平凡）则 \(\omega_{\text{ext}}\to\omega^*\) 完全对齐；非遍历则落不动核（中心化子）。第二态并入基线后其在 A 上的历史一致性 \(D\to D_{\omega^*}\)，而平衡态一般不主动退相干 A-历史（\(D_{\omega^*}\neq0\)），故原 \(D=0\) 一致性随之崩——态对齐（本章）与 A 历史失序（第五章）＝同一次死的两面。</li>
 <li id="fn-death" class="footnote"><a href="#fnref-death" class="fn-back" title="返回引用处">↩</a>死不可被第一人称经验、死为限界而非事件、死为与不可及者的关系——现象学传统对应（同型，非把三家收编为本框架推论；本书只指出两态坍缩的结构与这条线索同形）：Epicurus, *Letter to Menoeceus*（死与我们无关：我们在时它不在、它在时我们不在）；Heidegger, M., *Sein und Zeit* §46–53（Sein-zum-Tode：死为此在之限界，不可作为经历被经历、他人之死只从第三人称得见）；Levinas, E., *Le Temps et l&#x27;Autre* / *Dieu, la mort et le temps*（死＝与绝对他者/不可把握者的关系，主体掌控之限界，从彼处到来）。本框架落点：第二态本为非典范、被外接、不完全属我的视角（第二、三章），其撤离＝该视角停止被顶住、朝&quot;我&quot;被取出之前的基线松弛（接第零章&quot;被取&quot;性）。</li>
-</ol></section>
+</ol>
+<h3 class="fn-section">〔文献〕</h3>
+<ol class="footnotes">
+<li id="fn-dpi4" class="footnote"><a href="#fnref-dpi4" class="fn-back" title="返回引用处">↩</a>数据处理不等式（相对熵在条件期望/正规 UCP 映射下单调不增）在任意 von Neumann 代数上成立：Uhlmann, A., *Relative entropy and the Wigner–Yanase–Dyson–Lieb concavity in an interpolation theory*, Comm. Math. Phys. <strong>54</strong> (1977), 21–32；Araki, H., *Relative entropy of states of von Neumann algebras*, Publ. RIMS <strong>11</strong> (1976), 809–833。含 \(\text{III}_1\)，无条件。</li>
+<li id="fn-fm" class="footnote"><a href="#fnref-fm" class="fn-back" title="返回引用处">↩</a>他者内核＝ Cartan 对 \((\mathcal{M}_{\mathcal{A}},\mathcal{A}_{\text{phys}})\) 的 Feldman–Moore 扭曲类 \([\sigma]\in H^2(\mathcal{R},\mathbb{T})\)：Feldman, J., Moore, C. C., *Trans. AMS* <strong>234</strong> (1977), 289–324（及 325–359）。前件（Cartan 对、可数标准 Borel 等价关系）由命题 R★（附录 W.2.7，其 R3＝舞台 Cartan 对）构造级与公理可分性供给。\([\sigma]\) 取值独立于公理＝元定理 W（附录）。</li>
+<li id="fn-spohn" class="footnote"><a href="#fnref-spohn" class="fn-back" title="返回引用处">↩</a>相对熵单调（量子 H 定理）：以 \(\omega^*\) 为忠实正规不变态的正规量子马尔可夫半群，其相对熵 \(t\mapsto S(D_{*t}\varphi\,\|\,\omega^*)\) 单调不增——Spohn, H., *Entropy production for quantum dynamical semigroups*, J. Math. Phys. <strong>19</strong> (1978), 1227–1230；Frigerio, A., *Stationary states of quantum dynamical semigroups*, Comm. Math. Phys. <strong>63</strong> (1978), 269–276。根＝Araki 相对熵在正规 UCP 映射下的 Uhlmann 单调性（Uhlmann, A., *Relative entropy and the Wigner–Yanase–Dyson–Lieb concavity in an interpolation theory*, Comm. Math. Phys. <strong>54</strong> (1977), 21–32；Araki, H., *Relative entropy of states of von Neumann algebras*, Publ. RIMS <strong>11</strong> (1976), 809–833），在无迹 \(\text{III}_1\) 上成立（用 Araki 相对熵，非迹版）。遍历（不动核平凡）则 \(\omega_{\text{ext}}\to\omega^*\) 完全对齐；非遍历则落不动核（中心化子）。第二态并入基线后其在 A 上的历史一致性 \(D\to D_{\omega^*}\)，而平衡态一般不主动退相干 A-历史（\(D_{\omega^*}\neq0\)），故原 \(D=0\) 一致性随之崩——态对齐（本章）与 A 历史失序（第五章）＝同一次死的两面。</li>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

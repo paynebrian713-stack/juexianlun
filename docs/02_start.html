@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,10 +83,10 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第零章</h1>
 <h2 id="一-一次显现">一、一次显现</h2>
-<p>导论把你带到了&quot;没有尺子&quot;的门口。现在，往里走。要走进去的不是一套代数，是你自己最原初的地方：那道显现之流，怎么从最底下、什么都还没有的地方，一层一层长出来。这一遍，先不碰任何公式，你第一人称亲自走一趟——从满溢一直走到逻辑，四级台阶，是进入全书的入口坡道。（四级之间还夹着一记<strong>跳跃</strong>——它不是台阶，是台阶断掉的地方；走到那儿你会认出它。）</p>
+<p id="scene-wuji">导论把你带到了&quot;没有尺子&quot;的门口。现在，往里走。要走进去的不是一套代数，是你自己最原初的地方：那道显现之流，怎么从最底下、什么都还没有的地方，一层一层长出来。这一遍，先不碰任何公式，你第一人称亲自走一趟——从满溢一直走到逻辑，四级台阶，是进入全书的入口坡道。（四级之间还夹着一记<strong>跳跃</strong>——它不是台阶，是台阶断掉的地方；走到那儿你会认出它。）</p>
 <p>慢慢走，你会渐渐看出一件事：每一层的样子，追到底都是同一件——这道流，没有一把绝对的尺子。这件事（无迹）是全书唯一的主题。往后每一层，都只是它转过来的一张脸；而你此刻亲身走过的这几级，后面会一级一级，对上这台机器的一个个部件。<sup><a href="#fn-z1" id="fnref-z1" class="fn-ref">[z1]</a></sup></p>
 <p>先不要有你。</p>
 <p>这一段里还没有你。只有满。</p>
@@ -100,7 +118,7 @@
 <h2 id="二-这台机器是什么">二、这台机器是什么</h2>
 <p>导论说过，谈认知要用一套（严格结合的）算子代数，理由是公共世界不发散。但这台代数究竟是<strong>哪一种</strong>？</p>
 <p>答案不是先验挑出来的。我们拿上一节你已经亲自核对过的几件事，一条条排掉不合的，看最后剩下谁。</p>
-<h3>排除，一步一步</h3>
+<h3 id="排除-一步一步">排除，一步一步</h3>
 <p><strong>第一步，排掉有最小单元的那类。</strong> 有一类代数带着最小的、不可再分的基本块——它的每个&quot;部分&quot;最终都由一些原子拼成。可上一段核对过：浓淡连续，没有最小的一格。带原子的那类与此不合，排掉。</p>
 <p><strong>第二步，排掉有客观尺子的那类。</strong> 这一步的钥匙，是上一段关于时间的那件事：流，不是对象中的一项。</p>
 <p>把它译到代数这一侧。一个态锚定之后，会带出一道内在的时间流（它把当下沿&quot;之前—之后&quot;铺开）。这道流有两种可能的身份。这两种身份的分别，恰恰决定了时间是一根&quot;能摊开来读的坐标&quot;，还是一段&quot;只能被活过的流逝&quot;。要么，它是<strong>内</strong>的：系统内部有某一项操作在驱动它转（代数里有一个自伴的&quot;能量&quot;元 \(H\)，使 \(\sigma_t=\mathrm{Ad}(e^{itH})\)）。若真如此，那道流就是被系统里的一个量推着走的。这就好比一条河里装着一台泵：你能确切地指认那台泵，读出它的读数。于是&quot;我在第几刻&quot;原则上可测、可标定——时间被一个内部的量<strong>空间化</strong>，成了一根能摊开来俯瞰的坐标轴。要么，它<strong>不是</strong>内的——它把整个系统一起搬动，却不对应系统内的任何一项（模流&quot;非内&quot;）。这就像一条河在流，可你把河翻遍，哪儿也找不到那台泵：流动是真的，却不是河里任何一部分推出来的——<strong>流动就是这条河本身，不是它某个零件的效果</strong>。没有那个内部的 \(H\) 可读，你就无法把自己标定在时间轴的某一点上、无法跳出&quot;此刻&quot;去俯瞰整条轴；时间于是不是一根被摊开的坐标，而是你只能被它带着走的、纯粹的流逝——这正是被活着的绵延。</p>
@@ -126,34 +144,34 @@
 <p>排到这里，只剩一种，\(\text{III}_1\)。它还自带两样正面的好处，与绵延严丝合缝：它有一段<strong>典范的、一维的内禀时间</strong>——一根唯一的时间轴，正对应绵延那唯一的流；它的谱不变量<strong>填满整条非负半轴</strong>，没有任何离散的格点，正对应&quot;世界的统计里没有等比赔率表&quot;<sup><a href="#fn-connes-inv" id="fnref-connes-inv" class="fn-ref">[connes-inv]</a></sup>。<sup><a href="#fn-sharpen" id="fnref-sharpen" class="fn-ref">[sharpen]</a></sup></p>
 <p><strong>补一句这两步的底细，因为它不只是&quot;绵延要求如此&quot;。</strong> 第三、四步——把&quot;带节拍的&quot;和&quot;时间轴不唯一的&quot;排掉——看着像是纯凭绵延的现象学性质在挑，其实底下有一个精确的代数机制托着，而且这个机制本书后面还要正面用到一次。绵延是一条<strong>单向</strong>的流（时间只朝一个方向淌、回不去，这是被活着就有的事），而&quot;单向的流&quot;在代数上不是一句空话：它对应一个<strong>正能量的单向平移</strong>——正是后面要讲的理解流那一侧的结构（&quot;历史可以顺着往回读&quot;靠的就是它）。一旦有了这样一个单向平移，它和那道模流之间就锁进一条固定的伸缩关系；这条关系像一把梳子，把模流的谱<strong>梳成连续、填满整条非负半轴</strong>——那恰恰就是 \(\text{III}_1\)（而不是带离散节拍的 \(\text{III}_\lambda\)、也不是时间轴不唯一的 \(\text{III}_0\)）。换句话说：**把&quot;没有尺子的那一大类&quot;锐化成&quot;唯一那一支 \(\text{III}_1\)&quot;的，正是&quot;时间被活成一条单向、不可逆的流&quot;这一条<strong>——第三、四步不是两次独立的现象学挑拣，是这</strong>同一件事**（绵延的单向性）在谱上的两个后果。这条机制在附录 W.2.6 会以另一副面孔再出现一次（那里从&quot;理解流以标准半边模包含的形式在场&quot;出发，同样逼出 \(\text{III}_1\)）——第零章从&quot;绵延是单向流&quot;进，附录从&quot;理解流的代数刻画&quot;进，**逼出的是同一支 \(\text{III}_1\)**，两处是一条筋的两头。</p>
 <p>这就是公理 I 要落定的地方：**描述认知的结构，是一个 \(\text{III}_1\) 型因子。**</p>
-<h3>把这个论证的地位说清楚</h3>
+<h3 id="把这个论证的地位说清楚">把这个论证的地位说清楚</h3>
 <p>这不是一条从虚空推出来的定理。它是三样东西合起来的结果。一样是几件<strong>读者能亲自核对的显现事实</strong>（浓淡无最小格、流不是对象中的一项、绵延无节拍、时间轴唯一不需外部校准）。一样是几处<strong>本书作出的翻译</strong>（把每件事对到代数的一个性质上——这些翻译是本书的对应读法，不是被证明的定理）。还有一样是一件数学事实：因子代数的分类是穷尽的，除了上面走过的这几型，没有第五种可能。把这三样合起来，排除法才走得通。</p>
 <p>所以本书的主张是有分寸的：认这几件显现事实、认这几处翻译，\(\text{III}_1\) 就是唯一的落点，别无分店；本书<strong>不</strong>宣称脱离这些前提、从空中推出 \(\text{III}_1\)。</p>
 <p>还有一条贯穿全章的纪律：<strong>上面每一个用来排除的锚，都取自&quot;锚定之后&quot;的经验</strong>——那是我们唯一待得住的位置。凡是关于锚定之前（Stage 0）的话，一律不拿来当排除的依据；它们的资格，由落定之后的结果回头补发。<sup><a href="#fn-z6" id="fnref-z6" class="fn-ref">[z6]</a></sup>这条纪律，让本章不去偷用一个自己够不到的位置说话。</p>
-<h3>为什么是&quot;因子&quot;</h3>
+<h3 id="为什么是-因子">为什么是&quot;因子&quot;</h3>
 <p>公理 I 里还压着一个词：因子。它的意思是这台代数没有非平凡的中心——设定它，和设定 \(\text{III}_1\) 同级，是公理的一部分，不是从别处推出来的定理。但它有一个正面的理由，而且这个理由既不借无迹、也不借&quot;我们不想要上帝视角&quot;这类诉求——它来自第一人称处境本身。</p>
 <p>先说这个正面理由，因为它是独立的。一台一般的代数，若中心非平凡，数学上总能把它<strong>摊成一族因子</strong>——中心里的元素就是这一摊的坐标（这是标准的中心分解：\(\mathcal{M}=\int^{\oplus}\mathcal{M}_z\,d\mu(z)\)，每一片 \(\mathcal{M}_z\) 都是因子）。中心里那些元素，是与<strong>一切</strong>可观测量都对易的量——物理里管它们叫<strong>超选择荷</strong>：像总电荷，像那种&quot;一经确定就不再叠加&quot;的经典标签。它们把整个空间切成一块块<strong>互不相干的扇区</strong>，扇区与扇区之间，可观测量搭不上话、态也叠加不起来——你在这一块里做任何操作，都传不到那一块去。关键在下一步：<strong>第一人称永远活在其中某一个确定的扇区里</strong>。&quot;我&quot;有确定的电荷、确定的那些经典标签的值，不是它们的叠加——被抛进来，就是被抛进某<strong>一个</strong>扇区，而不是骑在所有扇区之上。而<strong>一个扇区内部的代数，恰恰就是因子</strong>。所以&quot;描述认知的结构是因子&quot;不是我们额外许的一个愿，是&quot;有一个第一人称在场&quot;这件事的<strong>自动后果</strong>：视角一旦落定，扇区就已选定，中心就已塌成标量。非因子对应的是&quot;扇区还没定下来&quot;——可&quot;我&quot;一在场，扇区就定了。<sup><a href="#fn-scatter" id="fnref-scatter" class="fn-ref">[scatter]</a></sup></p>
 <p>讲清这条独立理由，才好说它的<strong>含义</strong>（这一步是解读，不是论证）：中心取为平凡，等于说这台代数里没有一个&quot;放之四海皆同、被给予之前就固定、无论从哪个视角看都一样&quot;的绝对区分——没有一块&quot;上帝视角&quot;的残余。这与下一节（&quot;参照是无差别地被取的&quot;）要证的&quot;无凸显态&quot;同气：一个不预标绝对区分，一个不预选绝对参照，都是&quot;结构自己不供出上帝视角&quot;的两面。但分寸要摆准：这是在<strong>解读</strong>因子性的哲学意味，<strong>不是</strong>反过来拿&quot;我们不要上帝视角&quot;把因子性论证出来——因子性的正面理由是上一段那条（第一人称落在一个确定扇区），它与无迹、与任何哲学诉求都无关。<sup><a href="#fn-z7" id="fnref-z7" class="fn-ref">[z7]</a></sup></p>
-<h3>另一条公理：可分</h3>
+<h3 id="另一条公理-可分">另一条公理：可分</h3>
 <p>除了公理 I，本书只再立一条公理：可分。它是全书唯一的自然数入口——让&quot;一步一步&quot;&quot;一个接一个&quot;这样的计数成为可能。可分不靠一张现象学的出生证来立，它靠的是<strong>减法</strong>。</p>
 <p>把可分撤掉，后面要立的那些基础现象，会一样一样地立不起来。它不是可有可无的技术方便，是下游整片结构的地基。数一遍就清楚。III₁ 那条把&quot;任取参照全都无差别&quot;撑住的齐性定理（Connes–Størmer），<strong>明文要求代数有可分的预对偶</strong>——撤了可分，&quot;起源处无差别地取参照&quot;这句话就没了依据。下一节要用印记把参照定成唯一的那个极小化（0.C），存在唯一性靠的是一个弱\*强制、序列紧的论证，而那个紧性同样要可分——撤了它，被定下来的那个基线态可能根本不存在、或者不唯一。再往后，还有第四章那个把世界铺成可缝之图的截面（Cartan 对，Feldman–Moore 理论）：它<strong>要求一个可数的标准等价关系</strong>。撤了可分，群胚上同调、那个他者的扭曲 \([\sigma]\)、乃至整座世界 topos，全都失去定义的地面；历史一致性、耗散稳态，也一并没了可安放的地方。所以可分不是一句轻描淡写的技术前提：<strong>它一撤，模流的唯一性、基线态的存在唯一、可缝的截面、他者的扭曲、历史一致性——依次坍塌，这本书就没有下游。</strong><sup><a href="#fn-z8" id="fnref-z8" class="fn-ref">[z8]</a></sup></p>
-<h3>辩护，收个尾</h3>
+<h3 id="辩护-收个尾">辩护，收个尾</h3>
 <p>于是两条公理各有出处：公理 I 由上面的排除链逼出；可分由减法必然性撑起——撤了它，下游基础现象成批坍塌。</p>
 <p>至于更底层的那个问题——为什么一开始就用严格结合的算子代数，而不是层层松动、越叠越高的高阶结构——这里要比导论说得细一点，因为它是比&quot;为何 \(\text{III}_1\)&quot;更靠下的一块地基。</p>
 <p>前提是一件我们确实在活的事：我们<strong>有</strong>一个稳定的公共世界，主体之间<strong>能</strong>协调——分歧是真的，但协调是可能的，理解不会无限地发散下去。把这件事的形式条件追到底，它要求&quot;主体间协调的障碍&quot;必须在某一阶封顶、不能层层无穷地累积。而封顶的见证，就在前件自身里：我们谈的从来是<strong>实际已经成立</strong>的协调——一个真实共享着的公共世界。协调既然实际立起来了，搭起它的那一步就没有撞上三阶的障碍：三阶障碍类为零，不是被哪个假设抹平的，是被&quot;它确实立起来了&quot;这个事实本身见证为零的。于是剩余的协调障碍到二阶（\(H^2\)）为止——那正是他者所住的层。而严格结合的运算（结合子恒等于一），恰是如实承载&quot;三阶已闭合&quot;这一事实的最经济结构：它平凡化的是结合子那一个 3-余圈，而&quot;整个三阶障碍为零&quot;由前件（协调实际存在）给、不由结合律给——严格结合只是不给已经闭合的地方再留可调的松动。反过来，层层松动的高阶结构<sup><a href="#fn-ainfty" id="fnref-ainfty" class="fn-ref">[ainfty]</a></sup>，每升一层都冒出一层独立的相干障碍——结合子、五边形子、以及无穷阶的更高相干——每一层都得靠一次单独的巧合去抹平，公共世界就成了一座无穷的奇迹塔。而更硬的一条挡在那里：三范畴一般不能被完全严格化<sup><a href="#fn-gps" id="fnref-gps" class="fn-ref">[gps]</a></sup>，所以在真正的高阶世界里，这种封顶原则上得不到。</p>
 <p>合起来：主体间性事实上闭合（我们确实共享稳定世界）⟹ 三阶障碍被这个事实本身见证为零、协调障碍止于二阶 ⟹ 严格结合的算子代数是这个封顶的最经济的典范承载，而层层松动的高阶结构承载不了它。所以选严格结合的代数，不是数学口味，是&quot;公共世界不发散&quot;这件事的结构要求。这是一条超越论式的<strong>最佳结构推断</strong>——认那个我们确实在活的事实，这套代数就是配得上它、又最不铺张的落点；本书不反过来强断言（不说&quot;公共世界不发散&quot;就&quot;必须&quot;是这套代数、别的绝无可能）。<sup><a href="#fn-z9" id="fnref-z9" class="fn-ref">[z9]</a></sup></p>
-<h3>一件必要的补料：为什么是复数</h3>
+<h3 id="一件必要的补料-为什么是复数">一件必要的补料：为什么是复数</h3>
 <p>再补一件不属于刀刃、却是机器成立所必需的事：为什么这套代数建在复数上，而不是实数上。</p>
 <p>答案就在模流里。上一节那道流 \(\sigma_t^\omega(x)=\Delta^{it}x\Delta^{-it}\) 要转得起来——要有一个幺正的单参数群 \(\Delta^{it}\)——那个指数上的 \(i\) 是省不掉的：模算子 \(\Delta\) 是正的自伴算子，\(\Delta^{it}\) 之所以幺正、之所以给出一道保范的流，正因为底空间是复的 Hilbert 空间。换成实的，\(\Delta^{it}\) 不再是幺正流，绵延就转不起来。所以复不是外加的选择，是绵延这道流能存在的前提。<sup><a href="#fn-z10" id="fnref-z10" class="fn-ref">[z10]</a></sup></p>
 <h2 id="三-机器上的运动">三、机器上的运动</h2>
 <p>机器立好了。回到第一人称——现在每一个动作都有了位置。</p>
-<h3>参照，是无差别地被取的</h3>
+<h3 id="参照-是无差别地被取的">参照，是无差别地被取的</h3>
 <p>第一件事，是那道&quot;锚定的一跳&quot;落到哪个态上——换句话说，那个当基准的参照，是怎么来的。</p>
 <p>直觉会说&quot;选一个&quot;。但这里没有&quot;选&quot;。要对满溢里的差异做任何比较，都得先固定一个态当参照（没这个参照，连&quot;谁深谁浅&quot;都无从谈起）。可在这台机器上，那些能拿来当参照的态，彼此之间<strong>没有任何内在的分别</strong>。</p>
 <p>这件事有一个精确的数学形。在这台机器（\(\text{III}_1\)）上，任意两个忠实正规态 \(\varphi,\psi\) 都是酉等价的——更强地，任一态的酉轨道 \(\{u\varphi u^*:u\in\mathcal{U}(\mathcal{M})\}\) 在预对偶 \(\mathcal{M}_*\) 的范数拓扑下稠密（Connes–Størmer 齐次性定理<sup><a href="#fn-cs" id="fnref-cs" class="fn-ref">[cs]</a></sup>）。诸态的轨道稠密地铺满，没有哪一个态被结构凸显出来。对比一下就看出这是这台机器独有的：若结构里有一把客观尺子（II 型的迹 \(\tau\)），那把尺子就是一个被凸显的特权参照，&quot;取哪个&quot;就有了分别；若有最小单元（I 型的原子），原子也是特权。唯独这台机器既无尺子、又无原子，参照才是<strong>真正无差别</strong>的——取哪个都一样，因为没有一个&quot;哪个&quot;被结构标出来。<sup><a href="#fn-z11" id="fnref-z11" class="fn-ref">[z11]</a></sup></p>
 <p>所以那道锚定的跳跃，第一重身份是<strong>非选择</strong>：不是从一排候选里挑中了一个，是无差别地落在了其中一个上——诸态平权，没得挑。&quot;选&quot;这个词在这里是空的。</p>
 <p>取第一个锚的那一下，没有第二个锚可以拿来比，连&quot;选&quot;都无从谈起——这个起点，本书称<strong>无从比较的起点</strong>（§一 从现象学那一面，管它叫被抛）。</p>
-<h3>锚定，带出时间</h3>
+<h3 id="锚定-带出时间">锚定，带出时间</h3>
 <p>参照一固定，时间就来了。</p>
 <p>先说现象。留住那个持续的音、那片不变的底色，你已经核对过：内容不动，绵延照流。这道流不是比喻，它有确切的来处和唯一的方向——这件事有精确的数学形。</p>
 <p>固定一个忠实正规态 \(\omega\)，模理论（Tomita–Takesaki）会从它自动生出一道单参数的流：\(\sigma_t^\omega(x)=\Delta^{it}\,x\,\Delta^{-it}\)，其中 \(\Delta\) 是 \(\omega\) 的模算子<sup><a href="#fn-tt" id="fnref-tt" class="fn-ref">[tt]</a></sup>。这道流 \(\sigma_t^\omega\) 把当下沿着&quot;之前—之后&quot;铺开，就是绵延的形式载体。它有两个不寻常处。其一，这道流不是裸代数现成就有的——\(\mathcal{M}\) 本身不携带任何时间定序，\(\Delta\) 要有一个态 \(\omega\) 才定义得出来，时间是<strong>固定了参照之后</strong>才被生成的。其二，这道流的方向是<strong>唯一的</strong>。抛开一切内部调整，剩下一个&quot;纯方向&quot;（即 \(\sigma_t^\omega\) 在 \(\mathrm{Out}(\mathcal{M})=\mathrm{Aut}(\mathcal{M})/\mathrm{Inn}(\mathcal{M})\) 中的像）。这个纯方向与你选哪个 \(\omega\) 无关——Connes 余圈定理保证，不同态的模流只差一个内自同构。这就是 Connes 的内禀时间。而它典范一维，是 \(\text{III}_1\) 独有的：\(\text{III}_0\)、\(\text{III}_\lambda\) 的对应流不典范，要靠外部数据才定得下来<sup><a href="#fn-connes" id="fnref-connes" class="fn-ref">[connes]</a></sup>。所以绵延有唯一的内禀方向，不需要任何外部的钟去校准。</p>
@@ -163,7 +181,7 @@
 <div class="math-block">\[\omega(\sigma_t(a))=(\omega\circ\sigma_t)(a).\]</div>
 <p>左边把时间挂在算子 \(a\) 上——算子在演化、态不动，这是<strong>海森堡视角</strong>（世界里的东西在随时间变，客观读法）；右边把时间挂在态 \(\omega\) 上——算子不动、态在演化，这是<strong>薛定谔视角</strong>（我的视角在流动，被活读法）。同一道模流，两种视角读它，恒等地相等。所以&quot;我在流&quot;和&quot;世界在变&quot;从一开始就是同一道流的两面——不是两道流、也不是谁派生谁。<sup><a href="#fn-z12" id="fnref-z12" class="fn-ref">[z12]</a></sup></p>
 <p>（一个形式上的呼应——梅洛-庞蒂的 *chiasme*（交错）。他说触摸者与被触者是同一片肉的两面，摸的手同时也被摸，而两面永远贴近、从不完全重合。这个&quot;触即被触、却从不重合&quot;的结构，代数上正是一个对合 \(J\)（\(J^2=1\)，触两次回到原处）；而那&quot;从不完全重合&quot;的一线之差——触与被触的不对称——正对应这道流之所以能流：若两面严丝合缝地重合，就没有先后、没有绵延。有绵延，正因为对合没有把两面压成一个。这是结构上的对应，不是说时间&quot;就是&quot;那道差。）</p>
-<h3>参照：印记的浓淡即是基线态的选定</h3>
+<h3 id="参照-印记的浓淡即是基线态的选定">参照：印记的浓淡即是基线态的选定</h3>
 <p>参照是无差别地被取的（上面第一节）。但被活出来的&quot;我&quot;，背后是一个<strong>确定的、稳定的</strong>背景，不是一个飘忽不定的随便哪个态。这两件事怎么调和？答案在时间里：无差别地取来的参照，被随后流过的东西一点点定成唯一的那一个——更准确地说，是流过后沉淀的印记，其浓淡本身把它定了下来。</p>
 <p>顺序是这样。参照一固定，模流转起来，当下开始流过；流过的东西被粗粒化、沉淀下来，成为一批&quot;印记&quot;——可以反复指认的痕迹。而这些印记的浓淡，随即定下了那个参照：能与全部已沉淀印记的浓淡保持一致的态，就是唯一的那一个。</p>
 <p>这一步也有精确的数学形。设流过的东西沉淀出一族局部印记 \(\{(\mathcal{M}_j,\varphi_j)\}\)，定义一个&quot;惊奇度&quot;泛函</p>
@@ -175,19 +193,19 @@
 <p>（一句接口，留给后面——但要立准，因为第一章的追溯极限要用它。\(\omega^*\) 的唯一性可以按需松动：当这道流足够&quot;搅动&quot;时，会留下一块它整个动不到的区域，即<strong>中心化子</strong></p>
 <div class="math-block">\[\mathcal{M}^{\omega^*}:=\{x\in\mathcal{M}:\sigma_t^{\omega^*}(x)=x\ \ \forall t\}.\]</div>
 <p>它有几条要紧的性质。\(\omega^*\) 限制在这块上是一把<strong>迹</strong>（模流在此不动 \(\iff\) KMS 条件平凡 \(\iff\) 限制态为迹）——所以它是一个&quot;可以反复回到、做不依赖时间的比较&quot;的不动底子，被动综合就依托在它上面。这把迹是<strong>局部的</strong>（只活在 \(\mathcal{M}^{\omega^*}\) 上），与整个 \(\mathcal{M}\) 无迹并不矛盾——全局没有尺子，某块不动的子代数上却可以有一把局部的尺子。这块有多大，分两种情形：当模流&quot;遍历&quot;时它退化成只含恒等（\(\mathcal{M}^{\omega^*}=\mathbb{C}1\)），当模流非遍历时它是一块非平凡的子代数（自由 Araki–Woods 因子就是后者的实例）。这两支都合法，是绵延自身丰富度的两个层次。第五章要用这块不动底子，此处先把它立清楚。）</p>
-<h3>&quot;我&quot;从哪里进来</h3>
+<h3 id="我-从哪里进来">&quot;我&quot;从哪里进来</h3>
 <p>上面说&quot;我&quot;是被立出来的一个参照。那么，它确切是从哪里进来的？</p>
 <p>这一步在感知里是照不见的。感知里，并没有一个叫作&quot;态&quot;的对象供你端详。所谓&quot;参考态&quot;，不是一样能被感受到的东西，而是一个动作——<strong>拿一段绵延去衡量另一段绵延</strong>的动作本身。它只能用数学语言点出，不能当成一件可以体验的事来写。</p>
 <p>单是锚定一个基线态，还不足以生出&quot;同一个我&quot;。基线态铺开浓淡，也带出一个相对它不动的中心，但那个中心此刻只是&quot;相对基准不动&quot;这个平凡事实，还没有被认作跨时间的同一性。要判断&quot;此刻这个中心，还是刚才那个吗&quot;，就得把刚才的量到现在来——而这需要另立一个当下的参照去做这个衡量。<strong>而那个另立的参照，是又一个态。</strong> 到这里为止只有一个态（基线 \(\omega^*\)）：它铺得开浓淡、生得出绵延，却只够如此——单一个态，写得出的只有那两股流。要有&quot;我&quot;、有衡量、有跨时间的同一性，非得第二个态不可。就在这个衡量的动作被执行、第二个态被立作参照的地方，&quot;我&quot;作为那个参照被立了出来，被它衡量的流动成了&quot;他者&quot;。<sup><a href="#fn-z15" id="fnref-z15" class="fn-ref">[z15]</a></sup>所以&quot;我&quot;与&quot;他者&quot;的分野，不在浓淡铺开的那一刻，而在&quot;拿一段去量另一段&quot;这个衡量被执行的那一刻。这也是为什么说&quot;分辨在时间之中发生&quot;是把话说反了：分辨与时间是同一道锚定的两面，&quot;我&quot;则是这道流被拿来衡量自己时才立出的参照，不在流的源头。<sup><a href="#fn-z16" id="fnref-z16" class="fn-ref">[z16]</a></sup></p>
-<h3>我进来之前，与我进来之后</h3>
+<h3 id="我进来之前-与我进来之后">我进来之前，与我进来之后</h3>
 <p>在&quot;我&quot;这个参照被立起来之前，几乎什么都还不可知。要说清&quot;不可知&quot;和&quot;不存在&quot;的分别：那些东西不是不在——它们在，只是在&quot;我&quot;这一侧、从认知内部够不到。基线态锚定之后，唯一&quot;在&quot;、且可指认其存在的，是那道外在的模流（绵延本身）。除此之外，还有几样东西：这台代数究竟是哪一种（它的那些不变量，比如维数）、那个抹不平的他者、以及可以被当作&quot;物理世界&quot;来读的那本账。<strong>在&quot;我&quot;被立起来之前，它们要么不可定义（维数需要一把不存在的迹），要么只是被给予、还没被谁读到（他者、世界的内容）。</strong> 换句话说：<strong>一切我们真能知道的——关于物理世界的任何读数、对他者的任何感受——都是&quot;我&quot;这个参照一旦被选定，才随之带出来的。</strong> &quot;我&quot;不是一个旁观者，被添进一个早已摆好的、已知的世界里；&quot;我&quot;恰恰是&quot;有一个已知的世界、有一个被感受到的他者&quot;这件事得以发生的那个条件。世界的可知、他者的可感，都从选定这个参照的那一下才开始。</p>
 <p>这一点有一个不轻的后果，要在这里说准，因为它管着后面读者怎么领受这整本书。<strong>没有尺子，意味着：伦理上，你没法把责任甩给任何&quot;客观规律&quot;或&quot;客观现实&quot;。</strong> 因为——恰恰因为无迹——根本没有一个不依赖任何视角、放之四海的客观绝对，可以拿来当那个&quot;本来就该如此&quot;的挡箭牌。任何&quot;这是客观必然、由不得我&quot;的说法，都预设了一把并不存在的绝对尺子。你能知道的世界，永远是<strong>透过你所持的那个视角</strong>知道的；而选哪个视角、怎么读，这一下没有客观的绝对来替你做、也没有客观的绝对逼你非如此不可。责任因此无处可推：不是推给上帝、也不是推给&quot;规律&quot;，因为那个能替你兜底的绝对位置，是空的。</p>
 <p>那么&quot;我&quot;到底是什么？前面说过，起点（基线 \(\omega^*\)）是被抛的、他者是被给予的——都不由我选。但这两处&quot;不由我&quot;不在同一层。起点被抛，锚落在这台机器的零阶／一阶结构上——态、模流、余圈，都在第零章公理刻画的范围之内。他者被给予，却落在另一座上同调塔上（账本群胚的二阶余圈）——那座塔与刻画起点的那座（模流轴上的余圈）之间没有桥，连公理都够不到它（元定理W，第四章）。&quot;起点不由我选&quot;和&quot;他者不由我造&quot;两处被给予，落在两座不相通的塔上——混作一句笼统的&quot;都不由我&quot;，就把同属被给予侧、却分属两座无桥之塔的两样东西说成同质的了。可正因如此，还要格外把一件事分清：<strong>被抛、被给予，绝不等于被决定。</strong> 被抛定的，只是那个我没得选的起点；被给予的，只是那个我改不动的他者。但从这个起点出发、面对这个他者，我<strong>怎么读</strong>——挪动我这个参照、也就是挪动那道余圈——这一下，起点定不了、他者也定不了。那道余圈——&quot;我怎么读&quot;——是这里<strong>唯一不被起点和他者锁死的</strong>：起点被抛、他者被给予，都改不动；而怎么读，始终敞开。所以&quot;我&quot;不是一个被起点和他者决定好的、然后才登场演出的现成之物——<strong>&quot;我&quot;恰恰就是那唯一一处不被决定的本身</strong>。说得再直白些：能动性不是&quot;我&quot;这个东西额外具备的一项功能；能动性就是&quot;我&quot;的全部——&quot;我&quot;不是一个有能动性的实体，&quot;我&quot;就是那个挪动视角的活动本身。一个被抛进未选的起点、面对不由己的他者，却在&quot;怎么读&quot;这一处始终未被决定的——那就是&quot;我&quot;。<sup><a href="#fn-z17" id="fnref-z17" class="fn-ref">[z17]</a></sup></p>
-<h3>有限，是登记出来的</h3>
+<h3 id="有限-是登记出来的">有限，是登记出来的</h3>
 <p>顺带把&quot;有限性&quot;这件事收掉——它在本书里不是一条公理，是上面这些的一个副产品。</p>
 <p>这台代数本身没有&quot;大小&quot;：任取两个非零的部分，比不出谁大谁小，差异在、程度不在<sup><a href="#fn-z18" id="fnref-z18" class="fn-ref">[z18]</a></sup>。那&quot;有限&quot;从哪来？从锚定来。一固定参照、开始拿它去比较去登记，各种&quot;有限&quot;——有限的容量、有限的距离——才第一次出现，而且只在相对这个参照的结构里出现。所以有限不是某个主体先天带着的属性，是&quot;分辨&quot;这个动作本身带出来的形式<sup><a href="#fn-finite" id="fnref-finite" class="fn-ref">[finite]</a></sup>。全书的公理，就只剩前面那两条：没有尺子、可数。</p>
 <p>也正因如此，公理的位置上最后只剩一句诚实话：<strong>锚定已经发生——我们，总已经在锚定之后。</strong> 这不是缺陷。本书从不站在锚定之前的位置说话，因为那个位置根本不存在（第二章会证它是一片禁区）。</p>
-<h3>每一次挪动，都有代价</h3>
+<h3 id="每一次挪动-都有代价">每一次挪动，都有代价</h3>
 <p>机器上的动作，除了&quot;站在哪一层&quot;（纵向，那是第一段的四级台阶），还有&quot;把锚放在哪里&quot;（横向）。这个横向的挪动，本书称为<strong>切法</strong>，它有深浅两种。</p>
 <p><strong>浅切</strong>，是自然态度之内的视角转换（Einstellungsänderung）——立足点没动，只是换个角度看同一堆东西：从正面看这个杯子，转到侧面看它。**基线的锚（\(\omega^*\)）还在原处**——它那块守恒的影子（中心化子 \(\mathcal{M}^{\omega^*}\)）整体不动；动的只是看它的那个视角（参考态 \(\omega_{\text{ext}}\)），朝向变了而已。</p>
 <p><strong>深切</strong>，是把&quot;以何处为准&quot;这件事整个悬置起来——胡塞尔的悬搁（epoché，《观念 I》§31–32）。这不是否定世界，是把&quot;世界如其被设定的那样存在&quot;这个总设定的效力挂起，连&quot;该以哪里为基准&quot;本身都被换掉。深切必然要松开一部分锚定（退回分辨那一层的一部分），因为它动的，正是那个把一切立起来的**基线锚 \(\omega^*\)<strong> 本身——把基准整个搬到别处（中心化子不再被正规化保住，而是随之挪位）。但要说准一层：搬，还不是</strong>撤**。把&quot;锚定的那一跳&quot;整个松开、退回被攥出之前，是更深的一步，那是尾声的松锚；深切只是把基线基准搬了地方，那一跳仍在。</p>
@@ -201,7 +219,9 @@
 <p>一旦被攥出来，你就再也回不到那片没有你的满。从这一刻起，你开始活成一个样子——一个你自己也说不清对不对、有没有尽头的样子。</p>
 <p>开始，由不得你；可怎么活下去，是往后每一章要一寸寸看清的。</p>
 <p>锚定生出了唯一的绵延——那么这道流，接下来会做什么？下一章看它分成的两股。</p>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-z1" class="footnote"><a href="#fnref-z1" class="fn-back" title="返回引用处">↩</a>先说明白：说每一层&quot;是无迹的一张脸&quot;，是就结构这一面说的。每一层被活出来的质地——满溢的匿名、绵延的流、当下的厚——并不因此被化约成&quot;无非是无迹&quot;。同一件事，结构上可以统一，被活出时却各是各的，不可相互取代。</li>
 <li id="fn-z2" class="footnote"><a href="#fnref-z2" class="fn-back" title="返回引用处">↩</a>不同的意识状态——专注、放空、临睡前的恍惚——大致是停在这道坡的不同高度；这些留作后面要解释的现象，此刻不作证据。</li>
 <li id="fn-stage0" class="footnote"><a href="#fnref-stage0" class="fn-back" title="返回引用处">↩</a>刚才那片满，就是全书说的 <strong>Stage 0</strong>（原初差异的满溢）；那一跳，是它和后面一切的分界。关于 Stage 0 要说一句诚实话：它不是一份可以核对的报告——没有谁能站到它跟前去看它，我们读到、想到任何东西时，都已经在那一跳之后了。所以它只作一个叙述的入口，究竟什么样，要等这台机器立起来之后、由后面的结果回过头来追认，本章不拿它当论据。还要记一件：这片满溢，是他者性最初的源——它还不是某一个具体的他者，是一切他者所从来的那片匿名的复多。</li>
@@ -220,10 +240,7 @@
 <li id="fn-gps" class="footnote"><a href="#fnref-gps" class="fn-back" title="返回引用处">↩</a>三范畴一般不能被完全严格化（tricategories cannot generally be strictified to 3-categories）：Gordon, R., Power, A. J., Street, R., *Coherence for Tricategories*, Memoirs of the AMS <strong>117</strong>, No. 558 (1995)。本书取其&quot;高阶结构不可约化为低阶严格结构&quot;这个一般原理的界限意义：在真正的高阶世界里，结合的严格性不是可调选项，而是不可达的纲领。故本书选严格结合的算子代数、而非层层松动的高阶范畴，是&quot;公共世界不发散&quot;这个事实的结构推论，不是数学口味的偏好。</li>
 <li id="fn-z9" class="footnote"><a href="#fnref-z9" class="fn-back" title="返回引用处">↩</a><span class="fn-back-list"> · 亦见 <a href="06_theother.html#fnref-z9">06_theother</a></span>也顺带纠一个可能的误读：这条辩护靠的是结合律、对一切冯诺依曼代数都成立，与&quot;超有限&quot;无关。要说清的是：<strong>前面的排除链从未排除、也无法排除超有限性</strong>——它排的是原子（I）、半有限（II）、离散节拍（\(\text{III}_\lambda\)）、轴不唯一（\(\text{III}_0\)）；超有限的 \(\text{III}_1\) 因子 \(R_\infty\)（Araki–Woods）<strong>通过全部排除</strong>，是这台机器的一个合法模型（它无迹、模流非内、有绵延、可理解，只是他者内核 \([\sigma]=0\)——一个&quot;无他者的活模型&quot;，见附录 W 模型 A；<strong>不是</strong>水晶棺，水晶棺＝有迹，见尾声）。本书那句&quot;我们这台机器大概非超有限&quot;只是迹象指向、非严格证明（以第八章 <sup class="fn-missing" title="未找到脚注定义">[hyperfin]</sup> 为准）。</li>
 <li id="fn-z10" class="footnote"><a href="#fnref-z10" class="fn-back" title="返回引用处">↩</a>同一个模理论里，\(\Delta\) 分出模流的时间方向，与它配对的对合 \(J\) 则分出另一套材料——号差的负号从哪来，是后面判物理时的事，第七章。此处只立复结构：它是时间的前提，不是可选项。</li>
-<li id="fn-cs" class="footnote"><a href="#fnref-cs" class="fn-back" title="返回引用处">↩</a>Connes, A., Størmer, E., *Homogeneity of the state space of factors of type* \(\text{III}_1\), J. Funct. Anal. <strong>28</strong> (1978), 187–196。该定理要求 \(\mathcal{M}\) 具可分预对偶——正是公理的第二条（可分）供给的。</li>
 <li id="fn-z11" class="footnote"><a href="#fnref-z11" class="fn-back" title="返回引用处">↩</a>严格说，这也正是为什么&quot;没有凸显的态&quot;：凡能仅凭结构就挑出一个态的规则，都会反过来逼出一把迹，而这里无迹。</li>
-<li id="fn-tt" class="footnote"><a href="#fnref-tt" class="fn-back" title="返回引用处">↩</a>Tomita–Takesaki 模理论，见 Takesaki, M., *Theory of Operator Algebras II*, Springer (2003), Ch. VI–VIII。忠实正规态生成模算子 \(\Delta\) 与模自同构群 \(\sigma_t^\omega\) 是其基本结论。</li>
-<li id="fn-connes" class="footnote"><a href="#fnref-connes" class="fn-back" title="返回引用处">↩</a>\(\text{III}_1\) 外模流的典范一维性来自 Connes 的 III 型分类：Connes, A., *Une classification des facteurs de type* III, Ann. Sci. ÉNS <strong>6</strong> (1973), 133–252。&quot;不同态的模流只差一个内自同构&quot;是 Connes 的 Radon–Nikodym 余圈定理（同文）：\(\sigma_t^\varphi=\mathrm{Ad}([D\varphi:D\psi]_t)\circ\sigma_t^\psi\)，故外模流类与态无关。</li>
 <li id="fn-z12" class="footnote"><a href="#fnref-z12" class="fn-back" title="返回引用处">↩</a>这个恒等式本身空无一物，就是结合律；它的分量全在&quot;时间到底归谁&quot;这个追问上。它是第二章主客两读的根，此处先埋下：绵延这道流，天生就由两视角共用。</li>
 <li id="fn-araki" class="footnote"><a href="#fnref-araki" class="fn-back" title="返回引用处">↩</a>定理 0.C 四步骨架全有文献出处，无新数学需要证明。(1) 可解前提由框架给出；(2) 弱\*下半连续 + 强制性 → 极小元存在：Araki, H., *Relative entropy of states of von Neumann algebras*, Publ. RIMS <strong>11</strong> (1976), 809–833; <strong>13</strong> (1977), 173–192；正常态空间弱\*紧性见 Takesaki, M., *Theory of Operator Algebras I*, Springer (1979), §II.3；(3) 严格凸 → 极小唯一：系统性汇总见 Ohya, M. &amp; Petz, D., *Quantum Entropy and Its Use*, Springer (1993), §5.3；(4) 通道完备 → 唯一性强化：Araki 1976 已含必要性质，本书仅引不自己重证。</li>
 <li id="fn-z13" class="footnote"><a href="#fnref-z13" class="fn-back" title="返回引用处">↩</a>两个前件都是&quot;有一个稳定的第一人称在此&quot;这件事的形式：印记够得着＝我的经验不是自相矛盾到无法自洽，通道完备＝我的印记合起来就是我的全部世界、外面没有够不到的另一半。它们是被抛的前件，不是从虚空证出的定理；若通道不完备，唯一性降为&quot;相对已有通道唯一&quot;。</li>
@@ -234,9 +251,32 @@
 <li id="fn-finite" class="footnote"><a href="#fnref-finite" class="fn-back" title="返回引用处">↩</a>有限性因此不占公理位——它是&quot;分辨的形式条件&quot;这一命题的推论。（这一重铸取消了把&quot;有限性&quot;当作独立公设的做法：在无迹结构上并不存在一把可用来度量&quot;有限&quot;的迹尺，&quot;有限&quot;只能来自锚定后的相对结构。）</li>
 <li id="fn-z18" class="footnote"><a href="#fnref-z18" class="fn-back" title="返回引用处">↩</a>这正是第一段&quot;满溢无程度&quot;那句话，此刻作为 \(\text{III}_1\) 的一条性质被追认</li>
 <li id="fn-z19" class="footnote"><a href="#fnref-z19" class="fn-back" title="返回引用处">↩</a>&quot;参照&quot;是参考态 \(\omega_{\text{ext}}\) 的专名，深切挪的是基线基准 \(\omega^*\)，故此处用&quot;基准&quot;。</li>
-</ol></section>
+</ol>
+<h3 class="fn-section">〔文献〕</h3>
+<ol class="footnotes">
+<li id="fn-cs" class="footnote"><a href="#fnref-cs" class="fn-back" title="返回引用处">↩</a>Connes, A., Størmer, E., *Homogeneity of the state space of factors of type* \(\text{III}_1\), J. Funct. Anal. <strong>28</strong> (1978), 187–196。该定理要求 \(\mathcal{M}\) 具可分预对偶——正是公理的第二条（可分）供给的。</li>
+<li id="fn-tt" class="footnote"><a href="#fnref-tt" class="fn-back" title="返回引用处">↩</a>Tomita–Takesaki 模理论，见 Takesaki, M., *Theory of Operator Algebras II*, Springer (2003), Ch. VI–VIII。忠实正规态生成模算子 \(\Delta\) 与模自同构群 \(\sigma_t^\omega\) 是其基本结论。</li>
+<li id="fn-connes" class="footnote"><a href="#fnref-connes" class="fn-back" title="返回引用处">↩</a>\(\text{III}_1\) 外模流的典范一维性来自 Connes 的 III 型分类：Connes, A., *Une classification des facteurs de type* III, Ann. Sci. ÉNS <strong>6</strong> (1973), 133–252。&quot;不同态的模流只差一个内自同构&quot;是 Connes 的 Radon–Nikodym 余圈定理（同文）：\(\sigma_t^\varphi=\mathrm{Ad}([D\varphi:D\psi]_t)\circ\sigma_t^\psi\)，故外模流类与态无关。</li>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

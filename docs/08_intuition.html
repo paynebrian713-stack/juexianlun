@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>第六章</h1>
 <p>第五章交出了两本账：算子读铸出可数性和离散的桩，态读供出钝的基底和跳变的洞。这一章，你的直觉先从算子读那本账起步——它拿着 ℚ 的锐性，想往前走到一个连续的世界。它会在自己肚子里，撞见从另一本账里长出来的、不给对上的东西。这一章走到那道缝跟前就停住——不缝合，不安慰。</p>
 <h2 id="6-0-承接-直觉-从两本账中的一本起步">6.0 承接：直觉，从两本账中的一本起步</h2>
@@ -209,7 +227,9 @@
 前面每一章，你伸手都摸到过一个&quot;够不到&quot;，那些够不到还有个形状。这一次，你伸手去读一个点，那个你一直在用的读法，却读了个空——连&quot;点&quot;这个东西，原来都是你自己带来的。<br>
 <br>
 它不给你下一句。它就停在这里。</p></blockquote>
-<section class="footnotes"><h2>脚注</h2><ol class="footnotes">
+<section class="footnotes"><h2>脚注</h2>
+<h3 class="fn-section">〔旁注〕</h3>
+<ol class="footnotes">
 <li id="fn-bluntcare" class="footnote"><a href="#fnref-bluntcare" class="fn-back" title="返回引用处">↩</a>这里要拦两个最容易犯的混淆，先钉住。其一：<strong>钝不是他者</strong>。两样东西听着都&quot;没有尽头&quot;，但一个是&quot;值永远收不到一个点&quot;（钝，弥散，态这一侧就够得着），一个是&quot;记录永远拼不平的那处扭曲&quot;（他者，要账本立起来才谈得上、比这里高一整阶）——够不到的那个当不了这里的钝。其二：<strong>钝不是&quot;连续加上不可逆&quot;打包成的东西</strong>。钝是弥散——横着切、永远切不到原子；不可逆是另一根轴——纵着走、回不来。两根轴都源于无迹，却不是一回事：一片钝的浓淡完全可以配一道可逆的流。别把它们卷成一团。</li>
 <li id="fn-epilogue6" class="footnote"><a href="#fnref-epilogue6" class="fn-back" title="返回引用处">↩</a>看清这层遮蔽、却仍然一如既往地过日子——仍然把桌子当桌子、把昨天当昨天——这是本书最后（尾声）才回得来的一个姿态；这里只把它标出来：确定感这片平坦，是造出来的，而造它的动作把&quot;造&quot;这件事也一并抹平了。</li>
 <li id="fn-noweld" class="footnote"><a href="#fnref-noweld" class="fn-back" title="返回引用处">↩</a>要避开一个错焊：不能说&quot;结合律严格就把 \(H^2\) 封顶了&quot;——严格结合只平凡化结合子那一个 3-余圈，管不到 \(H^2\)；而 \(H^2\) 恰恰是他者内核 \([\sigma]\) 住的地方，若它被结合律&quot;封&quot;住，就等于说他者被结合律管着，与&quot;他者连公理都推不出&quot;直接冲突。推理不上塔，是因为它不落盘，与结合律无关。</li>
@@ -224,17 +244,37 @@
 <li id="fn-brouwer" class="footnote"><a href="#fnref-brouwer" class="fn-back" title="返回引用处">↩</a>传统对应（同型，非把诸家收编为本框架推论；本书只指出&quot;逻辑关乎验证主体、真值系于主客对齐&quot;这条线索与本机器的判定结构同形）：Brouwer/Heyting 的 <strong>BHK 解释</strong>——命题为真＝主体持有一个构造/验证（直觉主义逻辑本即&quot;验证着的主体&quot;的逻辑）；Kant，*Kritik der reinen Vernunft*，先验逻辑——判断＝把感性直观纳入知性概念（&quot;直观无概念则盲，概念无直观则空&quot;），与本处&quot;感觉给定→结论&quot;的对齐同构；Brandom, R., *Making It Explicit* (1994)，推论主义——意义活在前提→结论的推论关节里；Husserl，noesis（意向作用/主观侧）／noema（意向相关项/客观侧），及《形式与超越论逻辑》（客观逻辑结构系于主观构造活动）。诚实边界：这些是传统对应，非本框架的证明；本框架只提供其代数形（判定＝视角对内容的裁决、真值＝主客对齐检验的分级）。</li>
 <li id="fn-dedekind" class="footnote"><a href="#fnref-dedekind" class="fn-back" title="返回引用处">↩</a>topos 内部实数取<strong>戴德金</strong>实数对象（一般 topos 内戴德金与柯西实数不同构，本书用戴德金）；在层 topos 中戴德金实数对象＝连续/可测实值函数的层。见 Johnstone, P. T., *Sketches of an Elephant: A Topos Theory Compendium*, Oxford Logic Guides <strong>43–44</strong>, Oxford University Press (2002), §D4.7。</li>
 <li id="fn-ks" class="footnote"><a href="#fnref-ks" class="fn-back" title="返回引用处">↩</a>Kochen, S., Specker, E. P., &quot;The problem of hidden variables in quantum mechanics,&quot; *J. Math. Mech.* <strong>17</strong> (1967), 59–87。无一套整体赋值使一切对易语境同时有确定点值；本书用于&quot;跨语境不能同时二值化&quot;（结构腿，§6.2）与&quot;全局锐化不可能&quot;（§6.8）。</li>
-<li id="fn-kj" class="footnote"><a href="#fnref-kj" class="fn-back" title="返回引用处">↩</a>细化序上的强制（Kripke–Joyal）语义：预层/层 topos 内 \(\forall\) 量化到一切后续阶段；标准，见 Mac Lane, S., Moerdijk, I., *Sheaves in Geometry and Logic: A First Introduction to Topos Theory*, Universitext, Springer (1992), Ch. VI。</li>
 <li id="fn-split" class="footnote"><a href="#fnref-split" class="fn-back" title="返回引用处">↩</a>\([\sigma]\in H^2(\mathcal{R},\mathbb{T})\) 分类扭曲扩张 \(1\to\mathbb{T}\to\Sigma\to\mathcal{R}\to1\)；**全局 splitting（截面同态）存在 \(\iff[\sigma]=0\)**（定义性障碍，Schreier 理论群胚版／Feldman–Moore）；splitting 非空时全体＝\(H^1(\mathcal{R},\mathbb{T})\)-torsor（&quot;拉平方式之差&quot;）。\([\sigma]\) 是扩张类障碍、非任何 \(H^1\to H^2\) 连接同态之像（详见附录）。</li>
 <li id="fn-tarski" class="footnote"><a href="#fnref-tarski" class="fn-back" title="返回引用处">↩</a>一阶实闭域理论完备且可判定（量词消去）：Tarski, A., *A Decision Method for Elementary Algebra and Geometry* (2nd ed., rev.), University of California Press (1951)。<strong>辖区＝一阶实闭域，不扩大为&quot;本书几何整体完备&quot;。</strong></li>
 <li id="fn-godel" class="footnote"><a href="#fnref-godel" class="fn-back" title="返回引用处">↩</a>Gödel, K., &quot;Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I,&quot; *Monatshefte für Mathematik und Physik* <strong>38</strong> (1931), 173–198：解释足够算术（Robinson Q 以上）的一致递归可公理化理论不完备，且不能证明自身一致性。<strong>含本框架自身一经形式化的情形——债已入账。</strong></li>
 <li id="fn-mipstar" class="footnote"><a href="#fnref-mipstar" class="fn-back" title="返回引用处">↩</a>\(\text{MIP}^*=\text{RE}\)：Ji, Z., Natarajan, A., Vidick, T., Wright, J., Yuen, H., *Commun. ACM* <strong>64</strong> (2021), 131–138。量子多体交互证明的判定能力＝递归可枚举，\(\Sigma_1\)-完备（停机问题层）。此处用于&quot;算法跑不完＝认识论边界 G&quot;，非&quot;不被决定&quot;。<strong>作为&quot;有真值却算不到&quot;的外部实例引，非本框架内部定理</strong>：MIP\*=RE 关于量子多体交互证明，不是这台 \(\text{III}_1\) 机器内部证出的结论。</li>
 <li id="fn-spectralgap" class="footnote"><a href="#fnref-spectralgap" class="fn-back" title="返回引用处">↩</a>谱隙不可判定：Cubitt, T., Pérez-García, D., Wolf, M. M., *Nature* <strong>528</strong> (2015), 207–211（正式证明 *Forum Math. Pi* <strong>10</strong> (2022), e14）。\(\Pi_2\)-完备，较停机问题更高、更不可及。同属&quot;够不着&quot;（G），非不被决定。<strong>作为外部实例引，非本框架内部定理</strong>：谱隙不可判定关于格点哈密顿量，不是 \(\text{III}_1\) 机器内部的定理。</li>
-<li id="fn-apart" class="footnote"><a href="#fnref-apart" class="fn-back" title="返回引用处">↩</a>直觉主义/topos 实数上，等号一般不可判定（apartness 关系是基本的，\(x=y\) 的真值一般非 \(\top/\bot\)）：Johnstone, P. T., *Sketches of an Elephant: A Topos Theory Compendium*, Oxford Logic Guides <strong>43–44</strong>, Oxford UP (2002), §D4.7；Fourman, M. P., Scott, D. S., *Sheaves and logic*, in: Applications of Sheaves, Springer LNM <strong>753</strong> (1979), 302–401。本书校正：内部 Dedekind 实数 \(\mathbb{R}_{\text{int}}\) 是<strong>钝</strong>的（等号不可判定）；\(\mathbb{Q}\) 的锐性止于分割。认知手里的銳实数轴是一笔内部兑现不了的借条（点性态度）；D 七章板 = 让该借条生效的机器。</li>
 <li id="fn-toposq" class="footnote"><a href="#fnref-toposq" class="fn-back" title="返回引用处">↩</a>量子理论的 topos 处理不唯一：把量子性放进几何有多条路——语境<strong>偏序</strong>上的谱预层：Isham, C. J., Butterfield, J., &quot;Topos perspective on the Kochen–Specker theorem: I. Quantum states as generalized valuations,&quot; *Int. J. Theor. Phys.* <strong>37</strong> (1998), 2669–2733；Döring, A., Isham, C. J., &quot;A topos foundation for theories of physics: I–IV,&quot; *J. Math. Phys.* <strong>49</strong> (2008), 053515–053518／Bohr 化内 C\*-代数：Heunen, C., Landsman, N. P., Spitters, B., &quot;A topos for algebraic quantum theory,&quot; *Comm. Math. Phys.* <strong>291</strong> (2009), 63–110／本书的 Cartan <strong>群胚</strong>＋gerbe：Feldman–Moore 1977（同 <sup><a href="#fn-split" class="fn-ref">[split]</a></sup>）。三者不等价（底几何不同、输入不同）；他者 \([\sigma]\in H^2(\mathcal{R},\mathbb{T})\) 是不可拉平的扭曲类——它的自然居所是群胚（Cartan 对），偏序底上没有它的自然居所（非&quot;不可能&quot;——只是本书需要在群胚上陈述它，故不选偏序路线）。这也是为什么本书的量子 topos 必须走群胚路线而非偏序路线。</li>
-</ol></section>
+</ol>
+<h3 class="fn-section">〔文献〕</h3>
+<ol class="footnotes">
+<li id="fn-kj" class="footnote"><a href="#fnref-kj" class="fn-back" title="返回引用处">↩</a>细化序上的强制（Kripke–Joyal）语义：预层/层 topos 内 \(\forall\) 量化到一切后续阶段；标准，见 Mac Lane, S., Moerdijk, I., *Sheaves in Geometry and Logic: A First Introduction to Topos Theory*, Universitext, Springer (1992), Ch. VI。</li>
+<li id="fn-apart" class="footnote"><a href="#fnref-apart" class="fn-back" title="返回引用处">↩</a>直觉主义/topos 实数上，等号一般不可判定（apartness 关系是基本的，\(x=y\) 的真值一般非 \(\top/\bot\)）：Johnstone, P. T., *Sketches of an Elephant: A Topos Theory Compendium*, Oxford Logic Guides <strong>43–44</strong>, Oxford UP (2002), §D4.7；Fourman, M. P., Scott, D. S., *Sheaves and logic*, in: Applications of Sheaves, Springer LNM <strong>753</strong> (1979), 302–401。本书校正：内部 Dedekind 实数 \(\mathbb{R}_{\text{int}}\) 是<strong>钝</strong>的（等号不可判定）；\(\mathbb{Q}\) 的锐性止于分割。认知手里的銳实数轴是一笔内部兑现不了的借条（点性态度）；D 七章板 = 让该借条生效的机器。</li>
+</ol>
+</section>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

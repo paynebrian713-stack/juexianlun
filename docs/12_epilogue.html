@@ -44,10 +44,28 @@
   .diagram code { background: none; padding: 0; }
   a.d-link { color: #7eb8da; text-decoration: none; }
   a.d-link:hover { text-decoration: underline; }
+  a.w-ref { color: #7eb8da; text-decoration: none; }
+  a.w-ref:hover { text-decoration: underline; }
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .math-block::-webkit-scrollbar-thumb:hover { background: #6a6a62; }
+  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
+  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
+                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
+                  justify-content: center; align-items: flex-start;
+                  overflow-y: auto; padding: 2rem 0; }
+  #map-overlay.active { display: flex; }
+  .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
+                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
+                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
+  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+               color: #5f5e5a; cursor: pointer; background: none; border: none;
+               line-height: 1; padding: 0 .15rem; }
+  .map-close:hover { color: #1b1b18; }
+  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
+  .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
   #status.err { color: #d86; }
   table { border-collapse: collapse; }
@@ -65,7 +83,7 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a></p>
+<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
 <h1>尾声</h1>
 <h2 id="三种样子-和活着的那一种">三种样子，和活着的那一种</h2>
 <p>一个人可以把自己的存在，想成三种样子。</p>
@@ -96,7 +114,7 @@
 <p>这一路，证到底，说了那么多&quot;够不到&quot;。有人会想：那到头来，是不是一切都够不到，然后归于一片空？攥了一辈子，最后发现手里什么都没有？</p>
 <p><strong>不是这样。</strong> 这是最要紧的一句，务必听清。</p>
 <p>全书两个方向，其实是同一个无迹的两面。一面，是你<strong>够不到一个终极的对象</strong>——那个自在的、绝对的、在一切视角之外的&quot;物自身&quot;，是一格永远填不进去的禁格，你趋近它、却永远够不到。另一面，是你<strong>可以松开一切对象</strong>——不必攥着任何一个不放，可以让手张开。<strong>够不到终极对象，和可以松开一切对象，是同一件事的两面</strong>：正因为没有一个绝对的、非攥不可的终极物（无迹），所以你既够不到它、也不必被它攥住。</p>
-<p>所以松开那个锚，不是失去你。松锚，在这台机器里，说白了只是一个极简的动作：把当初那个替你钉死起点的印记，撤掉——回到印记落下之前，那个还没被执取的、无差别的态。而那意味着什么？意味着<strong>认出</strong>：那个你一直当成&quot;我&quot;、当成独立自足的东西，本来就是从原初那片满溢的差异里，被一道印记<strong>执取出来的一道</strong>而已——它从来不是一个独立者，是被取的一道。松开手，不是让&quot;我&quot;湮灭；是认出&quot;我&quot;本来的样子——本就不是一个攥得住的实体，是这片流里被执的一道浪。</p>
+<p id="scene-songshou">所以松开那个锚，不是失去你。松锚，在这台机器里，说白了只是一个极简的动作：把当初那个替你钉死起点的印记，撤掉——回到印记落下之前，那个还没被执取的、无差别的态。而那意味着什么？意味着<strong>认出</strong>：那个你一直当成&quot;我&quot;、当成独立自足的东西，本来就是从原初那片满溢的差异里，被一道印记<strong>执取出来的一道</strong>而已——它从来不是一个独立者，是被取的一道。松开手，不是让&quot;我&quot;湮灭；是认出&quot;我&quot;本来的样子——本就不是一个攥得住的实体，是这片流里被执的一道浪。</p>
 <p>攥紧的那只手，在松开的一刻，认出了一件事：它一直攥着的那道浪，和它此刻放开的这片水，<strong>本是同一片海里涌起的</strong>。没有谁在那一刻消失。松开的，和攥着的，从来是同一片海。</p>
 <p>这里要小心，别把这句话读成了某种终点——以为松开手，就抵达了一个&quot;万物平等、再无分别&quot;的地方安住下来。不是的。若真有那样的地方，它就又成了一把绝对的尺子，一个不必再动的绝对位置——而我们早就知道，这台机器里没有那样的位置。这里说的&quot;松开&quot;，不是一次抵达，是一个<strong>时时回头的动作</strong>：在你一次次落账、一次次把流攥成事实的当口，时不时回头看一眼自己正攥着的这一道——看见它也不过是这片海里此刻涌起的一道，不是海本身。看见了，手就松一分；松一分，不是从此不再攥，是下一刻还得攥、但攥的时候知道自己在攥。这不站上一劳永逸的平等，也不站列维纳斯那道&quot;我永远先亏欠&quot;的不对称——那两条路是第四章标出、留给你走的岔口，这里不替你选。这里只留一个更朴素的动作：落账的时候，时不时回头看看自己落的账。</p>
 <p>松开手，不是一次做完就了的动作，是一种活法。有人会问：那具体该怎么活——怎么才能不总是下意识地攥住某一个视角、某一把尺子？这里要老实说一句：<strong>没有一条&quot;该攥哪个&quot;的正确答案可给。</strong> 任何一条&quot;你应该锚在这里&quot;的规则，本身就是又一个锚——给你一条规则，就是替你重新钉死一次。真要给出&quot;正确的锚法&quot;，需要的正是那把不存在的绝对尺子（第三章那个禁格）。所以这件事只能<strong>反着说</strong>：不是教你正确地攥，是教你认出自己什么时候攥死了。</p>
@@ -112,8 +130,24 @@
 <p>到这里，该说的都说了。剩下的那道缝，不是一个还没解开的问题，是一处本就该留白的地方——是被活、而非被证的。</p>
 <p>书，在这里，沉默。</p>
 <p>风暴还在外面。合上书，回到它。</p>
+<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+ <div class="map-container">
+  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <p class="map-hint">点任意节点跳转到对应章节段落</p>
+ </div>
+</div>
 <p id="status">正在渲染公式…</p>
 <script>
+function showMap() {
+  document.getElementById('map-overlay').classList.add('active');
+}
+function hideMap() {
+  document.getElementById('map-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideMap();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {
