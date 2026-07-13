@@ -359,6 +359,11 @@ def clean_chapter(text, ch_name):
     text = re.sub(r'[\n^]\*v\d+\.?\d*\s+过程沿革.*?\*', '', text, flags=re.DOTALL)
     # 🔧 清洗句首独立的斜体版本号行（无其他正文）
     text = re.sub(r'(?<=\n)\*v\d+\.?\d+.*?\n', '\n', text)
+    # 🔧 清洗"可读重写 vX→vY"沿革块（含后续所有斜体说明及数学侧待审问题卡）
+    text = re.sub(r'\n---\n\s*\*可读重写\s+v\d+.*', '', text, flags=re.DOTALL)
+    text = re.sub(r'\n\*可读重写\s+v\d+.*', '', text, flags=re.DOTALL)
+    # 🔧 清洗"数学侧·待终审问题卡"挂账块（独立出现时）
+    text = re.sub(r'\n##\s*⚠️\s*数学侧.*', '', text, flags=re.DOTALL)
     return text
 
 
