@@ -10,7 +10,8 @@
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }
   h1 { font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }
-  h2 { font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }
+  h2 { font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
@@ -49,21 +50,40 @@
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
-  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }
+  .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }
+                    padding: 2rem 1.6rem 1rem; }
   .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
   .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  /* --- footnote bubble --- */
+  a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
+  a.fn-a:hover { text-decoration: underline; }
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
+  .fn-bubble-close:hover { color: #e0dcd4; }
+  .fn-bubble-arrow { position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }
+  .fn-bubble-arrow::after { content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -83,7 +103,8 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 <h1>第三章</h1>
 <p>上一章那道墙，把&quot;两股缝成一条&quot;的路堵死了。缝合不拢，就等于说：认知有一圈够不到的边界。</p>
 <p>这一章不往前走。中心定理那道墙很硬，走过之后得有个慢拍——先停下来，把这圈边界数清楚：它们恰好是三种，围着一个空着的位置。数完，下一章再回到缝里，去看那处更特别的东西——他者。</p>
@@ -101,7 +122,7 @@
 <p><strong>维数，是这块板上的一个具体条目</strong>。维数的<strong>存在性</strong>是典范给定的，刚硬到连标度都不用选；但维数的<strong>具体值</strong>，是这块板搭出来的东西，而且在这台无迹的机器里根本<strong>定义不出来</strong>——要付代价截断才有值。所以别把第三个不可知窄化成&quot;维数&quot;：脚手架比维数大，维数只是它四层分解里的一层。第三个不可知的真身，其实是<strong>&quot;硬要拿钝量当锐实数用，就只好搭一块底下没桥的板&quot;</strong>这件事本身。</p>
 <p>所以&quot;三种不可知&quot;，是把三个已经遇到的具体边界摆到一起，看清它们的结构。它们各自的完整戏份都在后面：<strong>横向的锚</strong>在第五章（历史一致性），<strong>纵向的未来</strong>在第六章（逻辑），<strong>脚手架的断言板</strong>在第七章。这一章只把它们归好位，指向下游。</p>
 <p>它们沿两个坐标分开。<strong>第一个坐标，是补给物能不能被典范地给出。</strong> 横向非典范——锚没有天生的原点；脚手架典范——断言板的骨架被结构稳住，甚至刚硬到连标度都不用选，维数是其上最尖的那条；未来无物——谈不上。<strong>第二个坐标，是那个位置能不能被占据、能不能居。</strong> 横向可居——判定时你总站在某个锚上；未来不可居——无物可站；脚手架不可居——断言板是外部对象化，不是主体的立足地。</p>
-<p>把两坐标摆开，三种不可知占三格，还剩一格空着。那一格是&quot;可居 ＋ 典范给出&quot;，对应一个能俯瞰一切、又被结构典范挑定的绝对参照。这样的东西，就是一把迹——而这台机器无迹。所以那一格空着，是<strong>无迹在这张表上的显形</strong>：它空着这件事本身，是全书的根。那个空格，就是下面要说的禁格。<sup><a href="#fn-fourth" id="fnref-fourth" class="fn-ref">[fourth]</a></sup></p>
+<p>把两坐标摆开，三种不可知占三格，还剩一格空着。那一格是&quot;可居 ＋ 典范给出&quot;，对应一个能俯瞰一切、又被结构典范挑定的绝对参照。这样的东西，就是一把迹——而这台机器无迹。所以那一格空着，是<strong>无迹在这张表上的显形</strong>：它空着这件事本身，是全书的根。那个空格，就是下面要说的禁格。<sup><a href="#fn-fourth" id="fnref-fourth" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-fourth')">[fourth]</a></sup></p>
 <p>数清楚这三种之前，还有一件看似最小、却最切身的事要说。它不单独占一个分类格，却是这三种不可知在你自己的学习里运转的同一个机制——分辨率的不可套娃。</p>
 <p>第一章有过一个结构事实：学习流每一层压缩都比上一层更粗，\(\mathcal{A}_0\supseteq\mathcal{A}_1\supseteq\cdots\)，越压越浅，分辨率逐层下降。你要问&quot;我现在学得多深了&quot;，能问——对比一下自己上一刻的分辨率，就知道又压了一档。可你要接着问&quot;这个深浅本身有多深？我这个对比分辨率的动作，自己的分辨率是多少&quot;——这一问就问空了。因为任何对比所用的尺子，都坐在这一次看出去的锚里。你要给&quot;分辨深浅&quot;这个动作本身再定一个分辨率，就得有一把不参与这次看、在外面盯着你的第二把尺；而这台机器没有第二把尺。</p>
 <p>这就是学习这件事自己的一个够不到：你能看见自己在学，能看见每一层比上一层粗在哪儿，可你永远不能跳出自己，去量这个&quot;看见动作&quot;自己的分辨率。套娃停在第一层——不是数学上不准你套，是从里面活着这件事的结构上，你就没有那个站到外面去的位置。</p>
@@ -124,11 +145,11 @@
 <p>两条路都在无迹这一关上断掉，只是断法不同：第一条断在没有计数尺，第二条断在没有迹类算子。共同点是：<strong>都得先离开这台机器、截断到一个有迹的平台，维数才有值。</strong> 下面走第二条（它最尖、且直接连着第七章的板）；第一条到此为止——它已经说明了：无迹先堵死了最朴素的维数，才轮到谱维数。</p>
 <div class="math-block">\[\zeta_D(s)=\mathrm{Tr}\big(|D|^{-s}\big),\]</div>
 <p>维数就藏在这个函数的极点位置里——这是非交换几何里&quot;谱维数&quot;的标准定义<sup><a href="#fn-connes-ncg" id="fnref-connes-ncg" class="fn-ref">[connes-ncg]</a></sup>。可 \(\zeta_D\) 要有意义，\(\mathrm{Tr}(|D|^{-s})\) 得是有限的、是迹类的；这需要 \(D\) 有离散的谱，一格一格排开、跑向无穷；而这又需要 \(D\) 有紧的预解式。一环扣一环：<strong>要有维数，先要迹类；要迹类，先要离散谱；要离散谱，先要紧预解式。</strong></p>
-<p>而这台机器（\(\text{III}_1\)）恰恰在链条的头上就断了。它没有迹（第零章），而迹是紧预解式背后那层全局正则性的根。说得再具体些：\(\text{III}_1\) 上的模流生成元 \(\log\Delta\) 谱是连续的，铺满整个 \([0,\infty)\)——这就是 Connes 分类里的不变量 \(S(\mathcal{M})=[0,\infty)\)（Connes 1973，见第零章 <sup><a href="02_start.html#fn-connes-inv" id="fnref-connes-inv" class="fn-ref">[connes-inv]</a></sup>）。从这台机器内部，拿不出一个天生有离散谱的 \(D\) 候选。没有离散谱，就没有紧预解式；没有紧预解式，\(|D|^{-s}\) 就不是迹类。链条不是到第三环第四环才断，是第一环就封死了：无迹堵住了紧预解式，紧预解式堵住了 \(\zeta_D\)，\(\zeta_D\) 连写都写不出来。所以<strong>在这台机器内部，维数不是一个算不到的值，是一个定义不出来的量</strong>。<sup><a href="#fn-strength" id="fnref-strength" class="fn-ref">[strength]</a></sup></p>
+<p>而这台机器（\(\text{III}_1\)）恰恰在链条的头上就断了。它没有迹（第零章），而迹是紧预解式背后那层全局正则性的根。说得再具体些：\(\text{III}_1\) 上的模流生成元 \(\log\Delta\) 谱是连续的，铺满整个 \([0,\infty)\)——这就是 Connes 分类里的不变量 \(S(\mathcal{M})=[0,\infty)\)（Connes 1973，见第零章 <sup><a href="02_start.html#fn-connes-inv" id="fnref-connes-inv" class="fn-ref">[connes-inv]</a></sup>）。从这台机器内部，拿不出一个天生有离散谱的 \(D\) 候选。没有离散谱，就没有紧预解式；没有紧预解式，\(|D|^{-s}\) 就不是迹类。链条不是到第三环第四环才断，是第一环就封死了：无迹堵住了紧预解式，紧预解式堵住了 \(\zeta_D\)，\(\zeta_D\) 连写都写不出来。所以<strong>在这台机器内部，维数不是一个算不到的值，是一个定义不出来的量</strong>。<sup><a href="#fn-strength" id="fnref-strength" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-strength')">[strength]</a></sup></p>
 <p>这里要钉死一件事，因为它管着后面所有的账。有人会说：不对——Connes 的谱重构定理<sup><a href="#fn-connes-ncg" class="fn-ref">[connes-ncg]</a></sup>明明就在谈维数。给定谱三元组 \((\mathcal{A},\mathcal{H},D)\)，\(\zeta_D(s)\) 的极点就是维数，非交换几何整套机器都能跑。说得一点没错。**但那个 \(D\)，正是第七章要讲的断言板。** 谱三元组的 \(D\) 要能给出维数的数值，得满足 A4——离散谱、紧预解式。而在 \(\text{III}_1\) 上，模流生成元 \(\log\Delta\) 谱连续，**原生的 \(D\) 候选可证不满足 A4**（\(\log\Delta\) 谱连续，无离散谱）。所以那个能跑起来的 \(D\)，是<strong>装上去的</strong>，不是从代数类型里取出来的。Connes 的重构定理没有错——它恰恰证明了：要有一根逐点可读的几何连续统、要有一个能放进 \(\zeta_D\) 里的维数，就得搭这么一块板；需要多少料、料从哪来，每一件在定理里都是明账——A1–A4 的公理包，就是转贷和打桩的条文版。<strong>定理把板开成了发票——错的是用的时候，总是下意识忘了自己已经站在板上。</strong> 把板上的维数当成代数自带的维数，就是把借来的说成了长出来的。</p>
 <p>那维数为什么&quot;感觉是给定的&quot;？因为要给它一个数值，可以先把这台机器截断到它的一个有迹的核——沿 Connes–Takesaki 连续分解，\(\text{III}_1\) 因子可以写成一个有迹的 \(\text{II}_\infty\) 核与模流的交叉积 \(\mathcal{M}\rtimes_\sigma\mathbb{R}\)。在这个有迹的核上，\(\zeta_D\) 写得出来，维数有了数值，而且刚硬：核是典范存在的，迹唯一到一个标度，极点位置在标度变换下不变——维数连标度都不用选。<strong>但这个截断，是付了代价的</strong>：截到有迹的核，等于借用了一个态外的、俯瞰性的有迹平台，而那正是这台机器没有、也够不到的位置（态外位，§3.4）。所以维数的数值不是免费的——它是站到机器之外才读得出的读数。（这里走的是 Connes–Takesaki 连续分解，截到半有限的 \(\text{II}_\infty\) 核；附录 W 另处讲物理学的紫外截断，截到 type I。两条是不同的截断路径、不同的有迹平台，但代价同性：都要付一次态外位，借一个这台机器没有的俯瞰平台。）</p>
 <p>要再钉两句分寸，免得把维数说过头。</p>
-<p><strong>其一，维数的具体值（为什么是三），是第三类不可知，不是一个&quot;等经验来定&quot;的暂挂项。</strong> 它属于脚手架这一类不可知：典范可以构想、可以组织一切逼近，却原则上不可被任何直观占据。这正是康德意义上的一个调节性观念（Idee im Kantischen Sinne，胡塞尔《观念 I》§143）——一个完全被给予性只作为调节性极限而存在的东西：可设想、可作为逼近的组织者，却永不被任何直观充实<sup><a href="#fn-kant" id="fnref-kant" class="fn-ref">[kant]</a></sup>。维数的具体值，就是这样一个康德观念型的量：不是&quot;现在还没测出、以后能测出&quot;，是结构上就属于第三类不可知（这里标的是结构同构，不借教义词）。</p>
+<p><strong>其一，维数的具体值（为什么是三），是第三类不可知，不是一个&quot;等经验来定&quot;的暂挂项。</strong> 它属于脚手架这一类不可知：典范可以构想、可以组织一切逼近，却原则上不可被任何直观占据。这正是康德意义上的一个调节性观念（Idee im Kantischen Sinne，胡塞尔《观念 I》§143）——一个完全被给予性只作为调节性极限而存在的东西：可设想、可作为逼近的组织者，却永不被任何直观充实<sup><a href="#fn-kant" id="fnref-kant" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-kant')">[kant]</a></sup>。维数的具体值，就是这样一个康德观念型的量：不是&quot;现在还没测出、以后能测出&quot;，是结构上就属于第三类不可知（这里标的是结构同构，不借教义词）。</p>
 <p><strong>其二，维数取法，不被决定。</strong> 即使维数的值不可占据，它的不可占据是认识论的、结构性的，不是那种&quot;不被决定&quot;的不确定——它不因为&quot;你不被决定&quot;才不确定。维数是一个被掷出的标量初始条件，不携带&quot;决定世界是活是死&quot;的角色；那种角色只属于他者那个抹不平的内核。一个被掷出的标量值，取法不在你，却也不因为&quot;能取&quot;才有它的值。</p>
 <blockquote><p>你此刻就站在三维空间里。你从没怀疑过它——上下、左右、前后，三个方向，硬得像脚下的地基。你不会觉得需要去&quot;选&quot;它是三维的，就像你不会觉得需要选地是硬的。<br>
 <br>
@@ -149,7 +170,7 @@
 <p><strong>II 型 · 脚手架桥</strong>：把纵向那个&quot;无物&quot;<strong>对象化</strong>成一根类空间的轴，在几何里谈它与横向的关系。维数那根脚手架轴，就是这种对象化的产物——它把&quot;够不到的方向&quot;摆成一根可以在几何里指认的坐标。</p>
 <p><strong>III 型 · 禁桥</strong>：不付任何代价、想白拿一座绝对的桥。这些都被那道墙杀掉了：一个自给自足的统一动力学（\(\Phi\)）；牛顿式的绝对同时——一个全局的时间函数，等于一把迹式的绝对刻度；拉普拉斯之妖——从当下的横向数据自足地生成全部未来。它们都要求一个态外的绝对参照，而这台机器没有。</p>
 <p>这三去处是一张分类：直接桥被杀，剩下的绕行落在 I、II、III 这三格。这并不是宣称&quot;数学证明了绝无第四种绕法&quot;，而是把已知的跨越方式按机制归了类；其中，禁桥那一类，是被墙明明白白挡回来的。</p>
-<p>这些能走的桥，各自的完整机器不在这一章——它们分驻在各自语法所在的那一章。<sup><a href="#fn-bridges" id="fnref-bridges" class="fn-ref">[bridges]</a></sup> 桥是句子，句子住在它的语法所在处；这一章只把它们的类型数清楚。</p>
+<p>这些能走的桥，各自的完整机器不在这一章——它们分驻在各自语法所在的那一章。<sup><a href="#fn-bridges" id="fnref-bridges" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-bridges')">[bridges]</a></sup> 桥是句子，句子住在它的语法所在处；这一章只把它们的类型数清楚。</p>
 <blockquote><p>明天太阳会升起。<br>
 <br>
 你信这句话。你不是猜的——你甚至能翻出明天日出的准确时刻，几点几分，一秒不差。这句话稳当得像已经发生过了。<br>
@@ -202,11 +223,13 @@
 <li id="fn-connes-ncg" class="footnote"><a href="#fnref-connes-ncg" class="fn-back" title="返回引用处">↩</a>谱维数由 \(\zeta_D(s)=\mathrm{Tr}(|D|^{-s})\) 的极点定义，需 \(D\) 有紧预解式（离散谱、迹类）：Connes, A., *Noncommutative Geometry*, Academic Press (1994), Ch. IV。\(\text{III}_1\) 无迹、无此结构，须沿 Connes–Takesaki 连续分解截断到 \(\text{II}_\infty\) 核 \(\mathcal{M}\rtimes_\sigma\mathbb{R}\)（有迹）后，维数方有数值。</li>
 </ol>
 </section>
+<script>var FN_CONTENT={"fn-bridges": "<a href=\"#fnref-bridges\" class=\"fn-back\" title=\"返回引用处\">↩</a>判定桥里的规律、概率、时态与脚手架桥的几何化，加上守恒、承诺——持存桥在第五章，规律／概率／时态桥在第六章，守恒桥在第七章，承诺桥在第八章。", "fn-gejing-math": "<a href=\"#fnref-gejing-math\" class=\"fn-back\" title=\"返回引用处\">↩</a><span class=\"fn-back-list\"> · 亦见 <a href=\"13_appendixW.html#fnref-gejing-math\">13_appendixW</a></span>禁格&quot;俯瞰位置不存在&quot;的数学身份，是两件事叠起来：<strong>没有被结构挑出的不动位置</strong>（III₁ 无迹 ⟹ 内自同构下的不变泛函＝迹，不存在；\\(Z(\\mathcal{M})=\\mathbb{C}1\\) ⟹ 不变元也只剩标量），<strong>且没有被结构挑出的态</strong>（Connes–Størmer：任二正规态在酉共轭下范数稠密，没有一个态天生特殊）。前者说&quot;无不动点&quot;，后者说&quot;都一样&quot;，两条合起来，才是&quot;无典范位置&quot;——齐性单独不够，它只说&quot;都一样&quot;、不说&quot;无不动点&quot;。这与 §3.1 横向&quot;第二态非典范性&quot;是同一件事的两处显形。注意：这层（无典范位置）根在<strong>无迹</strong>，与 R★ 生成半边那个&quot;嵌入非内蕴&quot;是<strong>两个不同的根</strong>（后者对一切真包含成立、不依赖无迹），别混。", "fn-kant": "<a href=\"#fnref-kant\" class=\"fn-back\" title=\"返回引用处\">↩</a>维数具体值作为第三类不可知的康德观念型刻画：胡塞尔&quot;康德意义上的观念&quot;（Idee im Kantischen Sinne，《观念 I》§143）——完全被给予性只作为调节性极限观念存在，典范可构想、可组织一切逼近、原则上不可被任何直观占据。此处标结构同构，不借教义词。", "fn-fourth": "<a href=\"#fnref-fourth\" class=\"fn-back\" title=\"返回引用处\">↩</a>三格加一个空格，一共四格；但那第四格不是第四种不可知，是无迹留下的一个洞。另外，三种不可知分类上独立、发生上却耦合：脚手架是纵向的对象化，把够不到的未来方向摆成一根类空的轴；横向的锚又在纵向那根轴上活动。分开数是为看清，别忘了它们同根。", "fn-strength": "<a href=\"#fnref-strength\" class=\"fn-back\" title=\"返回引用处\">↩</a>说维数&quot;不可知&quot;，是修辞还是定理？是定理，而且比&quot;不可知&quot;更强——是不可定义。&quot;不可知&quot;是有个值算不到；&quot;不可定义&quot;是连定义式都写不出来（无迹类算子，\\(\\zeta_D\\) 无从落笔）。截断到有迹核之后它才有值、才谈得上可知，而截断要付态外位的代价。所以这不是一句修辞，是一条有链条、有代价的定理。"};</script>
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -218,7 +241,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
 });
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
@@ -226,7 +249,40 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+    closeAllBubbles();
+  }
 });
+function closeAllBubbles() {
+  document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
+}
+function showFnBubble(event, fid) {
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){b.style.transition='';});
+  setTimeout(function(){b.style.opacity=1;b.style.transition='opacity .12s';},20);
+}
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

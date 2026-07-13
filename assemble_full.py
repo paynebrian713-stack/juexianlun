@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # 组装完整稿 — 三版输出：总完整版 / 无脚注版 / HTML 阅读器
-import os, re, shutil, html as html_mod
+import os, re, shutil, html as html_mod, json
 from datetime import datetime
 
 BASE = "E:/界限论"
@@ -47,7 +47,8 @@ HTML_SHELL = """<!DOCTYPE html>
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }}
   h1 {{ font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }}
-  h2 {{ font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }}
+  h2 {{ font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }}
+  h2:first-of-type {{ border-top: none; margin-top: 0; padding-top: 0; }}
   h3 {{ font-size: 1.08rem; color: #d0ccc4; }}
   blockquote {{ border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }}
   code {{ background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }}
@@ -86,21 +87,40 @@ HTML_SHELL = """<!DOCTYPE html>
   .math-block {{ overflow-x: auto; overflow-y: hidden; }}
   .math-block::-webkit-scrollbar {{ height: 6px; }}
   .math-block::-webkit-scrollbar-thumb {{ background: #4a4a44; border-radius: 3px; }}
-  .map-btn {{ font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }}
-  .map-btn:hover {{ color: #e0dcd4; text-decoration: underline; }}
+  .map-btn {{ position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }}
+  .map-btn:hover {{ color: #fff; background: rgba(40,40,35,.92); }}
   #map-overlay {{ display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }}
   #map-overlay.active {{ display: block; }}
   .map-container {{ position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }}
+                    padding: 2rem 1.6rem 1rem; }}
   .map-close {{ position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }}
   .map-close:hover {{ color: #1b1b18; }}
-  .map-svg-wrap {{ transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }}
+  .map-svg-wrap {{ transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }}
   .map-hint {{ text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }}
+  /* --- footnote bubble --- */
+  a.fn-a {{ color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }}
+  a.fn-a:hover {{ text-decoration: underline; }}
+  .fn-bubble {{ position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }}
+  .fn-bubble-close {{ position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }}
+  .fn-bubble-close:hover {{ color: #e0dcd4; }}
+  .fn-bubble-arrow {{ position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }}
+  .fn-bubble-arrow::after {{ content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }}
   .fn-section {{ font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }}
   .fn-section:first-child {{ margin-top: .1rem; }}
   #status {{ font-size: .85rem; color: #7a766e; margin-top: 2rem; }}
@@ -120,13 +140,15 @@ HTML_SHELL = """<!DOCTYPE html>
 <script defer src="{katex}/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 {body}
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -138,7 +160,7 @@ function hideMap() {{
   document.getElementById('map-overlay').classList.remove('active');
 }}
 document.addEventListener('keydown', function(e) {{
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') {{ hideMap(); closeAllBubbles(); }}
 }});
 document.addEventListener('click', function(e) {{
   var ov = document.getElementById('map-overlay');
@@ -146,7 +168,40 @@ document.addEventListener('click', function(e) {{
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {{
     hideMap();
   }}
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {{
+    closeAllBubbles();
+  }}
 }});
+function closeAllBubbles() {{
+  document.querySelectorAll('.fn-bubble').forEach(function(b){{b.remove();}});
+}}
+function showFnBubble(event, fid) {{
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {{
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }}
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){{b.style.transition='';}});
+  setTimeout(function(){{b.style.opacity=1;b.style.transition='opacity .12s';}},20);
+}}
 document.addEventListener('DOMContentLoaded', function() {{
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {{
@@ -788,15 +843,37 @@ class PageConverter:
 
         flush_quote()
         body = restore_math('\n'.join(out), math_store)
+
+        # ── footnote classification + bubble injection ──
         if self.footnote_items:
+            a_fids = set()
             a_htmls = []
             b_htmls = []
+            fn_content_map = {}
             for fid, html, raw_body in self.footnote_items:
                 html = restore_math(html, math_store)
                 if classify_footnote(raw_body) == 'A':
+                    a_fids.add(fid)
                     a_htmls.append(html)
+                    inner = re.sub(r'^<li[^>]*>|</li>$', '', html).strip()
+                    fn_content_map[f'fn-{fid}'] = inner
                 else:
                     b_htmls.append(html)
+
+            # Rewrite fn-ref links: A-type → bubble popup, B-type stays jump
+            def _rewrite_fn_ref(m):
+                fid = m.group(2)
+                if fid in a_fids:
+                    return re.sub(
+                        r'class="fn-ref"',
+                        'class="fn-a" onclick="event.preventDefault();showFnBubble(event,\'fn-' + fid + '\')"',
+                        m.group(0))
+                return m.group(0)
+
+            body = re.sub(
+                r'(<a\s[^>]*href="[^"]*#fn-(\w+)"[^>]*class="fn-ref"[^>]*>[^<]*</a>)',
+                _rewrite_fn_ref, body)
+
             parts = []
             if a_htmls:
                 parts.append('<h3 class="fn-section">〔旁注〕</h3>\n<ol class="footnotes">\n' +
@@ -805,6 +882,9 @@ class PageConverter:
                 parts.append('<h3 class="fn-section">〔文献〕</h3>\n<ol class="footnotes">\n' +
                              '\n'.join(b_htmls) + '\n</ol>')
             body += '\n<section class="footnotes"><h2>脚注</h2>\n' + '\n'.join(parts) + '\n</section>'
+
+            # Inject FN_CONTENT map
+            body += '\n<script>var FN_CONTENT=' + json.dumps(fn_content_map, ensure_ascii=False) + ';</script>'
         return body
 
 

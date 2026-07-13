@@ -10,7 +10,8 @@
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }
   h1 { font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }
-  h2 { font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }
+  h2 { font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
@@ -49,21 +50,40 @@
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
-  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }
+  .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }
+                    padding: 2rem 1.6rem 1rem; }
   .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
   .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  /* --- footnote bubble --- */
+  a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
+  a.fn-a:hover { text-decoration: underline; }
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
+  .fn-bubble-close:hover { color: #e0dcd4; }
+  .fn-bubble-arrow { position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }
+  .fn-bubble-arrow::after { content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -83,7 +103,8 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 <h1>附录</h1>
 <h2 id="w-0">W.0 导言:本附录证什么</h2>
 <p>本附录是《界限论》的数学地基。剥去一切图景与旁注,它有<strong>一个主结果</strong>,在<strong>三个方向</strong>上展开:</p>
@@ -141,7 +162,7 @@
 <p>账本 \(\mathcal{A}_{\text{phys}}\)=<strong>稳定子代数</strong>。&quot;MASA&quot;一词盖住四条独立条件:</p>
 <table border="1" cellpadding="6" cellspacing="0"><tr><td>条件</td><td>内容</td><td>谁要求</td></tr><tr><td>稳定</td><td>\(\sigma_t^{\omega^*}(\mathcal{A})=\mathcal{A}\)</td><td>学习流(Takesaki:⟺有保态期望)。<strong>幂等的全部要求</strong></td></tr><tr><td>阿贝尔</td><td>对易</td><td>经典性(格式,<a href="#w-1-2" class="w-ref">W.1.2</a>)</td></tr><tr><td>迷向平凡</td><td>\(\mathcal{A}'\cap\mathcal{M}=\mathcal{A}\)</td><td>**只有 \([\sigma]\) 的 FM 定义要**(已蕴含阿贝尔)</td></tr><tr><td>生成</td><td>\(\mathcal{N}(\mathcal{A})''=\mathcal{M}\)</td><td>无人要求(=&quot;理解流展开到底&quot;)</td></tr></table>
 <p>Cartan=阿贝尔∧迷向平凡∧生成(∧期望)。<strong>幂等≠MASA。</strong></p>
-<p><strong>Remark(稳定 ≠ 不变,全篇通用约定)。</strong> &quot;稳定&quot;指 \(\sigma_t^{\omega^*}(\mathcal{A})=\mathcal{A}\):模流把集合 \(\mathcal{A}\) <strong>搬回自己</strong>(作为集合不动),<strong>允许内部逐点被搅动</strong>。&quot;不变&quot;指逐点不动 \(\sigma_t^{\omega^*}(x)=x\ \forall x\in\mathcal{A}\),即 \(\mathcal{A}\subseteq\mathcal{M}^{\omega^*}\)(中心化子)。两者天差地别:模流<strong>遍历</strong>时中心化子 \(\mathcal{M}^{\omega^*}=\mathbb{C}1\) 塌成标量,故&quot;不变&quot;的非平凡子代数几乎没有;而&quot;稳定&quot;的子代数丰富(整个 \(\mathcal{M}\) 就稳定)。<strong>账本要的是稳定(集合搬回、不塌),不是不变</strong>——物体能延续(稳定)不等于逐点冻结(不变)。凡见&quot;某子代数在 III₁ 遍历时塌成 \(\mathbb{C}1\)&quot;的论证,先分清它假设的是稳定还是不变:若结论只对&quot;不变&quot;成立,就伤不到&quot;稳定&quot;的账本。<sup><a href="#fn-stabinv" id="fnref-stabinv" class="fn-ref">[stabinv]</a></sup></p>
+<p><strong>Remark(稳定 ≠ 不变,全篇通用约定)。</strong> &quot;稳定&quot;指 \(\sigma_t^{\omega^*}(\mathcal{A})=\mathcal{A}\):模流把集合 \(\mathcal{A}\) <strong>搬回自己</strong>(作为集合不动),<strong>允许内部逐点被搅动</strong>。&quot;不变&quot;指逐点不动 \(\sigma_t^{\omega^*}(x)=x\ \forall x\in\mathcal{A}\),即 \(\mathcal{A}\subseteq\mathcal{M}^{\omega^*}\)(中心化子)。两者天差地别:模流<strong>遍历</strong>时中心化子 \(\mathcal{M}^{\omega^*}=\mathbb{C}1\) 塌成标量,故&quot;不变&quot;的非平凡子代数几乎没有;而&quot;稳定&quot;的子代数丰富(整个 \(\mathcal{M}\) 就稳定)。<strong>账本要的是稳定(集合搬回、不塌),不是不变</strong>——物体能延续(稳定)不等于逐点冻结(不变)。凡见&quot;某子代数在 III₁ 遍历时塌成 \(\mathbb{C}1\)&quot;的论证,先分清它假设的是稳定还是不变:若结论只对&quot;不变&quot;成立,就伤不到&quot;稳定&quot;的账本。<sup><a href="#fn-stabinv" id="fnref-stabinv" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-stabinv')">[stabinv]</a></sup></p>
 <p>*(以下 <a href="#w-2" class="w-ref">W.2</a> 全节自 v5.6 之 <a href="#w-3" class="w-ref">W.3</a> 整体平移、零改,仅改编号。)*</p>
 <p><strong>前置理由=承重隔离</strong>:以下主路四步一次不用 \([\sigma]\);\((\star)\) 塌下砸 <a href="#w-4" class="w-ref">W.4</a> 及三/四/七章,砸不到这里。</p>
 <h3 id="w-1-3">W.1.3 账本层结构:一行定理、视域、三层、&quot;已知&quot;</h3>
@@ -169,7 +190,7 @@
 \end{aligned}\]</div>
 <p><strong>边界怎么来(枢纽)</strong>:\(s_0\) 不能靠&quot;模流流到哪&quot;来标——模流双向、无内禀&quot;此刻&quot;(无绝对现在);它只能被给予。&quot;已知&quot;之所以<strong>有边界</strong>(不等于全部),正因为 \(s_0\) 之后的滤流不由此刻决定(要理解流 \(\mathcal{N}\) 展开、纳入尚未被给予的材料)——这就是未来不可知。<strong>已知是被它的未知边界定义的;边界的不可逾越 = 未来不可知。</strong> 反证:若未来可知,滤流全程由此刻定,已知=全部,&quot;已知/全部&quot;的区分消失。</p>
 <h4 id="w-1-3-7">W.1.3.7 &quot;已知&quot;定义的核验:五条体检与两流不焊</h4>
-<p><strong>严谨性体检(五条,全过)</strong>:(a)<strong>不依赖几何</strong>——全是子代数/模论,无度规无 \(D\);(b)<strong>不偏迹</strong>——用相对熵(相对)或序(无量),不用迹(绝对);(c)**不押 \(\omega^*\) 的值**——\(s_0\) 标&quot;链上哪一节&quot;、不标数值,序是代数事实;(d)**节不塌成 \(\mathbb{C}1\)**——要 \(\sigma_t\)-<strong>稳定</strong>(不塌)、非 \(\sigma_t\)-<strong>不变</strong>(才塌,见 <a href="#w-1-3" class="w-ref">W.1.3</a> <sup><a href="#fn-stabinv" class="fn-ref">[stabinv]</a></sup>);(e)\(s_0\) 不可内生 = <strong>无凸显态引理在滤流上的实例</strong>(不存在内禀构造挑出 \(s_0\))。</p>
+<p><strong>严谨性体检(五条,全过)</strong>:(a)<strong>不依赖几何</strong>——全是子代数/模论,无度规无 \(D\);(b)<strong>不偏迹</strong>——用相对熵(相对)或序(无量),不用迹(绝对);(c)**不押 \(\omega^*\) 的值**——\(s_0\) 标&quot;链上哪一节&quot;、不标数值,序是代数事实;(d)**节不塌成 \(\mathbb{C}1\)**——要 \(\sigma_t\)-<strong>稳定</strong>(不塌)、非 \(\sigma_t\)-<strong>不变</strong>(才塌,见 <a href="#w-1-3" class="w-ref">W.1.3</a> <sup><a href="#fn-stabinv" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-stabinv')">[stabinv]</a></sup>);(e)\(s_0\) 不可内生 = <strong>无凸显态引理在滤流上的实例</strong>(不存在内禀构造挑出 \(s_0\))。</p>
 <p><strong>两条流不焊</strong>:此滤流的参数 \(s\) 是学习流内禀参数(单向,来自 B1 落账不可逆),<strong>不是</strong>模流 \(t\)(双向);它<strong>不是</strong>半边模包含(那是理解流 \(\mathcal{N}\) 的结构,<a href="#w-2-6" class="w-ref">W.2.6</a>)。&quot;知识单向增长&quot;来自 B1、不来自 HSMI 的单向流。\(s\) 的精确身份(疑为 Araki 相对熵,与 Spohn H 定理单调性同源)及 \(s\)-\(t\) 关系属待算(<a href="#w-6" class="w-ref">W.6</a>);定义只用到&quot;存在增滤流 + 不可内生截断&quot;这一层,该层确定、足以严格定义&quot;已知&quot;。</p>
 <h2 id="w-1-star">W.1.★ 核心引理:无凸显态(全篇总源头)</h2>
 <p>本引理是全篇三个方向的共同源头。它初等、自含、不需可分性——却是&quot;无迹&quot;贯穿一切的那一处。三个主定理都在用它;单独陈述于此,下游各处引用而不重复。</p>
@@ -420,7 +441,7 @@
 <p><strong>核验结论</strong>：经核，本书法化子群 \(\{U:U\mathcal{N}U^*=\mathcal{N}\}\) 与 DHR–Doplicher–Roberts 从局域观测网重构出的紧致规范群 \(G\)（满足 \(\mathcal{A}=\mathcal{F}^G\)）<strong>不是同一个群，也不存在简单的子群/商群包含关系，分属不同的代数层级</strong>：</p>
 <p>- **DHR 规范群 \(G\)<strong>：从超选择扇区的表示范畴（张量范畴）Tannaka 型重构出的</strong>抽象紧致内部对称群**（如 \(U(1)\)、\(SU(N)\)），与时空几何无关，作用在重构出的场代数 \(\mathcal{F}\) 的内部自由度上。 - <strong>本书法化子群</strong>：von Neumann 代数 \(\mathcal{M}\) 上保 \(\mathcal{N}\) 的酉群，<strong>时空因果侧</strong>对象，根植于模理论（Borchers 平移、boost 经 BW = 模流）。</p>
 <p>二者作用对象、来源层级、物理意义都不同（一个内部对称、表示范畴层；一个时空因果、算子层）。这与 <strong>Coleman–Mandula 定理</strong>自洽：S 矩阵的对称群只能是 Poincaré 群与内部对称群的<strong>直积</strong>，时空对称与内部对称不可非平凡混合——内部的 \(G\) 与时空侧的法化子在结构上本就分离。</p>
-<blockquote><p>**\(G\) 不焊、且是派生对象(压缩;细目见脚注)**:曾有把 \(G\) 焊到法化子、或当作&quot;\([\sigma]\) 的群化&quot;的两种诱惑,均否决。\(G\) 是<strong>派生对象</strong>——完整输入只有三样(局域网 \(\mathcal{N}\)+真空 \(\omega^*\)+时空维度=视角 \((\omega^*,\mathcal{N})\)+几何),经 Doplicher–Roberts(Tannaka–Krein 型)重构而得;模流不作 \(G\) 重构的显式原料(仅经 \(\omega^*\) 间接在场),故 \(G\) 非&quot;差&quot;、非 \([\sigma]\) 群化。界限论不为 \(G\) 单设部件。<sup><a href="#fn-Gderived" id="fnref-Gderived" class="fn-ref">[Gderived]</a></sup></p></blockquote>
+<blockquote><p>**\(G\) 不焊、且是派生对象(压缩;细目见脚注)**:曾有把 \(G\) 焊到法化子、或当作&quot;\([\sigma]\) 的群化&quot;的两种诱惑,均否决。\(G\) 是<strong>派生对象</strong>——完整输入只有三样(局域网 \(\mathcal{N}\)+真空 \(\omega^*\)+时空维度=视角 \((\omega^*,\mathcal{N})\)+几何),经 Doplicher–Roberts(Tannaka–Krein 型)重构而得;模流不作 \(G\) 重构的显式原料(仅经 \(\omega^*\) 间接在场),故 \(G\) 非&quot;差&quot;、非 \([\sigma]\) 群化。界限论不为 \(G\) 单设部件。<sup><a href="#fn-Gderived" id="fnref-Gderived" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-Gderived')">[Gderived]</a></sup></p></blockquote>
 <p><strong>严谨度</strong>：拆解所依据的代数事实（BW = boost、谱条件 ⟺ 正能量平移半群、弯曲时空真空不唯一、Unruh/Hawking、DHR 重构）均为标准结果（A）；将它们<strong>定位</strong>到界限论部件上的读法，是结构同型旁注（元规则 M，非预言、非本书新定理）；&quot;脉络与物理规范的精确关系&quot;已核（不同层级、分述、不焊，与 Coleman–Mandula 自洽）；进一步撕开 \(G\) 已核为派生对象（输入=局域网 + 真空 + 时空维度=视角 \((\omega^*,\mathcal{N})\) + 几何，模流不作 \(G\) 重构的显式原料、仅经 \(\omega^*\) 间接在场，故 \(G\) 非原始颗粒、非&quot;差&quot;、非 \([\sigma]\) 群化），界限论不为其单设部件。</p>
 <h2 id="w-7">W.7 开放问题</h2>
 <p>1. **\((\star)\)【承重级·首位】**:存在遍历 \(\mathcal{R}\) 使 \(H^2(\mathcal{R},\mathbb{T})\neq0\)。归结 Popa 2007 <strong>§6.6</strong> 的期望式表述(带问号 \(H^n(\mathcal{R}_\sigma)\cong H^n(\Gamma,\mathbb{T})\)?;归结=给欠债具名出处,<strong>非还债</strong>)。<strong>三支改述</strong>(承载 \([\sigma]\) 的 \(\mathcal{R}\) 是舞台的、舞台型未定):舞台 III₁/半有限/型立前件;**\((\star_{\mathrm{II}_1})\)**=存在 pmp 遍历 \(\mathcal{R}\) 使 \(H^2\neq0\)=Popa 猜想原生形态(若舞台可 II₁,gap 消失)。护栏:有迹的是舞台非世界(\(\mathcal{M}\) 仍 III₁、理解流住 \(\mathcal{M}\),不违公理 I)。</p>
@@ -443,11 +464,13 @@
 <li id="fn-Gderived" class="footnote"><a href="#fnref-Gderived" class="fn-back" title="返回引用处">↩</a>\(G\) 派生性细目:\(G\) 由三输入经 DR 重构(扇区=局域网+真空/融合=代数复合/统计=维度);&quot;\(G\) 不长得像 \([\sigma]\)&quot;因 \([\sigma]\) 是嵌入撕不平的内核(一个差)、\(G\) 是&quot;给定视角与几何后允许哪些局域激发及其复合&quot;的组织结构;与 Coleman–Mandula(时空⊗内部对称直积)自洽。所据代数事实(BW=boost/谱条件⟺正能量平移/DHR 重构)均标准结果(A);定位到界限论部件为结构同型旁注(元规则 M,非预言)。核验:文献双核一致(不同层级、分述、不焊)。</li>
 </ol>
 </section>
+<script>var FN_CONTENT={"fn-stabinv": "<a href=\"#fnref-stabinv\" class=\"fn-back\" title=\"返回引用处\">↩</a>稳定 vs 不变的严格区分。\\(\\sigma_t\\)-<strong>稳定</strong>:\\(\\sigma_t(\\mathcal{A})=\\mathcal{A}\\) 作为集合(自同构把 \\(\\mathcal{A}\\) 映满 \\(\\mathcal{A}\\)),等价于存在保态条件期望 \\(E:\\mathcal{M}\\to\\mathcal{A}\\)(Takesaki 定理)。\\(\\sigma_t\\)-<strong>不变</strong>:\\(\\sigma_t(x)=x\\ \\forall x\\in\\mathcal{A}\\),即 \\(\\mathcal{A}\\subseteq\\mathcal{M}^{\\omega^*}\\)(模流不动点=中心化子)。III₁ 模流遍历 \\(\\iff\\mathcal{M}^{\\omega^*}=\\mathbb{C}1\\)(Connes–Størmer 型),此时&quot;不变&quot;子代数只有标量;而&quot;稳定&quot;子代数丰富(\\(\\mathcal{M}\\) 自身即稳定,任何有保态期望的子代数亦然)。二者独立:账本、增滤流各节要的是稳定(可延续、不塌),不是不变(逐点冻结)。", "fn-Gderived": "<a href=\"#fnref-Gderived\" class=\"fn-back\" title=\"返回引用处\">↩</a>\\(G\\) 派生性细目:\\(G\\) 由三输入经 DR 重构(扇区=局域网+真空/融合=代数复合/统计=维度);&quot;\\(G\\) 不长得像 \\([\\sigma]\\)&quot;因 \\([\\sigma]\\) 是嵌入撕不平的内核(一个差)、\\(G\\) 是&quot;给定视角与几何后允许哪些局域激发及其复合&quot;的组织结构;与 Coleman–Mandula(时空⊗内部对称直积)自洽。所据代数事实(BW=boost/谱条件⟺正能量平移/DHR 重构)均标准结果(A);定位到界限论部件为结构同型旁注(元规则 M,非预言)。核验:文献双核一致(不同层级、分述、不焊)。"};</script>
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -459,7 +482,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
 });
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
@@ -467,7 +490,40 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+    closeAllBubbles();
+  }
 });
+function closeAllBubbles() {
+  document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
+}
+function showFnBubble(event, fid) {
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){b.style.transition='';});
+  setTimeout(function(){b.style.opacity=1;b.style.transition='opacity .12s';},20);
+}
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

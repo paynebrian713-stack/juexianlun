@@ -10,7 +10,8 @@
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }
   h1 { font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }
-  h2 { font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }
+  h2 { font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
@@ -49,21 +50,40 @@
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
-  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }
+  .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }
+                    padding: 2rem 1.6rem 1rem; }
   .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
   .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  /* --- footnote bubble --- */
+  a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
+  a.fn-a:hover { text-decoration: underline; }
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
+  .fn-bubble-close:hover { color: #e0dcd4; }
+  .fn-bubble-arrow { position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }
+  .fn-bubble-arrow::after { content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -83,13 +103,14 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 <h1>第一章</h1>
 <p>你刚才亲眼看着一道流从满溢里被攥出来。现在，看它做事。</p>
-<p>它一旦流起来，就同时朝两个相反的方向做事。<sup><a href="#fn-premise" id="fnref-premise" class="fn-ref">[premise]</a></sup> 这一章把它分成方向相反的两股，给出各自的结构，再给出它们之间唯一能严格写下的那个关系。两股仍是无迹的一张脸——正因没有一把统一的尺子，同一道流才能朝相反两向走，而不被锁死。</p>
+<p>它一旦流起来，就同时朝两个相反的方向做事。<sup><a href="#fn-premise" id="fnref-premise" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-premise')">[premise]</a></sup> 这一章把它分成方向相反的两股，给出各自的结构，再给出它们之间唯一能严格写下的那个关系。两股仍是无迹的一张脸——正因没有一把统一的尺子，同一道流才能朝相反两向走，而不被锁死。</p>
 <p>这一章和第零章，是全书正面、丰盈的一半：有被活着的绵延、真实的流、被领受的当下。还不是边界。先领受这丰盈的一半，从第二章起再走向墙。</p>
 <h2 id="1-1-一道流-两种用法">1.1 一道流，两种用法</h2>
-<p>绵延只有一道；在代数上，它读作模流 \(\sigma_t^{\omega^*}\)（第零章）。两股流不是两道时间，是同一道流被朝两个相反方向使用。<sup><a href="#fn-tworead" id="fnref-tworead" class="fn-ref">[tworead]</a></sup></p>
+<p>绵延只有一道；在代数上，它读作模流 \(\sigma_t^{\omega^*}\)（第零章）。两股流不是两道时间，是同一道流被朝两个相反方向使用。<sup><a href="#fn-tworead" id="fnref-tworead" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-tworead')">[tworead]</a></sup></p>
 <p>在分清两股之前，先定下两个词。这台机器里，一切能被指认的读数，都算作一个<strong>算子</strong>；模流不停地向前，把这些算子一个个搅动、演化。而一批算子，如果在这套运算里自成一体、封闭不漏——乘起来、加起来都还落在里头——就叫一个<strong>子代数</strong>。两股流的分别，不在流本身，而在<strong>一个子代数被这道流怎么对待</strong>。</p>
 <p>学习流要把流过的当下，压成可以反复指认、可以共享的事实。它落脚的子代数，必须被这道流<strong>双侧保持</strong>——模流把它搅来搅去，它整个纹丝不动，还是它自己：</p>
 <div class="math-block">\[\sigma_t^{\omega^*}(\mathcal{A})=\mathcal{A}\qquad(\forall t\in\mathbb{R}).\]</div>
@@ -99,7 +120,7 @@
 <p>为什么学习非得双侧、理解非得单侧，不能反过来？这不是随意分派，是两件事各自的要求逼出来的。要可共享、可反复指认，就得对所有时刻都稳——那正是双侧保持。要有因果的方向、能顺着往回追，就得只朝一边收——那正是严格单侧。反过来分派，学习就不再是学习，理解也不再是理解。两个方向，是被&quot;可共享&quot;和&quot;有因果向&quot;这两件事各自钉死的。</p>
 <p>还有一个更根的问题，值得在这里就点破：为什么恰恰是<strong>两</strong>股，不是一股、也不是三股？有没有别的认知形式？完整的答案要到第五章&quot;历史一致性&quot;才说清，但根已经在这里——任何要维持历史一致性的认知，都被逼出、且只被逼出这两股。</p>
 <p>所谓维持历史一致性，就是能核对：&quot;此刻这一笔，和先前落定的，对不对得上？&quot;要能核对，缺一不可地需要两样东西。一样是一份落定下来、可以拿来对的记录——这就是学习流，朝前沉积，压出账本。另一样是一条能回到那份记录去对的路——这就是理解流，朝后追溯，把尺子搬回过去。没沉积，就没记录可对（能回却无处回）；没追溯，记录在也够不着（有记录却核不了）。所以&quot;一份可核对的记录，加上回去核对的能力&quot;，恰好就是这两股方向相反的流。历史一致性不是额外加给两股的任务，它本就是这两股非有不可的理由。</p>
-<p>至于为什么没有第三股：这道模流的结构——一道流，加它的单侧因果窗口——供出的正是这一对，再没有第三个独立方向可分，维持一致性也不需要第三个。所以在这个框架里，&quot;认知&quot;就是&quot;在稳定记录上维持历史一致性&quot;，而这件事必然长成这两股的样子。不是我们没想到别的认知形式，是&quot;维持一致&quot;这个要求本身，把结构定死在了记录与回溯这两股上。<sup><a href="#fn-p1" id="fnref-p1" class="fn-ref">[p1]</a></sup></p>
+<p>至于为什么没有第三股：这道模流的结构——一道流，加它的单侧因果窗口——供出的正是这一对，再没有第三个独立方向可分，维持一致性也不需要第三个。所以在这个框架里，&quot;认知&quot;就是&quot;在稳定记录上维持历史一致性&quot;，而这件事必然长成这两股的样子。不是我们没想到别的认知形式，是&quot;维持一致&quot;这个要求本身，把结构定死在了记录与回溯这两股上。<sup><a href="#fn-p1" id="fnref-p1" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p1')">[p1]</a></sup></p>
 <blockquote><p>你正看着桌上的一只杯子。<br>
 <br>
 朝前的那一股在做什么？它在把这只杯子按住。把它从此刻这道正在流走的绵延里按住、压实——压成一个明天还认得、能告诉别人的事实：*它是一个杯子，它在那里*。这一按，杯子就从&quot;正在被看着的这一片流&quot;里，变成了一件东西。它站住了。它可以被指认，可以被反复回来找到，可以被你说给一个不在场的人听。<br>
@@ -123,7 +144,7 @@
 <p>压到底的极限 \(\mathcal{A}_{\text{phys}}=\bigcap_k\mathcal{A}_k\)，是一个可对易的子代数（诸读数彼此相容、可同时确定），弥散无原子（无迹⟹无最小投影）。它就是<strong>账本</strong>：一套换任何视角都稳、可反复指认、可一字不差传给别人的事实。学习流的产物，是可定域的事实（split<sup><a href="#fn-split" id="fnref-split" class="fn-ref">[split]</a></sup>）——&quot;它在那里，可指认&quot;。</p>
 <p>这套压缩落到底，就是一个到账本的保态条件期望 \(E:\mathcal{M}\to\mathcal{A}_{\text{phys}}\)（\(\mathcal{A}_{\text{phys}}\) 模不变，故 \(E\) 存在，Takesaki）。它有一个不起眼、却要紧的性质——<strong>幂等</strong>：</p>
 <div class="math-block">\[E^2=E,\qquad E(x)=x\iff x\in\mathcal{A}_{\text{phys}}.\]</div>
-<p>幂等的意思是：一件事一旦被压成账本里的事实，再压一次，纹丝不动。这正是<strong>化石</strong>&quot;死而可靠&quot;的代数形——落定的事实是 \(E\) 的不动点，稳定、可反复指认、可一字不差传出去。账本，就是这些化石的总目录。<sup><a href="#fn-p3" id="fnref-p3" class="fn-ref">[p3]</a></sup><sup><a href="#fn-p2" id="fnref-p2" class="fn-ref">[p2]</a></sup><sup><a href="#fn-p4" id="fnref-p4" class="fn-ref">[p4]</a></sup></p>
+<p>幂等的意思是：一件事一旦被压成账本里的事实，再压一次，纹丝不动。这正是<strong>化石</strong>&quot;死而可靠&quot;的代数形——落定的事实是 \(E\) 的不动点，稳定、可反复指认、可一字不差传出去。账本，就是这些化石的总目录。<sup><a href="#fn-p3" id="fnref-p3" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p3')">[p3]</a></sup><sup><a href="#fn-p2" id="fnref-p2" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p2')">[p2]</a></sup><sup><a href="#fn-p4" id="fnref-p4" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p4')">[p4]</a></sup></p>
 <blockquote><p>想一件你已经不会做的事。<br>
 <br>
 比如骑车。你第一次骑的时候，每一下都是活的：车把往哪边偏了半寸，重心正在往左滑，脚要不要现在蹬——全在当下临响应，处处费力。那时候你在<strong>理解</strong>骑车。<br>
@@ -141,7 +162,7 @@
 可靠与可传，是拿凝固换来的。<br>
 <br>
 你每学会一样东西，就有一样东西死在了你身上。</p></blockquote>
-<p>传得过去的，到底是什么？不是你<strong>从哪个角度看</strong>——你站的位置、你的视角，这些换个人就换了，谁也没法把自己的视角原样搬进别人脑子里。传得过去的，是<strong>事实之间怎么连</strong>：一旦你把两处本以为无关的东西连成同一套结构（苹果落地和月亮绕地，是同一道引力），这套连法就能一字不差地交到下一个人手里，让他不必从头再连一遍。视角随人而逝，连法却可以千年不朽——教育、科学之所以能累积，靠的正是这个：传的从来不是坐标，是连法。<sup><a href="#fn-lian" id="fnref-lian" class="fn-ref">[lian]</a></sup></p>
+<p>传得过去的，到底是什么？不是你<strong>从哪个角度看</strong>——你站的位置、你的视角，这些换个人就换了，谁也没法把自己的视角原样搬进别人脑子里。传得过去的，是<strong>事实之间怎么连</strong>：一旦你把两处本以为无关的东西连成同一套结构（苹果落地和月亮绕地，是同一道引力），这套连法就能一字不差地交到下一个人手里，让他不必从头再连一遍。视角随人而逝，连法却可以千年不朽——教育、科学之所以能累积，靠的正是这个：传的从来不是坐标，是连法。<sup><a href="#fn-lian" id="fnref-lian" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-lian')">[lian]</a></sup></p>
 <h2 id="1-3-理解流-朝后-追溯">1.3 理解流：朝后，追溯</h2>
 <p>理解流则完全相反。学习流把事实定下来；理解流做的是另一件事——顺着一件正发生的事，往回摸它的来路：这事怎么来的、和刚才那些牵连在哪。你懂一件事，从来不是孤零零地懂它，是把它接回它所来自的那一整片脉络。这个&quot;顺着往回摸、把当下接回它的来路&quot;的过程，就是理解流。它朝后，把当下追溯成可理解的曾在。</p>
 <p>代数上，理解流的载体，是一个<strong>半边模包含</strong>的子代数 \(\mathcal{N}\)。它不是从 \(\omega^*\) 构造出来的——它是被给予的因果窗口（前件的显形，明标）。给定这个 \(\mathcal{N}\)（满足 \(\sigma_t(\mathcal{N})\subseteq\mathcal{N}\)，\(t\le0\)，非退化），有一条定理接管其余一切：这样一个半边模包含，导出一个正能量的平移半群</p>
@@ -151,12 +172,12 @@
 <div class="math-block">\[\mathcal{N}_\lambda:=\sigma_{-\lambda}^{\omega^*}(\mathcal{N}),\qquad\lambda\ge0.\]</div>
 <p>\(\lambda\) 是反向时间，越大，追溯的曾在越久远。这个序列有三条性质：</p>
 <p>1. <strong>严格递减</strong>：\(\mu>\lambda\Rightarrow\mathcal{N}_\mu\subsetneq\mathcal{N}_\lambda\)。每往回一步，可理解的脉络就收窄一点——越靠源头，分化出来的结构越少。（由半边模包含的<strong>严格</strong>单侧性直接得出。） 2. <strong>极限被模流双侧保持</strong>：\(\mathcal{N}_{-\infty}:=\bigcap_{\lambda\ge0}\mathcal{N}_\lambda\) 满足 \(\sigma_t(\mathcal{N}_{-\infty})=\mathcal{N}_{-\infty}\)（模流是自同构、与交运算交换）。 3. <strong>极限落在不动核</strong>：\(\mathcal{N}_{-\infty}\subseteq\mathcal{M}^{\omega^*}\)，其中 \(\mathcal{M}^{\omega^*}\) 是模流的不动点代数（中心化子）。这是 Connes 关于 \(\text{III}_1\) 模流的遍历性质的准确用法<sup><a href="#fn-connes-erg" id="fnref-connes-erg" class="fn-ref">[connes-erg]</a></sup>：被模流双侧保持的东西，必落在中心化子里。**当模流遍历时（中心化子平凡，\(\mathcal{M}^{\omega^*}=\mathbb{C}1\)），极限退化为 \(\mathbb{C}1\)；当模流非遍历时，极限落在那个非平凡的不动核里。**</p>
-<p>第三条要说准，因为它容易被写过头。追溯的终点，不是一个&quot;绝对的虚无点&quot;。它是那个再不分化、可反复回到的不动底子——遍历时，它收缩成只含恒等；非遍历时，它就是第零章那个中心化子<sup><a href="#fn-p5" id="fnref-p5" class="fn-ref">[p5]</a></sup>。所以&quot;追溯到底&quot;归于的，是&quot;再没有可分化结构&quot;的极限，落在不动核里。把它说成&quot;归于虚无&quot;，是过强了。</p>
+<p>第三条要说准，因为它容易被写过头。追溯的终点，不是一个&quot;绝对的虚无点&quot;。它是那个再不分化、可反复回到的不动底子——遍历时，它收缩成只含恒等；非遍历时，它就是第零章那个中心化子<sup><a href="#fn-p5" id="fnref-p5" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p5')">[p5]</a></sup>。所以&quot;追溯到底&quot;归于的，是&quot;再没有可分化结构&quot;的极限，落在不动核里。把它说成&quot;归于虚无&quot;，是过强了。</p>
 <p id="scene-zong"><strong>为什么理解流只能倒着写。</strong> 上面的反向收缩序列，是从当下的窗口 \(\mathcal{N}\) 出发、朝过去 \(\sigma_{-\lambda}\) 定义的。反过来，想从不动核朝前&quot;积出&quot; \(\mathcal{N}\)，是做不到的：正向的 \(\sigma_{+\lambda}(\mathcal{N})\supsetneq\mathcal{N}\)（\(\lambda>0\)）需要一批多出来的生成元，它们落在当下窗口之外、尚未被给予（半边模包含只保证 \(t\le0\) 方向落在 \(\mathcal{N}\) 内）。所以从当下朝前重建的那个映射，不是&quot;算不准&quot;，是根本没有定义域——它要用的材料不在场（这正接第三章：未来是&quot;无物&quot;，不是&quot;难算&quot;）。收缩路径确定、可算到底；展开映射，无从落笔。所以理解流的动力学，起点定在当下、终点定在过去的不动核，方向永远是从现在往回。</p>
 <p>这不是数学的别扭，是&quot;理解&quot;这件事的本性：理解永远是对已经在此者的把握——&quot;原来如此&quot;这个词，已经泄露了方向。一个朝前积的&quot;理解动力学&quot;，概念上就矛盾：那不是理解，是预言，而预言是没有的（选择算不尽，第四章）。</p>
 <p>每往回追一步，&quot;多出来&quot;的那部分结构，可以精确刻画。相对交换子</p>
 <div class="math-block">\[\mathcal{C}_\delta=\mathcal{N}_\lambda'\cap\mathcal{N}_{\lambda+\delta}\]</div>
-<p>里的酉元 \(u\) 与 \(\mathcal{N}_\lambda\) 对易，故 \(u\mathcal{N}_\lambda u^{*}=\mathcal{N}_\lambda\)——它保持子代数，是 \(\mathcal{N}_\lambda\) 的一个<strong>法化子</strong>。这些结晶出来、保持已稳定结构的酉元，是脉络的胚胎。<sup><a href="#fn-p6" id="fnref-p6" class="fn-ref">[p6]</a></sup></p>
+<p>里的酉元 \(u\) 与 \(\mathcal{N}_\lambda\) 对易，故 \(u\mathcal{N}_\lambda u^{*}=\mathcal{N}_\lambda\)——它保持子代数，是 \(\mathcal{N}_\lambda\) 的一个<strong>法化子</strong>。这些结晶出来、保持已稳定结构的酉元，是脉络的胚胎。<sup><a href="#fn-p6" id="fnref-p6" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p6')">[p6]</a></sup></p>
 <p>（接上一节那句接口的话，把另一半也埋下：学习流给的是&quot;有哪些事实&quot;（对象），理解这一侧给的，是&quot;这些事实怎么连起来&quot;——<strong>态射</strong>。这些保持账本的酉元（法化子）结晶出来的连法，正是后面那个&quot;世界&quot;里事实与事实之间的箭；它们织成的那张网，就是第五章要立的那个世界的骨架。这里还要先说一句要紧的：那个够不到的<strong>他者</strong>，将来就住在这一层——不在&quot;有哪些事实&quot;里，而在&quot;事实怎么连&quot;里。事实永远是事实，从不长出他者；他者是连法里那个换任何视角都拧不平的扭。它为什么偏住这一层，第四、五章会说清；此处只标出它的门牌。）</p>
 <blockquote><p>有人叫你的名字。你回过头。<br>
 <br>
@@ -176,7 +197,7 @@
 <h2 id="1-4-两股的唯一关系-换序不对易">1.4 两股的唯一关系：换序不对易</h2>
 <p>两股都写清了。它们之间是什么关系？</p>
 <p>这里容易生出一个错觉：以为两股在拔河——学习压紧，理解松开，一拉一拽。并非如此。两股不是一对相互作用的力：学习流朝前沉积（吃的是账本 \(\mathcal{A}_{\text{phys}}\)），理解流朝后收缩（吃的是因果窗口 \(\mathcal{N}\)），各自从同一道模流派生、各有自己的输入，谁的动力学都不把另一股当变量代进去——写不出、也不需要一个&quot;学习流如何作用于理解流&quot;的耦合方程。所以&quot;理解流是学习流的刹车&quot;这类拟力学的话，本书不用：那是把两股当成两个在同一根轴上对推的东西，而它们根本不在同一根轴上对推。</p>
-<p>它们之间<strong>能</strong>严格写下的关系，只有一个，而且不是&quot;作用力&quot;，是<strong>换序</strong>：先学习再理解，和先理解再学习，落点不一样。这个先后不对易，才是两股唯一可证的交涉——下一段把它写成一行包含式。<sup><a href="#fn-strictness" id="fnref-strictness" class="fn-ref">[strictness]</a></sup></p>
+<p>它们之间<strong>能</strong>严格写下的关系，只有一个，而且不是&quot;作用力&quot;，是<strong>换序</strong>：先学习再理解，和先理解再学习，落点不一样。这个先后不对易，才是两股唯一可证的交涉——下一段把它写成一行包含式。<sup><a href="#fn-strictness" id="fnref-strictness" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-strictness')">[strictness]</a></sup></p>
 <p>两股之间<strong>唯一能严格写下的关系</strong>，是次序。学习流的压缩 \(E:\mathcal{M}\to\mathcal{A}_{\text{phys}}\) 和理解流的收缩 \(\sigma_{-\lambda}\)，一起作用时，先做哪个，结果不同，而且有一个严格的包含：</p>
 <div class="math-block">\[\mathcal{A}_{\text{phys}}\cap\sigma_{-\lambda}(\mathcal{N})\ \subseteq\ E\big(\sigma_{-\lambda}(\mathcal{N})\big).\]</div>
 <p>证起来一行：左边的 \(x\) 既在 \(\mathcal{A}_{\text{phys}}\)（故 \(E(x)=x\)），又在 \(\sigma_{-\lambda}(\mathcal{N})\)，于是 \(x=E(x)\in E(\sigma_{-\lambda}(\mathcal{N}))\)。左边是&quot;先取事实、再看落在收缩窗口里的&quot;——真实可追溯的痕迹；右边是&quot;先收缩、再压成对易&quot;——对过去的对易化解释。真实的痕迹，落在对它的解释之内：解释里总沉着一层已经沉积过的事实，去不掉。（当有真理解发生时——\(\sigma_{-\lambda}(\mathcal{N})\) 确有非对易部分被 \(E\) 压进 \(\mathcal{A}_{\text{phys}}\)——这个包含是严格的。）</p>
@@ -225,8 +246,8 @@
 <p>收一下。绵延是唯一的一道流；它分成两股，是这道流的两种相反用法。学习流朝双侧保持的方向压，沉积成可指认、可共享的事实（\(\mathcal{A}_{\text{phys}}\)、split）；理解流朝严格单侧的方向收，追溯成可理解的曾在，终点落在可反复回到的不动核，每步结晶出脉络的胚胎。两股不拔河、各自独立，唯一能严格陈述的关系，是换序不对易。当下不是独立的时刻，是两股配合、相对于基线锚 \(\omega^*\) 铺出的产物；能倒着够到的是过去，未来定义不出。</p>
 <p>追溯不是流自己要回头——是你，拿着此刻，回头去要一个说法。</p>
 <p>两股的产物之所以稳得住、不用每刻重搭，靠的是第三样动作——一层不偏不倚的沉淀。它把学习流压出的、理解流展开的，都沉淀成稳定的背景，成为那层世界的厚度（世界之肉）。</p>
-<p>这里正好把绵延上做的事，收成一个总数。一道被给予的绵延，被以<strong>三种方式操持</strong>：学习流朝双侧保持的方向压（跌落成对易的事实）；理解流朝严格单侧的方向收（单侧展开成脉络）；还有这第三样——不可逆的沉淀，把前两者的产物松弛成稳定的印记。前两种是本章的主题（对仗与追溯）。第三种只在这里露个头：它是一层带摩擦、不可逆的松弛，机制（它为什么不可逆、怎样撑起身体与感受）留到第四章。这里只领受它在两流处的功能：让沉积与追溯的产物留得下来。<sup><a href="#fn-p7" id="fnref-p7" class="fn-ref">[p7]</a></sup></p>
-<p>这三样为什么恰好是这三样，有一个干净的结构理由。前两样都在用同一道<strong>可逆</strong>的模流：学习流用它的双侧不变方向，理解流用它的单侧收缩方向——它们是那道可逆之流的两个干净用法。第三样不同：它不取模流的任何方向，它本身就是<strong>不可逆</strong>的耗散。在一切可能的动力学里，能被写成那两个干净方向的是特殊的，更一般的动力学，都是这种不可逆的松弛。所以&quot;三种操持&quot;不是随手凑的三样，是&quot;可逆模流的两个方向，加上不可逆耗散的其余&quot;这个干净的三分。还要记一句、留待第四章说透：这第三样耗散动力学，给不出一个独立的通用公式——它必须相对于那个基线态 \(\omega^*\)（相对模流的结构）才定得下型，脱开它就无从写起。<sup><a href="#fn-p8" id="fnref-p8" class="fn-ref">[p8]</a></sup></p>
+<p>这里正好把绵延上做的事，收成一个总数。一道被给予的绵延，被以<strong>三种方式操持</strong>：学习流朝双侧保持的方向压（跌落成对易的事实）；理解流朝严格单侧的方向收（单侧展开成脉络）；还有这第三样——不可逆的沉淀，把前两者的产物松弛成稳定的印记。前两种是本章的主题（对仗与追溯）。第三种只在这里露个头：它是一层带摩擦、不可逆的松弛，机制（它为什么不可逆、怎样撑起身体与感受）留到第四章。这里只领受它在两流处的功能：让沉积与追溯的产物留得下来。<sup><a href="#fn-p7" id="fnref-p7" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p7')">[p7]</a></sup></p>
+<p>这三样为什么恰好是这三样，有一个干净的结构理由。前两样都在用同一道<strong>可逆</strong>的模流：学习流用它的双侧不变方向，理解流用它的单侧收缩方向——它们是那道可逆之流的两个干净用法。第三样不同：它不取模流的任何方向，它本身就是<strong>不可逆</strong>的耗散。在一切可能的动力学里，能被写成那两个干净方向的是特殊的，更一般的动力学，都是这种不可逆的松弛。所以&quot;三种操持&quot;不是随手凑的三样，是&quot;可逆模流的两个方向，加上不可逆耗散的其余&quot;这个干净的三分。还要记一句、留待第四章说透：这第三样耗散动力学，给不出一个独立的通用公式——它必须相对于那个基线态 \(\omega^*\)（相对模流的结构）才定得下型，脱开它就无从写起。<sup><a href="#fn-p8" id="fnref-p8" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-p8')">[p8]</a></sup></p>
 <p>这些都是正面的、被给予的、可以第一人称活出的。这是边界之内，丰盈的一半。</p>
 <p>现在，边界的第一道追问已经在门口了。两股方向相反、合不成一条子代数（上面那组对仗）——可也许，子代数合不成，动力学上还能合成一条？也许存在一个统一的方程，把学习和理解一并写下、不假外求？下一章问这个。答案，会是全书第一道墙。</p>
 <section class="footnotes"><h2>脚注</h2>
@@ -255,11 +276,13 @@
 <li id="fn-connes-erg" class="footnote"><a href="#fnref-connes-erg" class="fn-back" title="返回引用处">↩</a>\(\text{III}_1\) 因子模自同构群的遍历性质、被双侧保持子代数落在中心化子内：Connes, A., *Une classification des facteurs de type* III, Ann. Sci. ÉNS <strong>6</strong> (1973), 133–252；中心化子（模流不动点代数）可非平凡，见第零章 0.C″（自由 Araki–Woods 因子为例）。故极限一般为 \(\subseteq\mathcal{M}^{\omega^*}\)，遍历情形退化为 \(\mathbb{C}1\)。</li>
 </ol>
 </section>
+<script>var FN_CONTENT={"fn-premise": "<a href=\"#fnref-premise\" class=\"fn-back\" title=\"返回引用处\">↩</a>先划清本章证什么、不证什么。<strong>两股能分，是本书的讨论范围前件，不是一条结构定理</strong>。锚定生出绵延（第零章）是定理；但&quot;绵延在场就一定分得出双侧保持的一扇与严格单侧的一扇&quot;——即一般 \\(\\text{III}_1\\) 上真正的半边模包含必然存在——不是定理，是尚开放的问题（附录 W.2.1″）。所以本章不宣称&quot;处处必能分&quot;，只处理<strong>给定这样一具体两股配对在场</strong>时的结构。<strong>而此刻分成的这一具体配对——这一个账本、这一个理解窗口——更是被抛的前件</strong>：它取决于这个认知实际学过、实际在理解什么，是经验内容，退不到源头去看它怎么被造出来（和&quot;锚定已经发生&quot;同级）。所以下文凡&quot;设某个具体的账本／窗口被给予&quot;，都是这条前件的显形，不冒充定理。本章证的，是给定这一配对，两股各自的代数结构、及它们之间能严格说清的关系。", "fn-tworead": "<a href=\"#fnref-tworead\" class=\"fn-back\" title=\"返回引用处\">↩</a>还有一句关于这道流的话，与上面两股的方向无关，却要紧：它是两种读法（态读、算子读）共用的同一道，而且两读严格一致——那个恒等式 \\(\\omega(\\sigma_t a)=(\\omega\\circ\\sigma_t)(a)\\) 本身只是结合律。在别处，&quot;时间挂在算子上&quot;和&quot;时间挂在态上&quot;能对上，靠的是外面先摆好一只钟（一个外部给定的哈密顿量），两读一致是白捡的。可这里没有外部的钟：流是那个态自己经模结构生出来的（Tomita–Takesaki）。所以两读一致，在这里才成其为一个可证的事实，不是一句同义反复。这也是第二章主客两读的根——内与外，是同一道模流的两读，不是两样东西；胡塞尔&quot;内时间意识&quot;背后那个&quot;客观外时间&quot;的位置，在这里是空的。（说&quot;空&quot;的是<strong>外部先摆好的一只钟</strong>——独立于任何态、先于绵延就在那里的哈密顿量；<strong>不是</strong>第零章那条公共方向——那条恰恰非空，是所有态共认的客观时间。外部的钟空，公共的流实：两个&quot;客观&quot;不是一回事，公共≠外部先摆好的钟。）", "fn-p1": "<a href=\"#fnref-p1\" class=\"fn-back\" title=\"返回引用处\">↩</a>这两股还必须被稳稳维持成一个远离平衡的稳态，才不散——那是第四章的事。这里先立一句：两股由历史一致性逼出，且仅此两股。", "fn-lian": "<a href=\"#fnref-lian\" class=\"fn-back\" title=\"返回引用处\">↩</a>用第四章的话说：这里&quot;传得过去的连法 vs 传不过去的视角&quot;，正是他者那趟搬运 \\(u\\) 的两面在&quot;学习/传递&quot;侧的显影——<strong>可换算面</strong>（视角差：搬参考态、搬因果窗口，可抵平、不带新信息）随人而逝；<strong>不可换算面</strong>（新连法，含此前没有的结构信息）才是被传递、被累积的东西。此处不预支&quot;他者&quot;概念（留第四章 §4.2½），只取&quot;传的是连法不是坐标&quot;这一面——它已由本节化石主题（可传=已凝固的结构）直接给出，不需额外假设。", "fn-p3": "<a href=\"#fnref-p3\" class=\"fn-back\" title=\"返回引用处\">↩</a>这个 \\(E\\) 还有另一面：它幂等，稳住了已落定的，却也丢掉了没落进账本的那部分。把压下去的再原样包含回来，一般 \\(\\iota\\circ E\\neq\\mathrm{id}\\)，那道丢掉的亏量是第二章的事。同一个 \\(E\\)：幂等管&quot;落定即稳&quot;，非满管&quot;丢掉即失&quot;。", "fn-p2": "<a href=\"#fnref-p2\" class=\"fn-back\" title=\"返回引用处\">↩</a>一处诚实标注：这样一列 \\(\\{\\mathcal{A}_k\\}\\) 存在，就是&quot;学习在发生&quot;这一前件的形式。本章不从虚空造出它，只在它被给予时，刻画它必然满足的结构——模不变、信息单调、极限对易。\\(\\mathcal{A}_{\\text{phys}}\\) 在这里只用到这几条最小性质；它在整个 \\(\\mathcal{M}\\) 里是否&quot;正则&quot;，是另一层问题，本章不需要、也不预支。", "fn-p4": "<a href=\"#fnref-p4\" class=\"fn-back\" title=\"返回引用处\">↩</a>还有一句接口的话，先埋在这里：学习流沉积出的这些点——账本 \\(\\mathcal{A}_{\\text{phys}}\\) 里那些可反复指认的事实——就是后面第五、六章那个&quot;世界&quot;的<strong>对象</strong>。它们是判定所关于的东西，是&quot;有哪些事实&quot;这一半。至于这些事实之间怎么连、判它们真不真，是另一半，由下一节那股流来管。学习流给的是&quot;判什么&quot;，还不是&quot;怎么判&quot;。", "fn-p5": "<a href=\"#fnref-p5\" class=\"fn-back\" title=\"返回引用处\">↩</a>可反复回到、做流不变比较的不动参照，被动综合依托其上。", "fn-p6": "<a href=\"#fnref-p6\" class=\"fn-back\" title=\"返回引用处\">↩</a>注意平移算子 \\(U(s)\\) 不是法化子：它真收缩窗口 \\(U(s)\\mathcal{N}U(s)^*\\subsetneq\\mathcal{N}\\)，是搬动，不是保持。脉络的接榫是相对交换子里的法化子，不是平移。胚胎怎么长成可携带的脉络，是第七章的事。", "fn-p7": "<a href=\"#fnref-p7\" class=\"fn-back\" title=\"返回引用处\">↩</a>注意，这第三样不是&quot;学习流和理解流相互作用&quot;——两股不耦合，已经说过。它是独立地沉淀两股各自的产物，不是让两股彼此拉扯。", "fn-strictness": "<a href=\"#fnref-strictness\" class=\"fn-back\" title=\"返回引用处\">↩</a>要说清分寸：这行包含式证的是&quot;两步换个次序结果就变&quot;，<strong>不是</strong>&quot;两股互不相干&quot;那种更强的独立性——它们在记账舞台 \\(\\mathcal{M}_{\\mathcal{A}}\\) 上是相接的，只是接的方式让次序有意义。至于&quot;能不能干脆用一个自给自足的统一动力学把两股一起驱动&quot;——那是更强的一问，答案是不能，但那要靠第二章的中心定理，不在这一章、也不靠什么&quot;统一的尺退化成常数&quot;的话来搪塞。", "fn-p8": "<a href=\"#fnref-p8\" class=\"fn-back\" title=\"返回引用处\">↩</a>也顺带点一件贯穿全书的事：本章从头到尾只用了<strong>一个</strong>态——基线 \\(\\omega^*\\)。一个态，恰好只写得出这两股流；要出现度量、比较、&quot;我&quot;，得等<strong>第二个</strong>态进场，那是第二章的事。"};</script>
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -271,7 +294,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
 });
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
@@ -279,7 +302,40 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+    closeAllBubbles();
+  }
 });
+function closeAllBubbles() {
+  document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
+}
+function showFnBubble(event, fid) {
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){b.style.transition='';});
+  setTimeout(function(){b.style.opacity=1;b.style.transition='opacity .12s';},20);
+}
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

@@ -10,7 +10,8 @@
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }
   h1 { font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }
-  h2 { font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }
+  h2 { font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
@@ -49,21 +50,40 @@
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
-  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }
+  .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }
+                    padding: 2rem 1.6rem 1rem; }
   .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
   .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  /* --- footnote bubble --- */
+  a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
+  a.fn-a:hover { text-decoration: underline; }
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
+  .fn-bubble-close:hover { color: #e0dcd4; }
+  .fn-bubble-arrow { position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }
+  .fn-bubble-arrow::after { content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -83,7 +103,8 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 <h1>第八章</h1>
 <h2 id="8-0-承接-一个奇怪的倒置">8.0 承接：一个奇怪的倒置</h2>
 <p>物理学越往深里走，世界越不像你眼前这个日常。它告诉你：没有绝对的&quot;同时&quot;——两件事谁先谁后，换个参照就变了（相对论）；没有预先摆好的&quot;值&quot;——一个量在你问它之前，并不确定地是多少（量子力学）。可你从这些理论里抬起头，桌子还是桌子，昨天还是昨天，杯子稳稳地在它该在的地方。</p>
@@ -98,12 +119,12 @@
 <p>而这块板拆干净之后，剩下的是什么？剩下的，正是这本书从第零章就站定的那个世界：一个无迹的、没有绝对刻度的、没有预先事实的流——\(\text{III}_1\)。<strong>所以物理并不是发现了一个奇怪的新世界，它是拆掉了一层格式之后，第一次看见了没有格式的世界。</strong> 那个&quot;奇怪&quot;，只是因为我们太习惯格式、以为格式就是世界本身。</p>
 <h2 id="8-2-那格式是谁的-来源链">8.2 那格式是谁的：来源链</h2>
 <p>问题于是变成：这层格式——对易、经典性、&quot;事实能同时确定地摆着&quot;——如果不是世界本来就有的，它是谁的？从哪儿来？</p>
-<p>它不在世界那头。这正是&quot;退相干&quot;纲领一直在做、却始终差一口气的事：它想在世界内部找到经典性的来源，想说明&quot;为什么从量子的底子里会浮现出经典的表面&quot;。它能算出退相干有多快、相干性怎么流失，但它给出的经典性，永远是<strong>近似的、依赖于你怎么划分系统与环境的</strong>——因为它在世界里找一个本不在世界里的东西。<strong>模具不在泥里。</strong> 你把泥翻遍，找不到那个把泥压成形状的模子，因为模子在按压的那只手上。<sup><a href="#fn-decoh" id="fnref-decoh" class="fn-ref">[decoh]</a></sup></p>
+<p>它不在世界那头。这正是&quot;退相干&quot;纲领一直在做、却始终差一口气的事：它想在世界内部找到经典性的来源，想说明&quot;为什么从量子的底子里会浮现出经典的表面&quot;。它能算出退相干有多快、相干性怎么流失，但它给出的经典性，永远是<strong>近似的、依赖于你怎么划分系统与环境的</strong>——因为它在世界里找一个本不在世界里的东西。<strong>模具不在泥里。</strong> 你把泥翻遍，找不到那个把泥压成形状的模子，因为模子在按压的那只手上。<sup><a href="#fn-decoh" id="fnref-decoh" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-decoh')">[decoh]</a></sup></p>
 <p>那格式在哪儿？在你这一侧。而且它不是你的偏好，是你的<strong>不得不</strong>：你是有限的——握不住全部，只能一次抓一点；要抓，就得把那道流切成可分辨的块——这是第一章的锐性；切出来的块，得能被反复指认、能和别人共享、能在下一刻还认得出是同一个；而&quot;能反复指认、能同时摆着互不搅&quot;——这件事的代数形式，恰恰<strong>就是对易</strong>。</p>
 <p>\[\text{有限} \Rightarrow \text{必须切块} \Rightarrow \text{块须可共享、可重认} \Rightarrow \text{可同时确定地摆着} \Rightarrow \text{对易}\][^youxian]</p>
-<p><sup><a href="#fn-asymptotic" id="fnref-asymptotic" class="fn-ref">[asymptotic]</a></sup></p>
+<p><sup><a href="#fn-asymptotic" id="fnref-asymptotic" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-asymptotic')">[asymptotic]</a></sup></p>
 <p>所以对易性不是世界的一个性质，也不是你随便挑的一种习惯——<strong>它是&quot;事实&quot;这个概念本身的分析后果。</strong> 一个不能和别的事实同时稳稳摆在一起的东西，根本不配叫&quot;事实&quot;。你要有事实，就得把读法压到对易；而世界（\(\text{III}_1\)）本身，没有一个预先摆好的事实等着你去发现。</p>
-<p>正因对易是压出来的格式、不是世界的属性，有一个常被搅混的地方要分清：问&quot;我当下这本账，里头的东西彼此对不对易&quot;，这是<strong>有确定答案</strong>的——账本此刻登记的那些算子，两两之间要么对易要么不对易，摆在那里、原则上可查（只是可能查不完）。可另一个问法就不同了：问&quot;我这本账，是<strong>已经</strong>压到对易了，还是<strong>本来</strong>就非对易、将来也压不平&quot;——这一问<strong>没有答案，是个病句</strong>。<sup><a href="#fn-twocomm" id="fnref-twocomm" class="fn-ref">[twocomm]</a></sup>两个选项的差别整个落在将来（将来压不压得平），而将来是够不到的（下一节的事）；对一切当下能遭遇的现象，两个选项给出的是同一副样子。所以&quot;当下对不对易&quot;可问，&quot;已压到还是本来非对易&quot;不可问——别把这两个搅成一个。</p>
+<p>正因对易是压出来的格式、不是世界的属性，有一个常被搅混的地方要分清：问&quot;我当下这本账，里头的东西彼此对不对易&quot;，这是<strong>有确定答案</strong>的——账本此刻登记的那些算子，两两之间要么对易要么不对易，摆在那里、原则上可查（只是可能查不完）。可另一个问法就不同了：问&quot;我这本账，是<strong>已经</strong>压到对易了，还是<strong>本来</strong>就非对易、将来也压不平&quot;——这一问<strong>没有答案，是个病句</strong>。<sup><a href="#fn-twocomm" id="fnref-twocomm" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-twocomm')">[twocomm]</a></sup>两个选项的差别整个落在将来（将来压不压得平），而将来是够不到的（下一节的事）；对一切当下能遭遇的现象，两个选项给出的是同一副样子。所以&quot;当下对不对易&quot;可问，&quot;已压到还是本来非对易&quot;不可问——别把这两个搅成一个。</p>
 <p id="scene-xianshi">这是一个方向的彻底反转。我们总以为：事实，是&quot;我这样看&quot;和&quot;世界那样是&quot;两边对上了的地方——事实是被<strong>发现</strong>的。可这条链告诉你，恰恰相反：<strong>不是两边对上的地方才有事实；是我把两边压到对上，那里才生出事实。</strong> 一致，不是找到的，是造出来的。世界没有欠你一个事实；是你，为了能活、能认、能共享，在那道不对易的流里，硬压出了一片能对易的、可以称之为&quot;事实&quot;的岛。</p>
 <blockquote><p>挑一件你最确定的事——桌上那只杯子，就在那儿。<br>
 <br>
@@ -154,12 +175,12 @@
 所以你觉得世界&quot;本来如此&quot;、觉得自己此刻这一片那么理所当然、那么&quot;净&quot;——不是因为它真的自足，是因为把它压平的那只手，连同&quot;这是压出来的&quot;这句话，一起被压平了、藏进了平坦里。<br>
 <br>
 你越是觉得眼前干净、明白、用不着解释，你就越是站在那层最厚的遮蔽的正中间。你看起来最&quot;净&quot;的那一刻，恰恰是压得最严、最看不见压的那一刻。</p></blockquote>
-<p>这也就顺带拆掉了一个一直含糊的病句：&quot;我的身体，客观上到底是什么样子？&quot;——这个问题问不出答案，不是因为难，是因为它要一个不存在的位置——一个能从我一切视角之外、俯瞰我这具身体的立场——才答得了。你能真实说出的，只有<strong>被给予的处身</strong>：总有一片截面正在被压出、被维持着，这件事换不掉；但它是一个<strong>过程</strong>，不是一个摆在那里、等你去客观描述的<strong>东西</strong>。要一具&quot;客观身体&quot;，就是要那把并不存在的绝对尺子。<sup><a href="#fn-ergodic" class="fn-ref">[ergodic]</a></sup></p>
-<p><sup><a href="#fn-epilogue8" id="fnref-epilogue8" class="fn-ref">[epilogue8]</a></sup></p>
+<p>这也就顺带拆掉了一个一直含糊的病句：&quot;我的身体，客观上到底是什么样子？&quot;——这个问题问不出答案，不是因为难，是因为它要一个不存在的位置——一个能从我一切视角之外、俯瞰我这具身体的立场——才答得了。你能真实说出的，只有<strong>被给予的处身</strong>：总有一片截面正在被压出、被维持着，这件事换不掉；但它是一个<strong>过程</strong>，不是一个摆在那里、等你去客观描述的<strong>东西</strong>。要一具&quot;客观身体&quot;，就是要那把并不存在的绝对尺子。<sup><a href="#fn-ergodic" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-ergodic')">[ergodic]</a></sup></p>
+<p><sup><a href="#fn-epilogue8" id="fnref-epilogue8" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-epilogue8')">[epilogue8]</a></sup></p>
 <h2 id="8-7-收口-压出来的岛-和不因此变浅的海">8.7 收口：压出来的岛，和不因此变浅的海</h2>
 <p>于是&quot;经典世界哪儿来&quot;这个问题，收成一句话：<strong>它不在世界里，它在压的这一侧——是一个有限的、有身体的观察者，在一道无对易的流里，一片一片压出来的对易的岛。</strong></p>
 <p>但这句话不能滑向唯心。<strong>压出对易，并不改变世界。</strong> 世界还是那个无迹的、非对易的 \(\text{III}_1\)——你压出的，只是一片局部的、可共享可验证的切片，不是把整个世界变成了对易的。认知不驯服世界，认知只是在世界里凿出一座座岛。<strong>凿出的岛是真的</strong>——能站上去、能共享、能一代代传下去——<strong>可海不因此变浅</strong>。经典世界的真实，和世界底下那道流的非对易，两件事同时为真，不矛盾——因为一个是岛，一个是海。</p>
-<p>而这片海有一个温柔的性质，值得在收口时点一句。世界是一个因子——这条从一开始就立下的公理，最不起眼、也最温柔的一个后果是：<strong>它不许任何东西真正孤立。</strong><sup><a href="#fn-nocenter" id="fnref-nocenter" class="fn-ref">[nocenter]</a></sup>你够不到的那些，不是&quot;另一个海里的东西&quot;，只是这同一片海里此刻还游不到的远方。没有哪座岛是从别的海里漂来的、和你的海之间隔着一道谁也过不去的绝壁；一切抵达不了的，都还在同一片水域里，只是暂时够不着。这就是为什么&quot;够不到&quot;从不等于&quot;隔绝&quot;——够不到是距离，隔绝是断裂，而因子这条公理，恰恰不允许断裂。你和最远的那个够不到的他者之间，隔的是水，不是墙。</p>
+<p>而这片海有一个温柔的性质，值得在收口时点一句。世界是一个因子——这条从一开始就立下的公理，最不起眼、也最温柔的一个后果是：<strong>它不许任何东西真正孤立。</strong><sup><a href="#fn-nocenter" id="fnref-nocenter" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-nocenter')">[nocenter]</a></sup>你够不到的那些，不是&quot;另一个海里的东西&quot;，只是这同一片海里此刻还游不到的远方。没有哪座岛是从别的海里漂来的、和你的海之间隔着一道谁也过不去的绝壁；一切抵达不了的，都还在同一片水域里，只是暂时够不着。这就是为什么&quot;够不到&quot;从不等于&quot;隔绝&quot;——够不到是距离，隔绝是断裂，而因子这条公理，恰恰不允许断裂。你和最远的那个够不到的他者之间，隔的是水，不是墙。</p>
 <p>到这里，世界怎么来的，说清了：它是压出来的。可一个被压出来的世界，一张画满了边界的图，摆在你面前——你该怎么在它里面活下去？哪些边界是你该低头认下的墙，哪些是你该卷袖去填的表？哪些过去回得去，哪些回不去？</p>
 <p>下一章。</p>
 <section class="footnotes"><h2>脚注</h2>
@@ -174,11 +195,13 @@
 <li id="fn-youxian" class="footnote"><a href="#fnref-youxian" class="fn-back" title="返回引用处">↩</a>防一个看似循环的读法：链<strong>头</strong>的&quot;有限&quot;和链<strong>尾</strong>产出的&quot;有限性&quot;，是不同的成分，不循环。按有限性的三成分拆（附录 W.5.3）——链头的&quot;有限&quot;用的是成分 (iii)<strong>可分</strong>（公理，可数次操作）＋成分 (ii)<strong>时间摆脱不掉</strong>（无迹给的，必须活着）；这两个是前件。链尾产出的，是成分 (i)<strong>账本必真小</strong>（\(\mathcal{A}\subsetneq\mathcal{M}\)，由&quot;账本压向对易＋世界非对易&quot;这个后果给，引理3）。三个成分各不相同：链头是&quot;可分＋必须活着&quot;，链尾是&quot;账本装不下全世界&quot;，中间的桥是对易。所以不是&quot;用有限推有限&quot;，是&quot;用可分与必须活着，推出账本必真小&quot;。</li>
 </ol>
 </section>
+<script>var FN_CONTENT={"fn-decoh": "<a href=\"#fnref-decoh\" class=\"fn-back\" title=\"返回引用处\">↩</a>这不是说退相干纲领错了——它算相干性怎么流失，算得对、也有用；是说它算的那个问题，和&quot;对易这层格式从哪来&quot;根本不是同一个问题。经典性的<strong>动力学</strong>在世界侧，退相干管这个；经典性的<strong>格式</strong>在认知侧，这一章管这个。两件事，别当成一件的两种答案。", "fn-asymptotic": "<a href=\"#fnref-asymptotic\" class=\"fn-back\" title=\"返回引用处\">↩</a>这里链尾那个&quot;对易&quot;要说准：它是学习流施加的<strong>要求</strong>、是账本被压向的<strong>理想极限</strong>（渐进对易），不是账本在任何一个有限时刻就已经具备的既成属性——&quot;账本压到对易了没有&quot;这个问句本身是病句（第六章）。链推的是&quot;要有可共享的事实，就必须把账本压向对易&quot;，不是&quot;链一走完账本就对易了&quot;。", "fn-ergodic": "<a href=\"#fnref-ergodic\" class=\"fn-back\" title=\"返回引用处\">↩</a>更准地说：要&quot;客观身体&quot;，是要世界的舞台上有一个视角无关的绝对区分——而那等于要求账本群胚 \\(\\mathcal{R}\\) <strong>非遍历</strong>（\\(Z(\\mathcal{M}_{\\mathcal{A}})\\neq\\mathbb{C}1\\)），这是一个<strong>不可判定</strong>的命题，不是一把尺子的有无那么简单；见第四章。&quot;没有客观身体&quot;因此不是一个断言，是一个立场——把 \\(\\mathcal{R}\\) 遍历当作公理化的选择。", "fn-epilogue8": "<a href=\"#fnref-epilogue8\" class=\"fn-back\" title=\"返回引用处\">↩</a>这一节到&quot;看见&quot;为止。看见了这两面是同一个压，却仍然一如既往地去压、去维持那片截面——那是这本书最后才回得来的姿态，留到尾声。", "fn-twocomm": "<a href=\"#fnref-twocomm\" class=\"fn-back\" title=\"返回引用处\">↩</a>两个&quot;对不对易&quot;问题地位不同。**&quot;当下这个 \\(\\mathcal{A}\\) 阿贝尔吗&quot;<strong>：有确定值（由乘法表定、不依赖态），原则上可核（只是可能不停机）——不是病句。</strong>&quot;\\(\\mathcal{A}\\) 是已压到对易，还是本来非对易&quot;**：病句/不可知——两选项只差在未来（将来压不压得平，要理解流展开纳入尚未给予的材料），对一切当下遭遇同现象。前者是当下的代数事实，后者是关于无限远未来极限命运的问句，够不到。这与 <sup><a href=\"#fn-asymptotic\" class=\"fn-ref\">[asymptotic]</a></sup>（链尾对易=理想极限非既成属性）一致：正因&quot;压到对易没有&quot;是病句，&quot;当下对不对易&quot;才反而是可问的确定问题——两者分属&quot;极限&quot;与&quot;现况&quot;。", "fn-nocenter": "<a href=\"#fnref-nocenter\" class=\"fn-back\" title=\"返回引用处\">↩</a>世界是因子 \\(\\iff Z(\\mathcal{M})=\\mathbb{C}1\\)（中心平凡）。中心平凡的代数后果：不存在非平凡的中心投影把 \\(\\mathcal{M}\\) 劈成两块互不影响的直和——即没有&quot;超选择扇区&quot;、没有被绝对隔开的孤岛。落到舞台上：\\(\\mathcal{M}\\) 因子 \\(\\Rightarrow Z(\\mathcal{M}_{\\mathcal{A}})=\\mathbb{C}1\\)（生成⟹遍历，见 <sup><a href=\"#fn-ergodic\" id=\"fnref-ergodic\" class=\"fn-ref\">[ergodic]</a></sup>／附录 W.1.3.4）\\(\\Rightarrow\\) 没有&quot;时空独立体&quot;、一切在同一个连通的 \\(\\mathcal{R}\\) 里。&quot;够不到&quot;是可及性的（\\(\\mathcal{A}\\) 还没长到、\\(\\mathcal{N}\\) 够不着），不是连通性的（\\(\\mathcal{R}\\) 断开）——前者是距离，后者被因子公理禁止。此即因子公理&quot;最温柔的后果&quot;：不许任何东西真正孤立。", "fn-youxian": "<a href=\"#fnref-youxian\" class=\"fn-back\" title=\"返回引用处\">↩</a>防一个看似循环的读法：链<strong>头</strong>的&quot;有限&quot;和链<strong>尾</strong>产出的&quot;有限性&quot;，是不同的成分，不循环。按有限性的三成分拆（附录 W.5.3）——链头的&quot;有限&quot;用的是成分 (iii)<strong>可分</strong>（公理，可数次操作）＋成分 (ii)<strong>时间摆脱不掉</strong>（无迹给的，必须活着）；这两个是前件。链尾产出的，是成分 (i)<strong>账本必真小</strong>（\\(\\mathcal{A}\\subsetneq\\mathcal{M}\\)，由&quot;账本压向对易＋世界非对易&quot;这个后果给，引理3）。三个成分各不相同：链头是&quot;可分＋必须活着&quot;，链尾是&quot;账本装不下全世界&quot;，中间的桥是对易。所以不是&quot;用有限推有限&quot;，是&quot;用可分与必须活着，推出账本必真小&quot;。"};</script>
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -190,7 +213,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
 });
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
@@ -198,7 +221,40 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+    closeAllBubbles();
+  }
 });
+function closeAllBubbles() {
+  document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
+}
+function showFnBubble(event, fid) {
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){b.style.transition='';});
+  setTimeout(function(){b.style.opacity=1;b.style.transition='opacity .12s';},20);
+}
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

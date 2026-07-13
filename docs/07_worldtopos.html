@@ -10,7 +10,8 @@
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }
   h1 { font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }
-  h2 { font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }
+  h2 { font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
@@ -49,21 +50,40 @@
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
-  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }
+  .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }
+                    padding: 2rem 1.6rem 1rem; }
   .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
   .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  /* --- footnote bubble --- */
+  a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
+  a.fn-a:hover { text-decoration: underline; }
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
+  .fn-bubble-close:hover { color: #e0dcd4; }
+  .fn-bubble-arrow { position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }
+  .fn-bubble-arrow::after { content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -83,7 +103,8 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 <h1>第五章</h1>
 <p>前四章的一切——两流、缝、他者——都还在单独一个视角里。这一章看它们怎么缝成一个&quot;世界&quot;、一段&quot;历史&quot;。从学习流沉积的账本开始，一步步长到&quot;一个世界&quot;的范畴化定义；再看这个世界里的&quot;历史&quot;是怎么回事，那个&quot;坚固的东西还在&quot;是怎么读出来的，以及那个做着一切衡量的&quot;我&quot;到底坐在哪里。</p>
 <h2 id="5-0-承接-一个世界不是现成的">5.0 承接：一个世界不是现成的</h2>
@@ -93,8 +114,8 @@
 <h2 id="5-1-从账本到一个世界">5.1 从账本到一个世界</h2>
 <p><strong>第一层：账本，和它自带的经典逻辑。</strong> 学习流压到底，是那本经典账本 \(\mathcal{A}_{\text{phys}}\)（第一章）——一个可对易的子代数。可对易意味着它的那些读数彼此相容、可同时确定；用逻辑的话说，在<strong>任何单独一个 context 里</strong>（一组彼此相容、可同时读的事实里），排中律是免费的：一件事要么如此、要么不如此，没有中间。这不是额外假设，是账本可对易这件事的直接副产品（可对易 von Neumann 代数的投影格是布尔格）。<strong>要标一句分寸：这个&quot;排中律免费&quot;只在单个 context 内成立；跨 context 拼起来时它不再免费——那是下一章逻辑要处理的正事。</strong> 这里只领受：每一小块沉积的事实，自带经典的两值逻辑。</p>
 <p><strong>第二层：数得清——可数性从哪来。</strong> 要把一个世界搭起来，得能在里面&quot;数&quot;：第一件、第二件、第三件……这个&quot;能数&quot;是从哪来的？不是从连续统里长出来的（那容易误解，得说准）——它另有来源，是<strong>可分性</strong>：认知的分辨，本就是可数地一步步展开的，不是一次性铺满一个连续统。这条&quot;分辨可数展开&quot;，在代数上就是可分性公理（第二条公理：\(\mathcal{H}\) 可分）。</p>
-<p>可分性供给一个可数的骨架，有一条经典的构造把它兑现成代数——<strong>Feldman–Moore 构造</strong><sup><a href="#fn-realize" id="fnref-realize" class="fn-ref">[realize]</a></sup>。这一步不能跳：&quot;凭什么可数？&quot;答案在于：Cartan 对 \((\mathcal{M}_{\mathcal{A}},\mathcal{A}_{\text{phys}})\)在可分作用下，诱导的等价关系正是一个可数标准 Borel 等价关系——这是 Feldman–Moore 定理框架本身给出的<sup><a href="#fn-fmiff" id="fnref-fmiff" class="fn-ref">[fmiff]</a></sup><sup><a href="#fn-fm5" id="fnref-fm5" class="fn-ref">[fm5]</a></sup>。所以&quot;可分 \(\Rightarrow\) 可数&quot;这一环是接得上的，不是硬塞。</p>
-<p>由此，这个世界内部才有了它的&quot;自然数&quot;——一个可以在里面数数的对象。要紧的是它的<strong>来路</strong>：这个内部的自然数不是这个世界自己凭空长出来的，也不是从它内部的连续统构造的，是从可分性<strong>借来</strong>的。<sup><a href="#fn-natobj" id="fnref-natobj" class="fn-ref">[natobj]</a></sup></p>
+<p>可分性供给一个可数的骨架，有一条经典的构造把它兑现成代数——<strong>Feldman–Moore 构造</strong><sup><a href="#fn-realize" id="fnref-realize" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-realize')">[realize]</a></sup>。这一步不能跳：&quot;凭什么可数？&quot;答案在于：Cartan 对 \((\mathcal{M}_{\mathcal{A}},\mathcal{A}_{\text{phys}})\)在可分作用下，诱导的等价关系正是一个可数标准 Borel 等价关系——这是 Feldman–Moore 定理框架本身给出的<sup><a href="#fn-fmiff" id="fnref-fmiff" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-fmiff')">[fmiff]</a></sup><sup><a href="#fn-fm5" id="fnref-fm5" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-fm5')">[fm5]</a></sup>。所以&quot;可分 \(\Rightarrow\) 可数&quot;这一环是接得上的，不是硬塞。</p>
+<p>由此，这个世界内部才有了它的&quot;自然数&quot;——一个可以在里面数数的对象。要紧的是它的<strong>来路</strong>：这个内部的自然数不是这个世界自己凭空长出来的，也不是从它内部的连续统构造的，是从可分性<strong>借来</strong>的。<sup><a href="#fn-natobj" id="fnref-natobj" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-natobj')">[natobj]</a></sup></p>
 <blockquote><p>开始数：一，二，三……<br>
 <br>
 你停不下来——不管数到多大，你总能再数一个。没有哪个数是&quot;最后一个&quot;，&quot;再加一&quot;这条路，永远走得下去。<br>
@@ -105,10 +126,10 @@
 <br>
 &quot;永远能再数一个&quot;，和&quot;那个已经完成的无穷&quot;，是两回事。前一个，是你脚下真实走着的路；后一个，是一个你可以朝它走、却永远到不了的尽头——而你甚至不必真到那儿，就能一直走下去。<br>
 <br>
-所以别以为你心里装着一整个无穷。你装着的，只是&quot;随时能再迈一步&quot;这个本事。那个&quot;全部&quot;，你借着用，从不曾真的拥有。<sup><a href="#fn-brouwer" id="fnref-brouwer" class="fn-ref">[brouwer]</a></sup></p></blockquote>
+所以别以为你心里装着一整个无穷。你装着的，只是&quot;随时能再迈一步&quot;这个本事。那个&quot;全部&quot;，你借着用，从不曾真的拥有。<sup><a href="#fn-brouwer" id="fnref-brouwer" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-brouwer')">[brouwer]</a></sup></p></blockquote>
 <p><strong>第三层：视角，和它的漂移。</strong> 有了账本、有了数数的能力，还要有&quot;从某个视角看&quot;。视角转移构成一个群胚 \(\mathcal{R}\)（Cartan 对的等价关系，把一个视角搬到另一个视角的所有合法搬法）。占据一个视角，就是让那个外部锚态 \(\omega_{\text{ext}}\)（第二章）落在某处——而它<strong>随 Connes 余圈漂移</strong>（此余圈族对 \(t\) 强连续，是 Connes 余圈定理的标准推论；§5.5 量过去要用它），没有典范的选法（退相干的判据里显含这个锚，且这个锚会漂，第二章的红线在这里继续守着：没有绝对的指针基）。</p>
-<p><strong>第四层：把这些装进一个东西——一个世界。</strong> 账本（对象）、理解转移（态射）、可见性（锚）、进行时（未来开放）——把这些装进一个统一的范畴结构里，就得到&quot;一个世界&quot;。这个统一的东西，数学上是群胚 \(\mathcal{R}\) 的分类 topos（记作 \(B\mathcal{R}\)）<sup><a href="#fn-brtopos" id="fnref-brtopos" class="fn-ref">[brtopos]</a></sup>。</p>
-<p>关于这个世界，只需认准一个性质：<strong>它没有孤立的点，是一整块。</strong> 你没法把这个世界拆成一颗颗原子再拼回来——它从底就是弥散的（账本无原子）、无点的。要在这样一个无点的东西上做测度、做逻辑，得用一套不依赖点的办法（那套办法的全部技术——无点谱、无点测度——留附录<sup><a href="#fn-pointfree" id="fnref-pointfree" class="fn-ref">[pointfree]</a></sup>）。这里只须知道：世界是一整块，不是一盘散点。</p>
+<p><strong>第四层：把这些装进一个东西——一个世界。</strong> 账本（对象）、理解转移（态射）、可见性（锚）、进行时（未来开放）——把这些装进一个统一的范畴结构里，就得到&quot;一个世界&quot;。这个统一的东西，数学上是群胚 \(\mathcal{R}\) 的分类 topos（记作 \(B\mathcal{R}\)）<sup><a href="#fn-brtopos" id="fnref-brtopos" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-brtopos')">[brtopos]</a></sup>。</p>
+<p>关于这个世界，只需认准一个性质：<strong>它没有孤立的点，是一整块。</strong> 你没法把这个世界拆成一颗颗原子再拼回来——它从底就是弥散的（账本无原子）、无点的。要在这样一个无点的东西上做测度、做逻辑，得用一套不依赖点的办法（那套办法的全部技术——无点谱、无点测度——留附录<sup><a href="#fn-pointfree" id="fnref-pointfree" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-pointfree')">[pointfree]</a></sup>）。这里只须知道：世界是一整块，不是一盘散点。</p>
 <p>到这里，账本、数数、视角、世界的框架都立起来了。最后还要在这个世界上<strong>装一样东西</strong>——他者。</p>
 <h2 id="5-2-五样原料-装成一个世界">5.2 五样原料，装成一个世界</h2>
 <p>把上面缝起来的东西列一张对照表，就看清了&quot;一个世界&quot;到底由哪几样构成。这个世界 \(B\mathcal{R}\) 里，五个位置各有一样已经立过的原料：</p>
@@ -123,7 +144,7 @@
 <p>为什么说他者是让世界活着的东西？</p>
 <p>设想一个没有那个 \(H^2\) 载荷的世界 \([\sigma]=0\)。它的一切视角都能被规范化、拼平成一张干净的图册——每个局部的看法都能无冲突地黏合成一张完整的世界地图，再没有剩下任何抹不平的东西。这样一个世界是<strong>完备的、也是死的</strong>：它是一本合上的图册，没有任何多出来的、不可对象化的余地，一切都已被登记、被拼平。</p>
 <p>真实的世界带着那个载荷 \([\sigma]\neq0\)。它意味着：这些视角<strong>拼不平成一张干净的图</strong>——总剩一处二阶的扭曲，掀不平（他者）。正是这处掀不平，让世界不是一本合上的死图册，而是一个<strong>活的、还敞着口的</strong>世界：里面永远有一个够得到却不可对象化的他者，世界因此不能被彻底登记完、合上。</p>
-<p><sup><a href="#fn-star5" id="fnref-star5" class="fn-ref">[star5]</a></sup></p>
+<p><sup><a href="#fn-star5" id="fnref-star5" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-star5')">[star5]</a></sup></p>
 <blockquote><p>想象一个什么都说得清的世界。<br>
 <br>
 每一样东西都登记在册，每一个人你都读得透，每一件事都有一个准确的、再没有余数的解释。没有谜，没有暗处，没有一处让你&quot;对不上、收不进来&quot;的东西。一切都清清楚楚、严丝合缝。<br>
@@ -142,19 +163,19 @@
 <p><strong>上一层，核对——以及核对之上的反思。</strong> 但&quot;一段历史&quot;不只是被动沉积下来的东西，它还要被<strong>照一遍</strong>：用我今天的判准，去看过去那些影像彼此相容不相容。这一步叫<strong>核对</strong>——它是一种纯粹的<strong>反身</strong>（只照不裁、保住 \(\omega^*\)），也就是历史一致性本身（下一节讲它的机制）。这里要说准一件容易被压掉的事：<strong>核对，是可以只照不裁的</strong>——它把当下的尺子沿着那道流搬回过去、照一遍，看对不对得上；照完，可以不落任何新账、不动我这个参照。就这一步而言，它仍是保态的、可逆的：世界在被照着，而我并没有因此被改。真正<strong>动到我</strong>的，是核对之上再多做的一步——<strong>反思</strong>：对照出来的结果<strong>裁决</strong>一下，落下新的一笔、把我这个参照拧动一点。<strong>影响我这个视角的，是那一下裁决，不是核对本身。</strong> 所以要严格分清：历史一致性＝核对（那个判据）；反思＝核对再加一道裁决。别把判据本身，定义成非得带着裁决——一段历史，大半时候只是被照着（核对在跑、世界在），偶尔才被重新裁决（反思发动、我被改）。</p>
 <p><strong>底座，身体。</strong> 上面这两层，都跑在一个基底上——那个必须持续代谢才不塌的耗散稳态（QDS，第四章的肉）。要紧的是：这个基底本身<strong>不是纯被动的死物</strong>。它带着一道能主动关掉自己的开关（停下喂入，稳态即死）。正因为连基底都能被主动调制，跑在它上面的那道<strong>裁决</strong>（反思）才谈得上&quot;可控&quot;——能主动裁，也能不裁。</p>
 <p>三层分清：被动综合（自动沉淀）／历史一致性——即<strong>核对</strong>（纯粹的<strong>反身</strong>：照、可以不裁；保态、不动参照），而<strong>反思</strong>是核对之上再动一步的<strong>裁决</strong>（落盘、才动参照）／身体，那个带能动维度的基底。别把它们混成一团&quot;身体的被动性&quot;——它们是不同的层；尤其别把核对和裁决压成一件事：一个只照、世界照旧，一个才落账、我被改。</p>
-<p>要把这些接到全书那个更根本的分别上：<strong>分水岭，就是一个态与两个态的分别。</strong> 被动综合（Stage 1）只用一个态——基线，它铺开流、自动沉积，还没有第二个态进来做参照。核对（Stage 2）是第二个态进场：一个视角被立起来，用它去<strong>照</strong>过去。而 Stage 2 里还分两种用法——只<strong>照</strong>、不裁，和照完再<strong>裁</strong>；Stage 2 的大部分时光是照，反思是偶尔的裁。两个 Stage 的区分，就是一个态与两个态的区分<sup><a href="#fn-stage12" id="fnref-stage12" class="fn-ref">[stage12]</a></sup>。而身体，是这个第二态得以立着、对抗耗散的承载。</p>
+<p>要把这些接到全书那个更根本的分别上：<strong>分水岭，就是一个态与两个态的分别。</strong> 被动综合（Stage 1）只用一个态——基线，它铺开流、自动沉积，还没有第二个态进来做参照。核对（Stage 2）是第二个态进场：一个视角被立起来，用它去<strong>照</strong>过去。而 Stage 2 里还分两种用法——只<strong>照</strong>、不裁，和照完再<strong>裁</strong>；Stage 2 的大部分时光是照，反思是偶尔的裁。两个 Stage 的区分，就是一个态与两个态的区分<sup><a href="#fn-stage12" id="fnref-stage12" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-stage12')">[stage12]</a></sup>。而身体，是这个第二态得以立着、对抗耗散的承载。</p>
 <h2 id="5-5-历史-永远用今天的尺子量昨天">5.5 历史：永远用今天的尺子量昨天</h2>
 <p id="scene-lishi">现在来看看&quot;历史&quot;到底是怎么成立的。先破除一个直觉：人们总以为&quot;回到过去&quot;是把状态倒回去——好像有一台机器能把此刻的态调回昨天的态。<strong>没有这回事。</strong> 钉死在当下的，是<strong>今天的视角</strong>——那个第二态 \(\omega_{\text{ext}}\) 此刻的样子——昨天的视角早已随耗散散了（B1，参照不可回），倒不回来；能倒的，只有<strong>尺子</strong>（算子）。至于基线态 \(\omega^*\)，它本就被自己的模流保持不变（KMS），从来就没&quot;动&quot;过，也谈不上倒回。所以&quot;倒回过去&quot;两头都不通：视角回不去——它耗散了；基线不用回——它从没动。</p>
 <p>说清楚。核对过去发生了什么，我用的是<strong>此刻手里的一组判准</strong>——当下账本里的一组投影 \(\{P_i\}\subset\mathcal{A}_{\text{phys}}\)（注意：是算子、是尺子，不是态）。要&quot;量过去&quot;，就把这把当下的尺子沿模流搬运到过去的位置：</p>
 <div class="math-block">\[P_i(t)=\sigma_t^{\omega^*}(P_i).\]</div>
 <p>搬的是算子（尺子），态 \(\omega^*\) 始终钉在当下。于是所谓&quot;一段历史&quot;，就是<strong>今天的这把尺子，量在过去各个影像上，得到的一串彼此相容的读数</strong>。</p>
 <p>为什么必须用今天的尺子？因为昨天的尺子已经不在了——它随那道不可逆的耗散散掉了（B1，参照不可回）。<strong>我永远只能用今天的尺子量昨天。</strong> 这不是缺陷，是历史的本性：历史不是保存下来的昨天，是今天对昨天的、用今天判准做的一次对齐。</p>
-<p>对齐相容不相容，有一个精确的判据。给一段历史 \(\alpha\)<sup><a href="#fn-calpha" id="fnref-calpha" class="fn-ref">[calpha]</a></sup>，两段历史 \(\alpha,\beta\) 之间的一致性由这个泛函衡量：</p>
+<p>对齐相容不相容，有一个精确的判据。给一段历史 \(\alpha\)<sup><a href="#fn-calpha" id="fnref-calpha" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-calpha')">[calpha]</a></sup>，两段历史 \(\alpha,\beta\) 之间的一致性由这个泛函衡量：</p>
 <div class="math-block">\[D(\alpha,\beta)=\omega_{\text{ext}}\big(C_\alpha^{\dagger}\,C_\beta\big).\]</div>
-<p>这里要看清<strong>两个态各司其职、一处不混</strong><sup><a href="#fn-tracefree5" id="fnref-tracefree5" class="fn-ref">[tracefree5]</a></sup>：搬尺子的是基线态的模流 \(\sigma_t^{\omega^*}\)<sup><a href="#fn-timefeed" id="fnref-timefeed" class="fn-ref">[timefeed]</a></sup>；读数、判定一致性的是那个视角 \(\omega_{\text{ext}}\)（第二态给判定）。判定读数落在第二态上，不是落在基线上——这正是第三章说的&quot;判定任何一件事都得先固定一个参照 \(\omega_{\text{ext}}\)&quot;；也正因为读数落在会漂的第二态上，历史的&quot;客观&quot;才始终带着那个选不出典范的锚（横向不可知）。<sup><a href="#fn-readsec5" id="fnref-readsec5" class="fn-ref">[readsec5]</a></sup></p>
+<p>这里要看清<strong>两个态各司其职、一处不混</strong><sup><a href="#fn-tracefree5" id="fnref-tracefree5" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-tracefree5')">[tracefree5]</a></sup>：搬尺子的是基线态的模流 \(\sigma_t^{\omega^*}\)<sup><a href="#fn-timefeed" id="fnref-timefeed" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-timefeed')">[timefeed]</a></sup>；读数、判定一致性的是那个视角 \(\omega_{\text{ext}}\)（第二态给判定）。判定读数落在第二态上，不是落在基线上——这正是第三章说的&quot;判定任何一件事都得先固定一个参照 \(\omega_{\text{ext}}\)&quot;；也正因为读数落在会漂的第二态上，历史的&quot;客观&quot;才始终带着那个选不出典范的锚（横向不可知）。<sup><a href="#fn-readsec5" id="fnref-readsec5" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-readsec5')">[readsec5]</a></sup></p>
 <p>当不同的历史之间这个泛函为零——</p>
 <div class="math-block">\[D(\alpha,\beta)=0\quad(\alpha\neq\beta)\]</div>
-<p>——这些历史就彼此<strong>退相干</strong>、可以当作一套互斥而穷尽的经典可能性来谈——这正是 Gell-Mann–Hartle 意义上的一致历史，取中档的退相干条件、实部虚部皆零<sup><a href="#fn-gmh" id="fnref-gmh" class="fn-ref">[gmh]</a></sup>。\(D=0\)，就是&quot;这段历史站得住、可以当客观的过去来讲&quot;的精确含义。**这个翻转对齐成功、\(D=0\) 的时候，就表现为那种&quot;事情确实如此&quot;、指向某物的明见。**</p>
+<p>——这些历史就彼此<strong>退相干</strong>、可以当作一套互斥而穷尽的经典可能性来谈——这正是 Gell-Mann–Hartle 意义上的一致历史，取中档的退相干条件、实部虚部皆零<sup><a href="#fn-gmh" id="fnref-gmh" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-gmh')">[gmh]</a></sup>。\(D=0\)，就是&quot;这段历史站得住、可以当客观的过去来讲&quot;的精确含义。**这个翻转对齐成功、\(D=0\) 的时候，就表现为那种&quot;事情确实如此&quot;、指向某物的明见。**</p>
 <p>最后一件：为什么<strong>有历史学、却没有未来学</strong>？因为做这套对齐要靠那个理解窗口 \(\mathcal{N}\)，而它是单侧的——它只朝过去的方向发&quot;可对齐&quot;的许可证，不朝未来发。\(\mathcal{N}\) 是一张射程许可证，不是尺子；它单侧，所以过去可对齐、有历史学，未来对齐不了、没有未来学。</p>
 <blockquote><p>回想昨天的某个时刻——你在哪儿，做了什么，谁在旁边。<br>
 <br>
@@ -165,10 +186,10 @@
 试着找那份&quot;没被今天碰过的、原装的昨天&quot;。你找不到。你手里没有一份存档，能绕过此刻、直接读到过去；你有的，只是此刻拿着今天的尺子，去对齐昨天留下的那点影像。<br>
 <br>
 所以你以为你在&quot;记得&quot;，其实你每一次都在&quot;重拼&quot;。那个你想回到的、纯粹的昨天，从来不在某个抽屉里等你——它只在你今天这一次对齐里，被重新量了出来。</p></blockquote>
-<p><sup><a href="#fn-noreverse" id="fnref-noreverse" class="fn-ref">[noreverse]</a></sup></p>
+<p><sup><a href="#fn-noreverse" id="fnref-noreverse" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-noreverse')">[noreverse]</a></sup></p>
 <h2 id="5-6-某物-那个-还在的东西-以及它的另一面">5.6 某物：那个&quot;还在的东西&quot;，以及它的另一面</h2>
 <p>历史一致性立起来了。它最日常的产物，就是<strong>某物</strong>——&quot;同一个它还在&quot;。</p>
-<p>这张桌子，此刻在、昨天也在、我转过身它还在。这个&quot;还在&quot;不是白来的：它是历史一致性在算子这一侧读出来的结果——把不同时刻的影像用今天的尺子对齐，对齐成&quot;同一个对象在持续存在&quot;。某物就是这样被缝出来的对象极：学习流给的可定域事实（split）＋历史一致性给的跨时对齐（持存），缝成&quot;一个持续在此的东西&quot;<sup><a href="#fn-wu" id="fnref-wu" class="fn-ref">[wu]</a></sup>。</p>
+<p>这张桌子，此刻在、昨天也在、我转过身它还在。这个&quot;还在&quot;不是白来的：它是历史一致性在算子这一侧读出来的结果——把不同时刻的影像用今天的尺子对齐，对齐成&quot;同一个对象在持续存在&quot;。某物就是这样被缝出来的对象极：学习流给的可定域事实（split）＋历史一致性给的跨时对齐（持存），缝成&quot;一个持续在此的东西&quot;<sup><a href="#fn-wu" id="fnref-wu" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-wu')">[wu]</a></sup>。</p>
 <p>现代层论有一套优美的讲法：每个当下的感知侧面（侧显），是一个局部的截面；当我绕着桌子走、相邻的侧面彼此吻合，系统就把它们黏合起来；当所有侧面无冲突地黏合成一个整体，那个整体的全局截面，就是我以为的&quot;坚固的客观物&quot;。这套讲法对<strong>某物这一极</strong>是准的。但顺着它再多走三步，才会触到本书的要害：</p>
 <p><strong>第一步</strong>，那个全局截面（某物），其实是一个投影，\(\iota\circ E\neq\mathrm{id}\)——它复原不了非对易的整体，差的那道亏量就是意向性（第二章）。所以&quot;某物＝全局截面&quot;对，但&quot;全局截面＝完整的对象&quot;不对，差的那块是缝。</p>
 <p><strong>第二步</strong>，那个&quot;黏合&quot;不是空间上的边缘重叠，是<strong>群胚上的余圈相容</strong>——就是刚才的 \(D=0\)（今天的尺子在过去影像上对齐得上）。黏合的代数形是历史一致性，不是拼图。</p>
@@ -177,13 +198,13 @@
 <p><strong>这就带出某物的另一面。</strong> 上面说的是把时间读在算子上（客观读）——读出&quot;同一个它还在&quot;。但同一个历史一致性的过程，还能把时间读在<strong>态</strong>上（被活读）。这一读，读出的不是&quot;东西还在&quot;，是<strong>我被改变了</strong>。</p>
 <p>设想一次真正的遭遇——遇见一个他者。事后，不是世界里多了一个对象，是<strong>我这个视角本身被那次遭遇不可逆地挪动了</strong>（余圈被改写，参照不可回，B1）。用算子读，你会说&quot;发生了一件事、留下一个可记的对象&quot;；用态读，你会说&quot;那次遇见永远改变了我&quot;。列维纳斯把这叫作一次<strong>创伤</strong>（traumatisme）——他者先于我的任何选择、从外面，不可逆地改动了我。</p>
 <p>所以历史一致性的产物<strong>不必然是某物</strong>——某物只是它的算子读（客观极）。它的态读（被活极）是&quot;他者永远改变了我&quot;。两读是同一个过程的两面，正如第二章 noesis 与 noema 是同一恒等式的两面。第四章那个够不到的他者，在这里以态读的形式回来了：他者不只是我够不到的内里，也是那个永久改写了我这个视角的创伤。</p>
-<p><sup><a href="#fn-body5" id="fnref-body5" class="fn-ref">[body5]</a></sup></p>
-<p>这里有必要把两种最基本的&quot;读&quot;分清：把时间读在态上、读出&quot;一个此刻如此的信号&quot;，是<strong>现量</strong>——保着锚、没有时间厚度的那一读；把时间读在算子上、读出&quot;一串彼此关联的影像&quot;，是<strong>比量</strong>——保着算子、纯是关系的那一读。日常的感知，是这两读缝合在稳态上的产物，缝出来就是某物。<sup><a href="#fn-liangci" id="fnref-liangci" class="fn-ref">[liangci]</a></sup></p>
+<p><sup><a href="#fn-body5" id="fnref-body5" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-body5')">[body5]</a></sup></p>
+<p>这里有必要把两种最基本的&quot;读&quot;分清：把时间读在态上、读出&quot;一个此刻如此的信号&quot;，是<strong>现量</strong>——保着锚、没有时间厚度的那一读；把时间读在算子上、读出&quot;一串彼此关联的影像&quot;，是<strong>比量</strong>——保着算子、纯是关系的那一读。日常的感知，是这两读缝合在稳态上的产物，缝出来就是某物。<sup><a href="#fn-liangci" id="fnref-liangci" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-liangci')">[liangci]</a></sup></p>
 <h2 id="5-7-我-坐在哪里-以及世界怎样被创伤重奠">5.7 &quot;我&quot;坐在哪里；以及世界怎样被创伤重奠</h2>
 <p>最后，还有一个绕不开的问题。它正是第零章悬而未决的那件事：第零章立绵延时，标了一个位置说&quot;&#x27;我&#x27;从这里进来&quot;，但没给它代数形。现在给。</p>
 <p>那个做着这一切的&quot;我&quot;——固定参照、启动历史一致性、把今天的尺子搬去量昨天的那个&quot;我&quot;——它在代数上是什么？</p>
 <p>它<strong>不是</strong> \(\omega^*\) 本身。\(\omega^*\) 是第零章被印记钉死的背景锚，是那个可反复回到的基准；&quot;我&quot;不是这个基准，&quot;我&quot;是<strong>占据这个基准、用它去衡量</strong>的那个动作。精确地说：参考态被用起来，是&quot;用一段绵延去衡量另一段绵延&quot;这个动作——用一个余圈去量别的余圈。当这个衡量动作启动、有一个参照席被占据、历史一致性被发动，那一刻就是&quot;我&quot;坐上了参照席。<strong>自我同一性不是一个实体，是&quot;历史一致性检验被启动、一个参照席被占据&quot;这件事本身。</strong></p>
-<p>这个&quot;我&quot;坐上的席位，底下是那个可反复回到的不动核——中心化子 \(\mathcal{M}^{\omega^*}\)<sup><a href="#fn-centralizer" id="fnref-centralizer" class="fn-ref">[centralizer]</a></sup>。这里两个态各占一层，看得最清楚：<strong>&quot;我&quot;占据的那个参照席，是第二个态（视角）；而这个席位坐着的底座，是第一个态的不动核、中心化子。</strong> &quot;我&quot;＝把第二态立起来当参照、发动衡量的那个动作，坐在第一态的不动底子上。所以&quot;我&quot;不是悬空的：它一头是第二态、那个被立起来的参照，一头是第一态的不动核、那被动综合的底子。第零章问&quot;我从哪里进来&quot;，答案在这里兑现：从占据参照席、发动衡量这个动作进来——不是作为一个东西进来，是作为一个位置被占据、一个动作被发动。</p>
+<p>这个&quot;我&quot;坐上的席位，底下是那个可反复回到的不动核——中心化子 \(\mathcal{M}^{\omega^*}\)<sup><a href="#fn-centralizer" id="fnref-centralizer" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-centralizer')">[centralizer]</a></sup>。这里两个态各占一层，看得最清楚：<strong>&quot;我&quot;占据的那个参照席，是第二个态（视角）；而这个席位坐着的底座，是第一个态的不动核、中心化子。</strong> &quot;我&quot;＝把第二态立起来当参照、发动衡量的那个动作，坐在第一态的不动底子上。所以&quot;我&quot;不是悬空的：它一头是第二态、那个被立起来的参照，一头是第一态的不动核、那被动综合的底子。第零章问&quot;我从哪里进来&quot;，答案在这里兑现：从占据参照席、发动衡量这个动作进来——不是作为一个东西进来，是作为一个位置被占据、一个动作被发动。</p>
 <blockquote><p>你做了一整天的判断、比较、回忆——每一下，都有一个&quot;我&quot;在做。现在回过头，找那个&quot;我&quot;。<br>
 <br>
 不是找你的名字、你的脸、你的身体——那些别人也看得见。找那个正在做这一切的、里面的&quot;我&quot;。抓住它。<br>
@@ -199,9 +220,9 @@
 你找了一整天的那个&quot;我&quot;，从来不是一样东西。它是你每一次坐下去的那个动作——而动作一停，就没有谁在那儿了。</p></blockquote>
 <p>最后，回到 §5.3 留下的那个尾巴：世界怎么会被创伤重奠。</p>
 <p>现在能说清了。遭遇他者，会改动那个衡量所依的余圈。<strong>改动小时</strong>，它就是刚说的&quot;他者永远改变了我&quot;——参照被挪了一点，我这个视角有了不可逆的位移，但世界还是那个世界。<strong>改动大到一个阈值时</strong>，事情不一样了：那个抹不平的 \(H^2\) 载荷本身会<strong>跳变</strong>——扭曲结构被整个重新奠定，世界以一种新的方式掀开又合拢。这就是<strong>拓扑创伤</strong>（topos traumatisme）：一次够深的遭遇，不只挪动我，还重奠了我这个世界的扭曲。</p>
-<p>这里要守一句数学的分寸，防一句&quot;世界被彻底掀翻&quot;的夸大。**本书能承重的，是 \(H^2\) 载荷类 \([\sigma]\) 的跳变**——即扭曲被重奠。至于&quot;是不是连整个世界范畴的底板都被换掉&quot;（群胚 \(\mathcal{R}\) 本身是否被改），这是一个更强的命题，本书不越界断言。所以拓扑创伤，数学上落在&quot;扭曲载荷的跳变&quot;；&quot;整个世界被重奠&quot;作为被活的说法可以讲，但它的数学承重只到载荷这一层，不夸张成&quot;底被换掉&quot;。<sup><a href="#fn-retrigger" id="fnref-retrigger" class="fn-ref">[retrigger]</a></sup></p>
+<p>这里要守一句数学的分寸，防一句&quot;世界被彻底掀翻&quot;的夸大。**本书能承重的，是 \(H^2\) 载荷类 \([\sigma]\) 的跳变**——即扭曲被重奠。至于&quot;是不是连整个世界范畴的底板都被换掉&quot;（群胚 \(\mathcal{R}\) 本身是否被改），这是一个更强的命题，本书不越界断言。所以拓扑创伤，数学上落在&quot;扭曲载荷的跳变&quot;；&quot;整个世界被重奠&quot;作为被活的说法可以讲，但它的数学承重只到载荷这一层，不夸张成&quot;底被换掉&quot;。<sup><a href="#fn-retrigger" id="fnref-retrigger" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-retrigger')">[retrigger]</a></sup></p>
 <p>一次创伤，浅则改我、深则重奠我世界的扭曲——而它总是从外面来的，不可自内生成（余圈的突变不可内生，一如他者的被给予）。</p>
-<p>这里还藏着创伤的对立一端，把这一章的历史和上一章的死接到一起。历史一致性能做对齐，靠的是那道余圈——两个态之间的相对扭曲 \([D\omega_{\text{ext}}:D\omega^*]\)——它提供了一层可调整的自由度，让不同时刻、不同视角的读数能被拧到相容。活着，正是这道余圈非平凡、这层自由度活跃：我不断用它绕过那个抹不平的他者、把历史对齐成一段可讲的过去。而上一章说的死（两个态并到一起），在这里有了它算子这一侧的样子：<strong>两态一致，这道余圈就平凡了，那层可调整的自由度归零</strong>。自由度一旦尽了，那个一直都在、平时被这层活动绕过去的他者内核 \([\sigma]\)，就再没有什么能绕过它了——它从一个可以迂回的背景，暴露成决定一切的东西：历史还能不能对齐，此刻**完全由 \([\sigma]\) 说了算**。\([\sigma]\neq0\)，历史一致性就再也拼不拢。用最平实的话说：<strong>再没有一组稳定的基，可供测量、可供记录了</strong>——投影都还在，但把各处读数缝成一段一致记录的那层自由度没了，读数不再能落成可反复指认的历史。所以死不只是态并到一起（上一章），它在世界这一侧的样子是：<strong>绕过他者的余地耗尽，直面那道一直都在的墙</strong>。<sup><a href="#fn-deathkernel" id="fnref-deathkernel" class="fn-ref">[deathkernel]</a></sup></p>
+<p>这里还藏着创伤的对立一端，把这一章的历史和上一章的死接到一起。历史一致性能做对齐，靠的是那道余圈——两个态之间的相对扭曲 \([D\omega_{\text{ext}}:D\omega^*]\)——它提供了一层可调整的自由度，让不同时刻、不同视角的读数能被拧到相容。活着，正是这道余圈非平凡、这层自由度活跃：我不断用它绕过那个抹不平的他者、把历史对齐成一段可讲的过去。而上一章说的死（两个态并到一起），在这里有了它算子这一侧的样子：<strong>两态一致，这道余圈就平凡了，那层可调整的自由度归零</strong>。自由度一旦尽了，那个一直都在、平时被这层活动绕过去的他者内核 \([\sigma]\)，就再没有什么能绕过它了——它从一个可以迂回的背景，暴露成决定一切的东西：历史还能不能对齐，此刻**完全由 \([\sigma]\) 说了算**。\([\sigma]\neq0\)，历史一致性就再也拼不拢。用最平实的话说：<strong>再没有一组稳定的基，可供测量、可供记录了</strong>——投影都还在，但把各处读数缝成一段一致记录的那层自由度没了，读数不再能落成可反复指认的历史。所以死不只是态并到一起（上一章），它在世界这一侧的样子是：<strong>绕过他者的余地耗尽，直面那道一直都在的墙</strong>。<sup><a href="#fn-deathkernel" id="fnref-deathkernel" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-deathkernel')">[deathkernel]</a></sup></p>
 <p>到这里，世界立起来了，历史立起来了，那个&quot;我&quot;也落了座。</p>
 <p>这一章其实交出了<strong>两本账</strong>。一本是<strong>算子读</strong>的——成立的某物、可对齐的历史、坐下来的世界：客观的那一面。一本是<strong>态读</strong>的——改写我的创伤、漂移不定的&quot;我&quot;：被活的那一面。同一个过程，两种读法，两本账。</p>
 <p>这个缝出来的世界，有了它自己的内部结构，一套内部的语言。而这套语言会自己长出逻辑——而你的直觉，会先从<strong>算子读的那本账</strong>起步。它会长成什么样的逻辑，又会在什么地方，撞见它自己合不上的东西？下一章。</p>
@@ -231,11 +252,13 @@
 <li id="fn-wu" class="footnote"><a href="#fnref-wu" class="fn-back" title="返回引用处">↩</a>某物三层：Urimpression（原印象／现量输入）→ Konstitution（构成／\(E\) 的压缩动作）→ Gegenstand（对象极／不变核），加历史一致性给的持存桥（对象跨时持存）——胡塞尔《观念 I》给了对象极的现象学、缺持存的机制，本书补以历史一致性（\(D=0\) 的跨时对齐）。层论对照（局部显现＝预层／黏合＝群胚余圈 \(D=0\)／noema＝无点世界上的全局截面，但 \(\iota\circ E\neq\mathrm{id}\)、且载 \(H^2\)）见正文 §5.6 与附录。列维纳斯 traumatisme（创伤）作态读挂靠，非承重。</li>
 </ol>
 </section>
+<script>var FN_CONTENT={"fn-tracefree5": "<a href=\"#fnref-tracefree5\" class=\"fn-back\" title=\"返回引用处\">↩</a>这里有一处不是技术细节、而是主线的又一次显形，要点破。标准的退相干泛函，物理学里写成 \\(D(\\alpha,\\beta)=\\mathrm{tr}(C_\\alpha^{\\dagger}\\rho\\,C_\\beta)\\)，用的是一把<strong>迹</strong>。可这台机器无迹——迹写不出来（第零章）。所以判据必须落到<strong>第二态</strong> \\(\\omega_{\\text{ext}}\\) 上。这不是随手的技术替换，是&quot;没有绝对刻度&quot;在历史判据上的又一次显形：连&quot;这段历史站不站得住、能不能当客观的过去来讲&quot;这么根本的一判，都没有一把绝对的尺子可用，只能相对一个会漂的锚来判。无迹拿走了那把迹，这里又见一次。", "fn-readsec5": "<a href=\"#fnref-readsec5\" class=\"fn-back\" title=\"返回引用处\">↩</a>若把这个 \\(D\\) 写成基线 \\(\\omega^*\\) 上的，它 KMS 不变、不漂，&quot;判据显含锚且漂&quot;就落空了，历史也就和第一个不可知脱了钩——所以判据必须读第二态。", "fn-natobj": "<a href=\"#fnref-natobj\" class=\"fn-back\" title=\"返回引用处\">↩</a>数学上，它是 topos 内部的自然数对象，名字后面会用到；此刻只需记住它是借来的、不是涌现的。", "fn-realize": "<a href=\"#fnref-realize\" class=\"fn-back\" title=\"返回引用处\">↩</a>把一个可数标准 Borel 的等价关系实现成 von Neumann 代数。", "fn-fmiff": "<a href=\"#fnref-fmiff\" class=\"fn-back\" title=\"返回引用处\">↩</a>可分作用下，Cartan 子代数 \\(\\iff\\) 可数标准 Borel 等价关系加一个 2-上循环。", "fn-stage12": "<a href=\"#fnref-stage12\" class=\"fn-back\" title=\"返回引用处\">↩</a>第二章立第二态那一刻，就是从 Stage 1 跨进 Stage 2 的那一刻。", "fn-calpha": "<a href=\"#fnref-calpha\" class=\"fn-back\" title=\"返回引用处\">↩</a>一串在不同时刻搬运好的投影的乘积，记作类算子 \\(C_\\alpha\\)。", "fn-centralizer": "<a href=\"#fnref-centralizer\" class=\"fn-back\" title=\"返回引用处\">↩</a>第零章 0.C″，也是被动综合沉淀所依托的底子（§5.4）。", "fn-deathkernel": "<a href=\"#fnref-deathkernel\" class=\"fn-back\" title=\"返回引用处\">↩</a>\\([\\sigma]\\) 一直在、独立于任何态——死不产生它，只是撤掉了平时绕过它的余地，让它显形为绝对的判据。这道&quot;1-层自由度归零、障碍显于 2-层&quot;的机制属标准群胚上同调，细节入附录。", "fn-timefeed": "<a href=\"#fnref-timefeed\" class=\"fn-back\" title=\"返回引用处\">↩</a>第一态给时间：\\(P_i(t)=\\sigma_t^{\\omega^*}(P_i)\\)。", "fn-brouwer": "<a href=\"#fnref-brouwer\" class=\"fn-back\" title=\"返回引用处\">↩</a>借布劳威尔一句：这像贷款与抵押——你可以不断支取&quot;再数一个&quot;的潜能，但从不需要、也拿不出那个已完成的无穷作抵押。此为挂靠，不作论据。", "fn-star5": "<a href=\"#fnref-star5\" class=\"fn-back\" title=\"返回引用处\">↩</a>这里要和第四章交同一句底：本章说的&quot;真实世界带 \\([\\sigma]\\neq0\\)&quot;，依赖一个尚未证明的开放问题 \\((\\star)\\)——存在使 \\([\\sigma]\\neq0\\) 的 \\(\\text{III}_1\\) 遍历舞台，承重级开放问题（附录 W）。倘若 \\((\\star)\\) 竟为假——即所有这样的舞台都只能有 \\([\\sigma]=0\\)——那么世界就只能是那本&quot;死图册&quot;，本章&quot;世界因他者而活&quot;这条线就空转了。但请注意：**即便如此，第二章那道缝 \\(\\iota\\circ E\\neq\\mathrm{id}\\) 不受影响，意向性仍在**——&quot;有理解就有缝、缝里有够不到的你&quot;是无迹直接给的、不押在 \\((\\star)\\) 上。世界的<strong>基本敞口性</strong>站磐石，世界&quot;因他者的代数刚性而活&quot;押 \\((\\star)\\)，两者承重级别不同，据实标出。而下面那段&quot;什么都说得清反而窒息&quot;，讲的是&quot;<strong>如果</strong>有他者，活就不圆满&quot;，不是&quot;证明了有他者&quot;——它与这个标注不冲突。", "fn-noreverse": "<a href=\"#fnref-noreverse\" class=\"fn-back\" title=\"返回引用处\">↩</a>关于&quot;倒回过去把态调回去&quot;就真的做不到？做不到，而且刚说清了为什么——能搬的只有算子这把尺子，今天的视角钉在当下、昨天的视角已耗散、基线态从没动。没有&quot;回到过去的态&quot;这回事，只有&quot;用今天的判准重新量过去的影像&quot;。所谓时间旅行式的&quot;倒回&quot;，在这台机器里连定义都写不出来。", "fn-body5": "<a href=\"#fnref-body5\" class=\"fn-back\" title=\"返回引用处\">↩</a>一句必要的澄清，防混淆：第四章说身体是那个必须持续代谢的稳态——那是<strong>广义的身体，肉</strong>，不是我此刻这具能看能动、却永远不能完全对象化的<strong>狭义身体</strong>。狭义那具是另一回事，是遮&quot;观察者在自己地图上留的洞&quot;的一块补丁，属主体那一侧的盲区，后面的卷才展开。这里说的一切身体，都是肉这一层。", "fn-liangci": "<a href=\"#fnref-liangci\" class=\"fn-back\" title=\"返回引用处\">↩</a>&quot;锚定的态是经典的&quot;这句，要精确成&quot;锚定的 KMS 锚态是经典的&quot;——锚是模流的不动点；经典＝被这个锚过滤掉的世界，理解＝这个锚在世界里的漂移。这里借&quot;现量／比量&quot;两个词，只取其<strong>字面</strong>——&quot;现前所量&quot;与&quot;比对所量&quot;，取&quot;直接&quot;与&quot;关系&quot;这两个字面义；<strong>不取</strong>因明学里那套精确的知识论内涵（现量＝离分别的直接知觉、比量＝推理知——那两个定义与本书的态读／算子读并不对应，态读不是&quot;离分别&quot;、算子读也不是&quot;推理&quot;）。只借字面，不引教义。", "fn-retrigger": "<a href=\"#fnref-retrigger\" class=\"fn-back\" title=\"返回引用处\">↩</a>再说准一句&quot;跳变&quot;的机制，免得误读：在固定的账本 \\(\\mathcal{A}\\)、固定的 \\(\\mathcal{R}\\) 上，\\([\\sigma]\\) 是那个 Cartan 对的不变量、<strong>它不自己变</strong>。所谓&quot;\\([\\sigma]\\) 跳变&quot;，是指遭遇够深时账本 \\(\\mathcal{A}\\) 本身被<strong>重切</strong>（重切割的跃迁），重切给出一个<strong>新的</strong> Cartan 对，新对上的 \\([\\sigma]\\) 才不同——不是同一个 \\(\\mathcal{A}\\) 上那个固定的不变量自己变了。这与&quot;重奠＝重切&quot;的机制一致。", "fn-fm5": "<a href=\"#fnref-fm5\" class=\"fn-back\" title=\"返回引用处\">↩</a>可分作用下 Cartan 子代数 \\(\\iff\\) 可数标准 Borel 等价关系 ＋ 2-上循环 \\([\\sigma]\\in H^2(\\mathcal{R},\\mathbb{T})\\)：Feldman, J., Moore, C. C., &quot;Ergodic equivalence relations, cohomology, and von Neumann algebras I, II,&quot; *Trans. AMS* <strong>234</strong> (1977), 289–324, 325–359。本章&quot;可分 \\(\\Rightarrow\\) 可数标准 Borel&quot;一环即取自此框架，非额外假设。（一个前件的分寸：FM 的完整结论[含 \\([\\sigma]\\) 分类]要 Cartan 对[极大∧正则∧期望]；而本书几轮前已定账本可非极大[\\(\\mathcal{B}\\) 典范、附录命题1]。分层看：账本极大时是完整 Cartan；非极大时 \\([\\sigma]\\) 的典范性由命题1 给、不需极大。而这里只用到&quot;可数标准 Borel&quot;这一环，它只需正则＋可分，<strong>不需极大</strong>——所以账本非极大不影响本节的可数性论证。）", "fn-brtopos": "<a href=\"#fnref-brtopos\" class=\"fn-back\" title=\"返回引用处\">↩</a>群胚（局部紧／测度群胚）的分类 topos \\(B\\mathcal{R}\\) 是 Grothendieck topos：Moerdijk, I., 关于（localic）群胚分类 topos 的构造。本章正文只领受其存在与&quot;无点&quot;性质，构造全证入附录。", "fn-pointfree": "<a href=\"#fnref-pointfree\" class=\"fn-back\" title=\"返回引用处\">↩</a>无点（pointfree/localic）测度论与无点谱：世界 topos 底层 locale 无足够 \\(\\mathbf{Set}\\)-点，测度与逻辑须无点式处理（Pavlov 的无点测度论方向）。&quot;无点&quot;不蕴含&quot;无全局截面&quot;（全局截面 \\(F(1)\\) 仍存在，见 §5.6 某物）。全部技术（无点谱、Jech–Takeuti 布尔值模型对照）入附录。", "fn-gmh": "<a href=\"#fnref-gmh\" class=\"fn-back\" title=\"返回引用处\">↩</a>一致历史／退相干泛函，Gell-Mann–Hartle 原始版用迹 \\(D(\\alpha,\\beta)=\\mathrm{tr}(C_\\alpha^\\dagger\\rho\\,C_\\beta)\\)；**本书用态版 \\(\\omega_{\\text{ext}}(C_\\alpha^\\dagger C_\\beta)\\)，因这台机器无迹、迹版写不出来**（正文已点明这是&quot;无绝对刻度&quot;在历史判据上的显形，非技术替换）。判定读第二态 \\(\\omega_{\\text{ext}}\\)。中档退相干条件 \\(D(\\alpha,\\beta)=0\\ (\\alpha\\neq\\beta)\\)（实虚部皆零，medium decoherence）：Gell-Mann, M., Hartle, J. B., &quot;Classical equations for quantum systems,&quot; *Phys. Rev. D* <strong>47</strong> (1993), 3345–3382。本书用中档 \\(D=0\\)，不用弱档 \\(\\mathrm{Re}\\,D=0\\)。类算子 \\(C_\\alpha\\)＝当下投影 \\(\\{P_i\\}\\subset\\mathcal{A}_{\\text{phys}}\\) 经 \\(P_i(t)=\\sigma_t^{\\omega^*}(P_i)\\)（基线模流搬运）后的时序乘积。两态各司其职：\\(\\sigma_t^{\\omega^*}\\)（第一态）搬尺子给时间／\\(\\omega_{\\text{ext}}\\)（第二态）读数给判定。", "fn-wu": "<a href=\"#fnref-wu\" class=\"fn-back\" title=\"返回引用处\">↩</a>某物三层：Urimpression（原印象／现量输入）→ Konstitution（构成／\\(E\\) 的压缩动作）→ Gegenstand（对象极／不变核），加历史一致性给的持存桥（对象跨时持存）——胡塞尔《观念 I》给了对象极的现象学、缺持存的机制，本书补以历史一致性（\\(D=0\\) 的跨时对齐）。层论对照（局部显现＝预层／黏合＝群胚余圈 \\(D=0\\)／noema＝无点世界上的全局截面，但 \\(\\iota\\circ E\\neq\\mathrm{id}\\)、且载 \\(H^2\\)）见正文 §5.6 与附录。列维纳斯 traumatisme（创伤）作态读挂靠，非承重。"};</script>
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -247,7 +270,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
 });
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
@@ -255,7 +278,40 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+    closeAllBubbles();
+  }
 });
+function closeAllBubbles() {
+  document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
+}
+function showFnBubble(event, fid) {
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){b.style.transition='';});
+  setTimeout(function(){b.style.opacity=1;b.style.transition='opacity .12s';},20);
+}
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

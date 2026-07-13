@@ -10,7 +10,8 @@
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }
   h1 { font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }
-  h2 { font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }
+  h2 { font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
@@ -49,21 +50,40 @@
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
-  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }
+  .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }
+                    padding: 2rem 1.6rem 1rem; }
   .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
   .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  /* --- footnote bubble --- */
+  a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
+  a.fn-a:hover { text-decoration: underline; }
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
+  .fn-bubble-close:hover { color: #e0dcd4; }
+  .fn-bubble-arrow { position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }
+  .fn-bubble-arrow::after { content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -83,7 +103,8 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 <h1>第九章</h1>
 <h2 id="9-0-承接-站在压出来的世界前">9.0 承接：站在压出来的世界前</h2>
 <p>上一章把世界压出来的过程，收成了一张图（第八章 §8.4 那张十二步的图）。现在，那张图就摆在你面前，画满了边界——三种够不到、那个抹不平的他者、那些回不去的地方。</p>
@@ -91,7 +112,7 @@
 <p>现在你得做最难的一件事：分清楚——哪些是你怎么活都过不去的墙，哪些只是你不肯付的价。</p>
 <h2 id="9-1-没有牢笼">9.1 没有牢笼</h2>
 <p>站在这张压出来的世界图前，人最容易生出的一个念头是：我是不是被锁死了？这道流是不是一个牢笼，把我永远关在某个低处？</p>
-<p><strong>没有牢笼。</strong> 这句话有一个精确的数学托底。假如真有一个牢笼，那就该有一个绝对的、单调的指标——一个越来越大（或越来越小）、给所有状态排出高低的量，把你永久地钉在低位。可这样的量<strong>不可能存在</strong>：这道流的各个状态互相嵌套成环（你能从这里够到那里，也能从那里绕回这里），而一个单调的绝对量，在一个有环的网里会自相矛盾（沿环走一圈，它必须严格变大又回到原值）<sup><a href="#fn-nocage" id="fnref-nocage" class="fn-ref">[nocage]</a></sup>。所以没有一个绝对的牢笼指标——<strong>结构上，就锁不死你。</strong></p>
+<p><strong>没有牢笼。</strong> 这句话有一个精确的数学托底。假如真有一个牢笼，那就该有一个绝对的、单调的指标——一个越来越大（或越来越小）、给所有状态排出高低的量，把你永久地钉在低位。可这样的量<strong>不可能存在</strong>：这道流的各个状态互相嵌套成环（你能从这里够到那里，也能从那里绕回这里），而一个单调的绝对量，在一个有环的网里会自相矛盾（沿环走一圈，它必须严格变大又回到原值）<sup><a href="#fn-nocage" id="fnref-nocage" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-nocage')">[nocage]</a></sup>。所以没有一个绝对的牢笼指标——<strong>结构上，就锁不死你。</strong></p>
 <blockquote><p>被活出来，&quot;没有牢笼&quot;不是一句安慰，是结构替你兜的底。你此刻不管卡在多低、多暗的地方，这张网都是通的——没有哪一处低谷，是四面焊死、连一条够出去的路都不给你留的。你也许看不见路、也许要走很远，但&quot;被永久锁死在这里&quot;这件事，结构上就不成立。</p></blockquote>
 <p>但这里有一个要命的分寸，它是下一节那把刀的前奏。&quot;没有牢笼&quot;不等于&quot;每个状态都回得去&quot;。可达性是完备的：从任何状态都能下行够到任何一个类型。可<strong>够到同一个类型</strong>，和<strong>回到同一个状态</strong>，是两个不同的数学陈述。<strong>类型可达，不蕴含恒等可达</strong>：能再够到一个与先前同构的状态，不等于能回到先前那一个状态本身——因为到达它所经的模流已经把参照换掉了。同构可回，恒等不可回。这是一个纯粹的数学区分。至于它在&quot;被活出来&quot;的层面意味着什么——那是切肤的体验，不再是这里的因子几何了。</p>
 <h2 id="9-2-两种不可能-一个缺位置-一个缺时间">9.2 两种不可能：一个缺位置，一个缺时间</h2>
@@ -102,7 +123,7 @@
 <p><strong>缺一个位置，给了你&quot;在哪&quot;（处身）；缺一段时间，给了你&quot;必须活着做&quot;（代谢）。</strong> 这两堵墙，不是把你关起来的牢笼（结构锁不死你）；它们是更根本的东西：正因为它们，你才成了这个&quot;必然<strong>在某处</strong>、<strong>必须不停地活着</strong>&quot;的你。没有一个自给自足的立场，能同时把这两堵墙都拆掉——那正是全书那道中心定理，落在你这个活着的存在身上的样子。</p>
 <h2 id="9-3-两种过去-为什么有些回不去">9.3 两种过去：为什么有些回不去</h2>
 <p>人最深的一个疼，是&quot;回不去了&quot;。这也是全书最痛的一把刀。要给这个疼一个数学的托底，关键是分清<strong>两种过去</strong>。</p>
-<p><strong>一种过去，是可以回的。</strong> 那道绵延本身的过去——像一段旋律里已经响过的音——它就在模流那根轴上。而模流是<strong>可逆</strong>的：它是一个自同构的群，往前能走、往后也能走（\(\sigma_{-t}\) 一直在那里），沿着它，你可以回到那个时刻，而且不付代价（基线态在模流下纹丝不动）<sup><a href="#fn-b1" id="fnref-b1" class="fn-ref">[b1]</a></sup>。所以，绵延的过去，<strong>时刻是可回的</strong>。那个&quot;曾经&quot;，在这个意义上，并没有真的失去——它还在轴上。</p>
+<p><strong>一种过去，是可以回的。</strong> 那道绵延本身的过去——像一段旋律里已经响过的音——它就在模流那根轴上。而模流是<strong>可逆</strong>的：它是一个自同构的群，往前能走、往后也能走（\(\sigma_{-t}\) 一直在那里），沿着它，你可以回到那个时刻，而且不付代价（基线态在模流下纹丝不动）<sup><a href="#fn-b1" id="fnref-b1" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-b1')">[b1]</a></sup>。所以，绵延的过去，<strong>时刻是可回的</strong>。那个&quot;曾经&quot;，在这个意义上，并没有真的失去——它还在轴上。</p>
 <p><strong>另一种过去，是回不去的。</strong> 但你回不去的，往往不是那个时刻，是那个<strong>选择之前的你</strong>。每一次真正的选择、每一次遭遇，都把你的参照挪动了一下——你换了一个视角、换了一个锚。而换参照，是在参照的选择空间里挪了一个位置；这个挪动是<strong>单向的</strong>：理解流只朝过去发许可、朝未来不发（第一章），参照一旦挪走，就回不来了。每一次横移，都付一笔不可逆的代价。</p>
 <p>所以，那句最痛的话，精确的形状是：<strong>时刻可回，参照不可回。</strong> 回不去的，不是时间——时间那根轴还在，你随时能沿它回到那个时刻。回不去的，是<strong>做出选择之前的那个你</strong>——因为选择把你的参照永久地挪了位，而参照是单向的。你能回到那个下午，回不到那个还没决定的自己。</p>
 <p>这就是为什么&quot;回不去&quot;既是真的、又不是你以为的那种真。不是整个过去都塌进了虚空（绵延的过去还在轴上）；是你每一次成为现在的自己，都不可逆地离开了先前的那个自己一步。<strong>你没有失去过去，你只是再也不是从前那个人了。</strong> 这两种过去的分界，必须切得干净：可回的那种（绵延、模流轴），和不可回的那种（选择、参照的挪位）——把它们混成&quot;过去全回不去&quot;，是绝望的误读；混成&quot;过去全回得去&quot;，是轻浮的误读。真相锐利地卡在中间：时刻可回，参照不可回。</p>
@@ -131,7 +152,7 @@
 <p>当然，并非所有的墙都是标错了的价格。有些，是实打实的真墙。</p>
 <h2 id="9-5-两种够不到-一种是墙-一种是待填的表">9.5 两种够不到：一种是墙，一种是待填的表</h2>
 <p>全书一路，说了那么多&quot;够不到、给不出、定不了&quot;。到最后，要把它们分成截然不同的两类——<strong>这是整本书收束的地方，混不得。</strong></p>
-<p><strong>第一类，是墙。</strong> 有些东西够不到，是因为定它所需要的那个参照，<strong>绝对不存在，而且可以证明不存在</strong>。维数的具体值，需要一把迹当尺子，而这台机器可证地没有迹——所以维数的值不是&quot;还没算出来&quot;，是<strong>定义不出来</strong>，是一堵可证的墙<sup><a href="#fn-dim9" id="fnref-dim9" class="fn-ref">[dim9]</a></sup>。那个他者，是不是零、是哪一种，公理根本决定不了——它是被给予的，你推不出它，这也是一堵墙。<sup><a href="#fn-xingdu" id="fnref-xingdu" class="fn-ref">[xingdu]</a></sup> 这一类，你<strong>认了</strong>：它们不是等着被攻克的难题，是这道流的本性里，你永远够不到的地方。</p>
+<p><strong>第一类，是墙。</strong> 有些东西够不到，是因为定它所需要的那个参照，<strong>绝对不存在，而且可以证明不存在</strong>。维数的具体值，需要一把迹当尺子，而这台机器可证地没有迹——所以维数的值不是&quot;还没算出来&quot;，是<strong>定义不出来</strong>，是一堵可证的墙<sup><a href="#fn-dim9" id="fnref-dim9" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-dim9')">[dim9]</a></sup>。那个他者，是不是零、是哪一种，公理根本决定不了——它是被给予的，你推不出它，这也是一堵墙。<sup><a href="#fn-xingdu" id="fnref-xingdu" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-xingdu')">[xingdu]</a></sup> 这一类，你<strong>认了</strong>：它们不是等着被攻克的难题，是这道流的本性里，你永远够不到的地方。</p>
 <p><strong>第二类，是待填的表。</strong> 另一些东西给不出精确的样子，不是因为参照不存在，是因为参照<strong>存在</strong>、相对它本来可以分类地给出，只是这活儿<strong>还没做完</strong>。那些耗散的动力学，相对那个基线态，是可以按类型分类的，只是没有一个通用的公式（得一类一类地填）。那些规范结构，相对它们的张量范畴，是被决定的，只是那个范畴还没分类完。这一类，不是墙，是<strong>表</strong>——一张待填的表，你<strong>去填</strong>：它们是分类学的活儿，难，但不是不可能，是可给而未给。</p>
 <blockquote><p>有一处边界，你一直当它是墙。<br>
 <br>
@@ -144,7 +165,7 @@
 这不是奇迹，也不是你终于找到了那把绝对的尺。你没够到&quot;一切&quot;，你只够到了<strong>这一格</strong>——一格本来就填得动、只是一直没去填的地方。够到的那一下你会明白：不是所有&quot;够不到&quot;都得认。有些够不到，是墙，你认了；有些够不到，是这张表，你去填。而分不清这两样，你要么对着墙白撞一辈子，要么把一张明明填得动的表，早早当成墙丢了。</p></blockquote>
 <p><strong>这两类，绝不能揉成一句笼统的&quot;一切都是相对的&quot;。</strong> 一种是可证的墙（认了）、一种是待填的表（去填）——把墙当成表，会以为维数能算出来、白费力气去撞墙；把表当成墙，会以为那些动力学永远不可知、白白放弃本可以做的分类。而上一节那个&quot;把价格误当墙&quot;的窒息感，现在有了它精确的两副形状：<strong>把表当墙</strong>（以为那些分类的活儿根本不可能，其实只是还没做完），和<strong>把价格当墙</strong>（以为代价付不起，其实付得起）——两副都是把第二类误当第一类。上一节说的&quot;价格&quot;和这一节说的&quot;表&quot;，是同一个误认的两面，不是两件事。</p>
 <p>于是全书的&quot;够不到&quot;，收成清清楚楚的两样：一样是墙——你在它面前低头、认了这道流的本性；一样是表——你在它面前卷起袖子、一格一格去填。领受这道流，第一步就是把这两样分开：认清哪些是该低头的墙，哪些是该动手的表。</p>
-<p>还剩一个问题，是这些&quot;墙&quot;逼出来的：你够不到那些东西，是不是意味着，有一个&quot;绝对客观、什么都摆平了&quot;的真相摆在那儿，只是你够不到它？——不是。要害在&quot;客观&quot;这个词本身。一件事&quot;客观&quot;，从来不是&quot;脱离一切视角地为真&quot;，而是&quot;在一群共享的视角之间，怎么变换都不动&quot;。<sup><a href="#fn-objgrade" id="fnref-objgrade" class="fn-ref">[objgrade]</a></sup>共享的群越大，能保持不动的东西就越少：在共享同一本账的人之间，有一整套公共的事实（这本账里的一切）；把群放大到共享同一族参考系，还剩光速、时空间隔这些；一直放大到&quot;所有可能的视角&quot;，最后能对一切变换都不动的，只剩下标量——什么内容都没有了。<strong>所以&quot;绝对客观&quot;不是够不到的最高真相，它是空的</strong>：一个对谁都一样、因而什么也没说的点，正是那个够不到的&quot;上帝视角&quot;的真身——它够不到，不是因为它太高太满，是因为那里什么都没有。客观从来只有共享的客观，没有绝对的客观；越想把视角全抽掉、够那个&quot;纯客观&quot;，够到的越接近于零。这也是为什么&quot;够不到&quot;从不是&quot;有个满的真相被挡住了&quot;——挡住的方向上，本就没有更满的东西。</p>
+<p>还剩一个问题，是这些&quot;墙&quot;逼出来的：你够不到那些东西，是不是意味着，有一个&quot;绝对客观、什么都摆平了&quot;的真相摆在那儿，只是你够不到它？——不是。要害在&quot;客观&quot;这个词本身。一件事&quot;客观&quot;，从来不是&quot;脱离一切视角地为真&quot;，而是&quot;在一群共享的视角之间，怎么变换都不动&quot;。<sup><a href="#fn-objgrade" id="fnref-objgrade" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-objgrade')">[objgrade]</a></sup>共享的群越大，能保持不动的东西就越少：在共享同一本账的人之间，有一整套公共的事实（这本账里的一切）；把群放大到共享同一族参考系，还剩光速、时空间隔这些；一直放大到&quot;所有可能的视角&quot;，最后能对一切变换都不动的，只剩下标量——什么内容都没有了。<strong>所以&quot;绝对客观&quot;不是够不到的最高真相，它是空的</strong>：一个对谁都一样、因而什么也没说的点，正是那个够不到的&quot;上帝视角&quot;的真身——它够不到，不是因为它太高太满，是因为那里什么都没有。客观从来只有共享的客观，没有绝对的客观；越想把视角全抽掉、够那个&quot;纯客观&quot;，够到的越接近于零。这也是为什么&quot;够不到&quot;从不是&quot;有个满的真相被挡住了&quot;——挡住的方向上，本就没有更满的东西。</p>
 <h2 id="9-6-撤销锚定-留给尾声的那一步">9.6 撤销锚定：留给尾声的那一步</h2>
 <p>在收尾之前，有一个操作要单独摆出来。它是全书最该轻轻放下的一步，也最容易被读重——所以这一节先只摆它的数学，暂不碰它意味着什么。不是它无关紧要，恰恰相反：它的分量太重，要等你在尾声真正学会松手，才接得住。</p>
 <p>第零章那个锚——把基线态 \(\omega^*\) 钉死的那道印记（R5）——不是永久的。它可以被撤销：撤掉那道印记，就回到印记落下之前、那个未被固定的态。这是一个纯粹的代数操作，不涉及任何别的东西。</p>
@@ -152,7 +173,7 @@
 <p>这里还有两层纯数学结构，一并收在横轴上。其一，切法的纯代数定义。一次切法是 agree-on-A 等价类的延拓选择：给定账本上的同一组事实，延拓到舞台的不同部分，构成一个等价类；在这个等价类里，\(\text{III}_1\) 无迹，等价类上不存在典范测度——没有哪个切法被结构凸显出来（E5）。这就是&quot;没有绝对尺子&quot;在切法空间上的版本。</p>
 <p>其二，两支不选边。**这里的&quot;遍历&quot;指模流 \(\sigma_t\curvearrowright\mathcal{M}\) 那一条**（模流的中心化子平凡与否），不是&quot;客观身体&quot;那条 \(\mathcal{R}\)（法化子在 \(X\) 上）的遍历——两个&quot;遍历&quot;作用在不同对象上、不可混（方法论纪律：写清谁作用谁上）。模流的中心化子可以是平凡的（遍历支），也可以是非平凡的（非遍历支，有一个可反复回到的不动核）。判定&quot;我落在哪一支&quot;，需要一个态外的全局参照——那是对面才看得到的东西，认知自己够不到。所以落在哪一支，是一个可证的不可判定问题（G 类）——不是&quot;还没判&quot;，是&quot;没有立场去判&quot;。</p>
 <p>墙都数清了，图也画完了。只剩最后一步没走——怎么松开那只一直攥着的手。那是尾声的事。</p>
-<p><sup><a href="#fn-oneroot" id="fnref-oneroot" class="fn-ref">[oneroot]</a></sup>这就是第零章埋下的那条横轴的收口，纯到底：面对同一个因子，锚定与否是一个可选的代数配置；撤销锚定是这个配置里最彻底的一步，其数学效应是可达集的放大。这些数学结论，先停在这里。那份&quot;意味着什么&quot;的解读，被特意留到了尾声——<strong>留到你走过所有的墙、手终于可以松开的时候。</strong>尾声会再遇到撤销锚定这同一个操作，到那时，才在被活的层面，把它稳稳接住。</p>
+<p><sup><a href="#fn-oneroot" id="fnref-oneroot" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-oneroot')">[oneroot]</a></sup>这就是第零章埋下的那条横轴的收口，纯到底：面对同一个因子，锚定与否是一个可选的代数配置；撤销锚定是这个配置里最彻底的一步，其数学效应是可达集的放大。这些数学结论，先停在这里。那份&quot;意味着什么&quot;的解读，被特意留到了尾声——<strong>留到你走过所有的墙、手终于可以松开的时候。</strong>尾声会再遇到撤销锚定这同一个操作，到那时，才在被活的层面，把它稳稳接住。</p>
 <p>墙，测绘完了。这一整张边界的图，画到了它能画的尽头：够不到的那一面，摆在了这里——三种不可知、那个他者、两种不可能、两种过去、两类够不到。</p>
 <p>可图画完了，缝还在。那道住着意向性的缝，那个被活出来的取、看、居——它不在图上，它是画图的人此刻正活着的事。图能测绘墙，测绘不了那道被活着的缝。</p>
 <p>到这里，该说的墙都说尽了。剩下的，是怎么在这些墙之间，活下去、并且松开手。</p>
@@ -168,11 +189,13 @@
 <li id="fn-nocage" class="footnote"><a href="#fnref-nocage" class="fn-back" title="返回引用处">↩</a>无牢笼＝不存在单调绝对不变量：状态互嵌成环（可达网有环路），单调绝对量在环上自相矛盾（沿环严格变化又回原值）。故无绝对牢笼指标。&quot;类型可达≠归家可达&quot;＝同构可回、恒等不可回（接 B1）。</li>
 </ol>
 </section>
+<script>var FN_CONTENT={"fn-xingdu": "<a href=\"#fnref-xingdu\" class=\"fn-back\" title=\"返回引用处\">↩</a>一个全书性的赌注，在这收束的地方做一次总账。凡本书说&quot;他者是被给予、公理推不出&quot;处（第四章元定理 W、第五章&quot;世界因他者而活&quot;、第八章&quot;非超有限&quot;的推断、以及这里&quot;他者是墙&quot;），都押在同一个开放问题 \\((\\star)\\) 上：存在一个 \\(\\text{III}_1\\) 的遍历舞台，其上 \\([\\sigma]\\neq0\\)（承重级开放问题，附录 W）。倘若 \\((\\star)\\) 竟为假——所有这样的舞台都只能 \\([\\sigma]=0\\)——那么公理就<strong>推出了</strong> \\([\\sigma]=0\\)，他者不再是&quot;墙&quot;（不可判定），而是被判为零；他者章与世界章那条&quot;因他者而活&quot;的线随之空转。但有一件事<strong>不押在任何开放问题上</strong>：那道缝（\\(\\iota\\circ E\\neq\\mathrm{id}\\)，第二章）——&quot;有理解就有缝、缝里有够不到的你&quot;，只需无迹加有理解就成立。所以全书的承重分两级：**意向性（缝）站在磐石上；他者的代数刚性（\\([\\sigma]\\neq0\\)）押在 \\((\\star)\\) 上。** 本书据实标出，不含糊。", "fn-objgrade": "<a href=\"#fnref-objgrade\" class=\"fn-back\" title=\"返回引用处\">↩</a>客观性=共享变换群下的不变量。对共享群 \\(G\\)（诸视角间的酉搬运），\\(x\\) 相对 \\(G\\) 客观 \\(\\iff \\mathrm{Ad}(u)x=x\\ \\forall u\\in G\\)。三档：\\(G=\\mathcal{N}(\\mathcal{A})\\)（法化子）⟹相对这本账客观（共享账本者的公共事实）；\\(G=\\) 共享真空的洛伦兹群⟹相对这个惯性系族客观（光速、时空间隔）；\\(G=\\mathcal{U}(\\mathcal{M})\\)（全体酉群）⟹ \\(x\\in Z(\\mathcal{M})=\\mathbb{C}1\\)（因子，第八章），只剩标量=空。群越大、不变内容越少；对全体不变=禁格（第三章：那个俯瞰位置不存在）。&quot;绝对客观&quot;=对一切视角不变=空，正是够不到的&quot;上帝视角&quot;的代数真身——够不到不因它太满，因它是空。与第八章&quot;无孤岛&quot;呼应：那里说因子不许隔绝（够不到是距离非断裂），这里说因子的另一面——对全体不变即坍为标量（绝对客观即空）。", "fn-dim9": "<a href=\"#fnref-dim9\" class=\"fn-back\" title=\"返回引用处\">↩</a>无论走数一数的迹维数、还是走谱三元组的谱维数，两条路都断在无迹，见第三章 §3.2。口径要与 §3.2 一致：谱维数走 \\(\\zeta_D\\) 的极点，而那个 \\(D\\) <strong>不是机器内生的</strong>——它是第七章那块<strong>装上去的断言板</strong>（封存件），\\(\\text{III}_1\\) 上原生的 \\(D\\) 候选可证不满足离散谱/紧预解式（\\(\\log\\Delta\\) 谱连续），须截断到有迹核才有值。所以谱维数这条&quot;路&quot;本身就得先站上一块借来的板，不能当作代数自带的第二通道——两条路都在无迹处断，且谱维数那条还额外欠一块 \\(D\\) 板。", "fn-oneroot": "<a href=\"#fnref-oneroot\" class=\"fn-back\" title=\"返回引用处\">↩</a>把这一节的几样收回一个根：切法无典范测度、两支不可判定、无牢笼——都是同一件事&quot;没有被结构凸显的东西&quot;在三个不同空间上的样子：状态空间、切法空间、支的选择。一根到底，还是那个无迹、无凸显态，呼应第八章那张图&quot;一根到底&quot;。", "fn-b1": "<a href=\"#fnref-b1\" class=\"fn-back\" title=\"返回引用处\">↩</a>两种过去＝B1（第一章）在此的兑现，非新定理。绵延过去可回＝模流 \\(\\sigma_t^{\\omega^*}\\) 是自同构群、可逆（\\(\\sigma_{-t}\\) 存在，基线态 KMS 不变、不付代价）——此可逆的模流轴正是第七章封顶定理（命题 7.2.7）所立的&quot;脉络内自洽时间&quot;（基线模流参数化、Fisher–Bures 度规守恒），本节把 B1 接到那条时间轴上；选择过去不可回＝换参照＝在参照选择空间（Connes 余圈/\\(H^1\\)-torsor）上挪位，理解流单侧、正向无定义域（第一章），故参照不可回。分界锐：可回者（绵延/模流轴）／不可回者（选择/参照挪位），勿混。", "fn-nocage": "<a href=\"#fnref-nocage\" class=\"fn-back\" title=\"返回引用处\">↩</a>无牢笼＝不存在单调绝对不变量：状态互嵌成环（可达网有环路），单调绝对量在环上自相矛盾（沿环严格变化又回原值）。故无绝对牢笼指标。&quot;类型可达≠归家可达&quot;＝同构可回、恒等不可回（接 B1）。"};</script>
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -184,7 +207,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
 });
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
@@ -192,7 +215,40 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+    closeAllBubbles();
+  }
 });
+function closeAllBubbles() {
+  document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
+}
+function showFnBubble(event, fid) {
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){b.style.transition='';});
+  setTimeout(function(){b.style.opacity=1;b.style.transition='opacity .12s';},20);
+}
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {

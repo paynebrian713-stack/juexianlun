@@ -10,7 +10,8 @@
          font-size: 1.05rem; line-height: 1.75;
          background: #1b1b18; color: #c8c4bc; }
   h1 { font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }
-  h2 { font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }
+  h2 { font-size: 1.22rem; margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid #3a3a35; color: #d8d4cc; }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
@@ -49,21 +50,40 @@
   .math-block { overflow-x: auto; overflow-y: hidden; }
   .math-block::-webkit-scrollbar { height: 6px; }
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
-  .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
-  .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
+  .map-btn { position: fixed; top: .8rem; right: 1rem; z-index: 9999;
+              font-size: .92rem; color: #c8c4bc; background: rgba(20,20,18,.88);
+              padding: .35rem .7rem; border-radius: 6px; cursor: pointer;
+              border: 1px solid #4a4a44; text-decoration: none; }
+  .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  width: auto; max-width: 74vw; min-width: 440px;
+                  background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.6rem 1.1rem .7rem; }
+                    padding: 2rem 1.6rem 1rem; }
   .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
                line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
   .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  /* --- footnote bubble --- */
+  a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
+  a.fn-a:hover { text-decoration: underline; }
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+                border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
+                box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
+                     color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
+  .fn-bubble-close:hover { color: #e0dcd4; }
+  .fn-bubble-arrow { position: absolute; bottom: 100%; left: 1rem; width: 0; height: 0;
+                      border-left: 7px solid transparent; border-right: 7px solid transparent;
+                      border-bottom: 7px solid #4a4a44; }
+  .fn-bubble-arrow::after { content: ''; position: absolute; bottom: -6px; left: -6px;
+                              border-left: 6px solid transparent; border-right: 6px solid transparent;
+                              border-bottom: 6px solid #2a2a24; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -83,7 +103,8 @@
 <script defer src="vendor/katex/auto-render.min.js"></script>
 </head>
 <body>
-<p class="nav"><a href="index.html">← 目录</a><span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span></p>
+<span class="map-btn" onclick="showMap()" title="主线图景">🗺 主线图景</span>
+<p class="nav"><a href="index.html">← 目录</a></p>
 <h1>导论</h1>
 <h2 id="一-你拿不出来的那个此刻">一、你拿不出来的那个此刻</h2>
 <p>有一样东西，你此刻正待在它里面，却永远没法把它拿出来，摆到我面前给我看。</p>
@@ -95,7 +116,7 @@
 <p>这道手续，人类越做越精密。而把它做到极致的，是科学。</p>
 <p>物理学，把这件事做到了登峰造极。它把一个现象里凡是带着&quot;从谁看&quot;&quot;对谁而言&quot;的成分，一点点抽干净，只留下换谁来测都一样的那一点。一块石头几点几秒落地——这件事和你的心情无关，和你的视角无关，和你是谁也无关。这是经典物理的理想，也是它惊人力量的来源。</p>
 <p>它造出了一个世界。这是人类造过的最干净、最可靠的一个世界：换谁来看、换谁来测，都一样。</p>
-<p>只是——凡是能这样递到别人手上的东西，都已经不再活着。你递出去的，是<strong>化石</strong>。<sup><a href="#fn-fossil" id="fnref-fossil" class="fn-ref">[fossil]</a></sup></p>
+<p>只是——凡是能这样递到别人手上的东西，都已经不再活着。你递出去的，是<strong>化石</strong>。<sup><a href="#fn-fossil" id="fnref-fossil" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-fossil')">[fossil]</a></sup></p>
 <p>也正是在这个剥得最干净的地方，那把&quot;绝对的尺&quot;显得天经地义。牛顿说，时间对所有人一样地流，空间对所有人一样地铺；那个舞台不偏不倚，对谁都是同一个。三百年里，这几乎不必怀疑。可你若回头看，会发现这份&quot;绝对&quot;并不是宇宙交底给我们的真相。它是另一样东西：主观被剥净之后，剩下的那种近乎透明的干净。我们剥得太成功，成功到把&quot;剥剩下的&quot;，当成了&quot;本来就绝对的&quot;。</p>
 <p>然后，在剥离的最深处，那把绝对的尺自己碎了。</p>
 <p>爱因斯坦发现，再往深里剥，连时间、连&quot;同时&quot;都保不住。两件事是不是同时发生，没有一个对所有人都成立的答案。你要谈快慢长短，得先说清一件事：从哪个参考系看。人类本以为，一路剥下去会抵达&quot;纯粹的客观&quot;。可剥到尽头，撞见的是另一回事。你能剥掉心情，剥掉个人，剥掉一切私人的东西，唯独有一样剥不掉——总得从某处去看。视角，是剥不掉的最后一层。</p>
@@ -130,7 +151,7 @@
 <p>这一问，本书不靠表态去接，而是直接交由这套工具的结构本身。它谈边界的资格，不在于站到自己之外去俯瞰。在于另一件事：它能在自己内部，把自己的边界一寸寸标出来，连够不到的地方都给得出坐标。有五件事，全落在这套工具里面。</p>
 <p><strong>它的起点，是一条定理，不是一个信念。</strong> 一切从锚定一个基线态开始。而在这类结构里，一锚定，一道内在的时间流就跟着淌了出来——这是一条硬定理（Tomita–Takesaki），不是本书私设的前提。绵延、因果、那套内部逻辑，全扎在这道流上；而这道流，不过是&quot;锚定&quot;投下的影子。所以说这套工具&quot;地基不牢&quot;，是个误会。它的存在早于任何内容，在锚定这一步就齐了。</p>
 <p>关于锚定本身，有一句话要说到头。这一步是逻辑的必然吗——只要认知存在，就非落在这个锚上不可？不是。是一个绝对偶然的奇迹吗——有一只外来的手替你做了选择？也不是。在这类结构里，所有可能的锚都在互相稠密的轨道上，没有一个占结构上的便宜。没有优选，也就没有选对选错。于是对你来说，一旦锚定，回头已经看不见任何可以比较的另一个锚——你只有&quot;已经在某个锚上了&quot;这一个事实。它不是推出来的，不是被谁选的，它就是被给予的既成事实。而正因没有第二个态可拿来当参照，&quot;取哪个态&quot;之间，连差异都还没立起来——不是选了都一样，是在选之前，差异本身还不存在。海德格尔管它叫&quot;被抛&quot;（Geworfenheit）。</p>
-<p><strong>它够不到的地方，它自己给得出坐标。</strong> 这套逻辑只在一处会不自洽：当它去够他者的时候。可那处不自洽本身，不仅能被精确命名，还能被定位。它叫他者。在描述里，他者是一道消不掉的扭曲，它有自己的代数坐标。<sup><a href="#fn-sigma" id="fnref-sigma" class="fn-ref">[sigma]</a></sup> 所以工具撞上极限时，不是撞进一团模糊的&quot;这儿说不清了&quot;，而是撞到一个点，一个它标得出经纬度的点。够不到，和标不出坐标，是两回事：它够不到他者，却标得出他者在哪。</p>
+<p><strong>它够不到的地方，它自己给得出坐标。</strong> 这套逻辑只在一处会不自洽：当它去够他者的时候。可那处不自洽本身，不仅能被精确命名，还能被定位。它叫他者。在描述里，他者是一道消不掉的扭曲，它有自己的代数坐标。<sup><a href="#fn-sigma" id="fnref-sigma" class="fn-a" onclick="event.preventDefault();showFnBubble(event,'fn-sigma')">[sigma]</a></sup> 所以工具撞上极限时，不是撞进一团模糊的&quot;这儿说不清了&quot;，而是撞到一个点，一个它标得出经纬度的点。够不到，和标不出坐标，是两回事：它够不到他者，却标得出他者在哪。</p>
 <p><strong>既然没有绝对的尺子、称量都挂在视角上，&quot;公共的知识&quot;又从何谈起？它可被公共核对的答案，依然在它内部。</strong> 所谓公共核对，就是几个彼此够得到的视角，对同一批已经落定的记录，彼此吻合——本书管这叫&quot;历史一致性&quot;。理论不必偷用一个上帝视角来担保公共性。公共性，本就是它一直在描述的那个结构。</p>
 <p><strong>连&quot;自己测不到什么&quot;，它都证得出来。</strong> 一套理论最硬的一道自测，是看它能不能划定自己的无能为力。这套工具能。它证得出，有某一类精细的结构量，谁也测不出来——不是含糊地说一句&quot;测不了&quot;，是一条定理，把自己够不到的东西圈死在界外。也正因如此，凡是它数学上确实够不到的那些领受——只能被活、不能被证的——本书一律留在界外，空着那一格不写。诚实地空着，本身就是这份反身性的一部分。</p>
 <p><strong>还有第五件：连自己这个地基牢不牢，它都说得清、不心虚。</strong> 有人会追问：你凭什么断定，认知的结构非得是&quot;没有尺子&quot;这一类？本书的回答很老实。它不声称这是描述认知的唯一可能数学。它声称的是一件更精确、也更站得住的事——本书所有结论，形状都是&quot;给定没有尺子，则……&quot;，是一批条件定理。而任何想推翻它们的框架，都得先塞进一把绝对的尺、一个上帝视角。于是最深的那一问，就归结成一个摆在台面上、可以公开争论的前提：到底有没有上帝视角？本书答：没有。你握不住全部，也没有一个位置，能站到自己之外去看自己。这个&quot;没有&quot;，康德说过（没有智性直观），现象学也说过（没有来自无处的观看），是明摆着、可争论的论点，不是偷藏的假设。<strong>藏起来的假设才可怕；摆上台面、可被反驳的前提，是诚实。</strong><sup><a href="#fn-zero-ch" id="fnref-zero-ch" class="fn-ref">[zero-ch]</a></sup></p>
@@ -183,11 +204,13 @@
 <li id="fn-ch4-proof" class="footnote"><a href="#fnref-ch4-proof" class="fn-back" title="返回引用处">↩</a>这两句在此只给地位，证明在第四章。</li>
 </ol>
 </section>
+<script>var FN_CONTENT={"fn-fossil": "<a href=\"#fnref-fossil\" class=\"fn-back\" title=\"返回引用处\">↩</a>化石不是修辞。第一章会给它一个严格的身份：那些已经凝固、因此才传得过去的事实。", "fn-ti-body": "<a href=\"#fnref-ti-body\" class=\"fn-back\" title=\"返回引用处\">↩</a>这台摆渡机器怎么搭起它那个&quot;对谁都一样&quot;的客观面、又怎么一次次核对修正，是第五章（历史一致性）与第七章（断言板）的事。", "fn-projection-shape": "<a href=\"#fnref-projection-shape\" class=\"fn-back\" title=\"返回引用处\">↩</a>这里说的&quot;投影&quot;&quot;失真&quot;不是文学比喻。后面会看到，它有一副精确的数学形状：一个丰富的结构，为什么原则上没法被任何单一视角一次装下。", "fn-sigma": "<a href=\"#fnref-sigma\" class=\"fn-back\" title=\"返回引用处\">↩</a>这道扭曲的代数坐标是 \\([\\sigma]\\neq0\\)；此处只标出它有坐标，符号的含义在正文里到时自会遇到。", "fn-zero-ch": "<a href=\"#fnref-zero-ch\" class=\"fn-back\" title=\"返回引用处\">↩</a>完整论证在第零章。", "fn-step-three": "<a href=\"#fnref-step-three\" class=\"fn-back\" title=\"返回引用处\">↩</a>这一步留到其三。", "fn-four-step": "<a href=\"#fnref-four-step\" class=\"fn-back\" title=\"返回引用处\">↩</a>四步的机理在第二章与附录 W；导论只给这一句结论。", "fn-ch4-proof": "<a href=\"#fnref-ch4-proof\" class=\"fn-back\" title=\"返回引用处\">↩</a>这两句在此只给地位，证明在第四章。"};</script>
 <div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
+  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -199,7 +222,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideMap();
+  if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
 });
 document.addEventListener('click', function(e) {
   var ov = document.getElementById('map-overlay');
@@ -207,7 +230,40 @@ document.addEventListener('click', function(e) {
   if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
     hideMap();
   }
+  if (!e.target.closest('.fn-bubble') && !e.target.classList.contains('fn-a')) {
+    closeAllBubbles();
+  }
 });
+function closeAllBubbles() {
+  document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
+}
+function showFnBubble(event, fid) {
+  closeAllBubbles();
+  var content = FN_CONTENT[fid];
+  if (!content) return;
+  var a = event.currentTarget;
+  var b = document.createElement('div');
+  b.className = 'fn-bubble';
+  b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
+              + '<div class="fn-bubble-arrow"></div>' + content;
+  document.body.appendChild(b);
+  var rect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+  var top = rect.bottom + 8;
+  var left = rect.left + rect.width / 2 - 20;
+  if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
+  if (left < 8) left = 8;
+  if (top + bRect.height > window.innerHeight - 12) {
+    top = rect.top - bRect.height - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+    b.querySelector('.fn-bubble-arrow::after') && b.querySelector('.fn-bubble-arrow').nextSibling;
+  }
+  b.style.left = left + 'px';
+  b.style.top = top + 'px';
+  b.style.opacity = 0;
+  b.addEventListener('transitionend', function(){b.style.transition='';});
+  setTimeout(function(){b.style.opacity=1;b.style.transition='opacity .12s';},20);
+}
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
   if (typeof renderMathInElement !== 'function') {
