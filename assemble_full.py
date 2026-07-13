@@ -312,16 +312,19 @@ def title_from_md(text):
     for line in text.splitlines():
         if line.startswith('# '):
             raw = line[2:].strip()
-            # 取"·"之前的部分作为短标题
             short = raw.split('·')[0].strip()
+            if short.startswith('附录'):
+                return '附录'
             return short
     return "章节"
 
 
 def index_title(ch_name, full):
-    """目录页显示标题：正文章节带副标题，附录不显示副标题。"""
+    """目录页显示标题：正文章节带副标题，附录只写"附录"，导论只写"导论"。"""
     if ch_name == "附录":
-        return full.split('·')[0].strip()
+        return "附录"
+    if ch_name == "导论":
+        return "导论"
     return full
 
 
