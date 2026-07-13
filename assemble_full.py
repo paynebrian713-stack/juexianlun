@@ -44,48 +44,58 @@ HTML_SHELL = """<!DOCTYPE html>
 <style>
   body {{ max-width: 46rem; margin: 2rem auto; padding: 0 1.2rem;
          font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
-         font-size: 1.05rem; line-height: 1.75; color: #1a1a1a; }}
-  h1 {{ font-size: 1.55rem; border-bottom: 1px solid #ddd; padding-bottom: .35rem; }}
-  h2 {{ font-size: 1.22rem; margin-top: 1.8rem; }}
-  h3 {{ font-size: 1.08rem; }}
-  blockquote {{ border-left: 3px solid #bbb; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #333; }}
-  code {{ background: #f5f5f5; padding: .08em .3em; border-radius: 3px; font-size: .9em; }}
-  pre {{ background: #f5f5f5; padding: .75rem; overflow-x: auto; border-radius: 4px; }}
-  .nav {{ font-size: .88rem; margin-bottom: 1.2rem; color: #666; }}
-  .nav a {{ color: #0366d6; text-decoration: none; }}
+         font-size: 1.05rem; line-height: 1.75;
+         background: #1b1b18; color: #c8c4bc; }}
+  h1 {{ font-size: 1.55rem; border-bottom: 1px solid #3a3a35; padding-bottom: .35rem; color: #e0dcd4; }}
+  h2 {{ font-size: 1.22rem; margin-top: 1.8rem; color: #d8d4cc; }}
+  h3 {{ font-size: 1.08rem; color: #d0ccc4; }}
+  blockquote {{ border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }}
+  code {{ background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }}
+  pre {{ background: #242420; padding: .75rem; overflow-x: auto; border-radius: 4px; color: #c8c4bc; }}
+  .nav {{ font-size: .88rem; margin-bottom: 1.2rem; color: #7a766e; }}
+  .nav a {{ color: #7eb8da; text-decoration: none; }}
   .math-block {{ text-align: center; margin: 1.2rem 0; }}
   .katex-display {{ margin: 1rem 0; overflow-x: auto; }}
-  a.fn-ref {{ color: #0366d6; text-decoration: none; font-weight: 600; }}
+  a.fn-ref {{ color: #7eb8da; text-decoration: none; font-weight: 600; }}
   a.fn-ref:hover {{ text-decoration: underline; }}
-  .footnotes {{ margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: .92rem; }}
-  .footnotes h2 {{ font-size: 1rem; color: #666; margin-top: 0; }}
+  .footnotes {{ margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #3a3a35; font-size: .92rem; }}
+  .footnotes h2 {{ font-size: 1rem; color: #8a867e; margin-top: 0; }}
   ol.footnotes {{ padding-left: 1.4rem; }}
   li.footnote {{ margin: .65rem 0; }}
-  li.footnote:target {{ background: #fff8e6; margin-left: -0.4rem; padding: .35rem .4rem; border-radius: 4px; }}
-  a.fn-back {{ color: #666; text-decoration: none; margin-right: .35rem; }}
-  a.fn-back:hover {{ color: #0366d6; }}
-  a.ch-map {{ color: #0366d6; text-decoration: none; }}
+  li.footnote:target {{ background: #2a2818; margin-left: -0.4rem; padding: .35rem .4rem; border-radius: 4px; }}
+  a.fn-back {{ color: #8a867e; text-decoration: none; margin-right: .35rem; }}
+  a.fn-back:hover {{ color: #7eb8da; }}
+  a.ch-map {{ color: #7eb8da; text-decoration: none; }}
   a.ch-map:hover {{ text-decoration: underline; }}
-  .fn-back-list {{ margin-left: .25rem; font-size: .85em; color: #888; }}
-  .fn-back-list a {{ color: #888; text-decoration: none; }}
-  .fn-back-list a:hover {{ color: #0366d6; text-decoration: underline; }}
-  .toc {{ background: #f8f9fa; padding: .6rem 1rem; border-radius: 6px; margin: 1rem 0; font-size: .9rem; }}
-  .toc strong {{ display: block; margin-bottom: .3rem; color: #444; }}
+  .fn-back-list {{ margin-left: .25rem; font-size: .85em; color: #7a766e; }}
+  .fn-back-list a {{ color: #7a766e; text-decoration: none; }}
+  .fn-back-list a:hover {{ color: #7eb8da; text-decoration: underline; }}
+  .toc {{ background: #242420; padding: .6rem 1rem; border-radius: 6px; margin: 1rem 0; font-size: .9rem; }}
+  .toc strong {{ display: block; margin-bottom: .3rem; color: #a8a49c; }}
   .toc ul {{ margin: 0; padding-left: 1.2rem; list-style: none; }}
   .toc li {{ margin: .2rem 0; }}
-  a.toc-link {{ color: #0366d6; text-decoration: none; }}
+  a.toc-link {{ color: #7eb8da; text-decoration: none; }}
   a.toc-link:hover {{ text-decoration: underline; }}
-  .diagram {{ background: #f8f9fa; padding: .75rem; overflow-x: auto; border-radius: 4px;
+  .diagram {{ background: #242420; padding: .75rem; overflow-x: auto; border-radius: 4px;
              font-size: .88rem; line-height: 1.35; }}
   .diagram code {{ background: none; padding: 0; }}
-  a.d-link {{ color: #0366d6; text-decoration: none; }}
+  a.d-link {{ color: #7eb8da; text-decoration: none; }}
   a.d-link:hover {{ text-decoration: underline; }}
   .math-block {{ overflow-x: auto; overflow-y: hidden; }}
   .math-block::-webkit-scrollbar {{ height: 6px; }}
-  .math-block::-webkit-scrollbar-thumb {{ background: #ccc; border-radius: 3px; }}
-  .math-block::-webkit-scrollbar-thumb:hover {{ background: #999; }}
-  #status {{ font-size: .85rem; color: #888; margin-top: 2rem; }}
-  #status.err {{ color: #c00; }}
+  .math-block::-webkit-scrollbar-thumb {{ background: #4a4a44; border-radius: 3px; }}
+  .math-block::-webkit-scrollbar-thumb:hover {{ background: #6a6a62; }}
+  #status {{ font-size: .85rem; color: #7a766e; margin-top: 2rem; }}
+  #status.err {{ color: #d86; }}
+  table {{ border-collapse: collapse; }}
+  td, th {{ border: 1px solid #3a3a35; padding: .35rem .6rem; }}
+  @media (max-width: 600px) {{
+    body {{ font-size: .98rem; padding: 0 .8rem; margin: 1rem auto; }}
+    h1 {{ font-size: 1.35rem; }}
+    h2 {{ font-size: 1.1rem; }}
+    pre, .diagram {{ font-size: .8rem; padding: .5rem; }}
+    blockquote {{ margin: .6rem 0; padding: .15rem 0 .15rem .7rem; }}
+  }}
 </style>
 <link rel="stylesheet" href="{katex}/katex.min.css">
 <script defer src="{katex}/katex.min.js"></script>
@@ -632,15 +642,33 @@ def export_html(chapters):
         for h, t in index_items
     )
     index = f"""<!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="utf-8"><title>《界限论》阅读器</title>
-<style>body{{max-width:36rem;margin:2rem auto;font-family:serif;line-height:1.6}}
-a{{color:#0366d6}} .note{{color:#666;font-size:.95rem}}</style></head>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《界限论》阅读器</title>
+<style>
+  body {{ max-width: 36rem; margin: 2rem auto; padding: 0 1.2rem;
+         font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+         line-height: 1.8; background: #1b1b18; color: #c8c4bc; }}
+  h1 {{ font-size: 1.45rem; border-bottom: 1px solid #3a3a35;
+       padding-bottom: .35rem; color: #e0dcd4; }}
+  a {{ color: #7eb8da; text-decoration: none; }}
+  a:hover {{ text-decoration: underline; }}
+  ul {{ padding-left: 0; list-style: none; }}
+  li {{ padding: .25rem 0; border-bottom: 1px solid #2a2a26; }}
+  li:last-child {{ border-bottom: none; }}
+  .note {{ color: #7a766e; font-size: .88rem; margin-top: 1.8rem; }}
+  @media (max-width: 600px) {{
+    body {{ font-size: .95rem; padding: 0 .8rem; margin: 1rem auto; }}
+    h1 {{ font-size: 1.25rem; }}
+    li {{ font-size: .93rem; padding: .35rem 0; }}
+  }}
+</style></head>
 <body>
 <h1>《界限论》阅读器</h1>
-<p class="note">用 Chrome / Edge 直接打开（本地 KaTeX，无需联网）。
-脚注可点击跳转；跨章引用会自动跳到对应章节。</p>
-<p class="note">生成：{datetime.now():%Y-%m-%d %H:%M}</p>
 <ul>{links}</ul>
+<p class="note">用 Chrome / Edge 打开即可阅读（本地 KaTeX，无需联网）。<br>
+脚注可点击跳转；跨章引用会自动跳到对应章节。<br>
+生成：{datetime.now():%Y-%m-%d %H:%M}</p>
 </body></html>"""
     with open(f"{OUT_HTML}/index.html", 'w', encoding='utf-8', newline='\n') as f:
         f.write(index)
