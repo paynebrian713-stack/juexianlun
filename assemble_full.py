@@ -96,15 +96,15 @@ HTML_SHELL = """<!DOCTYPE html>
                   border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }}
   #map-overlay.active {{ display: block; }}
-  .map-container {{ position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 0 0 .6rem 0; }}
+  .map-container {{ position: relative; background: #1e1e1c; border-radius: 12px;
+                         padding: 0 0 .6rem 0; }}
   .map-titlebar {{ display: flex; justify-content: space-between; align-items: center;
-                    padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #e0dcd4; }}
+                   padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #3a3a35; }}
   .map-titlebar a {{ color: #7eb8da; text-decoration: none; font-size: .9rem; }}
   .map-titlebar a:hover {{ text-decoration: underline; }}
-  .map-close {{ font-size: 1.5rem; color: #5f5e5a; cursor: pointer; background: none;
-               border: none; line-height: 1; padding: 0 .15rem; }}
-  .map-close:hover {{ color: #1b1b18; }}
+  .map-close {{ font-size: 1.5rem; color: #8a867e; cursor: pointer; background: none;
+                border: none; line-height: 1; padding: 0 .15rem; }}
+  .map-close:hover {{ color: #e0dcd4; }}
   .map-svg-wrap {{ padding: 1.4rem 1.6rem 0 1.6rem; }}
   .map-svg-wrap object {{ width: 100%; display: block; }}
   /* --- footnote bubble --- */
@@ -861,6 +861,9 @@ class PageConverter:
                     a_fids.add(fid)
                     a_htmls.append(html)
                     inner = re.sub(r'^<li[^>]*>|</li>$', '', html).strip()
+                    # strip back-link (↩) from bubble content
+                    inner = re.sub(r'<a[^>]*class="fn-back"[^>]*>↩</a>\s*', '', inner)
+                    inner = re.sub(r'<span\s+class="fn-back-list"[^>]*>.*?</span>\s*', '', inner)
                     fn_content_map[f'fn-{fid}'] = inner
                 else:
                     b_htmls.append(html)
