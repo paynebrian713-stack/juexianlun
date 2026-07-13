@@ -248,6 +248,30 @@ def toc_html(headings):
     return f'<div class="toc"><strong>目录（可点击跳转）</strong><ul>\n{items}\n</ul></div>\n'
 
 
+def strip_w8(md_text):
+    """Remove ## W.8 section from markdown (appendix only)."""
+    idx = md_text.find('\n## W.8 ')
+    if idx >= 0:
+        return md_text[:idx].rstrip() + '\n'
+    return md_text
+
+
+def fix_w7_newlines(md_text):
+    """Insert blank lines between numbered items in W.7 section."""
+    start = md_text.find('\n## W.7 ')
+    if start < 0:
+        return md_text
+    end = md_text.find('\n## ', start + 1)
+    if end < 0:
+        end = md_text.find('\n[^', start + 1)
+    if end < 0:
+        return md_text
+    section = md_text[start:end]
+    # Insert blank line before each numbered item (except first)
+    fixed = re.sub(r'\n(\d+)\. ', r'\n\n\1. ', section)
+    return md_text[:start] + fixed + md_text[end:]
+
+
 def title_from_md(text):
     for line in text.splitlines():
         if line.startswith('# '):
@@ -523,6 +547,9 @@ def export_html(chapters):
     chapter_links = build_chapter_link_map()
     for html_name, ch_name, md in chapters:
         title = title_from_md(md)
+        if ch_name == "附录":
+            md = strip_w8(md)
+            md = fix_w7_newlines(md)
         conv = PageConverter(html_name, fn_index)
         body = conv.md_to_html(md)
         if ch_name == "导论":
