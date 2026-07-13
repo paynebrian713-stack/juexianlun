@@ -73,7 +73,7 @@
   /* --- footnote bubble --- */
   a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
   a.fn-a:hover { text-decoration: underline; }
-  .fn-bubble { position: fixed; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
                 border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
                 box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
   .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
@@ -350,12 +350,12 @@ function showFnBubble(a, fid) {
   document.body.appendChild(b);
   var rect = a.getBoundingClientRect();
   var bRect = b.getBoundingClientRect();
-  var top = rect.bottom + 8;
+  var top = rect.bottom + window.scrollY + 8;
   var left = rect.left + rect.width / 2 - 20;
   if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
   if (left < 8) left = 8;
-  if (top + bRect.height > window.innerHeight - 12) {
-    top = rect.top - bRect.height - 8;
+  if (rect.bottom + bRect.height > window.innerHeight - 12) {
+    top = rect.top + window.scrollY - bRect.height - 8;
     b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
   }
   b.style.left = left + 'px';
