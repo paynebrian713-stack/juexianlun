@@ -64,6 +64,8 @@ HTML_SHELL = """<!DOCTYPE html>
   li.footnote:target {{ background: #fff8e6; margin-left: -0.4rem; padding: .35rem .4rem; border-radius: 4px; }}
   a.fn-back {{ color: #666; text-decoration: none; margin-right: .35rem; }}
   a.fn-back:hover {{ color: #0366d6; }}
+  a.ch-map {{ color: #0366d6; text-decoration: none; }}
+  a.ch-map:hover {{ text-decoration: underline; }}
   .fn-back-list {{ margin-left: .25rem; font-size: .85em; color: #888; }}
   .fn-back-list a {{ color: #888; text-decoration: none; }}
   .fn-back-list a:hover {{ color: #0366d6; text-decoration: underline; }}
@@ -173,6 +175,34 @@ def chapter_html_name(i, ch_name):
     short = ch_name.replace("章", "").replace("第", "")
     sname = SAFE_NAME.get(short, ch_name)
     return f"{i:02d}_{sname}.html"
+
+
+def build_chapter_link_map():
+    """第零章～第九章 → HTML 文件名（与 files 列表同步，无需另维护）。"""
+    return {
+        ch_name: chapter_html_name(i, ch_name)
+        for i, (_, ch_name) in enumerate(files, 1)
+        if ch_name != "导论"
+    }
+
+
+def linkify_chapter_map(html, link_map):
+    """导论「章节地图」blockquote 内的 **第X章** → 跳转链接（仅 HTML 层）。"""
+    marker = "章节地图"
+    idx = html.find(marker)
+    if idx < 0:
+        return html
+    bq_start = html.rfind("<blockquote>", 0, idx)
+    bq_end = html.find("</blockquote>", idx)
+    if bq_start < 0 or bq_end < 0:
+        return html
+    segment = html[bq_start:bq_end]
+    for ch_label, href in link_map.items():
+        segment = segment.replace(
+            f"<strong>{ch_label}</strong>",
+            f'<strong><a href="{href}" class="ch-map">{ch_label}</a></strong>',
+        )
+    return html[:bq_start] + segment + html[bq_end:]
 
 
 def title_from_md(text):
@@ -445,10 +475,14 @@ def export_html(chapters):
     fn_index = FootnoteIndex(html_chapters)
 
     index_items = []
+    chapter_links = build_chapter_link_map()
     for html_name, ch_name, md in chapters:
         title = title_from_md(md)
         conv = PageConverter(html_name, fn_index)
-        write_html_page(os.path.join(OUT_HTML, html_name), title, conv.md_to_html(md))
+        body = conv.md_to_html(md)
+        if ch_name == "导论":
+            body = linkify_chapter_map(body, chapter_links)
+        write_html_page(os.path.join(OUT_HTML, html_name), title, body)
         index_items.append((html_name, title))
         print(f"    {html_name}")
 
