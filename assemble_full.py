@@ -171,6 +171,7 @@ def clean_chapter(text, ch_name):
     text = '\n'.join(result)
     if ch_name == "导论":
         text = re.sub(r'\n>\s*副标题[：:]\s*.+', '', text, count=1)
+        text = re.sub(r'\n---\n(?=\s*\n## )', '\n', text, count=1)
         text = re.sub(r'\n{3,}', '\n\n', text)
     text = re.sub(r'\n---\n', '\n* * *\n', text)
     return text
@@ -349,13 +350,10 @@ def title_from_md(text):
     return "章节"
 
 
-def index_title(ch_name, md, meta=None):
-    """目录页显示标题：正文章节带副标题，导论副标题来自 blockquote。"""
-    if ch_name == "附录":
-        return "附录"
-    if ch_name == "导论":
-        sub = (meta or {}).get("intro_subtitle", "")
-        return f"导论 · {sub}" if sub else "导论"
+def index_title(ch_name, md):
+    """目录页章节条目：导论/附录仅短名，其余带章节副标题。"""
+    if ch_name in ("附录", "导论"):
+        return ch_name
     return clean_title(full_title(md))
 
 
@@ -647,11 +645,14 @@ def export_html(chapters, meta=None):
     chapter_links = build_chapter_link_map()
     for html_name, ch_name, md in chapters:
         short = page_title(ch_name, md)
-        idx_text = index_title(ch_name, md, meta)
+        idx_text = index_title(ch_name, md)
         conv = PageConverter(html_name, fn_index)
         body = conv.md_to_html(md)
         body = strip_h1_subtitle(body, short)
         if ch_name == "导论":
+            body = re.sub(
+                r'<blockquote><p>\s*副标题[：:][^<]*</p></blockquote>\s*',
+                '', body, count=1)
             body = linkify_chapter_map(body, chapter_links)
         if ch_name == "附录":
             heads = extract_h2_headings(md)
@@ -666,6 +667,10 @@ def export_html(chapters, meta=None):
         f'    <li><a href="{html_mod.escape(h)}">{html_mod.escape(t)}</a></li>'
         for h, t in index_items
     )
+    book_sub = html_mod.escape((meta or {}).get("intro_subtitle", ""))
+    subtitle_block = (
+        f'<p class="subtitle">{book_sub}</p>\n' if book_sub else ''
+    )
     index = f"""<!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -675,7 +680,8 @@ def export_html(chapters, meta=None):
          font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
          line-height: 1.8; background: #1b1b18; color: #c8c4bc; }}
   h1 {{ font-size: 1.45rem; border-bottom: 1px solid #3a3a35;
-       padding-bottom: .35rem; color: #e0dcd4; }}
+       padding-bottom: .35rem; color: #e0dcd4; margin-bottom: .4rem; }}
+  .subtitle {{ color: #a8a49c; font-size: 1rem; margin: 0 0 1.4rem; }}
   a {{ color: #7eb8da; text-decoration: none; }}
   a:hover {{ text-decoration: underline; }}
   ul {{ padding-left: 0; list-style: none; }}
@@ -685,12 +691,13 @@ def export_html(chapters, meta=None):
   @media (max-width: 600px) {{
     body {{ font-size: .95rem; padding: 0 .8rem; margin: 1rem auto; }}
     h1 {{ font-size: 1.25rem; }}
+    .subtitle {{ font-size: .92rem; }}
     li {{ font-size: .93rem; padding: .35rem 0; }}
   }}
 </style></head>
 <body>
 <h1>《界限论》阅读器</h1>
-<ul>{links}</ul>
+{subtitle_block}<ul>{links}</ul>
 <p class="note">用 Chrome / Edge 打开即可阅读（本地 KaTeX，无需联网）。<br>
 脚注可点击跳转；跨章引用会自动跳到对应章节。<br>
 生成：{datetime.now():%Y-%m-%d %H:%M}</p>
