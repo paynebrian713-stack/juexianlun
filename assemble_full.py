@@ -67,6 +67,7 @@ HTML_SHELL = """<!DOCTYPE html>
   .katex-display::-webkit-scrollbar {{ display: none; }}
   a.fn-ref {{ color: #7eb8da; text-decoration: none; font-weight: 600; }}
   a.fn-ref:hover {{ text-decoration: underline; }}
+  a.fn-ref::after {{ content: ' ↓'; font-size: .8em; opacity: .5; }}
   .footnotes {{ margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #3a3a35; font-size: .92rem; }}
   ol.footnotes {{ padding: 0 0 0 1.4rem; margin: 0; }}
   li.footnote {{ padding: .35rem 0; margin: 0; }}
@@ -114,8 +115,9 @@ HTML_SHELL = """<!DOCTYPE html>
   .map-svg-wrap {{ padding: 1.4rem 1.6rem 0 1.6rem; }}
   .map-svg-wrap object {{ width: 100%; display: block; }}
   /* --- footnote bubble --- */
-  a.fn-a {{ color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }}
-  a.fn-a:hover {{ text-decoration: underline; }}
+  a.fn-a {{ color: #caa76b; text-decoration: none; font-weight: 600; cursor: pointer; }}
+  a.fn-a:hover {{ color: #e0c080; text-decoration: underline; }}
+  a.fn-a::after {{ content: ' ◎'; font-size: .7em; opacity: .6; }}
   .fn-bubble {{ position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
                 border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
                 box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }}
