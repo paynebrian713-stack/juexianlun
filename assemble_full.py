@@ -308,10 +308,37 @@ def linkify_ascii_diagram(body):
 
 
 def title_from_md(text):
+    """短标题：仅章节编号/名称，无副标题（用于页面 h1 和窗口标题）。"""
+    for line in text.splitlines():
+        if line.startswith('# '):
+            raw = line[2:].strip()
+            # 取"·"之前的部分作为短标题
+            short = raw.split('·')[0].strip()
+            return short
+    return "章节"
+
+
+def index_title(ch_name, full):
+    """目录页显示标题：正文章节带副标题，附录不显示副标题。"""
+    if ch_name == "附录":
+        return full.split('·')[0].strip()
+    return full
+
+
+def full_title(text):
+    """完整标题：包含副标题和版本号括号（用于索引页条目文本）。"""
     for line in text.splitlines():
         if line.startswith('# '):
             return line[2:].strip()
     return "章节"
+
+
+def strip_h1_subtitle(body, short):
+    """将页面 h1 从完整标题替换为短标题（仅在非附录页面）。"""
+    m = re.search(r'<h1>[^<]+</h1>', body)
+    if m:
+        return body[:m.start()] + f'<h1>{html_mod.escape(short)}</h1>' + body[m.end():]
+    return body
 
 
 def ts():
@@ -581,9 +608,11 @@ def export_html(chapters):
     index_items = []
     chapter_links = build_chapter_link_map()
     for html_name, ch_name, md in chapters:
-        title = title_from_md(md)
+        short = title_from_md(md)
+        idx_text = index_title(ch_name, full_title(md))
         conv = PageConverter(html_name, fn_index)
         body = conv.md_to_html(md)
+        body = strip_h1_subtitle(body, short)
         if ch_name == "导论":
             body = linkify_chapter_map(body, chapter_links)
         if ch_name == "附录":
@@ -591,8 +620,8 @@ def export_html(chapters):
             toc = toc_html(heads)
             body = body.replace('</h1>', f'</h1>\n{toc}', 1)
             body = linkify_ascii_diagram(body)
-        write_html_page(os.path.join(OUT_HTML, html_name), title, body)
-        index_items.append((html_name, title))
+        write_html_page(os.path.join(OUT_HTML, html_name), short, body)
+        index_items.append((html_name, idx_text))
         print(f"    {html_name}")
 
     links = '\n'.join(
