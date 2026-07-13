@@ -20,7 +20,7 @@ files = [
     (f"{BASE}/界限论_第八章_可读重写_v0_14.md",         "第八章"),
     (f"{BASE}/界限论_第九章_可读重写_v0.14.md",         "第九章"),
     (f"{BASE}/界限论_尾声_可读重写_v0_12.md",           "尾声"),
-    (f"{BASE}/界限论_附录W_v8_3.md",                    "附录"),
+    (f"{BASE}/界限论_附录W_v8_4.md",                    "附录"),
 ]
 
 SAFE_NAME = {
@@ -69,6 +69,12 @@ HTML_SHELL = """<!DOCTYPE html>
   .fn-back-list {{ margin-left: .25rem; font-size: .85em; color: #888; }}
   .fn-back-list a {{ color: #888; text-decoration: none; }}
   .fn-back-list a:hover {{ color: #0366d6; text-decoration: underline; }}
+  .toc {{ background: #f8f9fa; padding: .6rem 1rem; border-radius: 6px; margin: 1rem 0; font-size: .9rem; }}
+  .toc strong {{ display: block; margin-bottom: .3rem; color: #444; }}
+  .toc ul {{ margin: 0; padding-left: 1.2rem; list-style: none; }}
+  .toc li {{ margin: .2rem 0; }}
+  a.toc-link {{ color: #0366d6; text-decoration: none; }}
+  a.toc-link:hover {{ text-decoration: underline; }}
   #status {{ font-size: .85rem; color: #888; margin-top: 2rem; }}
   #status.err {{ color: #c00; }}
 </style>
@@ -203,6 +209,39 @@ def linkify_chapter_map(html, link_map):
             f'<strong><a href="{href}" class="ch-map">{ch_label}</a></strong>',
         )
     return html[:bq_start] + segment + html[bq_end:]
+
+
+# ── 附录目录（自动生成） ──────────────────────────────────
+
+def heading_anchor(text):
+    """从 ## 标题文本生成 HTML 锚点 ID。"""
+    plain = re.sub(r'⟦MATH:?\d+⟧', '', text).strip()
+    m = re.match(r'(W[\d.★]+)', re.sub(r'\s', '', plain))
+    if m:
+        return m.group(1).lower().replace('.', '-').replace('★', 'star')
+    s = re.sub(r'[^\w\u4e00-\u9fff]+', '-', plain).strip('-').lower()
+    return s
+
+
+def extract_h2_headings(md_text):
+    """从附录 Markdown 提取 ## 标题 + 锚点 ID。"""
+    heads = []
+    for line in md_text.splitlines():
+        s = line.strip()
+        if s.startswith('## '):
+            text = s[3:].strip()
+            heads.append((heading_anchor(text), text))
+    return heads
+
+
+def toc_html(headings):
+    if not headings:
+        return ''
+    items = '\n'.join(
+        f'    <li><a href="#{h}" class="toc-link">{html_mod.escape(t)}</a></li>'
+        for h, t in headings
+    )
+    return f'<div class="toc"><strong>目录（可点击跳转）</strong><ul>\n{items}\n</ul></div>\n'
 
 
 def title_from_md(text):
@@ -424,7 +463,9 @@ class PageConverter:
             if stripped.startswith('### '):
                 out.append(f'<h3>{self.fmt_inline(stripped[4:])}</h3>')
             elif stripped.startswith('## '):
-                out.append(f'<h2>{self.fmt_inline(stripped[3:])}</h2>')
+                h2_text = stripped[3:]
+                h2_id = heading_anchor(h2_text)
+                out.append(f'<h2 id="{h2_id}">{self.fmt_inline(h2_text)}</h2>')
             elif stripped.startswith('# '):
                 out.append(f'<h1>{self.fmt_inline(stripped[2:])}</h1>')
             elif stripped.startswith('|') and i + 1 < len(lines) and '|' in lines[i + 1]:
@@ -482,6 +523,10 @@ def export_html(chapters):
         body = conv.md_to_html(md)
         if ch_name == "导论":
             body = linkify_chapter_map(body, chapter_links)
+        if ch_name == "附录":
+            heads = extract_h2_headings(md)
+            toc = toc_html(heads)
+            body = body.replace('</h1>', f'</h1>\n{toc}', 1)
         write_html_page(os.path.join(OUT_HTML, html_name), title, body)
         index_items.append((html_name, title))
         print(f"    {html_name}")

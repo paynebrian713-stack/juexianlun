@@ -32,6 +32,12 @@
   .fn-back-list { margin-left: .25rem; font-size: .85em; color: #888; }
   .fn-back-list a { color: #888; text-decoration: none; }
   .fn-back-list a:hover { color: #0366d6; text-decoration: underline; }
+  .toc { background: #f8f9fa; padding: .6rem 1rem; border-radius: 6px; margin: 1rem 0; font-size: .9rem; }
+  .toc strong { display: block; margin-bottom: .3rem; color: #444; }
+  .toc ul { margin: 0; padding-left: 1.2rem; list-style: none; }
+  .toc li { margin: .2rem 0; }
+  a.toc-link { color: #0366d6; text-decoration: none; }
+  a.toc-link:hover { text-decoration: underline; }
   #status { font-size: .85rem; color: #888; margin-top: 2rem; }
   #status.err { color: #c00; }
 </style>
@@ -44,11 +50,11 @@
 <h1>第二章 · 意向性与中心定理：视角不可内生</h1>
 <p>答案是：不能。</p>
 <p>而这个&quot;不能&quot;，恰恰是意向性栖身的地方。这是全书第一道墙。承重的证明在附录 W，正文只作冷陈述，再把它接回你自己。</p>
-<h2>2.0 承接：能不能合成一条</h2>
+<h2 id="2-0-承接-能不能合成一条">2.0 承接：能不能合成一条</h2>
 <p>先把话说准。本章要证的，是这样一个<strong>自给自足</strong>的统一动力学不存在。要紧的是&quot;自给自足&quot;这四个字——不是说统一的衡量写不出来，是说它写出来时，必须外接一个视角内部生不出来的参照。矛盾不在&quot;方程不存在&quot;，在&quot;它不能自足&quot;。</p>
 <p>这一&quot;不能&quot;，是上一章那个&quot;合不成&quot;的加强。<sup><a href="#fn-static-dyn" id="fnref-static-dyn" class="fn-ref">[static-dyn]</a></sup></p>
 <p>但在上这道最硬的墙之前，先走一段缓坡：把两股共用的那道绵延，它最简单的一个结构拎出来。这段坡不难，人人都懂&quot;同一个东西，两种看法&quot;；它垫稳了，后面的墙才好上。它也是本章一切&quot;两读&quot;的公共根——而那两读的精确名字，不是含糊的&quot;主观／客观&quot;，是<strong>态读法／算子读法</strong>——主观／客观只是这对读法的一个粗投影，下面就把它说准。</p>
-<h2>2.1 一个恒等式，两种读法（缓坡）</h2>
+<h2 id="2-1-一个恒等式-两种读法-缓坡">2.1 一个恒等式，两种读法（缓坡）</h2>
 <p>两股共用同一道绵延，第一章立过。这道绵延本身有一个极简的结构。模流作用在算子上，有一个平凡的恒等式——第零章已埋过根：</p>
 <div class="math-block">\[\omega(\sigma_t(a))=(\omega\circ\sigma_t)(a).\]</div>
 <p>左边把时间挂在算子 \(a\) 上——<strong>算子在演化，态不动</strong>，这是<strong>算子读法</strong>，海森堡的视角。往实里说：这里那道流是基线的模流 \(\sigma_t=\sigma_t^{\omega^*}\)，它的生成元 \(\log\Delta_{\omega^*}\) 就是这个系统的内禀时间。所以算子读法，是拿一个稳定的参考态，去看观测量、那把尺子，沿这道内禀时钟自己的演化——把尺子一步步搬到不同的时刻上、再拿定住的视角去读它。<sup><a href="#fn-history" id="fnref-history" class="fn-ref">[history]</a></sup></p>
@@ -71,7 +77,7 @@
 <br>
 一样东西只有两读，没有第三面。你每读一次，就已经站进了某一读里：要么站光那边，要么站你这边，没有一个不站队的看法。那个把&quot;光在变&quot;和&quot;我在变&quot;接成同一件事的东西，你读不到——你只读得到它的两面。它不在任何一面上；可它也不是第三样东西，好让你绕到它跟前去看。它就是&quot;两面原是一件事&quot;这回事，而这回事，没有一个面朝着你。<sup><a href="#fn-pj3" id="fnref-pj3" class="fn-ref">[pj3]</a></sup></p></blockquote>
 <p>看一支飞行的箭，就能看清这两读是怎么混在一起的。&quot;箭在运动&quot;——这是把时间挂在算子上，读出对象正沿着内禀时钟演化——noema，算子读法面；可你若把每一个瞬间切片单独拿出来，每一片都如实报告&quot;箭在这里，没动&quot;。运动感不在任何一个切片里，它是&quot;参考态在被拖着走&quot;——noesis，态读法面——叠在切片序列上读出来的。所谓&quot;箭的运动&quot;，是两读的混合：算子读法的切片，对象在各时刻的定格，加上态读法的流，参考态被拖着走。<sup><a href="#fn-film" id="fnref-film" class="fn-ref">[film]</a></sup></p>
-<h2>2.2 中心定理：两股不能自给自足地合并（墙）</h2>
+<h2 id="2-2-中心定理-两股不能自给自足地合并-墙">2.2 中心定理：两股不能自给自足地合并（墙）</h2>
 <p>缓坡走完，上墙。</p>
 <p>你想只靠自己，给自己活出的这套，发一张&quot;它成立&quot;的证书——而这堵墙，就是它发不出来。</p>
 <p><strong>定理（视角不可内生 / 中心定理）</strong>：设 \(\mathcal{M}\) 为 \(\text{III}_1\) 因子，两股流在场——被抛前件，承第一章。则任何与两股兼容的统一衡量泛函 \(\Phi\)——以及一切以两股为构件的动力学过程——其源头对基线态 \(\omega^*\) 提出<strong>互斥的要求</strong>：\(\omega^*\) 被同时要求充当&quot;待生成的产物&quot;与&quot;已预设的前提&quot;。调和这一互斥，需要一个态外的不变参照；在无迹的结构上没有这样的参照，故互斥无法调和——自给自足的统一动力学不可完善地定义。证在附录 W.2，A 级<sup><a href="#fn-w3" id="fnref-w3" class="fn-ref">[w3]</a></sup>。</p>
@@ -96,7 +102,7 @@
 你要的那把&quot;能量自己的尺&quot;，不存在。就像你没法同时拿标准物造尺、又拿尺造标准物：总得有一样先被给定，另一样才立得起来。<br>
 <br>
 所以两股合不成一条自足的量法。不是你还没找到那把尺，是任何一把你立得起来的尺，都得先站在一个它自己够不到的视角上。而那个视角，你挣不来。</p></blockquote>
-<h2>2.3 物理世界：相对于视角，且视角无法自给</h2>
+<h2 id="2-3-物理世界-相对于视角-且视角无法自给">2.3 物理世界：相对于视角，且视角无法自给</h2>
 <p>有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了——但要先说清它相对于什么。</p>
 <p>学习流压出的账本 \(\mathcal{A}_{\text{phys}}\)（第一章）是一个对易截面：可反复指认、可共享的事实。理解流的因果窗口 \(\mathcal{N}\) 展开可理解的脉络。两者在一个<strong>舞台</strong>上并置，这个舞台是账本的正规化子生成的正则包 \[\mathcal{M}_{\mathcal{A}}:=\mathcal{N}(\mathcal{A}_{\text{phys}})''\]<sup><a href="#fn-normalizer" id="fnref-normalizer" class="fn-ref">[normalizer]</a></sup> 一个视角，就是一个配对 \((\omega^*,\mathcal{N})\)；给定它，两股就在这个舞台内剪辑出<strong>一条路径</strong>——所谓&quot;物理世界&quot;，就是给定视角后剪出的这一条路径，落在三层包含之间：</p>
 <div class="math-block">\[\mathcal{A}_{\text{phys}}\ \subseteq\ (\text{这一个视角剪出的路径})\ \subseteq\ \mathcal{M}_{\mathcal{A}}.\]</div>
@@ -130,7 +136,7 @@
 <p>这最后一层，有一个精确的命题（证在附录 W.2.7）<sup><a href="#fn-rstar" id="fnref-rstar" class="fn-ref">[rstar]</a></sup>：</p>
 <p><strong>命题 R★（舞台完备性 / 环境欠定）</strong>：第一人称的全部数据——账本上登记的、舞台内动力学操作的、被活的绵延——只依赖于舞台连同它上面的基线态 \((\mathcal{M}_{\mathcal{A}},\ \omega^*|_{\mathcal{M}_{\mathcal{A}}})\)。任意两个把这个舞台包含在内、且在舞台上限制到同一基线态的更大环境，生成<strong>逐字相同</strong>的第一人称数据。换句话说：环境超出舞台的那部分，在账本上零指纹、在绵延里零手感。</p>
 <p>所以&quot;我当下的模流反推出的到底是哪一个 \(\mathcal{M}\)&quot;，没有第一人称答案——对于一切能被登记、被理解、被活出来的东西来说，舞台，就是世界的全部代数。这不是一句形而上的断言——说&quot;舞台就是世界&quot;越界了——而是严谨地指明：环境被一切&quot;被活之物&quot;所欠定。一个对一切可活数据都无差别的问题，不在本书射程之内。<sup><a href="#fn-decoherence" id="fnref-decoherence" class="fn-ref">[decoherence]</a></sup></p>
-<h2>2.4 缝：合不上的那道亏量</h2>
+<h2 id="2-4-缝-合不上的那道亏量">2.4 缝：合不上的那道亏量</h2>
 <p>两股合不成一条自足的动力学。这道&quot;合不成&quot;，在舞台上有一个最干净的代数见证。</p>
 <p>学习流的压缩是舞台到账本的条件期望 \(E:\mathcal{M}_{\mathcal{A}}\to\mathcal{A}_{\text{phys}}\)；它存在，因为账本在舞台内模不变，第一章 §1.2 已证。把压下去的再包含回舞台，\(\iota:\mathcal{A}_{\text{phys}}\hookrightarrow\mathcal{M}_{\mathcal{A}}\)。复合这两步：</p>
 <div class="math-block">\[\iota\circ E\ \neq\ \mathrm{id}_{\mathcal{M}_{\mathcal{A}}}.\]</div>
@@ -181,7 +187,7 @@
 那个把两边配起来的、你正活在里面的东西，是唯一一样你没法递出去的。<br>
 <br>
 哪怕递给最爱你的人。</p></blockquote>
-<h2>2.5 收束：定理为意向性腾位置</h2>
+<h2 id="2-5-收束-定理为意向性腾位置">2.5 收束：定理为意向性腾位置</h2>
 <p>把本章收拢。第一章立了两股各自的结构；本章问它们能不能自给自足地合并，答案是不能——统一衡量必须外接一个视角内生不出来的参照（中心定理），而那个参照是真态却扮不了全局的迹（有态≠有迹）。物理世界因此相对于视角，视角本身挣不来；舞台之外的环境，第一人称一律欠定（R★）。这一切合起来，就是那道压不下去的缝，\(\iota\circ E\neq\mathrm{id}\)。</p>
 <p>这道缝，是全书&quot;给位置、不给等式&quot;的原型。中心定理没有定义意向性——它做的是相反的事：它证明了客体化必然缝不拢，于是为那个缝不进任何&quot;某物&quot;的活余项，腾出了一个精确的、可被指认的位置。意向性住在那里，而数学只走到门口。</p>
 <p>缝合不拢，也就说明认知有一圈够不到的边界。在真正踏进缝里、去看那个更特别的东西（他者）之前，先停一下——把这一圈够不到的边界数清楚。它们恰好是三种，围着一个空着的位置。下一章盘点。</p>
