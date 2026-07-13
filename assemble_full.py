@@ -730,7 +730,7 @@ class PageConverter:
         self.footnote_items = []
 
     def fmt_inline(self, s):
-        parts = re.split(r'(⟦MATH:?[\d]+⟧)', s)
+        parts = re.split(r'(⟦MATHD?:[\d]+⟧)', s)
 
         def footnote_link(m):
             fid = m.group(1)
@@ -748,7 +748,7 @@ class PageConverter:
 
         out = []
         for p in parts:
-            if p.startswith('⟦MATH'):
+            if p.startswith('⟦MATHD:') or p.startswith('⟦MATH:'):
                 out.append(p)
             else:
                 p = html_mod.escape(p)
@@ -1117,8 +1117,8 @@ def patch_svg_dark(path):
     if '<rect width="680" height="520" fill="#1e1e1c"/>' not in svg:
         svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<rect width="680" height="520" fill="#1e1e1c"/>', svg, count=1)
     # 浮动/组标签文本 → 浅色
-    svg = svg.replace('fill="#52514e"', 'fill="#b5b2aa"')
-    svg = svg.replace('fill="#5F5E5A"', 'fill="#c8c4bc"')
+    svg = svg.replace('fill="#52514e"', 'fill="#d8d4cc"')
+    svg = svg.replace('fill="#5F5E5A"', 'fill="#e0dcd4"')
     # 标题/描述 style 内的颜色
     svg = _re.sub(r'fill:rgb\(0,\s*0,\s*0\)', 'fill:#c8c4bc', svg)
     svg = _re.sub(r'fill:rgb\(11,\s*11,\s*11\)', 'fill:#d8d4cc', svg)
@@ -1126,20 +1126,35 @@ def patch_svg_dark(path):
     # 线条/箭头 → 更亮
     svg = svg.replace('stroke="#5f5e5a"', 'stroke:#9b97a0')
     svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)
-    # 透明度 → 更不透明
-    svg = svg.replace('stroke-opacity="0.4"', 'stroke-opacity="0.65"')
-    svg = svg.replace('stroke-opacity="0.5"', 'stroke-opacity="0.7"')
-    svg = svg.replace('stroke-opacity="0.6"', 'stroke-opacity="0.75"')
-    # 字号放大：font-size 整体 +2px
-    def _bump_size(m):
+    # 透明度 → 更不透明（处理 XML 属性格式 opacity="0.5"）
+    svg = svg.replace('opacity="0.4"', 'opacity="0.8"')
+    svg = svg.replace('opacity="0.5"', 'opacity="0.85"')
+    svg = svg.replace('opacity="0.6"', 'opacity="0.9"')
+    svg = svg.replace('opacity="0.75"', 'opacity="0.9"')
+    # 字号放大：CSS 格式 font-size:Npx 整体 +4px（原 12→16, 14→18）
+    def _bump_size_css(m):
         n = int(m.group(1))
-        return f'font-size:{n+2}px'
-    svg = _re.sub(r'font-size:(\d+)px', _bump_size, svg)
-    # 线条加粗：stroke-width 整体 +0.25
-    def _bump_sw(m):
+        return f'font-size:{n+4}px'
+    svg = _re.sub(r'font-size:(\d+)px', _bump_size_css, svg)
+    # 字号放大：XML 属性格式 font-size="N" 整体 +4px（原 12→16, 14→18）
+    def _bump_size_attr(m):
+        n = int(m.group(1))
+        # No px suffix for XML attribute format
+        return m.group(0).replace(f'font-size="{n}"', f'font-size="{n+4}"')
+    svg = _re.sub(r'font-size="(\d+)"', _bump_size_attr, svg)
+    # 线条加粗：CSS 格式 stroke-width:Npx 整体 +0.5
+    def _bump_sw_css(m):
         n = float(m.group(1))
-        return f'stroke-width:{n+0.25}px'
-    svg = _re.sub(r'stroke-width:([\d.]+)px', _bump_sw, svg)
+        return f'stroke-width:{n+0.5}px'
+    svg = _re.sub(r'stroke-width:([\d.]+)px', _bump_sw_css, svg)
+    # 线条加粗：XML 属性格式 stroke-width="N" 整体 +0.5
+    # 注意避开 style 属性内已用 CSS 格式处理过的值
+    def _bump_sw_attr(m):
+        n = float(m.group(1))
+        return f'stroke-width="{n+0.5}"'
+    # Only match XML attribute pattern (not inside style="...")
+    svg = _re.sub(r'(?<!:)(stroke-width)="([\d.]+)"',
+                  lambda m: f'{m.group(1)}="{float(m.group(2))+0.5}"', svg)
     # mask 内的 rect 尺寸也需同步放大（与 font-size 对齐）
     # mask 中的 text-gap rects 使用固定坐标，暂不处理（视觉影响小）
     with open(path, 'w', encoding='utf-8') as f:

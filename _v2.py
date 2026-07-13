@@ -1,0 +1,7 @@
+svg = open('E:/界限论/docs/reality-map.svg', encoding='utf-8').read()
+print('has fill=#52514e:', 'fill="#52514e"' in svg)
+print('has fill=#5F5E5A:', 'fill="#5F5E5A"' in svg)
+print('has fill=#e0dcd4:', 'fill="#e0dcd4"' in svg)
+print('has fill=#d8d4cc:', 'fill="#d8d4cc"' in svg)
+print('has fill=#b5b2aa:', 'fill="#b5b2aa"' in svg)
+print('has stroke-opacity=', 'stroke-opacity' in svg)
