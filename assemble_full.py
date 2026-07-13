@@ -946,23 +946,30 @@ def write_html_page(path, title, body_html):
 
 
 def linkify_ending_next_chapter(body, next_href):
-    """把正文收束处的「下一章」做成跳转链接（仅最后一次出现；脚注区不动）。
-    🔧 依赖章末原文含「下一章」；若某章收束改写成不含此词，本章无链接，靠下方导航兜底。"""
+    """章尾若有「下一章」字样，做成跳转链接；返回 (body, linked)。
+    只看脚注前最后 3 个 <p>（避开章中途提及；章尾附录注也够盖住）。
+    🔧 无「下一章」时由调用方补导航条。"""
     cut = body.find('<section class="footnotes">')
     if cut < 0:
         head, tail = body, ''
     else:
         head, tail = body[:cut], body[cut:]
-    idx = head.rfind('下一章')
-    if idx < 0:
-        return body
-    # 已被链过则跳过
+    paras = list(re.finditer(r'<p\b[^>]*>.*?</p>', head, re.DOTALL))
+    window_paras = paras[-3:] if paras else []
+    if not window_paras:
+        return body, False
+    win_start = window_paras[0].start()
+    window = head[win_start:]
+    rel = window.rfind('下一章')
+    if rel < 0:
+        return body, False
+    idx = win_start + rel
     before = head[max(0, idx - 40):idx]
     if 'ch-next' in before or 'href=' in before:
-        return body
+        return body, True
     linked = f'<a href="{html_mod.escape(next_href)}" class="ch-next">下一章</a>'
     head = head[:idx] + linked + head[idx + len('下一章'):]
-    return head + tail
+    return head + tail, True
 
 
 # ── 主线图景场景锚点注入 ──────────────────────────────────
@@ -1035,10 +1042,19 @@ def export_html(chapters, meta=None):
             body = linkify_ascii_diagram(body)
             body = linkify_w_refs(body)
         body = inject_scene_ids(body, html_name)
-        # 章末正文里最后一次「下一章」→ 跳转链接（不另加导航条，避免重复）
+        # 有「下一章」字样 → 正文内做成链接；没有 → 脚注前补一条导航
         if i + 1 < len(chapters):
-            next_html, _, _ = chapters[i + 1]
-            body = linkify_ending_next_chapter(body, next_html)
+            next_html, next_ch, _ = chapters[i + 1]
+            body, linked = linkify_ending_next_chapter(body, next_html)
+            if not linked:
+                nav = (f'<nav class="chapter-nav">'
+                       f'<a href="{html_mod.escape(next_html)}">'
+                       f'→ 下一章：{html_mod.escape(next_ch)}</a></nav>\n')
+                fn_pos = body.find('<section class="footnotes">')
+                if fn_pos >= 0:
+                    body = body[:fn_pos] + nav + body[fn_pos:]
+                else:
+                    body += nav
         write_html_page(os.path.join(OUT_HTML, html_name), short, body)
         index_items.append((html_name, idx_text))
         print(f"    {html_name}")
