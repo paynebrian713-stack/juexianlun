@@ -898,7 +898,7 @@ class PageConverter:
                 return m.group(0)
 
             body = re.sub(
-                r'(<a\s[^>]*href="[^"]*#fn-(\w+)"[^>]*class="fn-ref"[^>]*>[^<]*</a>)',
+                r'(<a\s[^>]*href="[^"]*#fn-([\w-]+)"[^>]*class="fn-ref"[^>]*>[^<]*</a>)',
                 _rewrite_fn_ref, body)
 
             parts = []
