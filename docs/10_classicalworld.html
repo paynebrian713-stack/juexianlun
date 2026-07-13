@@ -246,6 +246,17 @@ function showFnBubble(a, fid) {
   b.innerHTML = '<button class="fn-bubble-close" onclick="this.parentNode.remove()">✕</button>'
               + '<div class="fn-bubble-arrow"></div>' + content;
   document.body.appendChild(b);
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(b, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });
+  }
   var rect = a.getBoundingClientRect();
   var bRect = b.getBoundingClientRect();
   var top = rect.bottom + window.scrollY + 8;
