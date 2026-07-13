@@ -59,10 +59,11 @@
               border: 1px solid #4a4a44; text-decoration: none; }
   .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 80vw; min-width: 480px;
+                  width: min(720px, 92vw); max-width: 92vw;
+                  max-height: 96vh; overflow: auto; -webkit-overflow-scrolling: touch;
                   background: rgba(14,14,12,.93);
                   border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
-                  box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
+                  box-shadow: -6px 6px 36px rgba(0,0,0,.6); }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #1e1e1c; border-radius: 12px;
                          padding: 0 0 .6rem 0; }
@@ -73,8 +74,8 @@
   .map-close { font-size: 1.5rem; color: #8a867e; cursor: pointer; background: none;
                 border: none; line-height: 1; padding: 0 .15rem; }
   .map-close:hover { color: #e0dcd4; }
-  .map-svg-wrap { padding: 1.4rem 1.6rem 0 1.6rem; }
-  .map-svg-wrap object { width: 100%; display: block; }
+  .map-svg-wrap { padding: 1.4rem 1.6rem 0 1.6rem; overflow-x: auto; }
+  .map-svg-wrap object { width: 100%; height: auto; display: block; }
   /* --- footnote bubble --- */
   a.fn-a { color: #caa76b; text-decoration: none; font-weight: 600; cursor: pointer; }
   a.fn-a:hover { color: #e0c080; text-decoration: underline; }
@@ -103,6 +104,14 @@
     h2 { font-size: 1.1rem; }
     pre, .diagram { font-size: .8rem; padding: .5rem; }
     blockquote { margin: .6rem 0; padding: .15rem 0 .15rem .7rem; }
+    .map-btn { top: .5rem; right: .5rem; font-size: .82rem; padding: .28rem .55rem; }
+    #map-overlay {
+      inset: 0; width: 100%; max-width: 100%; max-height: 100%;
+      border-radius: 0; padding: .55rem .45rem .7rem; box-shadow: none;
+    }
+    .map-container { border-radius: 10px; }
+    .map-titlebar { padding: .4rem .7rem .3rem; }
+    .map-svg-wrap { padding: .7rem .35rem 0; }
   }
 </style>
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
@@ -320,9 +329,11 @@
 <script>
 function showMap() {
   document.getElementById('map-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
+  document.body.style.overflow = '';
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
