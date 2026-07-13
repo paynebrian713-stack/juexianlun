@@ -51,19 +51,19 @@
   .math-block::-webkit-scrollbar-thumb { background: #4a4a44; border-radius: 3px; }
   .map-btn { font-size: .88rem; color: #a8a48c; text-decoration: none; margin-left: 1.2rem; cursor: pointer; }
   .map-btn:hover { color: #e0dcd4; text-decoration: underline; }
-  #map-overlay { display: none; position: fixed; top: 0; left: 0; z-index: 10000;
-                  width: 100%; height: 100%; background: rgba(12,12,10,.88);
-                  justify-content: center; align-items: flex-start;
-                  overflow-y: auto; padding: 2rem 0; }
-  #map-overlay.active { display: flex; }
+  #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
+                  width: auto; max-width: 64vw; background: rgba(14,14,12,.93);
+                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
+                  box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
+  #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 1.8rem 1.2rem 1.2rem; max-width: 92vw;
-                    box-shadow: 0 8px 40px rgba(0,0,0,.55); margin-top: 2vh; }
-  .map-close { position: absolute; top: .35rem; right: .8rem; font-size: 1.5rem;
+                    padding: 1.6rem 1.1rem .7rem; }
+  .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
                color: #5f5e5a; cursor: pointer; background: none; border: none;
-               line-height: 1; padding: 0 .15rem; }
+               line-height: 1; padding: 0 .15rem; z-index: 1; }
   .map-close:hover { color: #1b1b18; }
-  .map-hint { text-align: center; margin-top: .5rem; font-size: .8rem; color: #8a867e; }
+  .map-svg-wrap { transform: scale(1.28); transform-origin: top center; margin-bottom: -1rem; }
+  .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
   .fn-section { font-size: .96rem; color: #8a867e; margin: 1.1rem 0 .3rem 0; font-weight: 600; letter-spacing: .05em; }
   .fn-section:first-child { margin-top: .1rem; }
   #status { font-size: .85rem; color: #7a766e; margin-top: 2rem; }
@@ -443,10 +443,10 @@
 <li id="fn-Gderived" class="footnote"><a href="#fnref-Gderived" class="fn-back" title="返回引用处">↩</a>\(G\) 派生性细目:\(G\) 由三输入经 DR 重构(扇区=局域网+真空/融合=代数复合/统计=维度);&quot;\(G\) 不长得像 \([\sigma]\)&quot;因 \([\sigma]\) 是嵌入撕不平的内核(一个差)、\(G\) 是&quot;给定视角与几何后允许哪些局域激发及其复合&quot;的组织结构;与 Coleman–Mandula(时空⊗内部对称直积)自洽。所据代数事实(BW=boost/谱条件⟺正能量平移/DHR 重构)均标准结果(A);定位到界限论部件为结构同型旁注(元规则 M,非预言)。核验:文献双核一致(不同层级、分述、不焊)。</li>
 </ol>
 </section>
-<div id="map-overlay" onclick="if(event.target===this)hideMap()">
+<div id="map-overlay">
  <div class="map-container">
   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
-  <object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;max-width:680px;display:block;margin:0 auto"></object>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
   <p class="map-hint">点任意节点跳转到对应章节段落</p>
  </div>
 </div>
@@ -460,6 +460,13 @@ function hideMap() {
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') hideMap();
+});
+document.addEventListener('click', function(e) {
+  var ov = document.getElementById('map-overlay');
+  var btn = document.querySelector('.map-btn');
+  if (ov.classList.contains('active') && !ov.contains(e.target) && e.target !== btn) {
+    hideMap();
+  }
 });
 document.addEventListener('DOMContentLoaded', function() {
   var st = document.getElementById('status');
