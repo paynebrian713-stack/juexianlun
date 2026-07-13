@@ -111,7 +111,8 @@ HTML_SHELL = """<!DOCTYPE html>
   .map-container {{ position: relative; background: #1e1e1c; border-radius: 12px;
                          padding: 0 0 .6rem 0; }}
   .map-titlebar {{ display: flex; justify-content: space-between; align-items: center;
-                   padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #3a3a35; }}
+                   padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #3a3a35;
+                   position: sticky; top: 0; z-index: 2; background: #1e1e1c; }}
   .map-titlebar a {{ color: #7eb8da; text-decoration: none; font-size: .9rem; }}
   .map-titlebar a:hover {{ text-decoration: underline; }}
   .map-close {{ font-size: 1.5rem; color: #8a867e; cursor: pointer; background: none;
@@ -1110,7 +1111,8 @@ def export_html(chapters, meta=None):
   .map-container {{ position: relative; background: #1e1e1c; border-radius: 12px;
                     padding: 0 0 .6rem 0; }}
   .map-titlebar {{ display: flex; justify-content: space-between; align-items: center;
-                   padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #3a3a35; }}
+                   padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #3a3a35;
+                   position: sticky; top: 0; z-index: 2; background: #1e1e1c; }}
   .map-titlebar a {{ color: #7eb8da; text-decoration: none; font-size: .9rem; }}
   .map-titlebar a:hover {{ text-decoration: underline; }}
   .map-close {{ font-size: 1.5rem; color: #8a867e; cursor: pointer; background: none;
@@ -1143,7 +1145,7 @@ def export_html(chapters, meta=None):
 <div id="map-overlay">
  <div class="map-container">
   <div class="map-titlebar">
-   <span style="color:#8a867e;font-size:.9rem">主线图景</span>
+   <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
   <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
