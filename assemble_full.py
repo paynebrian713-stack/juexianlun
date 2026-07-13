@@ -7,9 +7,14 @@ BASE = "E:/界限论"
 OUT_HTML = f"{BASE}/docs"
 KATEX = "vendor/katex"
 
+# ╔═══════════════════════════════════════════════════════════════╗
+# ║  🔧 章节更新时务必同步维护此处 —— 整个工具体系的总开关         ║
+# ║  新增/删除/重排章节后，同步更新：(1) files (2) SAFE_NAME       ║
+# ║  (3) load_chapter() 里的哨兵 (4) 靠后的 SCENE_ID_MAP           ║
+# ╚═══════════════════════════════════════════════════════════════╝
 files = [
     (f"{BASE}/界限论_导论_可读重写_v0_33.md",         "导论"),
-    ("_零",                                             "第零章"),
+    ("_零",                                             "第零章"),  # ← 哨兵：实路径见 load_chapter()
     (f"{BASE}/界限论_第一章_可读重写_v0_21.md",         "第一章"),
     (f"{BASE}/界限论_第二章_可读重写_v0_19.md",         "第二章"),
     (f"{BASE}/界限论_第三章_可读重写_v1_4.md",          "第三章"),
@@ -23,6 +28,7 @@ files = [
     (f"{BASE}/界限论_附录W_v8_5.md",                    "附录"),
 ]
 
+# 🔧 章节增删/改名时必须同步：中文简称 → 英文短名（用于生成 HTML 文件名）
 SAFE_NAME = {
     "导论": "introduction",
     "零": "start", "一": "twostreams", "二": "intentionality",
@@ -270,6 +276,7 @@ def clean_chapter(text, ch_name):
         result.append(line)
 
     text = '\n'.join(result)
+    # 🔧 导论特有清洗：若导论源文件结构改动（副标题行、--- 分隔位），改下面三行正则
     if ch_name == "导论":
         text = re.sub(r'\n>\s*副标题[：:]\s*.+', '', text, count=1)
         text = re.sub(r'\n---\n(?=\s*\n## )', '\n', text, count=1)
@@ -279,12 +286,14 @@ def clean_chapter(text, ch_name):
 
 
 def strip_footnotes_and_refs(text, ch_name=""):
+    """生成无脚注稿。🔧 附录章节号变了需改 W.6 截断点。"""
     text = re.sub(r'\n(?:---\n)?## 脚注\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n(?:---\n)?## 参考文献\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n(?:---\n)?### 参考文献\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n\[\^[\w-]+\]:[^\n]*(?:\n(?!\[\^[\w-]+\]:|\n---\n)[^\n]*)*', '', text)
     text = re.sub(r'\[\^[\w-]+\]', '', text)
     if '附录' in ch_name:
+        # 🔧 W.6 截断：若附录节号重排，改此正则
         m = re.search(r'\n## W\.6\b', text)
         if m:
             text = text[:m.start()]
@@ -293,6 +302,7 @@ def strip_footnotes_and_refs(text, ch_name=""):
 
 
 def load_chapter(file_path, ch_name):
+    # 🔧 哨兵 "_零" → 真实路径：更新第零章文件版本号时改这里
     if file_path == "_零":
         actual = f"{BASE}/界限论_第零章_可读重写_v0_35.md"
     else:
@@ -317,8 +327,9 @@ def build_chapter_link_map():
 
 
 def linkify_chapter_map(html, link_map):
-    """导论「章节地图」blockquote 内的 **第X章** → 跳转链接（仅 HTML 层）。"""
-    marker = "章节地图"
+    """导论「章节地图」blockquote 内的 **第X章** → 跳转链接（仅 HTML 层）。
+    🔧 依赖导论中存在含"章节地图"文字的 <blockquote>；若导论结构变更，改 marker 或此逻辑。"""
+    marker = "章节地图"  # 🔧 导论中"章节地图"这个文字变了，此处改
     idx = html.find(marker)
     if idx < 0:
         return html
@@ -338,9 +349,9 @@ def linkify_chapter_map(html, link_map):
 # ── 附录目录（自动生成） ──────────────────────────────────
 
 def heading_anchor(text):
-    """从 ## 标题文本生成 HTML 锚点 ID。"""
+    """从 ## 标题文本生成 HTML 锚点 ID。🔧 附录章节前缀变了需改下面 W 正则。"""
     plain = re.sub(r'⟦MATH:?\d+⟧', '', text).strip()
-    m = re.match(r'(W[\d.★]+)', re.sub(r'\s', '', plain))
+    m = re.match(r'(W[\d.★]+)', re.sub(r'\s', '', plain))  # 🔧 若改用非 W 前缀（如 App.A），改这里
     if m:
         return m.group(1).lower().replace('.', '-').replace('★', 'star')
     s = re.sub(r'[^\w\u4e00-\u9fff]+', '-', plain).strip('-').lower()
@@ -371,6 +382,7 @@ def toc_html(headings):
 def w_ref_anchor(ref, *, use_lemma_alias=True):
     """W.x.y 标签 → HTML 锚点 id（与 heading_anchor 同规则）。"""
     ref = ref.strip()
+    # 🔧 内容特例：若"无凸显态引理"节号变动，同步更新此处映射
     if use_lemma_alias and ref == 'W.2.1':
         return 'w-1-star'  # 无凸显态引理：正文称 W.2.1，节号 W.1.★
     m = re.match(r'(W[\d.★]+)', ref)
@@ -424,6 +436,10 @@ def linkify_w_refs(html):
     return ''.join(chunks)
 
 
+# 🔧 高度脆弱的硬编码表 —— 附录 W.0 逻辑链图 ASCII → HTML 链接
+# 左列：图中原文（缩进、空格一个都不能差）
+# 右列：替换后带 <a href="#w-N"> 的 HTML
+# 若附录节号重排→改所有 href；若图表文字修改→改左列匹配串；位置不准→整段无声失效
 DPIAGRAM_REPLACE = [
     ('                    公理 Σ  (W.1:M 为 III₁ 因子 · 可分)',
      '                    公理 Σ  (<a href="#w-1" class="d-link">W.1</a>:M 为 III₁ 因子 · 可分)'),
@@ -464,6 +480,7 @@ DPIAGRAM_REPLACE = [
 
 def linkify_ascii_diagram(body):
     """将 W.0 ASCII 逻辑链图中的关键词转换为可点击跳转链接。"""
+    # 🔧 若图表内容（缩进/首字母）被修改，此 needle 必须同步更新，否则整段无声失效
     needle = '<pre><code>\n                    公理 Σ'
     start = body.find(needle)
     if start < 0:
@@ -480,6 +497,7 @@ def linkify_ascii_diagram(body):
 
 def extract_intro_subtitle(text):
     """导论 blockquote 副标题 → 纯文本（供目录用）。"""
+# 🔧 依赖导论源文件格式：blockquote > 副标题：... 格式变动需改下面正则
     m = re.search(r'^>\s*副标题[：:]\s*(.+?)\s*$', text, re.M)
     if not m:
         return ''
@@ -487,7 +505,7 @@ def extract_intro_subtitle(text):
 
 
 def page_title(ch_name, md):
-    """页面 h1 / 窗口标题用的短名。"""
+    """页面 h1 / 窗口标题用的短名。🔧 若章名改名，下面三处字符串对齐改。"""
     if ch_name == "导论":
         return "导论"
     if ch_name == "附录":
@@ -509,6 +527,7 @@ def title_from_md(text):
 
 def index_title(ch_name, md):
     """目录页章节条目：导论/附录仅短名，其余带章节副标题。"""
+    # 🔧 若章名改编，下面元组同步更新
     if ch_name in ("附录", "导论"):
         return ch_name
     return clean_title(full_title(md))
@@ -900,7 +919,21 @@ def write_html_page(path, title, body_html):
 
 
 # ── 主线图景场景锚点注入 ──────────────────────────────────
-
+#
+# 🔧🔧🔧 章节更新时最脆弱的一块 —— 三件事联动才能生效 🔧🔧🔧
+#
+#   ① 键（HTML 文件名）：章节增/删/重排后所有编号会变，如 02_start.html → 03_start.html
+#      文件名规则见 chapter_html_name()，永远从 files 列表顺号：01, 02, 03, …
+#      模板：{i:02d}_{SAFE_NAME[short]}.html
+#
+#   ② 值中的 marker 字符串：取自章节 HTML 正文文本片段。
+#      若章节内容修改了相关句子，inject_scene_ids() 的 body.find(marker) 就会无声失败。
+#      验证办法：生成后 grep 每个 marker 是否在目标 html 文件中出现。
+#      ⚠ 引号统一用 &quot;（HTML 转义），尖括号 <strong> 也照原文。
+#
+#   ③ 值中的 scene-id：与 reality-map.svg 中的 <a href="X.html#scene-YYY"> 必须一致。
+#      改 scene-id 时，SVG 里的 href 同步更新。
+#
 SCENE_ID_MAP = {
     '02_start.html':           {'scene-wuji':     '导论把你带到了&quot;没有尺子&quot;的门口。'},
     '07_worldtopos.html':      {'scene-lishi':    '现在来看看&quot;历史&quot;到底是怎么成立的。'},
@@ -945,6 +978,7 @@ def export_html(chapters, meta=None):
         conv = PageConverter(html_name, fn_index)
         body = conv.md_to_html(md)
         body = strip_h1_subtitle(body, short)
+        # 🔧 以下两个章节分支依赖章名不变；若改名或新增类似逻辑，同步维护
         if ch_name == "导论":
             body = re.sub(
                 r'<blockquote><p>\s*副标题[：:][^<]*</p></blockquote>\s*',
@@ -1017,6 +1051,7 @@ def main():
     output = []
     for html_name, ch_name, ch in chapters:
         ch = ch.rstrip() + '\n'
+        # 🔧 导论章 h1 改为全书标题；若章名"导论"变了，此处判断也要同步
         if ch_name == "导论":
             lines = ch.split('\n')
             if lines and lines[0].startswith('# '):
