@@ -1,6 +1,6 @@
 # 《界限论》
 
-[在线阅读 →](https://你的用户名.github.io/仓库名/)
+[在线阅读 →](https://paynebrian713-stack.github.io/juexianlun/)
 
 ## 简介
 
@@ -13,7 +13,7 @@
 HTML 版本支持公式渲染（KaTeX）、脚注双向跳转、跨章引用，无需联网。
 
 > 把仓库推送到 GitHub 并开启 Pages（Settings → Pages → Source: `main` / folder: `docs`）后，
-> 访问 `https://你的用户名.github.io/仓库名/` 即可在线阅读。
+> 访问 `https://paynebrian713-stack.github.io/juexianlun/` 即可在线阅读。
 
 ## 仓库结构
 
