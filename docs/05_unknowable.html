@@ -261,6 +261,16 @@ document.addEventListener('click', function(e) {
     e.preventDefault();
     showFnBubble(fnA, fnA.dataset.fn);
   }
+  // 所有哈希跳转 → 居中显示目标
+  var hashLink = e.target.closest('a[href^="#"]');
+  if (hashLink && !hashLink.closest('a.fn-a')) {
+    var targetId = hashLink.getAttribute('href').slice(1);
+    var target = document.getElementById(targetId);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ block: 'center' });
+    }
+  }
 });
 function closeAllBubbles() {
   document.querySelectorAll('.fn-bubble').forEach(function(b){b.remove();});
@@ -323,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
     st.className = 'err';
     st.textContent = 'KaTeX 渲染出错: ' + e;
   }
-  if (location.hash && location.hash.indexOf('fn-') === 1) {
+  if (location.hash) {
     var el = document.getElementById(location.hash.slice(1));
     if (el) el.scrollIntoView({ block: 'center' });
   }
