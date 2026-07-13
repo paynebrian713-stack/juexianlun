@@ -75,6 +75,11 @@ HTML_SHELL = """<!DOCTYPE html>
   .toc li {{ margin: .2rem 0; }}
   a.toc-link {{ color: #0366d6; text-decoration: none; }}
   a.toc-link:hover {{ text-decoration: underline; }}
+  .diagram {{ background: #f8f9fa; padding: .75rem; overflow-x: auto; border-radius: 4px;
+             font-size: .88rem; line-height: 1.35; }}
+  .diagram code {{ background: none; padding: 0; }}
+  a.d-link {{ color: #0366d6; text-decoration: none; }}
+  a.d-link:hover {{ text-decoration: underline; }}
   .math-block {{ overflow-x: auto; overflow-y: hidden; }}
   .math-block::-webkit-scrollbar {{ height: 6px; }}
   .math-block::-webkit-scrollbar-thumb {{ background: #ccc; border-radius: 3px; }}
@@ -246,6 +251,60 @@ def toc_html(headings):
         for h, t in headings
     )
     return f'<div class="toc"><strong>目录（可点击跳转）</strong><ul>\n{items}\n</ul></div>\n'
+
+
+DPIAGRAM_REPLACE = [
+    ('                    公理 Σ  (W.1:M 为 III₁ 因子 · 可分)',
+     '                    公理 Σ  (<a href="#w-1" class="d-link">W.1</a>:M 为 III₁ 因子 · 可分)'),
+    ('        ┌──────── 引理 W.2.1  无凸显态 ────────┐   ← 全篇总源头(枢纽)',
+     '        ┌──────── <a href="#w-1-star" class="d-link">引理 W.2.1  无凸显态</a> ────────┐   ← 全篇总源头(枢纽)'),
+    ('   中心定理             + Cartan/FM 框架       (下游各处引用,',
+     '   <a href="#w-2" class="d-link">中心定理</a>             + <a href="#w-1" class="d-link">Cartan/FM 框架</a>       (下游各处引用,'),
+    (' (视角不可内生)            (W.1)                 不重复证明)',
+     ' (<a href="#w-2" class="d-link">视角不可内生</a>)            (<a href="#w-1" class="d-link">W.1</a>)                 不重复证明)'),
+    ('   主定理 A             主定理 B',
+     '   <a href="#w-2" class="d-link">主定理 A</a>             <a href="#w-3" class="d-link">主定理 B</a>'),
+    (' (不可能性:统一          (刻画:缝 = [σ] ∈',
+     ' (<a href="#w-2" class="d-link">不可能性:统一</a>          (<a href="#w-3" class="d-link">刻画:缝 = [σ] ∈</a>'),
+    ('  动力学不可自给)         H²(R,𝕋),他者身份)',
+     '  <a href="#w-2" class="d-link">动力学不可自给</a>)         <a href="#w-3" class="d-link">H²(R,𝕋),他者身份</a>)'),
+    ('        │              主定理 C',
+     '        │              <a href="#w-4" class="d-link">主定理 C</a>'),
+    ('        │            ([σ] 独立于全部公理;',
+     '        │            (<a href="#w-4" class="d-link">[σ] 独立于全部公理;</a>'),
+    ('        │             非平凡性押 (★))',
+     '        │             <a href="#w-4" class="d-link">非平凡性押 (★)</a>)'),
+    ('  W.2 同族配套(第一人称&quot;够不到&quot;的三面):',
+     '  <a href="#w-2" class="d-link">W.2 同族配套</a>(第一人称&quot;够不到&quot;的三面):'),
+    ('   态半  W.2.1–2.4(视角不可内生)',
+     '   态半  <a href="#w-2" class="d-link">W.2.1–2.4</a>(视角不可内生)'),
+    ('   窗口半 W.2.6(唯我论不可内生)',
+     '   窗口半 <a href="#w-2" class="d-link">W.2.6</a>(唯我论不可内生)'),
+    ('   舞台半 W.2.7(环境欠定,命题 R★)',
+     '   舞台半 <a href="#w-2" class="d-link">W.2.7</a>(环境欠定,命题 R★)'),
+    ('  推论层 W.5(非顺从/荷对偶/三刻画等价/有限性)由主定理导出',
+     '  <a href="#w-5" class="d-link">推论层 W.5</a>(非顺从/荷对偶/三刻画等价/有限性)由主定理导出'),
+    ('  图景层 W.6(判定机·三缺/对易性=语法/物理对照)= 讨论,非定理',
+     '  <a href="#w-6" class="d-link">图景层 W.6</a>(判定机·三缺/对易性=语法/物理对照)= 讨论,非定理'),
+    ('  开放    W.7((★) 等)',
+     '  开放    <a href="#w-7" class="d-link">W.7</a>((★) 等)'),
+]
+
+
+def linkify_ascii_diagram(body):
+    """将 W.0 ASCII 逻辑链图中的关键词转换为可点击跳转链接。"""
+    needle = '<pre><code>\n                    公理 Σ'
+    start = body.find(needle)
+    if start < 0:
+        return body
+    end = body.find('</code></pre>', start)
+    if end < 0:
+        return body
+    content = body[start + len('<pre><code>\n'):end]
+    for old, new in DPIAGRAM_REPLACE:
+        content = content.replace(old, new)
+    new_block = f'<pre class="diagram"><code>{content}</code></pre>'
+    return body[:start] + new_block + body[end + len('</code></pre>'):]
 
 
 def title_from_md(text):
@@ -531,6 +590,7 @@ def export_html(chapters):
             heads = extract_h2_headings(md)
             toc = toc_html(heads)
             body = body.replace('</h1>', f'</h1>\n{toc}', 1)
+            body = linkify_ascii_diagram(body)
         write_html_page(os.path.join(OUT_HTML, html_name), title, body)
         index_items.append((html_name, title))
         print(f"    {html_name}")
