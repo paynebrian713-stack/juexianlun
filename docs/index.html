@@ -39,6 +39,9 @@
   .map-close:hover { color: #e0dcd4; }
   .map-svg-wrap { padding: 1.4rem 1.6rem 0 1.6rem; overflow-x: auto; }
   .map-svg-wrap object { width: 100%; height: auto; display: block; }
+  /* current-chapter highlight on overlay node */
+  .scene-current rect, .scene-current circle { filter: drop-shadow(0 0 6px rgba(236,200,120,.7)); stroke: #e8c050 !important; stroke-width: 2.5px !important; }
+  .scene-current text { fill: #f0e0a0 !important; font-weight: 700 !important; }
   @media (max-width: 600px) {
     body { font-size: .95rem; padding: 0 .8rem; margin: 1rem auto; }
     h1 { font-size: 1.25rem; }
@@ -73,7 +76,7 @@
     <li><a href="13_appendixW.html">附录</a></li></ul>
 <p class="note">用 Chrome / Edge 打开即可阅读（本地 KaTeX，无需联网）。<br>
 脚注可点击跳转；跨章引用会自动跳到对应章节。<br>
-生成：2026-07-14 02:27</p>
+生成：2026-07-14 03:16</p>
 <div id="map-overlay">
  <div class="map-container">
   <div class="map-titlebar">
@@ -92,6 +95,7 @@ function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
   document.body.style.overflow = '';
 }
+function hlScene() {}
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') hideMap();
 });

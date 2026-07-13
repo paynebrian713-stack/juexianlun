@@ -120,6 +120,9 @@ HTML_SHELL = """<!DOCTYPE html>
   .map-close:hover {{ color: #e0dcd4; }}
   .map-svg-wrap {{ padding: 1.4rem 1.6rem 0 1.6rem; overflow-x: auto; }}
   .map-svg-wrap object {{ width: 100%; height: auto; display: block; }}
+  /* current-chapter highlight on overlay node */
+  .scene-current rect, .scene-current circle {{ filter: drop-shadow(0 0 6px rgba(236,200,120,.7)); stroke: #e8c050 !important; stroke-width: 2.5px !important; }}
+  .scene-current text {{ fill: #f0e0a0 !important; font-weight: 700 !important; }}
   /* --- footnote bubble --- */
   a.fn-a {{ color: #caa76b; text-decoration: none; font-weight: 600; cursor: pointer; }}
   a.fn-a:hover {{ color: #e0c080; text-decoration: underline; }}
@@ -177,13 +180,43 @@ HTML_SHELL = """<!DOCTYPE html>
 </div>
 <p id="status">正在渲染公式…</p>
 <script>
+var CURRENT_SCENE = {scene_id};
 function showMap() {{
   document.getElementById('map-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
+  hlScene();
 }}
 function hideMap() {{
   document.getElementById('map-overlay').classList.remove('active');
   document.body.style.overflow = '';
+}}
+function hlScene() {{
+  var o = document.getElementById('map-svg');
+  if (!o) return;
+  var sid = CURRENT_SCENE;
+  if (!sid) return;
+  var doHL = function() {{
+    try {{
+      var d = o.contentDocument;
+      if (!d) return;
+      // inject highlight style into SVG
+      if (!d.getElementById('cursor-hl-style')) {{
+        var sty = d.createElementNS('http://www.w3.org/2000/svg','style');
+        sty.id = 'cursor-hl-style';
+        sty.textContent = '.scene-current rect,.scene-current circle{{filter:drop-shadow(0 0 6px rgba(236,200,120,.7));stroke:#e8c050!important;stroke-width:2.5px!important}}.scene-current text{{fill:#f0e0a0!important;font-weight:700!important}}';
+        d.documentElement.appendChild(sty);
+      }}
+      // remove any previous highlight
+      var prev = d.querySelector('.scene-current');
+      if (prev) prev.classList.remove('scene-current');
+      var a = d.querySelector('a[href$="' + '#' + sid + '"]');
+      if (!a) return;
+      var g = a.querySelector('g');
+      if (g) g.classList.add('scene-current');
+    }} catch(e){{}}
+  }};
+  doHL();
+  o.addEventListener('load', doHL);
 }}
 document.addEventListener('keydown', function(e) {{
   if (e.key === 'Escape') {{ hideMap(); closeAllBubbles(); }}
@@ -321,6 +354,11 @@ def clean_chapter(text, ch_name):
         text = re.sub(r'\n---\n(?=\s*\n## )', '\n', text, count=1)
         text = re.sub(r'\n{3,}', '\n\n', text)
     text = re.sub(r'\n---\n', '\n* * *\n', text)
+    # 🔧 清洗编辑过程记录：markdown 斜体包裹的版本号+终稿处理/沿革类记录
+    text = re.sub(r'[\n^]\*v\d+\.?\d*\s+终稿.*?\*', '', text, flags=re.DOTALL)
+    text = re.sub(r'[\n^]\*v\d+\.?\d*\s+过程沿革.*?\*', '', text, flags=re.DOTALL)
+    # 🔧 清洗句首独立的斜体版本号行（无其他正文）
+    text = re.sub(r'(?<=\n)\*v\d+\.?\d+.*?\n', '\n', text)
     return text
 
 
@@ -952,9 +990,10 @@ class PageConverter:
         return body
 
 
-def write_html_page(path, title, body_html):
+def write_html_page(path, title, body_html, scene_id=None):
     with open(path, 'w', encoding='utf-8', newline='\n') as f:
-        f.write(HTML_SHELL.format(title=html_mod.escape(title), body=body_html, katex=KATEX))
+        f.write(HTML_SHELL.format(title=html_mod.escape(title), body=body_html, katex=KATEX,
+                                   scene_id=json.dumps(scene_id) if scene_id else 'null'))
 
 
 def linkify_ending_next_chapter(body, next_href):
@@ -1067,7 +1106,9 @@ def export_html(chapters, meta=None):
                     body = body[:fn_pos] + nav + body[fn_pos:]
                 else:
                     body += nav
-        write_html_page(os.path.join(OUT_HTML, html_name), short, body)
+        scene_map = SCENE_ID_MAP.get(html_name, {})
+        page_scene = next(iter(scene_map.keys()), None) if scene_map else None
+        write_html_page(os.path.join(OUT_HTML, html_name), short, body, page_scene)
         index_items.append((html_name, idx_text))
         print(f"    {html_name}")
 
@@ -1120,6 +1161,9 @@ def export_html(chapters, meta=None):
   .map-close:hover {{ color: #e0dcd4; }}
   .map-svg-wrap {{ padding: 1.4rem 1.6rem 0 1.6rem; overflow-x: auto; }}
   .map-svg-wrap object {{ width: 100%; height: auto; display: block; }}
+  /* current-chapter highlight on overlay node */
+  .scene-current rect, .scene-current circle {{ filter: drop-shadow(0 0 6px rgba(236,200,120,.7)); stroke: #e8c050 !important; stroke-width: 2.5px !important; }}
+  .scene-current text {{ fill: #f0e0a0 !important; font-weight: 700 !important; }}
   @media (max-width: 600px) {{
     body {{ font-size: .95rem; padding: 0 .8rem; margin: 1rem auto; }}
     h1 {{ font-size: 1.25rem; }}
@@ -1160,6 +1204,7 @@ function hideMap() {{
   document.getElementById('map-overlay').classList.remove('active');
   document.body.style.overflow = '';
 }}
+function hlScene() {{}}
 document.addEventListener('keydown', function(e) {{
   if (e.key === 'Escape') hideMap();
 }});

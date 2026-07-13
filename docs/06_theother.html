@@ -77,6 +77,9 @@
   .map-close:hover { color: #e0dcd4; }
   .map-svg-wrap { padding: 1.4rem 1.6rem 0 1.6rem; overflow-x: auto; }
   .map-svg-wrap object { width: 100%; height: auto; display: block; }
+  /* current-chapter highlight on overlay node */
+  .scene-current rect, .scene-current circle { filter: drop-shadow(0 0 6px rgba(236,200,120,.7)); stroke: #e8c050 !important; stroke-width: 2.5px !important; }
+  .scene-current text { fill: #f0e0a0 !important; font-weight: 700 !important; }
   /* --- footnote bubble --- */
   a.fn-a { color: #caa76b; text-decoration: none; font-weight: 600; cursor: pointer; }
   a.fn-a:hover { color: #e0c080; text-decoration: underline; }
@@ -328,13 +331,43 @@
 </div>
 <p id="status">正在渲染公式…</p>
 <script>
+var CURRENT_SCENE = "scene-taren";
 function showMap() {
   document.getElementById('map-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
+  hlScene();
 }
 function hideMap() {
   document.getElementById('map-overlay').classList.remove('active');
   document.body.style.overflow = '';
+}
+function hlScene() {
+  var o = document.getElementById('map-svg');
+  if (!o) return;
+  var sid = CURRENT_SCENE;
+  if (!sid) return;
+  var doHL = function() {
+    try {
+      var d = o.contentDocument;
+      if (!d) return;
+      // inject highlight style into SVG
+      if (!d.getElementById('cursor-hl-style')) {
+        var sty = d.createElementNS('http://www.w3.org/2000/svg','style');
+        sty.id = 'cursor-hl-style';
+        sty.textContent = '.scene-current rect,.scene-current circle{filter:drop-shadow(0 0 6px rgba(236,200,120,.7));stroke:#e8c050!important;stroke-width:2.5px!important}.scene-current text{fill:#f0e0a0!important;font-weight:700!important}';
+        d.documentElement.appendChild(sty);
+      }
+      // remove any previous highlight
+      var prev = d.querySelector('.scene-current');
+      if (prev) prev.classList.remove('scene-current');
+      var a = d.querySelector('a[href$="' + '#' + sid + '"]');
+      if (!a) return;
+      var g = a.querySelector('g');
+      if (g) g.classList.add('scene-current');
+    } catch(e){}
+  };
+  doHL();
+  o.addEventListener('load', doHL);
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
