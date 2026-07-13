@@ -1106,17 +1106,31 @@ def patch_svg_dark(path):
     if '<rect width="680" height="520" fill="#1e1e1c"/>' not in svg:
         svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<rect width="680" height="520" fill="#1e1e1c"/>', svg, count=1)
     # 浮动/组标签文本 → 浅色
-    svg = svg.replace('fill="#52514e"', 'fill="#a8a59e"')
-    svg = svg.replace('fill="#5F5E5A"', 'fill="#b5b2aa"')
+    svg = svg.replace('fill="#52514e"', 'fill="#b5b2aa"')
+    svg = svg.replace('fill="#5F5E5A"', 'fill="#c8c4bc"')
     # 标题/描述 style 内的颜色
     svg = _re.sub(r'fill:rgb\(0,\s*0,\s*0\)', 'fill:#c8c4bc', svg)
     svg = _re.sub(r'fill:rgb\(11,\s*11,\s*11\)', 'fill:#d8d4cc', svg)
     svg = _re.sub(r'color:rgb\(11,\s*11,\s*11\)', 'color:#d8d4cc', svg)
     # 线条/箭头 → 更亮
-    svg = svg.replace('stroke="#5f5e5a"', 'stroke="#8a867e"')
-    svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#8a867e', svg)
-    # 透明度微调
-    svg = svg.replace('stroke-opacity="0.4"', 'stroke-opacity="0.55"')
+    svg = svg.replace('stroke="#5f5e5a"', 'stroke:#9b97a0')
+    svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)
+    # 透明度 → 更不透明
+    svg = svg.replace('stroke-opacity="0.4"', 'stroke-opacity="0.65"')
+    svg = svg.replace('stroke-opacity="0.5"', 'stroke-opacity="0.7"')
+    svg = svg.replace('stroke-opacity="0.6"', 'stroke-opacity="0.75"')
+    # 字号放大：font-size 整体 +2px
+    def _bump_size(m):
+        n = int(m.group(1))
+        return f'font-size:{n+2}px'
+    svg = _re.sub(r'font-size:(\d+)px', _bump_size, svg)
+    # 线条加粗：stroke-width 整体 +0.25
+    def _bump_sw(m):
+        n = float(m.group(1))
+        return f'stroke-width:{n+0.25}px'
+    svg = _re.sub(r'stroke-width:([\d.]+)px', _bump_sw, svg)
+    # mask 内的 rect 尺寸也需同步放大（与 font-size 对齐）
+    # mask 中的 text-gap rects 使用固定坐标，暂不处理（视觉影响小）
     with open(path, 'w', encoding='utf-8') as f:
         f.write(svg)
 
