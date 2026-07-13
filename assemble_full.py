@@ -63,6 +63,8 @@ HTML_SHELL = """<!DOCTYPE html>
   .nav a {{ color: #7eb8da; text-decoration: none; }}
   .chapter-nav {{ margin-top: 2.5rem; text-align: center; font-size: .95rem; }}
   .chapter-nav a {{ color: #7eb8da; text-decoration: none; }}
+  a.ch-next {{ color: #7eb8da; text-decoration: none; font-weight: 600; }}
+  a.ch-next:hover {{ text-decoration: underline; }}
   .math-block {{ text-align: center; margin: 1.2rem 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }}
   .math-block::-webkit-scrollbar {{ display: none; }}
   .katex-display {{ margin: 1rem 0; overflow-x: auto; scrollbar-width: none; }}
@@ -943,6 +945,26 @@ def write_html_page(path, title, body_html):
         f.write(HTML_SHELL.format(title=html_mod.escape(title), body=body_html, katex=KATEX))
 
 
+def linkify_ending_next_chapter(body, next_href):
+    """把正文收束处的「下一章」做成跳转链接（仅最后一次出现；脚注区不动）。
+    🔧 依赖章末原文含「下一章」；若某章收束改写成不含此词，本章无链接，靠下方导航兜底。"""
+    cut = body.find('<section class="footnotes">')
+    if cut < 0:
+        head, tail = body, ''
+    else:
+        head, tail = body[:cut], body[cut:]
+    idx = head.rfind('下一章')
+    if idx < 0:
+        return body
+    # 已被链过则跳过
+    before = head[max(0, idx - 40):idx]
+    if 'ch-next' in before or 'href=' in before:
+        return body
+    linked = f'<a href="{html_mod.escape(next_href)}" class="ch-next">下一章</a>'
+    head = head[:idx] + linked + head[idx + len('下一章'):]
+    return head + tail
+
+
 # ── 主线图景场景锚点注入 ──────────────────────────────────
 #
 # 🔧🔧🔧 章节更新时最脆弱的一块 —— 三件事联动才能生效 🔧🔧🔧
@@ -1013,10 +1035,18 @@ def export_html(chapters, meta=None):
             body = linkify_ascii_diagram(body)
             body = linkify_w_refs(body)
         body = inject_scene_ids(body, html_name)
-        # 章节间导航：末尾加“下一章”链接
+        # 章末「下一章」→ 链接（正文内最后一次）+ 脚注前导航条
         if i + 1 < len(chapters):
             next_html, next_ch, _ = chapters[i + 1]
-            body += f'<nav class="chapter-nav"><a href="{html_mod.escape(next_html)}">→ 下一章：{html_mod.escape(next_ch)}</a></nav>'
+            body = linkify_ending_next_chapter(body, next_html)
+            nav = (f'<nav class="chapter-nav">'
+                   f'<a href="{html_mod.escape(next_html)}">'
+                   f'→ 下一章：{html_mod.escape(next_ch)}</a></nav>\n')
+            fn_pos = body.find('<section class="footnotes">')
+            if fn_pos >= 0:
+                body = body[:fn_pos] + nav + body[fn_pos:]
+            else:
+                body += nav
         write_html_page(os.path.join(OUT_HTML, html_name), short, body)
         index_items.append((html_name, idx_text))
         print(f"    {html_name}")
@@ -1175,38 +1205,39 @@ def main():
 
 
 def patch_svg_dark(path):
-    """将 reality-map.svg 适配为暗色主题。幂等，可反复调用。"""
+    """将 reality-map.svg 适配为暗色主题。
+    🔧 幂等：已含 <!--svg-dark:v1--> 标记时跳过字号/线宽累加，只刷新颜色与标签。
+    """
     import re as _re
     with open(path, 'r', encoding='utf-8') as f:
         svg = f.read()
+
+    already = '<!--svg-dark:v1-->' in svg
+
     # 背景矩形（仅首次添加）
     if '<rect width="680" height="520" fill="#1e1e1c"/>' not in svg:
-        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<rect width="680" height="520" fill="#1e1e1c"/>', svg, count=1)
+        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n<rect width="680" height="520" fill="#1e1e1c"/>', svg, count=1)
+    elif not already:
+        svg = svg.replace('<rect width="680" height="520" fill="#1e1e1c"/>',
+                          '<!--svg-dark:v1-->\n<rect width="680" height="520" fill="#1e1e1c"/>', 1)
+
     # 浮动/组标签文本 → 浅色
     svg = svg.replace('fill="#52514e"', 'fill="#d8d4cc"')
     svg = svg.replace('fill="#5F5E5A"', 'fill="#e0dcd4"')
     # ── 文字颜色（XML 属性和 CSS 值）──
-    # fill="#0b0b0b"（几乎黑色）→ 浅色，适应暗色背景
     svg = svg.replace('fill="#0b0b0b"', 'fill="#e8e4dc"')
-    # style 内的 fill:#0b0b0b → 浅色
     svg = svg.replace('fill:#0b0b0b', 'fill:#e8e4dc')
-    # 其他 style 内旧颜色适配
     svg = _re.sub(r'fill:rgb\(0,\s*0,\s*0\)', 'fill:#c8c4bc', svg)
     svg = _re.sub(r'fill:rgb\(11,\s*11,\s*11\)', 'fill:#d8d4cc', svg)
     svg = _re.sub(r'color:rgb\(11,\s*11,\s*11\)', 'color:#d8d4cc', svg)
-    # ── 节点背景矩形/圆形 → 暗色化（让浅色文字有对比度）──
-    # 蓝色系节点（横向·锚 / 纵向·未来 / D对齐·板）
+    # ── 节点背景矩形/圆形 → 暗色化 ──
     svg = svg.replace('fill="#e6f1fb"', 'fill="#1e2a3a"')
     svg = svg.replace('stroke="#185fa5"', 'stroke="#3a8ac8"')
-    # 粉色系节点（他者·抹不平）
     svg = svg.replace('fill="#faece7"', 'fill="#3a1e1e"')
     svg = svg.replace('stroke="#993c1d"', 'stroke="#c85a3a"')
-    # 金色系节点（现实）
     svg = svg.replace('fill="#faeeda"', 'fill="#3a2e0a"')
     svg = svg.replace('stroke="#854f0b"', 'stroke="#c88a2a"')
-    # 灰色圆圈（无迹）
     svg = svg.replace('fill="#f1efe8"', 'fill="#3a3a38"')
-    # 紫色圆圈（历史一致性）
     svg = svg.replace('fill="#eeedfe"', 'fill="#1e1e3a"')
     svg = svg.replace('stroke="#534ab7"', 'stroke="#7a6ad8"')
     # 线条/箭头 → 更亮
@@ -1218,41 +1249,42 @@ def patch_svg_dark(path):
     svg = svg.replace('>纵向 · 未来<', '>纵向 · 单侧<')
     svg = svg.replace('>D 对齐 · 板<', '>脚手架 · D对齐<')
     # ── 透明度 → 更不透明 ──
-    svg = svg.replace('opacity="0.4"', 'opacity="0.8"')
-    svg = svg.replace('opacity="0.5"', 'opacity="0.85"')
-    svg = svg.replace('opacity="0.6"', 'opacity="0.9"')
-    svg = svg.replace('opacity="0.75"', 'opacity="0.9"')
-    # ── 字号放大 +4px ──
-    def _bump_4(m):
-        n = int(m.group(1))
-        return f'font-size:{n+4}px'
-    svg = _re.sub(r'font-size:(\d+)px', _bump_4, svg)
-    def _bump_4_attr(m):
-        n = int(m.group(1))
-        return m.group(0).replace(f'font-size="{n}"', f'font-size="{n+4}"')
-    svg = _re.sub(r'font-size="(\d+)"', _bump_4_attr, svg)
-    # ── 线条加粗 +0.5 ──
-    def _bump_sw_css(m):
-        n = float(m.group(1))
-        return f'stroke-width:{n+0.5}px'
-    svg = _re.sub(r'stroke-width:([\d.]+)px', _bump_sw_css, svg)
-    svg = _re.sub(r'(?<!:)(stroke-width)="([\d.]+)"',
-                  lambda m: f'{m.group(1)}="{float(m.group(2))+0.5}"', svg)
-    # ── mask 内切孔 rect 同步放大 ──
-    # 字号 +4px → 孔高度 +6px，y 上调 1px 保持居中
-    def _bump_mask_rect(m):
-        x = m.group(1)
-        y = int(m.group(2))
-        w = m.group(3)
-        h = int(m.group(4))
-        return f'<rect x="{x}" y="{y-1}" width="{w}" height="{h+6}" fill="black" rx="2"/>'
-    svg = _re.sub(r'<rect x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)" fill="black" rx="2"/>',
-                  _bump_mask_rect, svg)
-    # ── "松手 · 重定" 添加暗色背景 pill ──
-    svg = svg.replace(
-        '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n<g><text x="615" y="256"',
-        '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n<g><rect x="550" y="233" width="130" height="54" rx="8" fill="#2a2a28" stroke="#6a6a60" stroke-width="1.0"/><text x="615" y="256"'
-    )
+    if not already:
+        svg = svg.replace('opacity="0.4"', 'opacity="0.8"')
+        svg = svg.replace('opacity="0.5"', 'opacity="0.85"')
+        svg = svg.replace('opacity="0.6"', 'opacity="0.9"')
+        svg = svg.replace('opacity="0.75"', 'opacity="0.9"')
+        # 字号 +3（14→17, 12→15）；目标尺寸绝对值写入，避免累加
+        def _norm_css(m):
+            n = int(m.group(1))
+            return f'font-size:{"17" if n >= 14 else "15"}px'
+        svg = _re.sub(r'font-size:(\d+)px', _norm_css, svg)
+        def _norm_attr(m):
+            n = int(m.group(1))
+            t = 17 if n >= 14 else 15
+            return f'font-size="{t}"'
+        svg = _re.sub(r'font-size="(\d+)"', _norm_attr, svg)
+        # 线条加粗 +0.5
+        def _bump_sw_css(m):
+            n = float(m.group(1))
+            return f'stroke-width:{n+0.5}px'
+        svg = _re.sub(r'stroke-width:([\d.]+)px', _bump_sw_css, svg)
+        svg = _re.sub(r'(?<!:)(stroke-width)="([\d.]+)"',
+                      lambda m: f'{m.group(1)}="{float(m.group(2))+0.5}"', svg)
+        # mask 切孔 +4px 高
+        def _bump_mask_rect(m):
+            x, y, w, h = m.group(1), int(m.group(2)), m.group(3), int(m.group(4))
+            return f'<rect x="{x}" y="{y-1}" width="{w}" height="{h+4}" fill="black" rx="2"/>'
+        svg = _re.sub(r'<rect x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)" fill="black" rx="2"/>',
+                      _bump_mask_rect, svg)
+    # ── "松手 · 重定" 暗色 pill（仅首次）──
+    if 'scene-songshou' in svg and 'x="550" y="233"' not in svg:
+        svg = svg.replace(
+            '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n<g><text x="615" y="256"',
+            '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n'
+            '<g><rect x="550" y="233" width="130" height="54" rx="8" fill="#2a2a28" '
+            'stroke="#6a6a60" stroke-width="1.0"/><text x="615" y="256"'
+        )
     with open(path, 'w', encoding='utf-8') as f:
         f.write(svg)
 
