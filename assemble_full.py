@@ -169,6 +169,9 @@ def clean_chapter(text, ch_name):
         result.append(line)
 
     text = '\n'.join(result)
+    if ch_name == "导论":
+        text = re.sub(r'\n>\s*副标题[：:]\s*.+', '', text, count=1)
+        text = re.sub(r'\n{3,}', '\n\n', text)
     text = re.sub(r'\n---\n', '\n* * *\n', text)
     return text
 
@@ -317,6 +320,23 @@ def linkify_ascii_diagram(body):
     return body[:start] + new_block + body[end + len('</code></pre>'):]
 
 
+def extract_intro_subtitle(text):
+    """导论 blockquote 副标题 → 纯文本（供目录用）。"""
+    m = re.search(r'^>\s*副标题[：:]\s*(.+?)\s*$', text, re.M)
+    if not m:
+        return ''
+    return m.group(1).rstrip('。.')
+
+
+def page_title(ch_name, md):
+    """页面 h1 / 窗口标题用的短名。"""
+    if ch_name == "导论":
+        return "导论"
+    if ch_name == "附录":
+        return "附录"
+    return title_from_md(md)
+
+
 def title_from_md(text):
     """短标题：仅章节编号/名称，无副标题（用于页面 h1 和窗口标题）。"""
     for line in text.splitlines():
@@ -329,13 +349,14 @@ def title_from_md(text):
     return "章节"
 
 
-def index_title(ch_name, full):
-    """目录页显示标题：正文章节带副标题，附录只写"附录"，导论只写"导论"。"""
+def index_title(ch_name, md, meta=None):
+    """目录页显示标题：正文章节带副标题，导论副标题来自 blockquote。"""
     if ch_name == "附录":
         return "附录"
     if ch_name == "导论":
-        return "导论"
-    return full
+        sub = (meta or {}).get("intro_subtitle", "")
+        return f"导论 · {sub}" if sub else "导论"
+    return clean_title(full_title(md))
 
 
 def full_title(text):
@@ -360,10 +381,14 @@ def ts():
 
 def load_all_chapters():
     chapters = []
+    meta = {}
     for i, (file_path, ch_name) in enumerate(files, 1):
-        ch = clean_chapter(load_chapter(file_path, ch_name), ch_name)
+        raw = load_chapter(file_path, ch_name)
+        if ch_name == "导论":
+            meta["intro_subtitle"] = extract_intro_subtitle(raw)
+        ch = clean_chapter(raw, ch_name)
         chapters.append((chapter_html_name(i, ch_name), ch_name, ch))
-    return chapters
+    return chapters, meta
 
 
 # ── Markdown → HTML ─────────────────────────────────────────
@@ -612,7 +637,7 @@ def write_html_page(path, title, body_html):
         f.write(HTML_SHELL.format(title=html_mod.escape(title), body=body_html, katex=KATEX))
 
 
-def export_html(chapters):
+def export_html(chapters, meta=None):
     """chapters: [(html_name, ch_name, md_text), ...]"""
     os.makedirs(OUT_HTML, exist_ok=True)
     html_chapters = [(h, md) for h, _, md in chapters]
@@ -621,8 +646,8 @@ def export_html(chapters):
     index_items = []
     chapter_links = build_chapter_link_map()
     for html_name, ch_name, md in chapters:
-        short = title_from_md(md)
-        idx_text = index_title(ch_name, full_title(md))
+        short = page_title(ch_name, md)
+        idx_text = index_title(ch_name, md, meta)
         conv = PageConverter(html_name, fn_index)
         body = conv.md_to_html(md)
         body = strip_h1_subtitle(body, short)
@@ -683,7 +708,7 @@ def main():
         shutil.rmtree(split_dir)
         print(f"Removed: {split_dir}")
 
-    chapters = load_all_chapters()
+    chapters, meta = load_all_chapters()
     stamp = ts()
 
     # 1. 总完整版
@@ -725,7 +750,7 @@ def main():
 
     # 3. HTML 阅读器
     print(f"[3/3] HTML     → {OUT_HTML}/")
-    export_html(chapters)
+    export_html(chapters, meta)
 
     print("\nDone.")
 
