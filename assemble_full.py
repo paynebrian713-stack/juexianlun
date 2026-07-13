@@ -1092,5 +1092,36 @@ def main():
     print("\nDone.")
 
 
+# ── SVG 暗色系适配（主线图景覆盖层）────────────────────────
+
+
+def patch_svg_dark(path):
+    """将 reality-map.svg 适配为暗色主题。幂等，可反复调用。"""
+    import re as _re
+    with open(path, 'r', encoding='utf-8') as f:
+        svg = f.read()
+    # 背景矩形（仅首次添加）
+    if '<rect width="680" height="520" fill="#1e1e1c"/>' not in svg:
+        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<rect width="680" height="520" fill="#1e1e1c"/>', svg, count=1)
+    # 浮动/组标签文本 → 浅色
+    svg = svg.replace('fill="#52514e"', 'fill="#a8a59e"')
+    svg = svg.replace('fill="#5F5E5A"', 'fill="#b5b2aa"')
+    # 标题/描述 style 内的颜色
+    svg = _re.sub(r'fill:rgb\(0,\s*0,\s*0\)', 'fill:#c8c4bc', svg)
+    svg = _re.sub(r'fill:rgb\(11,\s*11,\s*11\)', 'fill:#d8d4cc', svg)
+    svg = _re.sub(r'color:rgb\(11,\s*11,\s*11\)', 'color:#d8d4cc', svg)
+    # 线条/箭头 → 更亮
+    svg = svg.replace('stroke="#5f5e5a"', 'stroke="#8a867e"')
+    svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#8a867e', svg)
+    # 透明度微调
+    svg = svg.replace('stroke-opacity="0.4"', 'stroke-opacity="0.55"')
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(svg)
+
+
 if __name__ == '__main__':
     main()
+    # 主线图景 SVG 自动适配暗色
+    svg_path = os.path.join(OUT_HTML, 'reality-map.svg')
+    if os.path.exists(svg_path):
+        patch_svg_dark(svg_path)
