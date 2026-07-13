@@ -56,19 +56,22 @@
               border: 1px solid #4a4a44; text-decoration: none; }
   .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 74vw; min-width: 440px;
+                  width: auto; max-width: 80vw; min-width: 480px;
                   background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
+                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 2rem 1.6rem 1rem; }
-  .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
-               color: #5f5e5a; cursor: pointer; background: none; border: none;
-               line-height: 1; padding: 0 .15rem; z-index: 1; }
+                    padding: 0 0 .6rem 0; }
+  .map-titlebar { display: flex; justify-content: space-between; align-items: center;
+                    padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #e0dcd4; }
+  .map-titlebar a { color: #7eb8da; text-decoration: none; font-size: .9rem; }
+  .map-titlebar a:hover { text-decoration: underline; }
+  .map-close { font-size: 1.5rem; color: #5f5e5a; cursor: pointer; background: none;
+               border: none; line-height: 1; padding: 0 .15rem; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
-  .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  .map-svg-wrap { padding: 1.4rem 1.6rem 0 1.6rem; }
+  .map-svg-wrap object { width: 100%; display: block; }
   /* --- footnote bubble --- */
   a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
   a.fn-a:hover { text-decoration: underline; }
@@ -279,10 +282,11 @@
 <script>var FN_CONTENT={"fn-premise": "<a href=\"#fnref-premise\" class=\"fn-back\" title=\"返回引用处\">↩</a>先划清本章证什么、不证什么。<strong>两股能分，是本书的讨论范围前件，不是一条结构定理</strong>。锚定生出绵延（第零章）是定理；但&quot;绵延在场就一定分得出双侧保持的一扇与严格单侧的一扇&quot;——即一般 \\(\\text{III}_1\\) 上真正的半边模包含必然存在——不是定理，是尚开放的问题（附录 W.2.1″）。所以本章不宣称&quot;处处必能分&quot;，只处理<strong>给定这样一具体两股配对在场</strong>时的结构。<strong>而此刻分成的这一具体配对——这一个账本、这一个理解窗口——更是被抛的前件</strong>：它取决于这个认知实际学过、实际在理解什么，是经验内容，退不到源头去看它怎么被造出来（和&quot;锚定已经发生&quot;同级）。所以下文凡&quot;设某个具体的账本／窗口被给予&quot;，都是这条前件的显形，不冒充定理。本章证的，是给定这一配对，两股各自的代数结构、及它们之间能严格说清的关系。", "fn-tworead": "<a href=\"#fnref-tworead\" class=\"fn-back\" title=\"返回引用处\">↩</a>还有一句关于这道流的话，与上面两股的方向无关，却要紧：它是两种读法（态读、算子读）共用的同一道，而且两读严格一致——那个恒等式 \\(\\omega(\\sigma_t a)=(\\omega\\circ\\sigma_t)(a)\\) 本身只是结合律。在别处，&quot;时间挂在算子上&quot;和&quot;时间挂在态上&quot;能对上，靠的是外面先摆好一只钟（一个外部给定的哈密顿量），两读一致是白捡的。可这里没有外部的钟：流是那个态自己经模结构生出来的（Tomita–Takesaki）。所以两读一致，在这里才成其为一个可证的事实，不是一句同义反复。这也是第二章主客两读的根——内与外，是同一道模流的两读，不是两样东西；胡塞尔&quot;内时间意识&quot;背后那个&quot;客观外时间&quot;的位置，在这里是空的。（说&quot;空&quot;的是<strong>外部先摆好的一只钟</strong>——独立于任何态、先于绵延就在那里的哈密顿量；<strong>不是</strong>第零章那条公共方向——那条恰恰非空，是所有态共认的客观时间。外部的钟空，公共的流实：两个&quot;客观&quot;不是一回事，公共≠外部先摆好的钟。）", "fn-p1": "<a href=\"#fnref-p1\" class=\"fn-back\" title=\"返回引用处\">↩</a>这两股还必须被稳稳维持成一个远离平衡的稳态，才不散——那是第四章的事。这里先立一句：两股由历史一致性逼出，且仅此两股。", "fn-lian": "<a href=\"#fnref-lian\" class=\"fn-back\" title=\"返回引用处\">↩</a>用第四章的话说：这里&quot;传得过去的连法 vs 传不过去的视角&quot;，正是他者那趟搬运 \\(u\\) 的两面在&quot;学习/传递&quot;侧的显影——<strong>可换算面</strong>（视角差：搬参考态、搬因果窗口，可抵平、不带新信息）随人而逝；<strong>不可换算面</strong>（新连法，含此前没有的结构信息）才是被传递、被累积的东西。此处不预支&quot;他者&quot;概念（留第四章 §4.2½），只取&quot;传的是连法不是坐标&quot;这一面——它已由本节化石主题（可传=已凝固的结构）直接给出，不需额外假设。", "fn-p3": "<a href=\"#fnref-p3\" class=\"fn-back\" title=\"返回引用处\">↩</a>这个 \\(E\\) 还有另一面：它幂等，稳住了已落定的，却也丢掉了没落进账本的那部分。把压下去的再原样包含回来，一般 \\(\\iota\\circ E\\neq\\mathrm{id}\\)，那道丢掉的亏量是第二章的事。同一个 \\(E\\)：幂等管&quot;落定即稳&quot;，非满管&quot;丢掉即失&quot;。", "fn-p2": "<a href=\"#fnref-p2\" class=\"fn-back\" title=\"返回引用处\">↩</a>一处诚实标注：这样一列 \\(\\{\\mathcal{A}_k\\}\\) 存在，就是&quot;学习在发生&quot;这一前件的形式。本章不从虚空造出它，只在它被给予时，刻画它必然满足的结构——模不变、信息单调、极限对易。\\(\\mathcal{A}_{\\text{phys}}\\) 在这里只用到这几条最小性质；它在整个 \\(\\mathcal{M}\\) 里是否&quot;正则&quot;，是另一层问题，本章不需要、也不预支。", "fn-p4": "<a href=\"#fnref-p4\" class=\"fn-back\" title=\"返回引用处\">↩</a>还有一句接口的话，先埋在这里：学习流沉积出的这些点——账本 \\(\\mathcal{A}_{\\text{phys}}\\) 里那些可反复指认的事实——就是后面第五、六章那个&quot;世界&quot;的<strong>对象</strong>。它们是判定所关于的东西，是&quot;有哪些事实&quot;这一半。至于这些事实之间怎么连、判它们真不真，是另一半，由下一节那股流来管。学习流给的是&quot;判什么&quot;，还不是&quot;怎么判&quot;。", "fn-p5": "<a href=\"#fnref-p5\" class=\"fn-back\" title=\"返回引用处\">↩</a>可反复回到、做流不变比较的不动参照，被动综合依托其上。", "fn-p6": "<a href=\"#fnref-p6\" class=\"fn-back\" title=\"返回引用处\">↩</a>注意平移算子 \\(U(s)\\) 不是法化子：它真收缩窗口 \\(U(s)\\mathcal{N}U(s)^*\\subsetneq\\mathcal{N}\\)，是搬动，不是保持。脉络的接榫是相对交换子里的法化子，不是平移。胚胎怎么长成可携带的脉络，是第七章的事。", "fn-p7": "<a href=\"#fnref-p7\" class=\"fn-back\" title=\"返回引用处\">↩</a>注意，这第三样不是&quot;学习流和理解流相互作用&quot;——两股不耦合，已经说过。它是独立地沉淀两股各自的产物，不是让两股彼此拉扯。", "fn-strictness": "<a href=\"#fnref-strictness\" class=\"fn-back\" title=\"返回引用处\">↩</a>要说清分寸：这行包含式证的是&quot;两步换个次序结果就变&quot;，<strong>不是</strong>&quot;两股互不相干&quot;那种更强的独立性——它们在记账舞台 \\(\\mathcal{M}_{\\mathcal{A}}\\) 上是相接的，只是接的方式让次序有意义。至于&quot;能不能干脆用一个自给自足的统一动力学把两股一起驱动&quot;——那是更强的一问，答案是不能，但那要靠第二章的中心定理，不在这一章、也不靠什么&quot;统一的尺退化成常数&quot;的话来搪塞。", "fn-p8": "<a href=\"#fnref-p8\" class=\"fn-back\" title=\"返回引用处\">↩</a>也顺带点一件贯穿全书的事：本章从头到尾只用了<strong>一个</strong>态——基线 \\(\\omega^*\\)。一个态，恰好只写得出这两股流；要出现度量、比较、&quot;我&quot;，得等<strong>第二个</strong>态进场，那是第二章的事。"};</script>
 <div id="map-overlay">
  <div class="map-container">
-  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
-  <p class="map-hint">点任意节点跳转到对应章节段落</p>
-  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
+  <div class="map-titlebar">
+   <a href="index.html">← 目录</a>
+   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  </div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>

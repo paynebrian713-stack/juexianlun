@@ -93,19 +93,22 @@ HTML_SHELL = """<!DOCTYPE html>
               border: 1px solid #4a4a44; text-decoration: none; }}
   .map-btn:hover {{ color: #fff; background: rgba(40,40,35,.92); }}
   #map-overlay {{ display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 74vw; min-width: 440px;
+                  width: auto; max-width: 80vw; min-width: 480px;
                   background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
+                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }}
   #map-overlay.active {{ display: block; }}
   .map-container {{ position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 2rem 1.6rem 1rem; }}
-  .map-close {{ position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
-               color: #5f5e5a; cursor: pointer; background: none; border: none;
-               line-height: 1; padding: 0 .15rem; z-index: 1; }}
+                    padding: 0 0 .6rem 0; }}
+  .map-titlebar {{ display: flex; justify-content: space-between; align-items: center;
+                    padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #e0dcd4; }}
+  .map-titlebar a {{ color: #7eb8da; text-decoration: none; font-size: .9rem; }}
+  .map-titlebar a:hover {{ text-decoration: underline; }}
+  .map-close {{ font-size: 1.5rem; color: #5f5e5a; cursor: pointer; background: none;
+               border: none; line-height: 1; padding: 0 .15rem; }}
   .map-close:hover {{ color: #1b1b18; }}
-  .map-svg-wrap {{ transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }}
-  .map-hint {{ text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }}
+  .map-svg-wrap {{ padding: 1.4rem 1.6rem 0 1.6rem; }}
+  .map-svg-wrap object {{ width: 100%; display: block; }}
   /* --- footnote bubble --- */
   a.fn-a {{ color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }}
   a.fn-a:hover {{ text-decoration: underline; }}
@@ -145,10 +148,11 @@ HTML_SHELL = """<!DOCTYPE html>
 {body}
 <div id="map-overlay">
  <div class="map-container">
-  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
-  <p class="map-hint">点任意节点跳转到对应章节段落</p>
-  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
+  <div class="map-titlebar">
+   <a href="index.html">← 目录</a>
+   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  </div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>

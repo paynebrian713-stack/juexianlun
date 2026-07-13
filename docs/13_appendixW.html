@@ -56,19 +56,22 @@
               border: 1px solid #4a4a44; text-decoration: none; }
   .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 74vw; min-width: 440px;
+                  width: auto; max-width: 80vw; min-width: 480px;
                   background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
+                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 2rem 1.6rem 1rem; }
-  .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
-               color: #5f5e5a; cursor: pointer; background: none; border: none;
-               line-height: 1; padding: 0 .15rem; z-index: 1; }
+                    padding: 0 0 .6rem 0; }
+  .map-titlebar { display: flex; justify-content: space-between; align-items: center;
+                    padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #e0dcd4; }
+  .map-titlebar a { color: #7eb8da; text-decoration: none; font-size: .9rem; }
+  .map-titlebar a:hover { text-decoration: underline; }
+  .map-close { font-size: 1.5rem; color: #5f5e5a; cursor: pointer; background: none;
+               border: none; line-height: 1; padding: 0 .15rem; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
-  .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  .map-svg-wrap { padding: 1.4rem 1.6rem 0 1.6rem; }
+  .map-svg-wrap object { width: 100%; display: block; }
   /* --- footnote bubble --- */
   a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
   a.fn-a:hover { text-decoration: underline; }
@@ -467,10 +470,11 @@
 <script>var FN_CONTENT={"fn-stabinv": "<a href=\"#fnref-stabinv\" class=\"fn-back\" title=\"返回引用处\">↩</a>稳定 vs 不变的严格区分。\\(\\sigma_t\\)-<strong>稳定</strong>:\\(\\sigma_t(\\mathcal{A})=\\mathcal{A}\\) 作为集合(自同构把 \\(\\mathcal{A}\\) 映满 \\(\\mathcal{A}\\)),等价于存在保态条件期望 \\(E:\\mathcal{M}\\to\\mathcal{A}\\)(Takesaki 定理)。\\(\\sigma_t\\)-<strong>不变</strong>:\\(\\sigma_t(x)=x\\ \\forall x\\in\\mathcal{A}\\),即 \\(\\mathcal{A}\\subseteq\\mathcal{M}^{\\omega^*}\\)(模流不动点=中心化子)。III₁ 模流遍历 \\(\\iff\\mathcal{M}^{\\omega^*}=\\mathbb{C}1\\)(Connes–Størmer 型),此时&quot;不变&quot;子代数只有标量;而&quot;稳定&quot;子代数丰富(\\(\\mathcal{M}\\) 自身即稳定,任何有保态期望的子代数亦然)。二者独立:账本、增滤流各节要的是稳定(可延续、不塌),不是不变(逐点冻结)。", "fn-Gderived": "<a href=\"#fnref-Gderived\" class=\"fn-back\" title=\"返回引用处\">↩</a>\\(G\\) 派生性细目:\\(G\\) 由三输入经 DR 重构(扇区=局域网+真空/融合=代数复合/统计=维度);&quot;\\(G\\) 不长得像 \\([\\sigma]\\)&quot;因 \\([\\sigma]\\) 是嵌入撕不平的内核(一个差)、\\(G\\) 是&quot;给定视角与几何后允许哪些局域激发及其复合&quot;的组织结构;与 Coleman–Mandula(时空⊗内部对称直积)自洽。所据代数事实(BW=boost/谱条件⟺正能量平移/DHR 重构)均标准结果(A);定位到界限论部件为结构同型旁注(元规则 M,非预言)。核验:文献双核一致(不同层级、分述、不焊)。"};</script>
 <div id="map-overlay">
  <div class="map-container">
-  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
-  <p class="map-hint">点任意节点跳转到对应章节段落</p>
-  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
+  <div class="map-titlebar">
+   <a href="index.html">← 目录</a>
+   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  </div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>

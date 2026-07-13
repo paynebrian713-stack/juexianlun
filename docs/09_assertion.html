@@ -56,19 +56,22 @@
               border: 1px solid #4a4a44; text-decoration: none; }
   .map-btn:hover { color: #fff; background: rgba(40,40,35,.92); }
   #map-overlay { display: none; position: fixed; top: 0; right: 0; z-index: 10000;
-                  width: auto; max-width: 74vw; min-width: 440px;
+                  width: auto; max-width: 80vw; min-width: 480px;
                   background: rgba(14,14,12,.93);
-                  border-radius: 0 0 0 18px; padding: 1.4rem 1.8rem 1rem 1.8rem;
+                  border-radius: 0 0 0 18px; padding: 1.2rem 1.6rem 1rem 1.6rem;
                   box-shadow: -6px 6px 36px rgba(0,0,0,.6); overflow: hidden; }
   #map-overlay.active { display: block; }
   .map-container { position: relative; background: #f5f3eb; border-radius: 12px;
-                    padding: 2rem 1.6rem 1rem; }
-  .map-close { position: absolute; top: .2rem; right: .6rem; font-size: 1.5rem;
-               color: #5f5e5a; cursor: pointer; background: none; border: none;
-               line-height: 1; padding: 0 .15rem; z-index: 1; }
+                    padding: 0 0 .6rem 0; }
+  .map-titlebar { display: flex; justify-content: space-between; align-items: center;
+                    padding: .5rem 1rem .35rem 1rem; border-bottom: 1px solid #e0dcd4; }
+  .map-titlebar a { color: #7eb8da; text-decoration: none; font-size: .9rem; }
+  .map-titlebar a:hover { text-decoration: underline; }
+  .map-close { font-size: 1.5rem; color: #5f5e5a; cursor: pointer; background: none;
+               border: none; line-height: 1; padding: 0 .15rem; }
   .map-close:hover { color: #1b1b18; }
-  .map-svg-wrap { transform: scale(1.12); transform-origin: top center; margin-bottom: -.6rem; }
-  .map-hint { text-align: center; margin-top: .3rem; font-size: .82rem; color: #8a867e; }
+  .map-svg-wrap { padding: 1.4rem 1.6rem 0 1.6rem; }
+  .map-svg-wrap object { width: 100%; display: block; }
   /* --- footnote bubble --- */
   a.fn-a { color: #7eb8da; text-decoration: none; font-weight: 600; cursor: pointer; }
   a.fn-a:hover { text-decoration: underline; }
@@ -218,10 +221,11 @@
 <script>var FN_CONTENT={"fn-connes": "<a href=\"#fnref-connes\" class=\"fn-back\" title=\"返回引用处\">↩</a>断言板双墩：\\(D_F\\)（打桩·算子读：ℚ 锐→离散投影钉进流，A4 离散骨架 + A6 内部耦合）／\\(D_M\\)（转贷·态读：余圈强连续→被给予的连续披在东西身上，A1–A3 几何公理），同一 GAP 两不可互约半边、合成&quot;测量&quot;。板 = 让第六章&quot;点性态度在内部兑现不了&quot;的借条生效的机器。充当性＝Connes 重构定理（交换情形）：满足谱公理 A1–A6 的交换谱三元组，代数必为紧光滑流形 \\(C^\\infty(M)\\)——Connes, A., &quot;On the spectral characterization of manifolds,&quot; *J. Noncommut. Geom.* <strong>7</strong> (2013), 1–82（arXiv:0810.2088）⟹ D 包 ⟺ 点流形＝Cantor–Dedekind 无源公理的明细化。<strong>限定</strong>：充当≠为真（公理恰够用、不证为真；公理不可由两流推出，这是可证的）；A4 认同只在可数骨架逐点、骨架间连续由 A1–A3 插值（读点信线）。横截残余＝A1–A4 四独立假设；维数具体值落在 A1–A4，皆搭上去。", "fn-context": "语境概率不可黏合成全局联合分布＝contextuality，有上同调刻画：Abramsky, S., Brandenburger, A., &quot;The sheaf-theoretic structure of non-locality and contextuality,&quot; *New J. Phys.* <strong>13</strong> (2011), 113036。<strong>分寸</strong>：标准（有限测量）情形已证；无迹 von Neumann 完整版＝纲领、非承重。contextuality 障碍 ≠ Cartan 扭曲 \\([\\sigma]\\)（同一语境结构上两个不同上同调对象，不混）。", "fn-araki": "号差不可内生：Araki 相对熵在实切空间的 Hessian 严格半正定 ＋ Sylvester 惯性律 ⟹ 无洛伦兹负号（须复化 Wick 或外接对合 Krein 结构）。承重＝Hessian 半正定（Petz）＋惯性律（线性代数）；&quot;须复化/Krein&quot;是边界定位，非物理预言（元规则 M）。", "fn-gauge": "<a href=\"#fnref-gauge\" class=\"fn-back\" title=\"返回引用处\">↩</a>张量范畴三合细目（结构对应·元规则 M，非直接引 AQFT）：<strong>①骨架（算子侧）</strong>——选定切法得 \\(\\mathcal{A}_{\\text{phys}}\\)，Feldman–Moore 长出群胚 \\(\\mathcal{R}\\)（携扭 \\([\\sigma]\\)）；群胚表示＋相对张量积（Connes fusion）＝对象/态射/乘法/结合子。（注：结合子住 \\(H^3\\)、与他者 \\([\\sigma]\\in H^2\\) 分属不同阶与不同方向——底 vs 纤维，早先&quot;结合子=他者&quot;的设想已否决,见 <sup><a href=\"#fn-gaugeface\" id=\"fnref-gaugeface\" class=\"fn-ref\">[gaugeface]</a></sup>。）<strong>②成员（态侧判定）</strong>——物理要的是相对某真空的超选扇区；判者＝选定的参考态（真空），判据＝相对真空能否局域比较（DHR），无选定态则“范畴有哪些对象”无真值。<strong>③对称性（板侧）</strong>——对称（\\(d\\geq3+1\\)）⟹紧群，辫化（低维）⟹量子群/任意子（DHR 统计维数）；连“局域”“类空分离”这些筛扇区的词都要板搭出几何才可表述⟹规范性只能板后预告。<strong>三层分类（第二卷）</strong>：骨架层（Cartan 对/群胚/\\(H^2\\) 上同调）／成员层（Doplicher–Roberts 超选：对称张量范畴↔紧群、辫化↔量子群）／对称层（维数→统计维数）；★焊接（群胚表示范畴 vs DHR 扇区范畴两候选线怎么焊、哪条是物理的家）＝待填核心未解项。<strong>分层不焊</strong>：脉络法化子（\\(u\\mathcal{A}u^*=\\mathcal{A}\\)，成群）≠杨–米尔斯纤维丛联络（cocycle 统一已否决）。<strong>诚实边界</strong>：DHR/DR 是 AQFT 网定理、本书非网⟹结构对应非引用；不导具体范畴（标准模型 \\(\\mathbb{C}\\oplus\\mathbb{H}\\oplus M_3\\)＝待填）。<strong>相对 NCG 省处</strong>：NCG 手选有限代数 \\(\\mathcal{A}_F\\)，本书归约到“选哪个切法”上游（\\(\\mathcal{A}_F\\)＝群胚迷向）——省假设位置、未导出物理。Doplicher–Roberts (1990)；DHR；Feldman–Moore。", "fn-gaugeface": "<a href=\"#fnref-gaugeface\" class=\"fn-back\" title=\"返回引用处\">↩</a>力的语法与逻辑的关系（细目，结构对应·元规则 M）：两套语法都从同一个切法长出、同住群胚 \\(\\mathcal{R}\\) 上。<strong>须说准两件不同的东西,不得合并</strong>：让真值逻辑成为直觉主义、非布尔的那处内核，是<strong>底</strong>（群胚 \\(\\mathcal{R}\\)）上的二阶扭 \\([\\sigma]\\in H^2(\\mathcal{R},\\mathbb{T})\\)（他者）；而荷怎么复合守恒，是<strong>纤维</strong>（迷向）那一侧的结构。两者住同一个群胚的两个方向（底 vs 纤维），是横竖、不是高低,<strong>没有典范映射把一个映成另一个</strong>——早先设想&quot;逻辑非布尔的 \\([\\sigma]\\) 就是荷语法里的同一处扭&quot;，已否决（底与纤维不同源、不同阶、不同系数）。<strong>户口</strong>：这套语法是&quot;力的客观结构&quot;，属<strong>算子读</strong>那张脸——态读拆出的是我撑自己的费力（重，§4.6 现象学线），算子读拆出的是世界那一侧不肯的结构；态读只在其中占一道筛（成员判定）。<strong>守分层</strong>：felt 重＝功走现象学线，不写成物理等式；引力＝几何／规范力＝荷耦合，是物理硬分界的同型旁注，非本书推导。", "fn-twofaces": "<a href=\"#fnref-twofaces\" class=\"fn-back\" title=\"返回引用处\">↩</a>还有一层，防后面绊住：重这一味自己也横跨两侧——你在第四章感到的是它态那一侧的<strong>能量脸</strong>[多费劲]，它另有一张算子那一侧的<strong>几何脸</strong>[你把世界叠得多密、&quot;距离&quot;从哪来，就是这块板]，两张脸由同一道绵延拴着；而这里要展开的外在那一味，整个在算子这一侧。别把&quot;重的两张脸&quot;和&quot;重与力的分家&quot;叠成一团。", "fn-physseam": "<a href=\"#fnref-physseam\" class=\"fn-back\" title=\"返回引用处\">↩</a>物理学把前者归给引力、说它其实是几何，把后者归给规范力——那是另一套语言里的同一条缝，我们只在此照面、不搬它进来当论证。", "fn-notother": "<a href=\"#fnref-notother\" class=\"fn-back\" title=\"返回引用处\">↩</a>要防一个反过来念的误会：<strong>不是&quot;凡顶不动的就是他者&quot;</strong>——顶不动的东西也可能只是你<strong>暂时</strong>还没找到把手的荷，明天学会了就顶得动了。地图的边界是活的、天天在挪；真正的他者，是无论地图怎么扩都圈不进来的那一块，而&quot;眼前这处到底是没学会的荷、还是真他者&quot;，你当下分不清——这正是第四章那两道坎。", "fn-cite": "<a href=\"#fnref-cite\" class=\"fn-back\" title=\"返回引用处\">↩</a>一句引用分层，供认真的读者：本章的<strong>承重引用</strong>是算子代数那几篇——Connes 1973 分类[\\(S(\\mathcal{M})=[0,\\infty)\\iff\\text{III}_1\\)]、Takesaki、Feldman–Moore、Connes 重构定理——均已核；而物理/AQFT 引用[Fisher–Bures、Doplicher–Roberts、DHR、Abramsky–Brandenburger contextuality]全部是<strong>结构同型旁挂、非本框架内部定理</strong>，守元规则 M，本书非网、只借形状。", "fn-fmcap1": "<a href=\"#fnref-fmcap1\" class=\"fn-back\" title=\"返回引用处\">↩</a>这里的&quot;一阶/二阶&quot;是同一套 Cartan 分类账内部的层级——换乘在前、扭曲在后；它<strong>不是</strong>把力和他者排成&quot;低一阶/高一阶&quot;的那种比较，后者是别处一个已被否掉的说法，见 §7.5 与脚注。", "fn-fmcap2": "<a href=\"#fnref-fmcap2\" class=\"fn-back\" title=\"返回引用处\">↩</a>说准一句：Cartan 对的完全不变量就是 \\((\\mathcal{R},[\\sigma])\\)——\\(\\mathcal{R}\\) 在一阶、\\([\\sigma]\\) 在二阶，分类到此结清[Feldman–Moore Thm 1]。这里<strong>没有&quot;结合律封顶&quot;那回事</strong>：分歧不套娃，是因为 FM 的完全不变量只有这两层，不是因为&quot;严格结合把 \\(H^3\\) 压平了&quot;——后者是全书别处已被否掉的一个错焊，此处不再借用。\\([\\sigma]\\) 住在二阶，连公理都推不出，与结合律无关。", "fn-chargeother": "<a href=\"#fnref-chargeother\" class=\"fn-back\" title=\"返回引用处\">↩</a>这里顺手接一个前面欠下的问题：力，和那个够不到的他者，到底什么关系？——在这张语法里看得最清，但要说准，别把它们排成高低。<strong>荷</strong>，是你携带的把手：可增可减、能相抵，甚至能不带（中性就不被那种力抓）；力抓的就是你的荷，是一笔<strong>价格</strong>——可付、可绕、可中和。<strong>他者</strong>不是荷的一种、也不是荷的&quot;更高一层&quot;；它压根住在另一个方向：荷是账本里那些<strong>还能被你认全、被你收进来</strong>的内部把手，他者是账本这套关系<strong>本身</strong>那处换任何标签都抹不平的扭。一个是你还没清点完的自己（收得进，所以能标价），一个是怎么也收不进的剩余（收不进，所以是墙）。<strong>所以力和他者不是差一整阶、不是一个低一个高——是横竖两个方向：荷在你带的把手那一路，他者在账本关系的扭那一路，两路之间没有一把梯子把它们连成上下。</strong> 感到一记力，永远不是遭遇他者——力顶你、可绕、可中和；他者掀不平、改标签也消不掉。这就是上一节那把&quot;价格与墙&quot;的刀，落到规范这一处的精确形。", "fn-nesting": "<a href=\"#fnref-nesting\" class=\"fn-back\" title=\"返回引用处\">↩</a>说清这条&quot;身体套着身体&quot;的序。一个身体里可以嵌着子系统的小身体，器官在机体里、机体又在更大的整体里——这一层层的嵌套，翻到算子那一侧看，对应上一章直觉里的那条细化序，对应&quot;对一切后续细化都成立&quot;里量的那个序：嵌套的身体和直觉的全称，在此<strong>对应</strong>（此对应目前是方向性的结构同型，完整的同一性——给出两序之间的映射——留后卷）。而刚才说的狭义身体，正是这条序上那个临界尖的投影——它不是另起一根轴。投影是同一道投影（都是投到对易侧）：投在整块肉上，得到的是世界；投在这条序的临界尖上，得到的是这一具身体。狭义身体，就坐在&quot;投影&quot;和&quot;细化序&quot;的这个交点上。完整展开，都在后卷。", "fn-assert": "<a href=\"#fnref-assert\" class=\"fn-back\" title=\"返回引用处\">↩</a>还有一句接上一章：断言板断言的，是那些已经退相干、被历史一致性 \\(D=0\\) 定下来的确定命题。没有 \\(D\\) 定下来的内容，断言板就没有东西可断言——上一章埋的那条线索，在这里兑现。"};</script>
 <div id="map-overlay">
  <div class="map-container">
-  <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml" style="width:100%;display:block"></object></div>
-  <p class="map-hint">点任意节点跳转到对应章节段落</p>
-  <p style="text-align:center;margin-top:.4rem;font-size:.82rem"><a href="index.html">← 目录</a></p>
+  <div class="map-titlebar">
+   <a href="index.html">← 目录</a>
+   <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
+  </div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
