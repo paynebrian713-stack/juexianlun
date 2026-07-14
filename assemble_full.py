@@ -1296,6 +1296,7 @@ def main():
 def patch_svg_dark(path):
     """将 reality-map.svg 适配为暗色主题。
     🔧 幂等：已含 <!--svg-dark:v1--> 标记时跳过字号/线宽累加，只刷新颜色与标签。
+    🔧 viewBox 联动：SVG viewBox 变化时同步背景 rect 尺寸。
     """
     import re as _re
     with open(path, 'r', encoding='utf-8') as f:
@@ -1307,55 +1308,67 @@ def patch_svg_dark(path):
     if 'preserveAspectRatio=' not in svg:
         svg = svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ', 1)
 
-    # 背景矩形（仅首次添加）🔧 viewBox 联动：改为 SVG viewBox 尺寸时同步
+    # 背景矩形（仅首次添加）
     if not already:
-        shifted = '<rect x="-30" y="0" width="760" height="560" fill="#1e1e1c"/>'
-        old_rect = '<rect width="700" height="560" fill="#1e1e1c"/>'
-        if old_rect in svg:
-            svg = svg.replace(old_rect, '<!--svg-dark:v1-->\n' + shifted, 1)
-        elif shifted not in svg:
-            svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n<rect x="-30" y="0" width="760" height="560" fill="#1e1e1c"/>', svg, count=1)
+        bg = '<rect x="0" y="0" width="680" height="600" fill="#1e1e1c"/>'
+        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n' + bg, svg, count=1)
 
-    # 浮动/组标签文本 → 浅色
-    svg = svg.replace('fill="#52514e"', 'fill="#d8d4cc"')
-    svg = svg.replace('fill="#5F5E5A"', 'fill="#e0dcd4"')
-    # ── 文字颜色（XML 属性和 CSS 值）──
-    svg = svg.replace('fill="#0b0b0b"', 'fill="#e8e4dc"')
-    svg = svg.replace('fill:#0b0b0b', 'fill:#e8e4dc')
-    svg = _re.sub(r'fill:rgb\(0,\s*0,\s*0\)', 'fill:#c8c4bc', svg)
-    svg = _re.sub(r'fill:rgb\(11,\s*11,\s*11\)', 'fill:#d8d4cc', svg)
+    # ── 文字颜色（CSS rgb 值和 XML 属性）──
+    # 主要文本
+    svg = _re.sub(r'fill:rgb\(11,\s*11,\s*11\)', 'fill:#e8e4dc', svg)
+    svg = svg.replace('fill="rgb(11,11,11)"', 'fill="#e8e4dc"')
     svg = _re.sub(r'color:rgb\(11,\s*11,\s*11\)', 'color:#d8d4cc', svg)
-    # ── 节点背景矩形/圆形 → 暗色化 ──
-    svg = svg.replace('fill="#e6f1fb"', 'fill="#1e2a3a"')
-    svg = svg.replace('stroke="#185fa5"', 'stroke="#3a8ac8"')
-    svg = svg.replace('fill="#faece7"', 'fill="#3a1e1e"')
-    svg = svg.replace('stroke="#993c1d"', 'stroke="#c85a3a"')
-    svg = svg.replace('fill="#faeeda"', 'fill="#3a2e0a"')
-    svg = svg.replace('stroke="#854f0b"', 'stroke="#c88a2a"')
-    svg = svg.replace('fill="#f1efe8"', 'fill="#3a3a38"')
-    svg = svg.replace('fill="#eeedfe"', 'fill="#1e1e3a"')
-    svg = svg.replace('stroke="#534ab7"', 'stroke="#7a6ad8"')
-    # 线条/箭头 → 更亮
-    svg = svg.replace('stroke="#5f5e5a"', 'stroke="#9b97a0"')
-    svg = svg.replace('stroke="#898781"', 'stroke="#9b97a0"')
-    svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)
-    # 新布局新增颜色
-    svg = svg.replace('stroke="#BA7517"', 'stroke="#d8a040"')
-    svg = svg.replace('stroke="#C4633B"', 'stroke="#e08060"')
-    svg = svg.replace('fill="#C4633B"', 'fill="#e08060"')
+    # 副文本/浮动标签
+    svg = _re.sub(r'fill:rgb\(82,\s*81,\s*78\)', 'fill:#d8d4cc', svg)
+    svg = svg.replace('fill="rgb(82,81,78)"', 'fill="#d8d4cc"')
+    svg = svg.replace('fill="#5F5E5A"', 'fill="#e0dcd4"')
+    svg = svg.replace('fill="#A56A4A"', 'fill="#c8a040"')
     svg = svg.replace('fill="#8A6A2A"', 'fill="#c8a040"')
-    svg = svg.replace('stroke="#0F6E56"', 'stroke="#3ac8a0"')
-    svg = svg.replace('fill="#0F6E56"', 'fill="#3ac8a0"')
-    # ── 节点标签文字修正 ──
-    svg = svg.replace('>横向 · 锚<', '>横向 · 参考态<')
-    svg = svg.replace('>纵向 · 未来<', '>纵向 · 单侧<')
-    svg = svg.replace('>D 对齐 · 板<', '>脚手架 · D对齐<')
+    # 松手绿色文字
+    svg = _re.sub(r'fill:rgb\(15,\s*110,\s*86\)', 'fill:#3ac8a0', svg)
+    svg = svg.replace('fill="rgb(15,110,86)"', 'fill="#3ac8a0"')
+    # 他者红色文字
+    svg = svg.replace('fill="#993C1D"', 'fill="#c85a3a"')
+
+    # ── 节点背景矩形/圆形 → 暗色化（CSS rgb 值和 XML 属性）──
+    svg = _re.sub(r'fill:rgb\(230,\s*241,\s*251\)', 'fill:#1e2a3a', svg)  # 蓝框填充
+    svg = svg.replace('fill="rgb(230,241,251)"', 'fill="#1e2a3a"')
+    svg = _re.sub(r'fill:rgb\(241,\s*239,\s*232\)', 'fill:#3a3a38', svg)  # 无迹圆
+    svg = svg.replace('fill="rgb(241,239,232)"', 'fill="#3a3a38"')
+    svg = _re.sub(r'fill:rgb\(238,\s*237,\s*254\)', 'fill:#1e1e3a', svg)  # 历史一致性圆
+    svg = svg.replace('fill="rgb(238,237,254)"', 'fill="#1e1e3a"')
+    svg = _re.sub(r'fill:rgb\(250,\s*238,\s*218\)', 'fill:#3a2e0a', svg)  # 现实
+    svg = svg.replace('fill="rgb(250,238,218)"', 'fill="#3a2e0a"')
+
+    # ── 线条/箭头颜色（CSS rgb 和 XML 属性）──
+    svg = _re.sub(r'stroke:rgb\(95,\s*94,\s*90\)', 'stroke:#9b97a0', svg)      # 无迹边框
+    svg = svg.replace('stroke="rgb(95,94,90)"', 'stroke="#9b97a0"')
+    svg = _re.sub(r'stroke:rgb\(83,\s*74,\s*183\)', 'stroke:#7a6ad8', svg)    # 历史一致性边框
+    svg = svg.replace('stroke="rgb(83,74,183)"', 'stroke="#7a6ad8"')
+    svg = _re.sub(r'stroke:rgb\(24,\s*95,\s*165\)', 'stroke:#3a8ac8', svg)    # 蓝线/蓝框
+    svg = svg.replace('stroke="rgb(24,95,165)"', 'stroke="#3a8ac8"')
+    svg = _re.sub(r'stroke:rgb\(186,\s*117,\s*23\)', 'stroke:#d8a040', svg)   # 金色线
+    svg = svg.replace('stroke="rgb(186,117,23)"', 'stroke="#d8a040"')
+    svg = _re.sub(r'stroke:rgb\(153,\s*60,\s*29\)', 'stroke:#c85a3a', svg)    # 红线
+    svg = svg.replace('stroke="rgb(153,60,29)"', 'stroke="#c85a3a"')
+    svg = _re.sub(r'stroke:rgb\(196,\s*99,\s*59\)', 'stroke:#e08060', svg)    # 他者虚线框
+    svg = svg.replace('stroke="rgb(196,99,59)"', 'stroke="#e08060"')
+    svg = _re.sub(r'stroke:rgb\(15,\s*110,\s*86\)', 'stroke:#3ac8a0', svg)   # 绿线/松手
+    svg = svg.replace('stroke="rgb(15,110,86)"', 'stroke="#3ac8a0"')
+    svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)  # 灰线（无迹→历史）
+    svg = svg.replace('stroke="rgb(137,135,129)"', 'stroke="#9b97a0"')
+    svg = svg.replace('stroke="#993C1D"', 'stroke="#c85a3a"')  # 他者箭头
+    svg = svg.replace('stroke="#8A6A2A"', 'stroke="#c88a2a"')
+    # 现实边框（XML 属性）
+    svg = svg.replace('stroke="rgb(133,79,11)"', 'stroke="#c88a2a"')
+
     # ── 透明度 → 更不透明 ──
     if not already:
         svg = svg.replace('opacity="0.4"', 'opacity="0.8"')
         svg = svg.replace('opacity="0.5"', 'opacity="0.85"')
+        svg = svg.replace('opacity="0.55"', 'opacity="0.85"')
         svg = svg.replace('opacity="0.6"', 'opacity="0.9"')
-        svg = svg.replace('opacity="0.75"', 'opacity="0.9"')
+        svg = svg.replace('opacity="0.7"', 'opacity="0.9"')
         # 字号 +3（14→17, 12→15）；目标尺寸绝对值写入，避免累加
         def _norm_css(m):
             n = int(m.group(1))
@@ -1379,14 +1392,7 @@ def patch_svg_dark(path):
             return f'<rect x="{x}" y="{y-1}" width="{w}" height="{h+4}" fill="black" rx="2"/>'
         svg = _re.sub(r'<rect x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)" fill="black" rx="2"/>',
                       _bump_mask_rect, svg)
-    # ── "松手 · 重定" 暗色 pill（仅首次）── 🔧 坐标联动：改布局后同步 rect x/y/width/height
-    if 'scene-songshou' in svg and 'x="500" y="228"' not in svg:
-        svg = svg.replace(
-            '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n<g>\n<text x="566" y="248"',
-            '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n'
-            '<g><rect x="500" y="228" width="132" height="56" rx="8" fill="#2a2a28" '
-            'stroke="#6a6a60" stroke-width="1.0"/>\n<text x="566" y="248"'
-        )
+
     with open(path, 'w', encoding='utf-8') as f:
         f.write(svg)
 
