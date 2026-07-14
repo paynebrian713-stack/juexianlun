@@ -219,6 +219,43 @@ function hlScene() {{
   }};
   doHL();
   o.addEventListener('load', doHL);
+  // setup map link interceptors (in parent scope, NOT inside SVG)
+  setupMapLinks();
+}}
+// intercept SVG <a> clicks from parent scope (avoids window.top cross-context issues)
+var _mapLinksDone = false;
+function setupMapLinks() {{
+  if (_mapLinksDone) return;
+  _mapLinksDone = true;
+  var o = document.getElementById('map-svg');
+  if (!o) return;
+  var go = function() {{
+    try {{
+      var d = o.contentDocument;
+      if (!d) return;
+      d.querySelectorAll('a').forEach(function(link){{
+        link.addEventListener('click', function(e){{
+          var href = this.getAttribute('href');
+          if (!href) return;
+          var parts = href.split('#');
+          var page = parts[0];
+          var hash = parts[1];
+          var curPage = window.location.pathname.split('/').pop() || 'index.html';
+          if (page === curPage && hash) {{
+            e.preventDefault();
+            e.stopPropagation();
+            hideMap();
+            CURRENT_SCENE = hash;
+            window.location.hash = '#' + hash;
+            hlScene();
+          }}
+          // cross-page: let target="_top" handle naturally
+        }});
+      }});
+    }} catch(e){{}}
+  }};
+  go();
+  o.addEventListener('load', go);
 }}
 document.addEventListener('keydown', function(e) {{
   if (e.key === 'Escape') {{ hideMap(); closeAllBubbles(); }}
@@ -1297,6 +1334,7 @@ def patch_svg_dark(path):
     """将 reality-map.svg 适配为暗色主题。
     🔧 幂等：已含 <!--svg-dark:v1--> 标记时跳过字号/线宽累加，只刷新颜色与标签。
     🔧 viewBox 联动：SVG viewBox 变化时同步背景 rect 尺寸。
+    色系参考：jingdian_shijie_renchulai_zong.svg — 暖色生成主线，深色饱和底给四种边界。
     """
     import re as _re
     with open(path, 'r', encoding='utf-8') as f:
@@ -1313,8 +1351,8 @@ def patch_svg_dark(path):
         bg = '<rect x="0" y="0" width="680" height="600" fill="#1e1e1c"/>'
         svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n' + bg, svg, count=1)
 
-    # ── 文字颜色（CSS rgb 值和 XML 属性）──
-    # 主要文本
+    # ── 文字颜色 ──
+    # 主要文本：黑色→浅色
     svg = _re.sub(r'fill:rgb\(11,\s*11,\s*11\)', 'fill:#e8e4dc', svg)
     svg = svg.replace('fill="rgb(11,11,11)"', 'fill="#e8e4dc"')
     svg = _re.sub(r'color:rgb\(11,\s*11,\s*11\)', 'color:#d8d4cc', svg)
@@ -1322,45 +1360,50 @@ def patch_svg_dark(path):
     svg = _re.sub(r'fill:rgb\(82,\s*81,\s*78\)', 'fill:#d8d4cc', svg)
     svg = svg.replace('fill="rgb(82,81,78)"', 'fill="#d8d4cc"')
     svg = svg.replace('fill="#5F5E5A"', 'fill="#e0dcd4"')
-    svg = svg.replace('fill="#A56A4A"', 'fill="#c8a040"')
+    # 他者绿色文本 → 青绿
+    svg = svg.replace('fill="#27500A"', 'fill="#8ad060"')
+    # 松手/弧线 青绿文本
+    svg = svg.replace('fill="#0F6E56"', 'fill="#3ac8a0"')
+    # 账本扩大
     svg = svg.replace('fill="#8A6A2A"', 'fill="#c8a040"')
-    # 松手绿色文字
-    svg = _re.sub(r'fill:rgb\(15,\s*110,\s*86\)', 'fill:#3ac8a0', svg)
-    svg = svg.replace('fill="rgb(15,110,86)"', 'fill="#3ac8a0"')
-    # 他者红色文字
-    svg = svg.replace('fill="#993C1D"', 'fill="#c85a3a"')
+    # 他者 sub text
+    svg = svg.replace('fill="#3B6D11"', 'fill="#5ac820"')
 
-    # ── 节点背景矩形/圆形 → 暗色化（CSS rgb 值和 XML 属性）──
-    svg = _re.sub(r'fill:rgb\(230,\s*241,\s*251\)', 'fill:#1e2a3a', svg)  # 蓝框填充
-    svg = svg.replace('fill="rgb(230,241,251)"', 'fill="#1e2a3a"')
-    svg = _re.sub(r'fill:rgb\(241,\s*239,\s*232\)', 'fill:#3a3a38', svg)  # 无迹圆
-    svg = svg.replace('fill="rgb(241,239,232)"', 'fill="#3a3a38"')
-    svg = _re.sub(r'fill:rgb\(238,\s*237,\s*254\)', 'fill:#1e1e3a', svg)  # 历史一致性圆
-    svg = svg.replace('fill="rgb(238,237,254)"', 'fill="#1e1e3a"')
-    svg = _re.sub(r'fill:rgb\(250,\s*238,\s*218\)', 'fill:#3a2e0a', svg)  # 现实
+    # ── 暖色填充（历史一致性/现实）→ 暗色化 ──
+    svg = _re.sub(r'fill:rgb\(250,\s*238,\s*218\)', 'fill:#3a2e0a', svg)
     svg = svg.replace('fill="rgb(250,238,218)"', 'fill="#3a2e0a"')
+    # 无迹 circle 填充
+    svg = _re.sub(r'fill:rgb\(241,\s*239,\s*232\)', 'fill:#3a3a38', svg)
+    svg = svg.replace('fill="rgb(241,239,232)"', 'fill="#3a3a38"')
 
-    # ── 线条/箭头颜色（CSS rgb 和 XML 属性）──
-    svg = _re.sub(r'stroke:rgb\(95,\s*94,\s*90\)', 'stroke:#9b97a0', svg)      # 无迹边框
+    # ── 线条/边框/箭头颜色 → 更亮 ──
+    # 暖色线（无迹→历史、历史→现实、现实→直觉）
+    svg = svg.replace('stroke="#BA7517"', 'stroke="#d8a040"')
+    # 棕色箭头（横向→历史）
+    svg = svg.replace('stroke="#712B13"', 'stroke="#c88a40"')
+    # 红色箭头（纵向→历史）
+    svg = svg.replace('stroke="#A32D2D"', 'stroke="#d85050"')
+    # 蓝色箭头（脚手架→主线）
+    svg = svg.replace('stroke="#185FA5"', 'stroke="#3a8ac8"')
+    # 绿色（他者→现实）
+    svg = svg.replace('stroke="#3B6D11"', 'stroke="#5ac820"')
+    # 青绿（弧线/松手）
+    svg = svg.replace('stroke="#0F6E56"', 'stroke="#3ac8a0"')
+    # 无迹 circle stroke
+    svg = _re.sub(r'stroke:rgb\(95,\s*94,\s*90\)', 'stroke:#9b97a0', svg)
     svg = svg.replace('stroke="rgb(95,94,90)"', 'stroke="#9b97a0"')
-    svg = _re.sub(r'stroke:rgb\(83,\s*74,\s*183\)', 'stroke:#7a6ad8', svg)    # 历史一致性边框
-    svg = svg.replace('stroke="rgb(83,74,183)"', 'stroke="#7a6ad8"')
-    svg = _re.sub(r'stroke:rgb\(24,\s*95,\s*165\)', 'stroke:#3a8ac8', svg)    # 蓝线/蓝框
-    svg = svg.replace('stroke="rgb(24,95,165)"', 'stroke="#3a8ac8"')
-    svg = _re.sub(r'stroke:rgb\(186,\s*117,\s*23\)', 'stroke:#d8a040', svg)   # 金色线
-    svg = svg.replace('stroke="rgb(186,117,23)"', 'stroke="#d8a040"')
-    svg = _re.sub(r'stroke:rgb\(153,\s*60,\s*29\)', 'stroke:#c85a3a', svg)    # 红线
-    svg = svg.replace('stroke="rgb(153,60,29)"', 'stroke="#c85a3a"')
-    svg = _re.sub(r'stroke:rgb\(196,\s*99,\s*59\)', 'stroke:#e08060', svg)    # 他者虚线框
-    svg = svg.replace('stroke="rgb(196,99,59)"', 'stroke="#e08060"')
-    svg = _re.sub(r'stroke:rgb\(15,\s*110,\s*86\)', 'stroke:#3ac8a0', svg)   # 绿线/松手
-    svg = svg.replace('stroke="rgb(15,110,86)"', 'stroke="#3ac8a0"')
-    svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)  # 灰线（无迹→历史）
-    svg = svg.replace('stroke="rgb(137,135,129)"', 'stroke="#9b97a0"')
-    svg = svg.replace('stroke="#993C1D"', 'stroke="#c85a3a"')  # 他者箭头
-    svg = svg.replace('stroke="#8A6A2A"', 'stroke="#c88a2a"')
-    # 现实边框（XML 属性）
+    # 历史一致性 circle / 现实 rect stroke
+    svg = _re.sub(r'stroke:rgb\(133,\s*79,\s*11\)', 'stroke:#c88a2a', svg)
     svg = svg.replace('stroke="rgb(133,79,11)"', 'stroke="#c88a2a"')
+    svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)
+    # 深色框的边框 → 可见
+    svg = svg.replace('stroke="#4A1B0C"', 'stroke="#8a3a20"')   # 横向边框
+    svg = svg.replace('stroke="#501313"', 'stroke="#a03030"')   # 纵向边框
+    svg = svg.replace('stroke="#042C53"', 'stroke="#1a5a9a"')   # 脚手架边框
+    svg = svg.replace('stroke="#412402"', 'stroke="#8a5a20"')   # 直觉边框
+
+    # ── 移除节点上的永久 SVG filter（参考色系无 glow-gold，高亮应仅来自 JS scene-current）──
+    svg = svg.replace(' filter="url(#glow-gold)"', '')
 
     # ── 透明度 → 更不透明 ──
     if not already:
@@ -1368,8 +1411,10 @@ def patch_svg_dark(path):
         svg = svg.replace('opacity="0.5"', 'opacity="0.85"')
         svg = svg.replace('opacity="0.55"', 'opacity="0.85"')
         svg = svg.replace('opacity="0.6"', 'opacity="0.9"')
+        svg = svg.replace('opacity="0.65"', 'opacity="0.9"')
         svg = svg.replace('opacity="0.7"', 'opacity="0.9"')
-        # 字号 +3（14→17, 12→15）；目标尺寸绝对值写入，避免累加
+        svg = svg.replace('opacity="0.8"', 'opacity="0.95"')
+        # 字号 +3（14→17, 12→15）
         def _norm_css(m):
             n = int(m.group(1))
             return f'font-size:{"17" if n >= 14 else "15"}px'
@@ -1388,9 +1433,9 @@ def patch_svg_dark(path):
                       lambda m: f'{m.group(1)}="{float(m.group(2))+0.5}"', svg)
         # mask 切孔 +4px 高
         def _bump_mask_rect(m):
-            x, y, w, h = m.group(1), int(m.group(2)), m.group(3), int(m.group(4))
+            x, y, w, h = m.group(1), float(m.group(2)), m.group(3), float(m.group(4))
             return f'<rect x="{x}" y="{y-1}" width="{w}" height="{h+4}" fill="black" rx="2"/>'
-        svg = _re.sub(r'<rect x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)" fill="black" rx="2"/>',
+        svg = _re.sub(r'<rect x="(\d+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)" fill="black" rx="2"/>',
                       _bump_mask_rect, svg)
 
     with open(path, 'w', encoding='utf-8') as f:

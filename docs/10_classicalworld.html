@@ -293,6 +293,43 @@ function hlScene() {
   };
   doHL();
   o.addEventListener('load', doHL);
+  // setup map link interceptors (in parent scope, NOT inside SVG)
+  setupMapLinks();
+}
+// intercept SVG <a> clicks from parent scope (avoids window.top cross-context issues)
+var _mapLinksDone = false;
+function setupMapLinks() {
+  if (_mapLinksDone) return;
+  _mapLinksDone = true;
+  var o = document.getElementById('map-svg');
+  if (!o) return;
+  var go = function() {
+    try {
+      var d = o.contentDocument;
+      if (!d) return;
+      d.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(e){
+          var href = this.getAttribute('href');
+          if (!href) return;
+          var parts = href.split('#');
+          var page = parts[0];
+          var hash = parts[1];
+          var curPage = window.location.pathname.split('/').pop() || 'index.html';
+          if (page === curPage && hash) {
+            e.preventDefault();
+            e.stopPropagation();
+            hideMap();
+            CURRENT_SCENE = hash;
+            window.location.hash = '#' + hash;
+            hlScene();
+          }
+          // cross-page: let target="_top" handle naturally
+        });
+      });
+    } catch(e){}
+  };
+  go();
+  o.addEventListener('load', go);
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { hideMap(); closeAllBubbles(); }
