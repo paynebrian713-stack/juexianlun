@@ -338,12 +338,13 @@ function hlScene() {
         d.documentElement.appendChild(sty);
       }
       // remove any previous highlight
-      var prev = d.querySelector('.scene-current');
-      if (prev) prev.classList.remove('scene-current');
-      var a = d.querySelector('a[href$="' + '#' + sid + '"]');
-      if (!a) return;
-      var g = a.querySelector('g');
-      if (g) g.classList.add('scene-current');
+      d.querySelectorAll('.scene-current').forEach(function(el){el.classList.remove('scene-current');});
+      var allA = d.querySelectorAll('a[href$="' + '#' + sid + '"]');
+      if (!allA.length) return;
+      allA.forEach(function(a){
+        var g = a.querySelector('g');
+        if (g) g.classList.add('scene-current');
+      });
     } catch(e){}
   };
   doHL();
