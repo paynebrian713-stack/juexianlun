@@ -31,7 +31,7 @@
 </g>
 </a>
 
-<a href="05_unknowable.html#scene-sanzhong" class="scene-node" target="_top">
+<a href="04_intentionality.html#scene-heng" class="scene-node" target="_top">
 <g>
 <rect x="34" y="142" width="176" height="40" rx="8" fill="#712B13" stroke="#8a3a20" stroke-width="1.0"/>
 <text x="122" y="162" text-anchor="middle" dominant-baseline="central" fill="#F5C4B3" font-family="Arial,sans-serif" font-size="17" font-weight="500">横向 · 参考态</text>
@@ -39,7 +39,7 @@
 </a>
 <line x1="210" y1="176" x2="276" y2="192" stroke="#c88a40" stroke-width="1.5" opacity="0.95" marker-end="url(#arrow)"/>
 
-<a href="05_unknowable.html#scene-sanzhong" class="scene-node" target="_top">
+<a href="03_twostreams.html#scene-zong" class="scene-node" target="_top">
 <g>
 <rect x="34" y="192" width="176" height="40" rx="8" fill="#791F1F" stroke="#a03030" stroke-width="1.0"/>
 <text x="122" y="212" text-anchor="middle" dominant-baseline="central" fill="#F7C1C1" font-family="Arial,sans-serif" font-size="17" font-weight="500">纵向 · 单侧</text>
@@ -49,7 +49,7 @@
 
 <line x1="330" y1="256" x2="330" y2="372" stroke="#d8a040" stroke-width="1.4" opacity="0.9" marker-end="url(#arrow)"/>
 
-<a href="05_unknowable.html#scene-sanzhong" class="scene-node" target="_top">
+<a href="09_assertion.html#scene-dui" class="scene-node" target="_top">
 <g>
 <rect x="34" y="288" width="176" height="46" rx="8" fill="#0C447C" stroke="#1a5a9a" stroke-width="1.0"/>
 <text x="122" y="305" text-anchor="middle" dominant-baseline="central" fill="#B5D4F4" font-family="Arial,sans-serif" font-size="17" font-weight="500">脚手架 · D 对齐</text>

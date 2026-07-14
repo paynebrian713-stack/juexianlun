@@ -232,12 +232,12 @@
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=7" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
 <script>
-var CURRENT_SCENE = null;
+var CURRENT_SCENE = (function(){ var h=window.location.hash; return h ? h.replace('#','') : null; })();
 function showMap() {
   document.getElementById('map-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -269,6 +269,7 @@ function hlScene() {
       var a = Array.from(d.querySelectorAll('a[href$="' + '#' + sid + '"]')).find(function(a){
         return a.querySelector('rect') || a.querySelector('circle');
       });
+      if (!a) a = d.querySelector('a[href$="' + '#' + sid + '"]');
       if (!a) return;
       var g = a.querySelector('g');
       if (g) g.classList.add('scene-current');

@@ -175,12 +175,12 @@ HTML_SHELL = """<!DOCTYPE html>
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=7" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
 <script>
-var CURRENT_SCENE = {scene_id};
+var CURRENT_SCENE = (function(){{ var h=window.location.hash; return h ? h.replace('#','') : {scene_id}; }})();
 function showMap() {{
   document.getElementById('map-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -212,6 +212,7 @@ function hlScene() {{
       var a = Array.from(d.querySelectorAll('a[href$="' + '#' + sid + '"]')).find(function(a){{
         return a.querySelector('rect') || a.querySelector('circle');
       }});
+      if (!a) a = d.querySelector('a[href$="' + '#' + sid + '"]');
       if (!a) return;
       var g = a.querySelector('g');
       if (g) g.classList.add('scene-current');
@@ -1088,7 +1089,10 @@ def linkify_ending_next_chapter(body, next_href):
 SCENE_ID_MAP = {
     '02_start.html':           {'scene-wuji':     '导论把你带到了&quot;没有尺子&quot;的门口。'},
     '07_worldtopos.html':      {'scene-lishi':    '现在来看看&quot;历史&quot;到底是怎么成立的。'},
-    '05_unknowable.html':      {'scene-sanzhong': '把认知够不到的边界数一数'},
+    '05_unknowable.html':      {'scene-sanzhong':    '把认知够不到的边界数一数',
+                                'scene-hengxiang':   '横向不可知，就是参考态的锚',
+                                'scene-zongxiang':   '纵向不可知，就是未来',
+                                'scene-jiaoshoujia': '脚手架不可知，就是断言板'},
     '04_intentionality.html':  {'scene-heng':     '有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了'},
     '03_twostreams.html':      {'scene-zong':     '<strong>为什么理解流只能倒着写。</strong>'},
     '09_assertion.html':       {'scene-dui':      '搭板就是干两件事：<strong>打桩</strong>'},
@@ -1239,7 +1243,7 @@ def export_html(chapters, meta=None):
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=7" type="image/svg+xml"></object></div>
  </div>
 </div>
 <script>
