@@ -283,12 +283,13 @@ function hlScene() {
       }
       // remove any previous highlight
       d.querySelectorAll('.scene-current').forEach(function(el){el.classList.remove('scene-current');});
-      var allA = d.querySelectorAll('a[href$="' + '#' + sid + '"]');
-      if (!allA.length) return;
-      allA.forEach(function(a){
-        var g = a.querySelector('g');
-        if (g) g.classList.add('scene-current');
+      // find first matching <a> that contains a visible box (rect/circle)
+      var a = Array.from(d.querySelectorAll('a[href$="' + '#' + sid + '"]')).find(function(a){
+        return a.querySelector('rect') || a.querySelector('circle');
       });
+      if (!a) return;
+      var g = a.querySelector('g');
+      if (g) g.classList.add('scene-current');
     } catch(e){}
   };
   doHL();
