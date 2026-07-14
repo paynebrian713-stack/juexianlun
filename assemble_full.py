@@ -1056,6 +1056,7 @@ SCENE_ID_MAP = {
     '06_theother.html':        {'scene-taren':    '先问一个人人都问过的问题：为什么我永远不能真正知道你在想什'},
     '10_classicalworld.html':  {'scene-xianshi':  '这是一个方向的彻底反转。'},
     '12_epilogue.html':        {'scene-songshou': '所以松开那个锚，不是失去你。'},
+    '08_intuition.html':       {'scene-luoji':    '直觉撞见的那道缝'},
 }
 
 
@@ -1304,12 +1305,12 @@ def patch_svg_dark(path):
     if 'preserveAspectRatio=' not in svg:
         svg = svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ', 1)
 
-    # 背景矩形（仅首次添加）
-    if '<rect width="680" height="520" fill="#1e1e1c"/>' not in svg:
-        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n<rect width="680" height="520" fill="#1e1e1c"/>', svg, count=1)
+    # 背景矩形（仅首次添加）🔧 viewBox 联动：改为 SVG viewBox 尺寸时同步 700/560
+    if '<rect width="700" height="560" fill="#1e1e1c"/>' not in svg:
+        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n<rect width="700" height="560" fill="#1e1e1c"/>', svg, count=1)
     elif not already:
-        svg = svg.replace('<rect width="680" height="520" fill="#1e1e1c"/>',
-                          '<!--svg-dark:v1-->\n<rect width="680" height="520" fill="#1e1e1c"/>', 1)
+        svg = svg.replace('<rect width="700" height="560" fill="#1e1e1c"/>',
+                          '<!--svg-dark:v1-->\n<rect width="700" height="560" fill="#1e1e1c"/>', 1)
 
     # 浮动/组标签文本 → 浅色
     svg = svg.replace('fill="#52514e"', 'fill="#d8d4cc"')
@@ -1334,6 +1335,13 @@ def patch_svg_dark(path):
     svg = svg.replace('stroke="#5f5e5a"', 'stroke="#9b97a0"')
     svg = svg.replace('stroke="#898781"', 'stroke="#9b97a0"')
     svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)
+    # 新布局新增颜色
+    svg = svg.replace('stroke="#BA7517"', 'stroke="#d8a040"')
+    svg = svg.replace('stroke="#C4633B"', 'stroke="#e08060"')
+    svg = svg.replace('fill="#C4633B"', 'fill="#e08060"')
+    svg = svg.replace('fill="#8A6A2A"', 'fill="#c8a040"')
+    svg = svg.replace('stroke="#0F6E56"', 'stroke="#3ac8a0"')
+    svg = svg.replace('fill="#0F6E56"', 'fill="#3ac8a0"')
     # ── 节点标签文字修正 ──
     svg = svg.replace('>横向 · 锚<', '>横向 · 参考态<')
     svg = svg.replace('>纵向 · 未来<', '>纵向 · 单侧<')
@@ -1367,13 +1375,13 @@ def patch_svg_dark(path):
             return f'<rect x="{x}" y="{y-1}" width="{w}" height="{h+4}" fill="black" rx="2"/>'
         svg = _re.sub(r'<rect x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)" fill="black" rx="2"/>',
                       _bump_mask_rect, svg)
-    # ── "松手 · 重定" 暗色 pill（仅首次）──
-    if 'scene-songshou' in svg and 'x="550" y="233"' not in svg:
+    # ── "松手 · 重定" 暗色 pill（仅首次）── 🔧 坐标联动：改布局后同步 rect x/y/width/height
+    if 'scene-songshou' in svg and 'x="500" y="228"' not in svg:
         svg = svg.replace(
-            '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n<g><text x="615" y="256"',
+            '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n<g>\n<text x="566" y="248"',
             '<a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">\n'
-            '<g><rect x="550" y="233" width="130" height="54" rx="8" fill="#2a2a28" '
-            'stroke="#6a6a60" stroke-width="1.0"/><text x="615" y="256"'
+            '<g><rect x="500" y="228" width="132" height="56" rx="8" fill="#2a2a28" '
+            'stroke="#6a6a60" stroke-width="1.0"/>\n<text x="566" y="248"'
         )
     with open(path, 'w', encoding='utf-8') as f:
         f.write(svg)

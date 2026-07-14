@@ -1,65 +1,85 @@
-<svg width="100%" viewBox="0 0 680 520" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg">
+<svg preserveAspectRatio="xMidYMid meet" width="100%" viewBox="0 0 700 560" role="img" xmlns="http://www.w3.org/2000/svg">
 <!--svg-dark:v1-->
-<rect width="680" height="520" fill="#1e1e1c"/>
-<title>Realty Map - Main Line Concept Map</title>
-<style>a.scene-node{cursor:pointer}a.scene-node:hover{opacity:0.82}</style>
+<rect width="700" height="560" fill="#1e1e1c"/><title>现实怎么来</title>
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/></marker>
-<mask id="img-gap" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="680" height="520" fill="white"/><rect x="36" y="15" width="78" height="26" fill="black" rx="2"/><rect x="312" y="47" width="36" height="26" fill="black" rx="2"/><rect x="291" y="231" width="78" height="26" fill="black" rx="2"/><rect x="290" y="253" width="80" height="24" fill="black" rx="2"/><rect x="82" y="103" width="80" height="24" fill="black" rx="2"/><rect x="92" y="141" width="60" height="26" fill="black" rx="2"/><rect x="85" y="189" width="74" height="26" fill="black" rx="2"/><rect x="85" y="237" width="72" height="26" fill="black" rx="2"/><rect x="312" y="407" width="36" height="26" fill="black" rx="2"/><rect x="260" y="449" width="140" height="24" fill="black" rx="2"/><rect x="578" y="239" width="74" height="26" fill="black" rx="2"/><rect x="569" y="259" width="92" height="24" fill="black" rx="2"/></mask>
-</defs>
+<mask id="img-gap" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="700" height="560" fill="white"/><rect x="36" y="15" width="78" height="26" fill="black" rx="2"/><rect x="322" y="47" width="36" height="26" fill="black" rx="2"/><rect x="301" y="231" width="78" height="26" fill="black" rx="2"/><rect x="300" y="252" width="80" height="24" fill="black" rx="2"/><rect x="83" y="101" width="80" height="24" fill="black" rx="2"/><rect x="79" y="139" width="88" height="26" fill="black" rx="2"/><rect x="86" y="187" width="74" height="26" fill="black" rx="2"/><rect x="73" y="235" width="101" height="26" fill="black" rx="2"/><rect x="322" y="407" width="36" height="26" fill="black" rx="2"/><rect x="270" y="485" width="140" height="24" fill="black" rx="2"/><rect x="70" y="436" width="88" height="26" fill="black" rx="2"/><rect x="434" y="395" width="56" height="24" fill="black" rx="2"/><rect x="528" y="401" width="116" height="26" fill="black" rx="2"/><rect x="534" y="420" width="104" height="24" fill="black" rx="2"/><rect x="529" y="231" width="74" height="26" fill="black" rx="2"/><rect x="520" y="251" width="92" height="24" fill="black" rx="2"/></mask></defs>
 
-<text x="40" y="32" style="fill:#e8e4dc;font-family:Arial,sans-serif;font-size:17px;font-weight:500">现实怎么来</text>
+<text x="40" y="32" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">现实怎么来</text>
 
-<line x1="330" y1="94" x2="330" y2="196" stroke="#9b97a0" stroke-width="1.0" opacity="0.85" marker-end="url(#arrow)"/>
-
-<a href="02_start.html#scene-wuji" class="scene-node" target="_top">
-<g><circle cx="330" cy="80" r="12" fill="#3a3a38" stroke="#9b97a0" stroke-width="1.0"/><text x="330" y="64" text-anchor="middle" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">无迹</text></g>
-</a>
+<line x1="340" y1="94" x2="340" y2="196" stroke="#9b97a0" stroke-width="1.0" opacity="0.85" marker-end="url(#arrow)"/>
+<g>
+<circle cx="340" cy="80" r="12" fill="#3a3a38" stroke="#9b97a0" stroke-width="1.0"/>
+<text x="340" y="64" text-anchor="middle" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">无迹</text>
+</g>
 
 <a href="07_worldtopos.html#scene-lishi" class="scene-node" target="_top">
-<g><circle cx="330" cy="250" r="52" fill="#1e1e3a" stroke="#7a6ad8" stroke-width="1.0"/><text x="330" y="243" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">历史一致性</text><text x="330" y="263" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">核对，照不裁</text></g>
+<g>
+<circle cx="340" cy="250" r="54" fill="#1e1e3a" stroke="#7a6ad8" stroke-width="1.0"/>
+<text x="340" y="243" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">历史一致性</text>
+<text x="340" y="263" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">核对，照不裁</text>
+</g>
 </a>
+
+<text x="123" y="116" text-anchor="middle" fill="#e0dcd4" font-family="Arial,sans-serif" font-size="15">够不到的位置</text>
 
 <a href="05_unknowable.html#scene-sanzhong" class="scene-node" target="_top">
-<g><text x="122" y="118" text-anchor="middle" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">够不到的位置</text></g>
+<g>
+<rect x="34" y="132" width="178" height="38" rx="8" fill="#1e2a3a" stroke="#3a8ac8" stroke-width="1.0"/>
+<text x="123" y="151" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">横向 · 参考态</text>
+</g>
+</a>
+<a href="05_unknowable.html#scene-sanzhong" class="scene-node" target="_top">
+<g>
+<rect x="34" y="180" width="178" height="38" rx="8" fill="#1e2a3a" stroke="#3a8ac8" stroke-width="1.0"/>
+<text x="123" y="199" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">纵向 · 单侧</text>
+</g>
+</a>
+<a href="05_unknowable.html#scene-sanzhong" class="scene-node" target="_top">
+<g>
+<rect x="34" y="228" width="178" height="38" rx="8" fill="#1e2a3a" stroke="#3a8ac8" stroke-width="1.0"/>
+<text x="123" y="247" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">脚手架 · D 对齐</text>
+</g>
 </a>
 
-<text x="482" y="222" text-anchor="middle" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">够得到却不可对象化</text>
+<line x1="212" y1="151" x2="290" y2="228" stroke="#185FA5" stroke-width="1.2" opacity="0.8"/>
+<line x1="212" y1="199" x2="287" y2="238" stroke="#185FA5" stroke-width="1.2" opacity="0.8"/>
+<line x1="212" y1="247" x2="290" y2="256" stroke="#185FA5" stroke-width="1.2" opacity="0.8"/>
 
-<a href="04_intentionality.html#scene-heng" class="scene-node" target="_top">
-<g><rect x="40" y="134" width="164" height="38" rx="8" fill="#1e2a3a" stroke="#3a8ac8" stroke-width="1.0"/><text x="122" y="153" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">横向 · 参考态</text></g>
-</a>
-
-<a href="03_twostreams.html#scene-zong" class="scene-node" target="_top">
-<g><rect x="40" y="182" width="164" height="38" rx="8" fill="#1e2a3a" stroke="#3a8ac8" stroke-width="1.0"/><text x="122" y="201" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">纵向 · 单侧</text></g>
-</a>
-
-<a href="09_assertion.html#scene-dui" class="scene-node" target="_top">
-<g><rect x="40" y="230" width="164" height="38" rx="8" fill="#1e2a3a" stroke="#3a8ac8" stroke-width="1.0"/><text x="122" y="249" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">脚手架 · D对齐</text></g>
-</a>
-
-<line x1="204" y1="153" x2="282" y2="228" stroke="#3a8ac8" stroke-width="1.2" opacity="0.8"/>
-<line x1="204" y1="201" x2="279" y2="238" stroke="#3a8ac8" stroke-width="1.2" opacity="0.8"/>
-<line x1="204" y1="249" x2="282" y2="256" stroke="#3a8ac8" stroke-width="1.2" opacity="0.8"/>
-
-<a href="06_theother.html#scene-taren" class="scene-node" target="_top">
-<g><rect x="417" y="230" width="130" height="38" rx="8" fill="#3a1e1e" stroke="#c85a3a" stroke-width="1.0"/><text x="482" y="249" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">他者 · 抹不平</text></g>
-</a>
-
-<line x1="417" y1="249" x2="382" y2="250" stroke="#c85a3a" stroke-width="1.2" opacity="0.85" marker-end="url(#arrow)"/>
-
-<line x1="330" y1="302" x2="330" y2="392" stroke="#ba7517" stroke-width="1.3" opacity="0.9" marker-end="url(#arrow)"/>
-
+<line x1="340" y1="304" x2="340" y2="392" stroke="#d8a040" stroke-width="1.3" opacity="0.9" marker-end="url(#arrow)"/>
 <a href="10_classicalworld.html#scene-xianshi" class="scene-node" target="_top">
-<g><rect x="245" y="396" width="170" height="46" rx="8" fill="#3a2e0a" stroke="#c88a2a" stroke-width="1.0"/><text x="330" y="419" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">现实</text></g>
+<g>
+<rect x="255" y="396" width="170" height="46" rx="8" fill="#3a2e0a" stroke="#c88a2a" stroke-width="1.0"/>
+<text x="340" y="419" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">现实</text>
+</g>
+</a>
+<text x="340" y="500" text-anchor="middle" fill="#e0dcd4" font-family="Arial,sans-serif" font-size="15">岛是真的，海不因此变浅</text>
+
+<line x1="255" y1="425" x2="196" y2="446" stroke="#993C1D" stroke-width="1.3" opacity="0.85" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+<a href="06_theother.html#scene-taren" class="scene-node" target="_top">
+<g>
+<rect x="34" y="428" width="160" height="40" rx="8" fill="none" stroke="#e08060" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="114" y="448" text-anchor="middle" dominant-baseline="central" fill="#993C1D" font-family="Arial,sans-serif" font-size="17" font-weight="500">他者 · 抹不平</text>
+</g>
+</a>
+<text x="114" y="478" text-anchor="middle" fill="#e08060" font-family="Arial,sans-serif" font-size="15">吸收后剩下的一处</text>
+
+<line x1="425" y1="419" x2="500" y2="419" stroke="#d8a040" stroke-width="1.3" opacity="0.85" marker-end="url(#arrow)"/>
+<text x="462" y="410" text-anchor="middle" fill="#c8a040" font-family="Arial,sans-serif" font-size="15">账本扩大</text>
+<a href="08_intuition.html#scene-luoji" class="scene-node" target="_top">
+<g>
+<rect x="502" y="396" width="168" height="46" rx="8" fill="#1e2a3a" stroke="#3a8ac8" stroke-width="1.0"/>
+<text x="586" y="413" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">直觉 · 逻辑的边界</text>
+<text x="586" y="431" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">压到底，撞见病句</text>
+</g>
 </a>
 
-<text x="330" y="464" text-anchor="middle" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">岛是真的，海不因此变浅</text>
-
-<path d="M415 412 C 680 370, 700 120, 356 80" fill="none" stroke="#0f6e56" stroke-width="1.5" opacity="0.9" marker-end="url(#arrow)" mask="url(#img-gap)"/>
-
+<path d="M425 405 C 580 360, 610 150, 366 80" fill="none" stroke="#3ac8a0" stroke-width="1.5" opacity="0.7" marker-end="url(#arrow)" mask="url(#img-gap)"/>
 <a href="12_epilogue.html#scene-songshou" class="scene-node" target="_top">
-<g><rect x="550" y="233" width="130" height="54" rx="8" fill="#2a2a28" stroke="#6a6a60" stroke-width="1.0"/><text x="615" y="256" text-anchor="middle" fill="#e8e4dc" font-family="Arial,sans-serif" font-size="17" font-weight="500">松手 · 重定</text><text x="615" y="274" text-anchor="middle" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">撤锚，回到无迹</text></g>
+<g><rect x="500" y="228" width="132" height="56" rx="8" fill="#2a2a28" stroke="#6a6a60" stroke-width="1.0"/>
+<text x="566" y="248" text-anchor="middle" fill="#3ac8a0" font-family="Arial,sans-serif" font-size="17" font-weight="500">松手 · 重定</text>
+<text x="566" y="266" text-anchor="middle" fill="#d8d4cc" font-family="Arial,sans-serif" font-size="15">撤锚，回到无迹</text>
+</g>
 </a>
 
 </svg>
