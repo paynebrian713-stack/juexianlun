@@ -22,7 +22,7 @@ files = [
     (f"{BASE}/界限论_第五章_可读重写_v0_13.md",          "第五章"),
     (f"{BASE}/界限论_第六章_可读重写_v0_21.md",         "第六章"),
     (f"{BASE}/界限论_第七章_可读重写_v0_26.md",         "第七章"),
-    (f"{BASE}/界限论_第八章_可读重写_v0_17.md",         "第八章"),
+    (f"{BASE}/界限论_第八章_可读重写_v0_18.md",         "第八章"),
     (f"{BASE}/界限论_第九章_可读重写_v0.14.md",         "第九章"),
     (f"{BASE}/界限论_尾声_可读重写_v0_12.md",           "尾声"),
     (f"{BASE}/界限论_附录W_v8_5.md",                    "附录"),
@@ -1305,12 +1305,14 @@ def patch_svg_dark(path):
     if 'preserveAspectRatio=' not in svg:
         svg = svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ', 1)
 
-    # 背景矩形（仅首次添加）🔧 viewBox 联动：改为 SVG viewBox 尺寸时同步 700/560
-    if '<rect width="700" height="560" fill="#1e1e1c"/>' not in svg:
-        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n<rect width="700" height="560" fill="#1e1e1c"/>', svg, count=1)
-    elif not already:
-        svg = svg.replace('<rect width="700" height="560" fill="#1e1e1c"/>',
-                          '<!--svg-dark:v1-->\n<rect width="700" height="560" fill="#1e1e1c"/>', 1)
+    # 背景矩形（仅首次添加）🔧 viewBox 联动：改为 SVG viewBox 尺寸时同步
+    if not already:
+        shifted = '<rect x="-30" y="0" width="760" height="560" fill="#1e1e1c"/>'
+        old_rect = '<rect width="700" height="560" fill="#1e1e1c"/>'
+        if old_rect in svg:
+            svg = svg.replace(old_rect, '<!--svg-dark:v1-->\n' + shifted, 1)
+        elif shifted not in svg:
+            svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n<rect x="-30" y="0" width="760" height="560" fill="#1e1e1c"/>', svg, count=1)
 
     # 浮动/组标签文本 → 浅色
     svg = svg.replace('fill="#52514e"', 'fill="#d8d4cc"')
