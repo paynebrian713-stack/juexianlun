@@ -1,0 +1,1464 @@
+================================================================================
+COMPLETE MATHEMATICAL EXTRACTION
+Connes, A. "On the spectral characterization of manifolds" (arXiv:0810.2088)
+================================================================================
+
+
+================================================================================
+§1. INTRODUCTION
+================================================================================
+
+--- THEOREMS ---
+
+Theorem 1.1.
+Let (A, H, D) be a spectral triple, with A commutative, fulfilling the first five
+conditions of [11] (cf. §2) in a slightly stronger form i.e. we assume that:
+  • The regularity holds for all A-endomorphisms of ∩ Dom D^m.
+  • The Hochschild cycle c is antisymmetric.
+Then there exists a compact oriented smooth manifold X such that A is the algebra
+C^∞(X) of smooth functions on X.
+
+Theorem 1.2.
+Let (A, H, D) be a spectral triple with A commutative, fulfilling the first five
+conditions of [11] (cf. §2) with the cycle c antisymmetric. Assume that the
+multiplicity of the action of A'' in H is 2^{p/2}. Then there exists a smooth
+oriented compact (spinc) manifold X such that A = C^∞(X).
+
+--- CONDITIONS (in §1 statement) ---
+
+(1) The n-th characteristic value of the resolvent of D is O(n^{-1/p}).
+(2) [[D,a],b] = 0  ∀ a,b ∈ A.
+(3) For any a ∈ A both a and [D,a] belong to the domain of δ^m, for any integer m
+    where δ is the derivation: δ(T) = [|D|,T].
+(4) There exists a Hochschild cycle c ∈ Z_p(A,A) such that π_D(c) = 1 for p odd,
+    while for p even, π_D(c) = γ is a Z/2 grading.
+(5) Viewed as an A-module the space H_∞ = ∩ Dom D^m is finite and projective.
+    Moreover the following equality defines a hermitian structure ( | ) on this module:
+    ⟨ξ, a η⟩ = ∫− a(ξ|η) |D|^{-p}, ∀ a ∈ A, ∀ ξ,η ∈ H_∞.
+
+--- STRATEGY OF PROOF (summary from §1) ---
+The components a_α^j (j > 0) of the cycle c = Σ a_α^0 ⊗ a_α^1 ⊗ ... ⊗ a_α^p
+are used as tentative local charts. Three basic difficulties:
+  a) Show that the spectrum X of A is large enough so that the range of "local
+     charts" a_α contains an open set in R^p.
+  b) Show that the joint spectral measure of the components a_α^j (j > 0) of a
+     "local chart" is the Lebesgue measure.
+  c) Apply the basic inequality ([8], [9], Proposition IV.3.14) giving an upper
+     bound on the Voiculescu obstruction [25] and use [25] Theorem 4.5 to show
+     that the "local charts" are locally injective.
+
+--- DEPENDENCIES ---
+  • Theorem 1.1 → Theorem 11.3
+  • Theorem 1.2 → Theorem 11.5
+  • The first five conditions are detailed in §2.
+
+
+================================================================================
+§2. PRELIMINARIES
+================================================================================
+
+--- CONDITIONS (for commutative geometry, from [11]) ---
+
+We let (A, H, D) be a spectral triple, H a Hilbert space, A an involutive algebra
+represented in H, D a selfadjoint operator in H. A is commutative. Given integer
+p which controls the dimension.
+
+1) DIMENSION: The n-th characteristic value of the resolvent of D is O(n^{-1/p}).
+
+2) ORDER ONE: [[D,f],g] = 0  ∀ f,g ∈ A.
+
+   Let δ(T) = [|D|,T] be the commutator with the absolute value of D.
+
+3) REGULARITY: For any a ∈ A both a and [D,a] belong to the domain of δ^m,
+   for any integer m.
+
+   Let π_D be the linear map:
+   (1) π_D(a^0 ⊗ a^1 ⊗ ... ⊗ a^p) = a^0[D,a^1]...[D,a^p],  ∀ a^j ∈ A.
+
+4) ORIENTABILITY: There exists a Hochschild cycle c ∈ Z_p(A,A) such that
+   π_D(c) = 1 for p odd, while for p even, π_D(c) = γ satisfies
+   γ = γ*, γ^2 = 1, γ D = -D γ.
+
+5) FINITENESS AND ABSOLUTE CONTINUITY: Viewed as an A-module the space
+   H_∞ = ∩_m Domain D^m is finite and projective. Moreover:
+   (2) ⟨ξ, a η⟩ = ∫− a(ξ|η) |D|^{-p}  ∀ a ∈ A, ∀ ξ,η ∈ H_∞.
+
+   In other words H_∞ = e A^n with e = e* ∈ M_n(A) defining the Hermitian
+   structure so that
+   (3) (ξ|η) = Σ ξ_i^* η_i ∈ A,  ∀ ξ,η ∈ e A^n.
+
+--- KEY DERIVED FACT ---
+It follows from condition 5) that A is uniquely determined inside its weak closure
+A'' (bicommutant of A in H) by the equality:
+  A = {T ∈ A'' ; T ∈ ∩_{m>0} Dom δ^m}.
+
+--- LEMMAS AND PROPOSITIONS ---
+
+Lemma 2.1.
+The following conditions are equivalent for T ∈ A'':
+  (1) T ∈ A
+  (2) [D,T] is bounded and both T and [D,T] belong to the domain of δ^m, for any
+      integer m
+  (3) T belongs to the domain of δ^m, for any integer m
+  (4) T H_∞ ⊂ H_∞
+
+Proof. (Summary) Assuming (4), T defines an endomorphism of H_∞ = e A^n, so
+  (4) T = e[a_{ij}]e, a_{ij} ∈ A
+  Then uses the norm closure A = C(X) of A with measure
+  (5) λ(f) = ∫− f |D|^{-p}, ∀ f ∈ A
+  and the identification
+  (6) H = E ⊗_A L^2(X,λ) = e L^2(X,λ)^n = L^2(X,λ,S)
+  Shows that T = e f for f ∈ L^∞(X,λ), and since T commutes with all
+  endomorphisms of H_∞ and belongs to the center, T = e x for x ∈ A.
+  Formula for x in terms of matrix elements t_{ij}:
+  (7) τ = Tr(e) = Σ j p_j, Σ p_j = 1
+  (8) P_j(k) = 0, ∀ k ≠ j, 0 ≤ k ≤ n, P_j(j) = 1
+  (9) x = (Σ t_{ii}) Σ_{j>0} (1/j) p_j ∈ A
+
+  The implication (3) ⇒ (4) uses:
+  (10) |D|^m T ξ = Σ_{k=0}^m binom(m,k) δ^k(T) |D|^{m-k} ξ, ∀ ξ ∈ Dom |D|^m
+  proved by induction on m.
+
+--- DEPENDENCIES within proof ---
+  • Lemma 2.1 (4) ⇒ (1) uses: condition 5 (absolute continuity), the fact that
+    any endomorphism of H_∞ is of the form (4), and the identification (6).
+  • (1) ⇒ (2) follows from regularity (condition 3).
+  • (2) ⇒ (3) is immediate.
+  • (3) ⇒ (4) uses the induction formula (10).
+
+--- ALGEBRA STRUCTURE ---
+A is a pre-C*-algebra, stable under holomorphic functional calculus.
+A = C(X) where X = Spec(A). Characters are automatically self-adjoint and
+continuous. Spec A = Spec A.
+
+A is a Frechet algebra with submultiplicative norms:
+  (11) p_k(xy) ≤ p_k(x) p_k(y), ∀ x,y ∈ A
+given by:
+  (12) p_k(x) = ‖ρ_k(x)‖,  ρ_k(x) = matrix with x, δ(x)/1!, ..., δ^k(x)/k! on
+       the first row, x, δ(x), ... on the second, etc.
+
+--- Proposition 2.2 ---
+(1) The unbounded derivation δ is a closed operator in L(H).
+(2) The algebra A endowed with the norms p_k is a Frechet algebra.
+(3) The semi-norms p_k([D,a]) = p'_k(a) are continuous.
+
+Proof. (1) The graph of δ is
+  G(δ) = {(T,S) ∈ L(H)^2 | (Tξ, Tη + Sξ) ∈ G(|D|), ∀ (ξ,η) ∈ G(|D|)}
+hence closed.
+(2) Cauchy sequence a_n in p_k norms → T ∈ A ⊂ A''. Using closedness of δ, one
+gets T ∈ ∩ Dom δ^m, hence T ∈ A by Lemma 2.1. So A is complete in Frechet
+topology.
+(3) Uses the fact that T → d(T) = [D,T] is also a closed operator in L(H),
+and the open mapping theorem ([24] Corollary 2.12).
+
+--- Proposition 2.3 ---
+(1) When endowed with the Sobolev norms
+    (13) ‖a‖_s^{sobolev} = (Σ_μ ‖(1+D^2)^{s/2} a η_μ‖^2)^{1/2}, ∀ a ∈ A
+    (with η_μ generators of H_∞ as A-module), A is a Frechet separable nuclear space.
+(2) One has Sobolev estimates:
+    (14) p_k(a) ≤ c_k ‖a‖_{s_k}^{sobolev},  p_k([D,a]) ≤ c'_k ‖a‖_{s'_k}^{sobolev}
+    with c_k < ∞, c'_k < ∞ and suitable sequences s_k > 0, s'_k > 0.
+(3) The spectrum X = Spec(A) is metrizable.
+(4) Any T ∈ End_A H_∞ is continuous in H_∞ and extends continuously to a
+    bounded operator in H.
+(5) The algebraic isomorphism H_∞ = e A^n is topological.
+(6) The map (a,ξ) ↦ aξ and the A-valued inner product are jointly continuous
+    A × H_∞ → H_∞ and H_∞ × H_∞ → A.
+
+Proof. (1) Completeness: given a_n ∈ A with (1+D^2)^{s/2} a_n η_μ convergent for
+all s,μ, define ζ_μ = lim a_n η_μ ∈ H_∞. Define T by
+  (15) T ξ = lim a_n ξ, ∀ ξ ∈ H_∞.
+T is an endomorphism of H_∞, hence of the form (4) and bounded. Using the argument
+of Lemma 2.1, T ∈ A. Separable nuclear because closed subspace of sum of finitely
+many H_∞ (each a nuclear space of sequences of rapid decay).
+(2) Open mapping theorem applied to the identity map from Frechet algebra with p_k
+to Frechet space with Sobolev topology.
+(3) A is Frechet separable nuclear → A is norm separable → X metrizable.
+(4) T = e[a_{ij}]e. Using A ⊂ A = C(X), T defines bounded operator in H by (6).
+Closed graph theorem gives continuity in H_∞.
+(5) Open mapping theorem.
+(6) Follows from (5) and joint continuity of product in A.
+
+--- Proposition 2.4 ---
+Let a_j = a_j^* be n self-adjoint elements of A and f: R^n → C be a smooth
+function defined on a neighborhood of the joint spectrum of the a_j. Then
+f(a_1,...,a_n) ∈ A ⊂ A.
+
+Proof. First show for a = a^* ∈ A and any k ∈ N:
+  (16) ‖δ^k(e^{isa})‖ = O(|s|^k), |s| → ∞.
+For k = 1:
+  (17) δ(e^{isa}) = i s ∫_0^1 e^{itsa} δ(a) e^{i(1-t)sa} dt
+In general, with β_u(T) = e^{iusa} T e^{-iusa}:
+  (18) (1/n!) δ^n(e^{isa}) e^{-isa} =
+       Σ_{k_j>0, Σ k_j=n} i^ℓ s^ℓ ∫_{S_ℓ} β_{u_1}(δ^{k_1}(a)/k_1!) ... β_{u_ℓ}(δ^{k_ℓ}(a)/k_ℓ!) du
+where S_ℓ = {(u_j) | 0 ≤ u_1 ≤ ... ≤ u_ℓ ≤ 1}.
+Then express f(a_1,...,a_n) via Fourier transform:
+  (19) f(a_1,...,a_n) = (2π)^{-n} ∫ f̂(s_1,...,s_n) Π e^{is_j a_j} Π ds_j
+where f̂ ∈ S(R^n) is a Schwartz function. By (16) the integral converges in any
+of the p_k norms. ∎
+
+
+================================================================================
+§3. OPENNESS LEMMA
+================================================================================
+
+--- DEFINITIONS ---
+
+Definition 3.1.
+Let A be a Frechet pre-C*-algebra. A continuous *-derivation δ_0 ∈ Der A
+exponentiates iff one has a unique solution, depending continuously on
+(t,a) ∈ R × A, of the differential equation:
+  (21) ∂_t y(t,a) = δ_0(y(t,a)),  y(0,a) = a.
+We say that A is expable when any continuous *-derivation δ_0 ∈ Der A
+exponentiates.
+
+--- PROPOSITIONS ---
+
+Proposition 3.2.
+One has for any a,b ∈ A:
+  (23) y(t,ab) = y(t,a) y(t,b),  y(t,a*) = y(t,a)*,  y(t,a+b) = y(t,a) + y(t,b)
+  (24) y(t_1+t_2,a) = y(t_1, y(t_2,a)),  y(t, δ_0(a)) = δ_0(y(t,a))
+Moreover y(t,a) is a smooth function of (t,a) with n-th derivative:
+  (25) D^n y(t,a, s_1,h_1,...,s_n,h_n) =
+       δ_0^n(y(t,a)) Π s_j + Σ_i δ_0^{n-1} y(t,h_i) Π_{j≠i} s_j
+
+Proof. (23)-(24) follow from uniqueness. For (25), consider Frechet spaces
+F = R × A, G = A and compute the first derivative:
+  Dy(t,a,s,h) = s δ_0(y(t,a)) + y(t,h)
+Then by induction using δ_0^k(y(t,a)) = y(t, δ_0^k(a)) from (24).
+
+--- LEMMAS ---
+
+Lemma 3.3. (Openness Lemma)
+Let A be commutative, and a = (a^j) be p self-adjoint elements of A. Let χ be a
+character of A. Assume that there exist p derivations δ_j ∈ Der A such that:
+  • Each δ_j exponentiates.
+  • The determinant of the matrix χ(δ_j(a^k)) does not vanish.
+Then the image under a of any neighborhood of χ in Spec(A) contains a
+neighborhood of a(χ) in R^p.
+
+Proof. Exponentiate δ_j to one-parameter groups F^j(t) ∈ Aut(A). Define
+  h = χ ∘ σ,  σ_{(t_1,...,t_p)} = F^1_{t_1} ∘ ... ∘ F^p_{t_p}
+which is a continuous map R^p → Spec(A). The map φ = a ∘ h: R^p → R^p has
+  (∂_j φ^k)(0) = χ(δ_j(a^k))
+Apply the implicit function theorem: φ maps a neighborhood of 0 diffeomorphically
+to a neighborhood of a(χ). The image of any neighborhood W of χ under a contains
+the image under φ of h^{-1}(W), which is a neighborhood of 0. ∎
+
+--- DEPENDENCIES ---
+  • Lemma 3.3 uses Definition 3.1 (expability) and the implicit function theorem.
+  • The map h is defined using the flows F^j from the exponentiated derivations δ_j.
+
+Lemma 3.4.
+Under the hypothesis of Lemma 3.3, there exists a smooth family σ_t ∈ Aut(A),
+t ∈ R^p, a neighborhood Z of χ in X = Spec(A) and a neighborhood W of 0 ∈ R^p
+such that, for any κ ∈ Z, the map t ↦ a(κ ∘ σ_t) is a diffeomorphism, depending
+continuously on κ, of W with a neighborhood of a(κ) in R^p.
+
+Proof. Uses
+  (27) σ_{(t_1,...,t_p)} = F^1_{t_1} ∘ ... ∘ F^p_{t_p}
+The map κ ↦ ψ_κ with ψ_κ(t) = a(κ ∘ σ_t) yields a continuous map
+X → C^∞(K, R^p) where K is a closed ball. The implicit function theorem
+([16] Theorem 5.2.3) applies since the Jacobian determinant at χ does not vanish.
+
+
+================================================================================
+§4. JACOBIAN AND OPENNESS OF LOCAL CHARTS
+================================================================================
+
+--- DEFINITIONS ---
+
+Definition 4.1.
+Let T_j ∈ B be elements of a noncommutative algebra B. Define:
+  [T_1,T_2,...,T_n] = Σ_σ ε(σ) T_{σ(1)} T_{σ(2)} ... T_{σ(n)}
+where σ varies through all permutations of {1,...,n} and ε(σ) is its signature.
+
+--- PROPOSITIONS ---
+
+Proposition 4.2.
+Let T_j ∈ B be elements of a noncommutative algebra B.
+  a) For any permutation α, [T_{α(1)},...,T_{α(n)}] = ε(α) [T_1,...,T_n]
+  b) If two of the T_j are equal, [T_1,...,T_n] = 0
+  c) Let A ⊂ B be a commutative subalgebra and A' ⊂ B its relative commutant.
+     Let a_k^j ∈ A, γ_j ∈ A'. With T_k = Σ a_k^j γ_j,
+     (28) [T_1,...,T_n] = Det((a_k^j)) [γ_1,...,γ_n]
+  d) Equality (28) extends to a rectangular matrix a_k^j ∈ A:
+     (29) [T_1,...,T_n] = Σ_F Det((a_k^j(F))) [γ_1(F),...,γ_n(F)]
+     where F ⊂ {1,...,m}, #F = n, a_k^j(F) is restriction to F,
+     and γ_j(F) are γ_i for i ∈ F ordered increasingly.
+
+Proof. c) Write
+  (30) [T_1,...,T_n] = Σ_{(j_k)} Π_{k=1}^n a_k^{j_k} [γ_{j_1},...,γ_{j_n}]
+Terms with equal j_k vanish by (b). Summing over permutations (j_k) and using
+(a) gives the determinant formula.
+
+--- LEMMAS ---
+
+Lemma 4.3.
+Let B be the algebra of endomorphisms of H_∞. One has a finite decomposition
+  (31) [D,a] = Σ δ_j(a) γ_j, ∀ a ∈ A,
+where γ_j ∈ B and the δ_j are derivations of the form
+  (32) δ_j(a) = i (ξ_j | [D,a] ξ_j), ∀ a ∈ A
+for some ξ_j ∈ H_∞.
+
+Proof. Using H_∞ = e A^n, B = e M_n(A) e. Every element T ∈ B can be written
+  T = Σ a_{kℓ} ε_{kℓ}
+with a_{kℓ} ∈ A uniquely determined by
+  (33) a_{kℓ} = (η_k | T η_ℓ) = L_{kℓ}(T)
+Applying to T = [D,b], the maps a ↦ L_{ij}([D,a]) give derivations of A.
+Decompose into self-adjoint derivations, using polarization identity:
+  (35) 2(ξ|Tη) = ((ξ+η)|T(ξ+η)) - (ξ|Tξ) - (η|Tη)
+       - i( ((ξ+iη)|T(ξ+iη)) - (ξ|Tξ) - (iη|Tiη) )
+By Proposition 2.3, the δ_j are continuous.
+
+--- DEPENDENCIES ---
+  • Lemma 4.3 uses: Proposition 2.3 (for continuity), the order-one condition
+    ([D,a] H_∞ ⊂ H_∞), and the structure H_∞ = e A^n.
+
+--- KEY CONSTRUCTION ---
+
+The Hochschild cycle c is:
+  (36) c = Σ_α a_α^0 ω_α,  ω_α = Σ_β ε(β) 1 ⊗ a_α^{β(1)} ⊗ ... ⊗ a_α^{β(p)}
+where a_α^μ are self-adjoint for μ > 0.
+
+The conditional expectation E_A: End_A(H_∞) → A is defined using the
+projections p_j of (7):
+  (37) E_A(T) = Σ_{j>0} (1/j) p_j Σ T_{kk}, ∀ T = (T_{kℓ}) ∈ e M_n(A) e
+
+Define self-adjoint ρ_α ∈ A:
+  (38) ρ_α = i^{p(p+1)/2} E_A(γ Σ_β ε(β) [D,a_α^{β(1)}]...[D,a_α^{β(p)}])
+
+Define:
+  (39) C_α = {x ∈ X | ρ_α(x) = 0}
+  U_α = C_α^c (open set where ρ_α ≠ 0)
+
+Lemma 4.4.
+The U_α form an open cover of X = Spec(A).
+Each U_α is the disjoint union of U_α^± corresponding to the sign of ρ_α:
+  ±ρ_α(x) > 0, ∀ x ∈ U_α^±.
+
+Proof. By π_D(c) = γ and (36):
+  γ Σ_α a_α^0 Σ_β ε(β) [D,a_α^{β(1)}]...[D,a_α^{β(p)}] = 1
+Using (38) and the module property E_A(aT) = a E_A(T):
+  i^{-p(p+1)/2} Σ_α a_α^0 ρ_α = 1
+Hence ρ_α(x) ≠ 0 for some α.
+
+--- DEPENDENCIES ---
+  • Lemma 4.4 uses the orientability condition (π_D(c) = γ) and the definition of E_A.
+
+Define the map s_α: X → R^p:
+  (40) χ ∈ Spec(A) ↦ (χ(a_α^j)) ∈ R^p
+
+Lemma 4.5.
+Assume that derivations of the form (32) exponentiate. Let χ ∈ U_α.
+  • There exists p derivations δ_j ∈ Der(A) such that χ(Det((δ_j(a_α^k)))) ≠ 0.
+  • The map a_α from U_α to R^p is open.
+  • There exists a smooth family σ_t ∈ Aut(A), t ∈ R^p, a neighborhood Z of χ in
+    X = Spec(A) and a neighborhood W of 0 ∈ R^p such that, for any κ ∈ Z, the
+    map t ↦ s_α(κ ∘ σ_t) is a diffeomorphism, depending continuously on κ,
+    of W with a neighborhood of a(κ) in R^p.
+
+Proof. By Lemma 4.3, [D,a] = Σ δ_j(a) γ_j. Since ρ_α(χ) ≠ 0:
+  [[D,a_α^1],...,[D,a_α^p]](χ) ≠ 0
+By Proposition 4.2 (d), one can find p δ_j among the derivations such that
+  (41) χ(Det((δ_j(a_α^k)))) ≠ 0
+The hypothesis of Lemma 3.3 is fulfilled, giving openness. The third statement
+follows from Lemma 3.4. ∎
+
+--- DEPENDENCIES ---
+  • Lemma 4.5 depends on Lemma 4.3 (decomposition of [D,a]), Proposition 4.2(d),
+    Lemma 3.3, and Lemma 3.4.
+
+
+================================================================================
+§5. DISSIPATIVE DERIVATIONS
+================================================================================
+
+--- LEMMAS ---
+
+Lemma 5.1.
+Assume that derivations of the form (32) exponentiate. Then, for any h = h* ∈ A,
+the commutator [D,h] vanishes where h reaches its maximum. Conversely, if this
+property holds, the derivations ±δ_j of the form (32) are dissipative (cf. [2],
+Definition 1.4.6), i.e.
+  (42) ‖x + λ δ_j(x)‖ ≥ ‖x‖, ∀ x ∈ A, λ ∈ R.
+
+Proof. (⇒) [D,h] = Σ δ_j(h) γ_j by Lemma 4.3. At the maximum χ of h,
+δ_j(h)(χ) = 0 (since e^{tδ_j} ∈ Aut(A) and the differentiable function
+f(t) = χ(e^{tδ_j}(h)) has maximum at t = 0, so f'(0) = χ(δ_j(h)) = 0).
+(⇐) δ_j(h) = i(ξ|[D,h]ξ). At maximum χ, [D,h](χ) = 0 ⇒ δ_j(h)(χ) = 0.
+For complex x ∈ A, let ψ be a state on A with |ψ(x)| = ‖x‖. Adjust by
+multiplication by unit modulus to get ψ(x) > 0. Write x = h + ik, h,k self-adjoint.
+Then ψ(x) = ψ(h) = ‖h‖, so ψ(δ_j(h)) = 0. Hence
+  ψ(x + λ δ_j(x)) = ψ(h) + iλ ψ(δ_j(k))
+and |ψ(x + λ δ_j(x))| ≥ ψ(h) = ‖x‖. ∎
+
+--- COUNTEREXAMPLE ---
+The spectral triple with boundary condition:
+  (43) A = C^∞([0,1]), H = L^2([0,1]) ⊗ C^2, D = [[0, ∂_x],[-∂_x, 0]]
+  (44) Dom D = {ξ = (ξ_1,ξ_2)^T | ξ_1(0) = 0, ξ_2(1) = 0}
+shows that the commutativity of [D,h] with h and self-adjointness of D alone
+do not suffice. In this example, condition 5 fails, regularity fails, and
+orientability fails.
+
+--- LEMMAS (continued) ---
+
+Lemma 5.2.
+Let T preserve Dom D and [D,T] be bounded. Then t ↦ α_t(T) = e^{itD} T e^{-itD}
+is norm continuous:
+  (46) ‖α_s(T) - α_t(T)‖ ≤ |s-t| ‖[D,T]‖
+and the difference quotient converges:
+  (47) (α_s(T) - T)/s = (i/s) ∫_0^s α_t([D,T]) dt → i[D,T] in strong topology.
+
+Proof. For ξ ∈ Dom D, (1/s)(e^{isD}-1)ξ → i D ξ (in norm). Using
+  (1/s)(e^{isD} T e^{-isD} - T)ξ = ... → i[D,T]ξ
+The function t ↦ α_t(T)ξ is C^1 with derivative i α_t([D,T])ξ. Hence
+  (48) (α_s(T) - α_t(T))ξ = i ∫_t^s α_u([D,T])ξ du
+holds for all ξ ∈ Dom D and hence all ξ ∈ H. ∎
+
+--- KEY IDENTITY ---
+
+Using the order one condition:
+  (50) [[D^2,h],h] = 2[D,h]^2
+
+Lemma 5.3.
+Let h = h* ∈ A and χ ∈ Spec(A). If [[D^2,h],h] vanishes at χ then [D,h]
+vanishes at χ.
+
+Proof. Immediate from (50). ∎
+
+Lemma 5.4.
+For any h = h* ∈ A, h ≥ 0, reaching its maximum at χ ∈ Spec(A) and any sequence
+b_n ∈ A, ‖b_n‖ ≤ 1, with support tending to {χ}, one has
+  (51) ‖b_n^*[|D|,h] b_n‖ → 0
+
+Proof. Let ξ_n ∈ H be unit vectors with support tending to {χ}. Consider any
+limit state η on L(H):
+  (52) η(T) = lim_ω ⟨ξ_n, T ξ_n⟩
+η(h) = h(χ) = ‖h‖. The map s ↦ γ_s(h) = e^{is|D|} h e^{-is|D|} is C^1 in norm
+(by Lemma 5.2 applied to |D|). The function s ↦ η(γ_s(h)) is C^1, maximal at
+s = 0, so η(δ(h)) = 0. Hence
+  (54) lim_ω ⟨ξ_n, δ(h) ξ_n⟩ = 0
+and this continues for any bounded sequence with support tending to {χ}.
+If (51) fails, use polarization (35) to get a contradiction. ∎
+
+--- DEPENDENCIES ---
+  • Lemma 5.4 uses: the C^1 regularity (from Lemma 5.2 applied to |D| instead
+    of D), the regularity condition (to get γ_s(h) smooth), and polarization.
+
+--- SYMBOL CALCULUS ---
+
+The principal symbol of D: by order one condition,
+  (55) τ^{-1} e^{iτφ} D e^{-iτφ} = -i[D,φ] + τ^{-1} D
+
+Expected symbol of D^2:
+  (56) lim_{τ→∞} τ^{-2} e^{iτφ} D^2 e^{-iτφ} ξ = -[D,φ]^2 ξ, ∀ ξ ∈ Dom D^2
+
+The symbol of [D^2,h]:
+  (58) τ^{-1} e^{iτφ}[D^2,h] e^{-iτφ} = -i([D,φ][D,h] + [D,h][D,φ]) + τ^{-1}[D^2,h]
+
+Lemma 5.6.
+Assume that when τ → ∞ the following limit holds in strong topology:
+  lim_{τ→∞} e^{iτh}[|D|,h] e^{-iτh} = T.
+Then, with strong convergence on Dom D:
+  lim_{τ→∞} τ^{-1} e^{iτh} |D| e^{-iτh} = -iT.
+
+Proof. Define β_u(Y) = e^{iuh} Y e^{-iuh}. Then
+  (60) e^{iuh}[|D|,h] e^{-iuh} ξ = i (d/du) β_u(|D|) ξ, ∀ ξ ∈ Dom |D|
+  (61) ∫_0^τ e^{iuh}[|D|,h] e^{-iuh} ξ du = i(β_τ(|D|) - |D|)ξ
+The Cesàro mean of the bounded sequence converges to T, giving the result. ∎
+
+Lemma 5.7.
+With h as above:
+  (1) C_τ(T) = τ^{-1} ∫_0^τ β_u(T) du is a completely positive map from L(H)
+      to itself and C_τ(1) = 1.
+  (2) C_τ(aT b) = a C_τ(T) b for all a,b ∈ A.
+  (3) C_τ([|D|,h]) = (i/τ)(e^{iτh}|D|e^{-iτh} - |D|)
+
+Proof. (1)-(2) from the definition, using commutativity of A for (2).
+(3) follows from (61). ∎
+
+--- KEY ESTIMATES ---
+
+Using the transformation θ_λ:
+  (70) θ_λ(T) = (D^2+λ) T (D^2+λ)^{-1}
+  (72) θ_λ(T) = T + [D^2,T](D^2+λ)^{-1}
+
+Lemma 5.8.
+With X(ε) = εD - i[D,h]:
+  (67) |X(ε)| = Y(ε) + f_0(X(ε))
+where
+  (68) Y(ε) ξ = (2/π) ∫_0^∞ X(ε)^2 / (1+u^2+X(ε)^2) ξ du, ∀ ξ ∈ Dom D
+and
+  (69) f_0(x) = |x| - x^2(1+x^2)^{-1/2}, ∀ x ∈ R
+
+Proof. Uses the integral representation
+  (1+T^2)^{-1/2} = (2/π) ∫_0^∞ 1/(1+u^2+T^2) du
+and the decomposition |x| = x^2(1+x^2)^{-1/2} + f_0(x) with f_0 ∈ C_0(R). ∎
+
+Lemma 5.9.
+Let h = h* ∈ A, there exists λ < ∞ such that
+  (71) ‖θ_λ((1+u^2+X(0)^2)^{-1})‖ ≤ (1/2+u^2)^{-1}, ∀ u.
+
+Proof. By (72), θ_λ(X(0)^2) = X(0)^2 - [D^2,[D,h]^2](D^2+λ)^{-1}.
+Regularity (§13) shows that [D^2,[D,h]^2](D^2+λ)^{-1} is compact,
+so for λ large enough ‖Z‖ ≤ 1/2 where Z = θ_λ(X(0)^2) - X(0)^2.
+Then since X(0)^2 = -[D,h]^2 ≥ 0, one gets the estimate. ∎
+
+Lemma 5.10.
+Let h = h* ∈ A, then when ε → 0,
+  (75) Y(ε)ξ → Y(0)ξ, ∀ ξ ∈ H_∞
+
+Proof. Using the identity:
+  η(u,ε) = (1+u^2)(1/(1+u^2+X(ε)^2)) (X(ε)^2 - X(0)^2) (1/(1+u^2+X(0)^2)) ξ
+  X(ε)^2 - X(0)^2 = ε^2 D^2 - iε[D^2,h]
+Introduce (D^2+λ)^{-1} and θ_λ to control the estimates. By Lemma 5.9,
+‖θ_λ((1+u^2+X(0)^2)^{-1})(D^2+λ)ξ‖ ≤ (1/2+u^2)^{-1} ‖(D^2+λ)ξ‖.
+After integration in u: ‖(Y(ε)-Y(0))ξ‖ = O(ε). ∎
+
+--- Proposition 5.11 ---
+Let h = h* ∈ A, then with norm convergence:
+  (77) lim_{τ→∞} τ^{-1} e^{iτh} |D| e^{-iτh} ξ = |[D,h]| ξ, ∀ ξ ∈ Dom D.
+
+Proof. By (66), need |X(ε)|ξ → |X(0)|ξ for ε → 0, ξ ∈ H_∞.
+By Lemma 5.10, Y(ε)ξ → Y(0)ξ. By Stone-Weierstrass, f_0(X(ε))ξ is
+continuous at ε = 0. Hence the result for ξ ∈ H_∞. General case
+ξ ∈ Dom D follows by uniformity. ∎
+
+--- DEPENDENCIES ---
+  • Proposition 5.11 depends on Lemma 5.8, Lemma 5.9, Lemma 5.10,
+    and Stone-Weierstrass theorem.
+
+--- Remark 5.12 ---
+Proposition 5.11 implies, under regularity:
+  (78) [|[D,h]|, [D,a]] = 0, ∀ h = h*, a ∈ A.
+Proof: [e^{iτh}|D|e^{-iτh}, [D,a]] = e^{iτh}[|D|,[D,a]]e^{-iτh}, and
+τ^{-1}‖[e^{iτh}|D|e^{-iτh},[D,a]]‖ → 0 as τ → ∞. Since [D,a] preserves
+Dom D, [|[D,h]|, [D,a]]ξ = 0 ∀ ξ ∈ Dom D.
+
+Under strong regularity (Definition 6.1), this further gives:
+  (79) [D,h]^2 ∈ A, ∀ h = h* ∈ A.
+
+--- Theorem 5.13 ---
+Let (A,H,D) be a regular spectral triple with A commutative fulfilling the
+order one condition. Then for any h = h* ∈ A, the commutator [D,h] vanishes
+where h reaches its maximum, i.e. for any sequence b_n ∈ A, ‖b_n‖ ≤ 1, with
+support tending to {χ} (where |χ(h)| is maximum), one has
+  ‖[D,h] b_n‖ → 0.
+
+Proof. By Proposition 5.11 combined with Lemma 5.7 (3):
+  C_τ([|D|,h]) ξ → i|[D,h]| ξ strongly as τ → ∞.
+By Lemma 5.7 (2): C_τ(b_n^*[|D|,h] b_n) = b_n^* C_τ([|D|,h]) b_n.
+Fixing n and taking τ → ∞ gives:
+  (81) C_τ(b_n^*[|D|,h] b_n) → i b_n^* |[D,h]| b_n
+So (82) ‖b_n^*|[D,h]| b_n‖ ≤ ‖b_n^*[|D|,h] b_n‖.
+By Lemma 5.4, the RHS → 0, giving the result. Since |[D,h]| commutes with
+the b_n, this is equivalent to ‖[D,h] b_n‖ → 0. ∎
+
+--- DEPENDENCIES ---
+  • Theorem 5.13 depends on Proposition 5.11, Lemma 5.7, and Lemma 5.4.
+
+Corollary 5.14.
+The derivations ±δ_j of Lemma 4.3 are dissipative.
+
+Proof. Follows from Theorem 5.13 and Lemma 5.1. ∎
+
+Corollary 5.15.
+Let h = h* ∈ A. The principal symbol of Grad(h) = [D^2,h] vanishes where h
+reaches its maximum.
+
+Proof. The principal symbol of [D^2,h] is from that of D:
+  (84) lim_{τ→∞} τ^{-1} e^{iτφ}[D^2,h] e^{iτφ}
+       = -i([D,φ][D,h] + [D,h][D,φ])
+Result follows from Theorem 5.13. ∎
+
+
+================================================================================
+§6. SELF-ADJOINTNESS AND DERIVATIONS
+================================================================================
+
+--- DEFINITIONS ---
+
+Definition 6.1.
+A spectral triple is strongly regular when all endomorphisms of the A-module
+H_∞ are regular.
+
+--- LEMMAS ---
+
+Lemma 6.2.
+Let A be regular. Then A Dom D ⊂ Dom D and the adjoint of A*D is the closure
+of the densely defined operator T:
+  (85) Dom T = Dom D,  T ξ = D(A ξ), ∀ ξ ∈ Dom D
+
+Corollary 6.3.
+Let φ = φ* ∈ A. Then H = φ D φ with domain Dom D is essentially self-adjoint.
+
+Lemma 6.4.
+Let A be regular. Then A*D is closable and:
+  • For any ξ in the domain of the closure A*D of A*D, for ε > 0,
+    (90) (1+ε|D|)^{-1} A*D ξ = A*D (1+ε|D|)^{-1} ξ
+         - (1+ε|D|)^{-1}[|D|,A*] ε D (1+ε|D|)^{-1} ξ
+  • The domain of A*D is the set of ξ ∈ H for which A*D (1+ε|D|)^{-1} ξ
+    converge in norm for ε → 0.
+  • The limit gives A*D ξ.
+
+Proposition 6.5.
+Let A be regular. Then H = A*DA with domain Dom D is essentially self-adjoint.
+The domain of the closure of H is the set of ξ ∈ H for which
+A*DA (1+ε|D|)^{-1} ξ converge in norm for ε → 0. The limit gives H̄ ξ.
+
+Lemma 6.6.
+Let ξ,η ∈ H_∞. Then
+  (91) T_{ξ,η}(ζ) = (η|ζ) ξ, ∀ ζ ∈ H_∞
+gives an endomorphism of the A-module H_∞. One has
+  (92) T_{aξ,bη} = a b* T_{ξ,η},  T_{ξ,η}^* = T_{η,ξ}
+
+--- KEY CONSTRUCTION ---
+
+Assuming strong regularity (Definition 6.1), define the essentially self-adjoint
+operator:
+  (93) D_{ξ,η} = T_{η,ξ} D T_{ξ,η}
+
+Relate to derivation δ_0(a) = i(ξ|[D,a]ξ):
+  (94) δ_0(a) = i(ξ|[D,a]ξ), ∀ a ∈ A
+
+Lemma 6.7.
+One has
+  (95) D_{ξ,η} ζ = -i δ_0((η|ζ)) η + (ξ|Dξ) T_{η,η} ζ, ∀ ξ,η,ζ ∈ H_∞
+The operator V_η(a) = a η ∀ a ∈ A extends to a bounded linear map
+V_η: L^2(X,dλ) → H, and
+  (96) V_η^*V_η = (η|η),  V_η V_η^* = T_{η,η},  V_η^*(ζ) = (η|ζ), ∀ ζ ∈ H_∞
+
+--- STRATEGY FOR EXPONENTIATION ---
+
+Consider the equation:
+  (97) (1 + iε(D_{ξ,η} - (ξ|Dξ) T_{η,η})) ζ = a η
+
+Lemma 6.8. (Properties of E_λ)
+Let T be regular.
+  1) E_λ^k(T) = ([D^2,T](D^2+λ)^{-1})^k are compact for k > 0 and converge in
+     norm to 0 as λ → ∞.
+  2) (with λ ≥ 1)
+     (103) ‖E_λ(T) D‖ ≤ 2‖δ(T)‖ + ‖δ^2(T)‖
+           ‖D E_λ(T)‖ ≤ 2‖δ(T)‖ + 3‖δ^2(T)‖ + ‖δ^3(T)‖
+  3) For k > 1, D E_λ^k(T) and E_λ^k(T) D are compact, converging in norm to 0
+     as λ → ∞.
+
+Proof. Uses (100): θ_λ(T) = T + E_λ(T), E_λ(T) = [D^2,T](D^2+λ)^{-1}
+and (102): [D^2,T] = 2δ(T)|D| + δ^2(T).
+
+Lemma 6.9.
+1) For any integer N ∈ N, there exists λ < ∞ and ε_0 > 0 such that
+   (105) θ_λ^N(1 + iε S_{ξ,η}),  S_{ξ,η} = D_{ξ,η} - (ξ|Dξ) T_{η,η}
+   is closable and invertible in H for any ε ≤ ε_0, with
+   (106) ‖(θ_λ^N(1 + iε S_{ξ,η}))^{-1}‖ ≤ 1 + N c_{ξ,η} ε
+2) For any integer N there exists ε_N > 0 such that (97) can be solved in
+   H_N = Dom |D|^N.
+
+Lemma 6.10.
+Assuming strong regularity, for η ∈ H_∞:
+  (111) ‖(η|ζ)‖_s^{sobolev} ≤ C_s ‖(1+D^2)^{s/2} ζ‖
+
+--- Theorem 6.11 ---
+Let (A,H,D) be a strongly regular spectral triple with A commutative, fulfilling
+the five conditions of §2. Then any derivation of A of the form (32), i.e.
+δ_0(a) = i(ξ|[D,a]ξ), ∀ a ∈ A, is closable for the C*-norm of A, and its
+closure is the generator of a one-parameter group of automorphisms U(t) of
+A = C(X), X = Spec(A).
+
+Proof. By Corollary 5.14, δ_0 is dissipative for the C*-norm, hence closable
+([2] Proposition 1.4.7). To apply Hille-Yosida-Lumer-Phillips, need to show
+for small ε: (1+εδ_0)D(δ_0) = A. Since ‖(1+εδ_0)(x)‖ ≥ ‖x‖ ∀ x ∈ D(δ_0),
+it's enough to show (1+εδ_0)A is norm dense in A.
+Choose η with (η|η) = 1 near support of ξ. Take N with Sobolev estimate
+(113) ‖a‖_{C^*} ≤ C ‖a‖_N^{sobolev}, ∀ a ∈ A.
+By Lemma 6.9, for ε small enough, solve (97) with ζ ∈ H_{N+1}. Approximate ζ
+by ζ_n ∈ H_∞ in H_{N+1}. Then b_n = (η|ζ_n) ∈ A converges in C*-norm.
+By (95) and (105):
+  S_{ξ,η} ζ_n = -i δ_0(b_n) η,  (1 + iε S_{ξ,η}) ζ_n → a η
+Apply (η|·): b_n + ε δ_0(b_n)(η|η) → a(η|η) in C*-norm.
+Since (η|η) = 1 near support of ξ: δ_0(b_n)(η|η) = δ_0(b_n).
+Let c_n = b_n + (1-(η|η))a, then c_n + ε δ_0(c_n) → a in norm.
+Hence (1+εδ_0)A is norm dense in A. Hille-Yosida shows δ_0 generates a
+contraction semi-group of A. Same for -δ_0 gives one-parameter group.
+U(t) are automorphisms of A (using analytic elements). ∎
+
+--- DEPENDENCIES ---
+  • Theorem 6.11 depends on: Corollary 5.14, Lemma 6.9, Lemma 6.10,
+    Proposition 2.3 (Sobolev estimates), and Hille-Yosida-Lumer-Phillips Theorem.
+
+Lemma 6.12.
+Let x ∈ A have support disjoint from the support of ξ. Then U(t)(x) = x for
+all t ∈ R.
+
+Lemma 6.13.
+Let S be the closure of S_{ξ,η} = D_{ξ,η} - (ξ|Dξ)T_{η,η}. Then:
+  (115) S(a η) = -i δ_0(a) η, ∀ a ∈ Dom δ_0
+  (116) (1 + iε S)(b η) = a η, b = (1+εδ_0)^{-1}(a), ∀ a ∈ A
+
+Lemma 6.14.
+The one-parameter group U(t) ∈ Aut(A) fulfills for each N:
+  (117) ‖U(t)(a)‖_N^{sobolev} ≤ c_1 e^{N c_{ξ,η} |t|} ‖a‖_N^{sobolev}
+
+--- Theorem 6.15 ---
+Let (A,H,D) be a strongly regular spectral triple with A commutative, fulfilling
+the five conditions of §2. Then any derivation δ_0(a) = i(ξ|[D,a]ξ) is the
+generator of a one-parameter group σ_t ∈ Aut(A) such that:
+  • ∂_t σ_t(a) = δ_0(σ_t(a))
+  • The map (t,a) ∈ R × A ↦ σ_t(a) ∈ A is jointly continuous.
+
+Proof. By Lemma 6.14, U(t) preserves the subalgebra A ⊂ A.
+σ_t(a) - a = ∫_0^t σ_u(δ_0(a)) du, and (117) shows
+‖σ_t(a) - a‖_N^{sobolev} = O(|t|) as t → 0. The difference quotient
+(1/t)(σ_t(a)-a) - δ_0(a) → 0 in ‖·‖_N^{sobolev}, showing
+∂_t σ_t(a) = δ_0(σ_t(a)) in the Frechet space A. Joint continuity follows
+from Lemma 6.14. ∎
+
+--- DEPENDENCIES ---
+  • Theorem 6.15 depends on Theorem 6.11, Lemma 6.14, and Lemma 6.12.
+
+--- Proposition 6.16 ---
+Let (A,H,D), δ_0, σ_t be as in Theorem 6.15. Then for each t ∈ R the measure λ
+of (5) is strongly equivalent to its transform under σ_t.
+
+Proof. With δ_0(a) = i(ξ|[D,a]ξ), by Lemma 6.12, σ_t^*(λ)(f) agrees with λ(f)
+when support of f is disjoint from support of ξ. Choose η with (η|η) = 1 near
+support of ξ. Then
+  λ(σ_t(f)) = ∫− σ_t(f)(η|η)|D|^{-p} = ⟨η, σ_t(f) η⟩
+Let S be the closure of S_{ξ,η}. By (122):
+  σ_t(a) η = e^{itS} a η, ∀ a ∈ A.
+Then
+  (123) ⟨η, σ_t(a) η⟩ = ⟨η, e^{itS} a η⟩ = ⟨e^{-itS^*} η, a η⟩
+The difference S - S^* is bounded, an endomorphism:
+  (124) S - S^* = ρ T_{η,η},  ρ = (ξ|Dξ)^* - (ξ|Dξ)
+Using expansional formula (121) ([1]):
+  (125) e^{-itS^*} η = (Σ_n i^n t^n ∫_{S_n} σ_{-tu_1}(ρ)...σ_{-tu_n}(ρ) du) η
+The series
+  (127) h(t) = Σ_n i^n t^n ∫_{S_n} σ_{-tu_1}(ρ)...σ_{-tu_n}(ρ) du
+converges in the Frechet algebra A. Combining gives
+  (129) λ(σ_t(f)) = λ(h̄(t) f)
+Since h = 1 outside support of ξ, equality holds for all f ∈ A.
+The norm continuity ‖h(t) - 1‖ → 0 as t → 0 gives strong equivalence. ∎
+
+
+================================================================================
+§7. ABSOLUTE CONTINUITY
+================================================================================
+
+--- DEFINITIONS AND LEMMAS ---
+
+The measure λ is defined by:
+  (130) ∫ a dλ = ∫− a |D|^{-p}, ∀ a ∈ C(X).
+
+Lemma 7.1.
+For any open set V ⊂ X, the following two measures are strongly equivalent:
+  • The restriction λ|_V
+  • The restriction to V of the spectral measure associated to a vector
+    ξ ∈ H^∞ whose A-valued inner product (ξ,ξ) is strictly positive on V̄.
+Proof. By absolute continuity condition, ⟨ξ, a ξ⟩ = ∫− a(ξ,ξ)|D|^{-p}. Since
+(ξ,ξ) ∈ A is strictly positive on V̄, equivalence follows. ∎
+
+--- CONSTRUCTIONS ---
+
+Let B_ε = {t ∈ R^p | |t| < ε}.
+Covariant notation: σ(κ) = κ ∘ σ^{-1}, ∀ κ ∈ Spec(A).
+View σ as a homeomorphism of X = Spec(A).
+
+Lemma 7.2.
+Let V ⊂ U_α be an open set and χ ∈ V. There exists a smooth family
+σ_t ∈ Aut(A), t ∈ R^p, a neighborhood Z of χ in V, and ε > 0, ε' > 0 such that:
+  (1) For any κ ∈ Z, t ↦ s_α(σ_t(κ)) = F(κ,t) is a diffeomorphism,
+      depending continuously on κ, of B_ε with a neighborhood of s_α(κ) in R^p,
+      and
+      (132) s_α(κ) + B_{ε'} ⊂ F(κ, B_{ε/2}), ∀ κ ∈ Z̄
+  (2) For any t ∈ B_ε,
+      (133) (1/2) λ ≤ σ_t(λ) ≤ 2 λ
+  (3) Z_1 = ∩_{B_ε} σ_t Z is a neighborhood of χ.
+  (4) Z_2 = ∪_{B_ε} σ_t Z ⊂ V.
+
+Proof. Use Lemma 4.5 to get σ_t, W, Z_0. Use a metric d on X (Proposition 2.3).
+Choose Z as a ball of radius r small enough: {κ | d(κ,χ) ≤ (3/2)r} ⊂ V.
+The continuity of (κ,t) ↦ σ_t^{-1}(κ) gives ε with B_ε ⊂ W and
+  (135) d(κ, σ_t^{±1}(κ)) ≤ r/2, ∀ κ ∈ X, |t| < ε.
+Then (1)-(4) follow. (2) follows from Proposition 6.16. ∎
+
+--- Theorem 7.3 ---
+Let V ⊂ U_α be an open set with V̄ ⊂ U_α. Then the image s_α(λ|_V) is absolutely
+continuous with respect to the Lebesgue measure, and every point χ ∈ V has a
+neighborhood Z such that s_α(λ|_Z) is equivalent (by a Radon-Nikodym derivative
+bounded from above and below) to the Lebesgue measure on s_α(Z).
+
+Proof. Two parts:
+(1) Show s_α(λ|_V) ≤ c dx^p (upper bound):
+Let χ ∈ V̄. Apply Lemma 7.2 with V = U_α. Choose h ∈ C_c^∞(B_ε), h(t) ∈ [0,1],
+h = 1 on B_{ε/2}. For κ ∈ Z, F_κ is a diffeomorphism B_ε → F_κ(B_ε).
+The image of h(t) dt^p under F_κ is g_κ(u) du^p where
+  (138) g_κ(u) = h(ψ(u)) |dψ(u)/du|
+with uniform bounds (139)-(140). Consider the measure ν:
+  (141) ∫ f(x) dν(x) = ∫_Z ∫_{B_ε} f(F(κ,t)) h(t) dt^p dλ(κ)
+  (142) = ∫ f(u) ρ(u) du^p,  ρ(u) = ∫_Z g_κ(u) dλ(κ)
+with ρ(u) ≤ c_1 λ(Z) < ∞ (by (139)-(144)). Using quasi-invariance (133):
+  (147) (1/2)∫_E (f ∘ s_α) dλ ≤ ∫_{σ_t^{-1}E} (f ∘ s_α ∘ σ_t) dλ ≤ 2∫_E (f ∘ s_α) dλ
+Apply to Z_1 = ∩_{B_ε} σ_t Z: since σ_t^{-1}(Z_1) ⊂ Z,
+  (148) ∫_{Z_1} (f ∘ s_α) dλ ≤ C ∫ f(u) du^p.
+Thus s_α(λ|_{Z_1}) is absolutely continuous with respect to Lebesgue and
+majorized by constant multiple of Lebesgue. Cover V̄ by finitely many Z_1.
+
+(2) Show lower bound for χ ∈ V:
+Using Z_2 = ∪_{B_ε} σ_t Z ⊂ V and the second inequality in (147) for E = Z_2:
+  (149) ∫_{Z_2} (f ∘ s_α) dλ ≥ C' ∫ f(u) ρ(u) du^p
+By (146), ρ(u) > 0 ∀ u ∈ s_α(Z). So ρ(u) > 0 near s_α(χ). Hence
+d s_α(λ|_{Z_2}) / dx^p = ρ_2(x) > 0 near s_α(χ). ∎
+
+--- DEPENDENCIES ---
+  • Theorem 7.3 depends on Lemma 7.2 (using Lemma 4.5 and Proposition 6.16),
+    and Fubini's theorem.
+
+
+================================================================================
+§8. SPECTRAL MULTIPLICITY
+================================================================================
+
+--- LEMMAS ---
+
+Lemma 8.1.
+Let s: X → Y be a continuous open map of compact spaces. Then the function
+n(y) = # s^{-1}(y) is lower semicontinuous on Y.
+
+Proof. If n(y) ≥ m, pick m distinct points x_j ∈ s^{-1}(y). Choose disjoint
+open sets V_j ∋ x_j and let W = ∩_j s(V_j). For any z ∈ W, s^{-1}(z) contains
+at least m points. ∎
+
+Lemma 8.2.
+Consider X = Y × {1,...,m} with s(y,k) = y and mutually singular measures μ_k.
+Then the spectral multiplicity Σ(y) = 1 a.e.
+
+Proof. The representations of C(Y) in L^2(Y,μ_k) are pairwise disjoint, each of
+multiplicity one. The commutant is commutative. ∎
+
+Lemma 8.3.
+Let X be compact, λ a finite positive measure on X, π the representation of C(X)
+in L^2(X,dλ) by multiplication. Let a_j = a_j* ∈ C(X) and s: X → R^p with
+coordinates a_j. Let U ⊂ X be open, ν a measure on R^p, and assume:
+  • s restricted to U is an open mapping.
+  • For every open V ⊂ U, s(λ|_V) is equivalent to ν|_{s(V)}.
+Let V ⊂ U be open and T_j = π(a_j)|_V. Then the joint spectral measure of the T_j
+is ν|_{s(V)} and the spectral multiplicity Σ(y) fulfills:
+  (150) Σ(y) ≥ n(y) = # {s^{-1}(y) ∩ V}, ∀ y ∈ s(V),
+almost everywhere modulo ν.
+
+Proof. Desintegrate λ|_V:
+  (151) λ|_V = ∫_W ρ_y dν(y)
+with ρ_y supported on F_y = s^{-1}(y) ∩ V. Then
+  L^2(V,dλ) = ∫_W^⊕ L^2(F_y,ρ_y) dν(y)
+The joint spectral measure of a_j is absolutely continuous w.r.t. ν|_W, equivalent
+by the hypothesis. For (150): with n(y) ≥ m, pick m distinct points x_j ∈ V in
+s^{-1}(y), disjoint open B_j ∋ x_j, Z = ∩_j s(B_j). For each j, the spectral
+measure of a_j in L^2(V_j,dλ_j) (where V_j = s^{-1}(Z) ∩ B_j) is ν_Z. The direct
+sum gives multiplicity ≥ m a.e. on Z. ∎
+
+--- Remark 8.4 ---
+With the hypothesis of Lemma 8.3, let E be a complex hermitian vector bundle over
+X with non-zero fiber dimension everywhere. Then Σ_E(y) ≥ n(y) holds for the
+spectral multiplicity of T_j acting on L^2(X,dλ,E).
+
+--- Theorem 8.5 ---
+Let V ⊂ U_α be an open set and a_α^j|_V be the restriction of a_α^j ∈ A to
+1_V H ⊂ H. Then:
+  • The joint spectral measure of the a_α^j|_V is the Lebesgue measure on s_α(V).
+  • The spectral multiplicity m_ac(y) fulfills:
+    (152) m_ac(y) ≥ n(y) = #{s_α^{-1}(y) ∩ V}, ∀ y ∈ s_α(V),
+    almost everywhere modulo Lebesgue measure.
+
+Proof. By Lemma 7.3, the hypotheses of Lemma 8.3 are fulfilled with the compact
+space X, measure λ, open set U_α, measure dν = dx^p, and elements a_α^j. Apply
+Lemma 8.3 and Remark 8.4. ∎
+
+--- DEPENDENCIES ---
+  • Theorem 8.5 depends on Lemma 7.3, Lemma 8.3, and Remark 8.4.
+
+
+================================================================================
+§9. LOCAL FORM OF THE L^{(p,1)} ESTIMATE
+================================================================================
+
+--- NORMS AND DEFINITIONS ---
+
+Fix p ∈ [1,∞[. For a compact operator T with characteristic values μ_n(T):
+  (153) ‖T‖_{(p,1)} = Σ_1^∞ n^{-1+1/p} μ_n
+
+For T of finite rank N:
+  (154) ‖T‖_{(p,1)} ≤ C_p N^{1/p} ‖T‖_∞
+
+  (155) ‖A T B‖_{(p,1)} ≤ ‖A‖_∞ ‖T‖_{(p,1)} ‖B‖_∞
+
+Let D be self-adjoint unbounded with μ_n(|D|^{-1}) = O(n^{-1/p}). Define:
+  (156) P(λ) = 1_{[0,λ]}(|D|),  α(λ) = Tr P(λ)
+The hypothesis implies:
+  (157) α(λ) ≤ C^p λ^p, ∀ λ > 0.
+
+--- LEMMAS ---
+
+Lemma 9.1.
+Let f ∈ C_c^∞(R). Then there exists C_f < ∞ such that
+  (158) ‖[f(εD), a]‖_∞ ≤ C_f ε ‖[D,a]‖, ∀ a ∈ A.
+Under the hypothesis of Theorem 8.5:
+  (159) lim inf λ^{-p} α(λ) > 0.
+
+Proof. Use
+  (160) [e^{isεD}, a] = i s ε ∫_0^1 e^{iusεD}[D,a] e^{i(1-u)sεD} du
+and
+  (161) [f(εD), a] = (2π)^{-1} ∫ f̂(s)[e^{isεD}, a] ds
+If (159) does not hold, choose λ_n → ∞ with lim λ_n^{-p} α(λ_n) = 0. Then
+  ‖[f(ε_n D), a]‖_{(p,1)} → 0
+using (154) and (158). The Voiculescu obstruction:
+  (163) k_J({a_j}) = lim inf_{A ∈ R_1^+, A ↑ 1} max ‖[A, a_j]‖_J
+Taking A_n = f(ε_n D) gives k_J({a_j}) = 0 for J = L^{(p,1)}, contradicting
+Theorem 8.5 by Voiculescu's Theorem 4.5 of [25]:
+  (164) k_J({a_j})^p = γ_p ∫_{R^p} m(y) d^p y
+where m(y) is the multiplicity of the Lebesgue spectrum. ∎
+
+Lemma 9.2.
+Let f ∈ C_c^∞(R). Then
+  (168) lim inf ‖[f(εD), a]‖_{(p,1)} ≤ c_f (∫−|D|^{-p})^{1/p} ‖[D,a]‖, ∀ a ∈ A.
+
+Proof. Using (167) lim inf ε^p Rank f(εD) ≤ c_g ∫−|D|^{-p} and
+Rank [f(εD),a] ≤ 2 Rank f(εD). Choose ε_q → 0 with
+Rank T_q ≤ 3 ε_q^{-p} c_g ∫−|D|^{-p}. Then use (154) and (158). ∎
+
+Lemma 9.3.
+Let h ∈ C_c^∞(R) be an (even) cutoff function and f = h^2. Then
+  (169) ‖[f(ε|D|), a] - (1/2)ε (f'(ε|D|) δ(a) + δ(a) f'(ε|D|))‖_{(p,1)} = O(ε)
+where δ(a) = [|D|,a] and a ∈ ∩_{j=1}^2 Dom δ^j.
+
+Proof. First (Corollary 10.16 of [14]):
+  (170) ‖[h(ε|D|),a] - ε h'(ε|D|) δ(a)‖ ≤ C_2 ε^2 ‖δ^2(a)‖
+Then using [f(ε|D|),a] = A_ε B_ε + C_ε A_ε with A_ε = h(ε|D|),
+B_ε = [h(ε|D|),a] - ε h'(ε|D|) δ(a), C_ε = [h(ε|D|),a] - ε δ(a) h'(ε|D|).
+‖B_ε‖ = O(ε^2), ‖C_ε‖ = O(ε^2), Rank A_ε = O(ε^{-p}) → ‖A_ε‖_{(p,1)} = O(ε^{-1}).
+Using (155) gives O(ε). ∎
+
+Lemma 9.4.
+For K ⊂ X compact, R_ε = 1_K f(ε|D|) 1_K, b ∈ A with b 1_K = 1_K:
+  (172) ‖[R_ε,a] - (1/2)ε(1_K f'(ε|D|) b δ(a) 1_K + 1_K δ(a) b f'(ε|D|) 1_K)‖_{(p,1)} = O(ε)
+
+Lemma 9.5. (Interpolation inequality)
+For 1 ≤ p < ∞, there exists c_p such that for S ∈ L^1:
+  (174) ‖S‖_{(p,1)} ≤ c_p ‖S‖_1^{1/p} ‖S‖_∞^{1-1/p}
+
+Proof. L^{(p,1)} obtained by real interpolation of index (θ,1) with θ = 1/p from
+K and L^1. Use the functoriality of interpolation. ∎
+
+--- Remark 9.6 ---
+Direct proof of (174) for p > 1. Equivalent norm:
+  (175) ‖T‖_{(p,1)'} = (1-θ) Σ N^{θ-2} σ_N(T), θ = 1/p.
+Splitting the sum: Σ_{N<ρ} N^{θ-1} ≤ C_θ ρ^θ and Σ_{N≥ρ} N^{θ-2} ρ ≤ C'_θ ρ^θ.
+
+Lemma 9.7.
+For b = b* ∈ A, b ≥ 0:
+  (176) lim inf ε^p ‖b f'(ε|D|) b‖_1 ≤ C_f ∫− b^2 |D|^{-p}
+
+Proof. f' ≤ 0 on [0,∞[. Let h = -f' ≥ 0 in C_c^∞(R). Then
+‖b h(ε|D|) b‖_1 = Tr(b^2 h(ε|D|)). Apply Corollary 14.10 (Appendix 2):
+lim inf ε^p Tr(b^2 h(ε|D|)) ≤ μ ∫− b^2 |D|^{-p}, μ = p ∫_0^∞ u^{p-1} h(u) du. ∎
+
+Lemma 9.8.
+For b = b* ∈ A, 0 ≤ b ≤ 1:
+  (177) lim inf ‖ε b f'(ε|D|) b‖_{(p,1)} ≤ C'_f (∫− b^2 |D|^{-p})^{1/p}
+
+Proof. By Lemma 9.7, there exists ε_q → 0 with
+‖b f'(ε_q|D|) b‖_1 ≤ 2 C_f ε_q^{-p} ∫− b^2 |D|^{-p}.
+Also ‖b f'(ε_q|D|) b‖_∞ ≤ B = ‖f'‖_∞. By Lemma 9.5 (174):
+‖b f'(ε_q|D|) b‖_{(p,1)} ≤ c_p (2 C_f ε_q^{-p} ∫− b^2 |D|^{-p})^{1/p} B^{1-1/p}.
+Multiply by ε_q. ∎
+
+--- Theorem 9.9 ---
+There exists a finite constant κ_p such that for any a_j ∈ A and compact K ⊂ X:
+  (178) k_J({a_j 1_K}) ≤ κ_p max ‖δ(a_j)‖_∞ (λ(K))^{1/p}
+where J = L^{(p,1)} and
+  λ(K) = inf_{b ∈ A^+, b 1_K = 1_K} ∫− b |D|^{-p}.
+
+Proof. Take R_ε = 1_K f(ε|D|) 1_K ∈ R_1^+, R_ε → 1 strongly in 1_K H.
+By Lemma 9.4:
+  ‖[R_ε,a]‖_{(p,1)} ≤ O(ε) + ‖ε b f'(ε|D|) b‖_{(p,1)} ‖δ(a)‖_∞
+By Lemma 9.8, for b ∈ A^+ equal to 1 on K, ∃ ε_q → 0 with
+  ‖ε_q b f'(ε_q|D|) b‖_{(p,1)} ≤ 2 C'_f (∫− b^2 |D|^{-p})^{1/p}
+Thus lim inf max ‖[R_ε, a_j 1_K]‖_J ≤ 2 C'_f max ‖δ(a_j)‖_∞ (∫− b^2 |D|^{-p})^{1/p}.
+Varying b gives the result. ∎
+
+--- DEPENDENCIES ---
+  • Theorem 9.9 depends on Lemma 9.4, Lemma 9.8, and the definition of k_J.
+
+--- Remark 9.10 ---
+(a) To get A ↑ 1 from R_ε: given finite rank projection P of rank N, let
+A_ε = P + (1-P)R_ε(1-P) which satisfies A_ε ≥ P and ‖R_ε - A_ε‖_J → 0.
+(b) Tensoring by (C, H', D') would require dim H' < ∞ to maintain dimension p.
+(c) The constant C'_f is given by (∫_0^∞ u^{p-1} h(u) du)^{1/p} ‖h‖_∞^{1-1/p},
+h = -f' ≥ 0, and is bounded below independently of f by a general inequality:
+  (181) ∫_0^∞ h(u) du ≤ c(p) (p ∫_0^∞ u^{p-1} h(u) du)^{1/p} ‖h‖_∞^{1-1/p}.
+
+--- Corollary 9.11 ---
+Let a_j = a_j* ∈ A be p self-adjoint elements. For any compact K ⊂ X:
+  (183) ∫_{R^p} m_ac^K(y) d^p y ≤ κ'_p max ‖δ(a_j)‖_∞^p λ(K)
+where m_ac^K(y) is the multiplicity of the Lebesgue spectrum of the restriction
+of a_j to 1_K(H).
+
+Proof. Combine Theorem 9.9 with Voiculescu's formula (182):
+  k_J({h_j})^p = γ_p ∫_{R^p} m(y) d^p y. ∎
+
+
+================================================================================
+§10. LOCAL BOUND ON #(s_α^{-1}(x) ∩ V)
+================================================================================
+
+Let V ⊂ U_α be open with V̄ ⊂ U_α.
+
+Lemma 10.1.
+There exists C < ∞ such that the spectral multiplicity m_ac^V(x) on the absolutely
+continuous joint spectrum of a_α^j|_V fulfills:
+  (184) m_ac^V(x) ≤ C, a.e. on W = s_α(V).
+
+Proof. By Theorem 8.5, the joint spectral measure is the Lebesgue measure on s_α(V).
+For compact E ⊂ W, K = s_α^{-1}(E) ∩ V̄. By Corollary 9.11:
+  (185) ∫ m_ac^K(y) d^p y ≤ κ' λ(K).
+One has m_ac^V(y) ≤ m_ac^K(y) ∀ y ∈ E (direct sum decomposition).
+By (136) from Lemma 7.3: λ(K) ≤ c ∫_E dx^p. Thus
+  (187) ∫_E m_ac^V(x) d^p x ≤ C ∫_E d^p x
+giving m_ac^V(x) ≤ C a.e. ∎
+
+Lemma 10.2.
+Let V be as above. Then there exists m < ∞ such that
+  (188) #(s_α^{-1}(x) ∩ V) ≤ m, ∀ x ∈ W = s_α(V).
+
+Proof. By Theorem 8.5, m_ac^V(y) ≥ n(y) a.e. The result follows from Lemma 10.1
+and the lower semicontinuity of n(y) (Lemma 8.1). ∎
+
+--- DEPENDENCIES ---
+  • Lemma 10.1 depends on Theorem 8.5, Corollary 9.11, and Lemma 7.3.
+  • Lemma 10.2 depends on Theorem 8.5, Lemma 10.1, and Lemma 8.1.
+
+Lemma 10.3.
+Let V ⊂ U_α be open with V̄ ⊂ U_α. There exists a dense open subset Y ⊂ s_α(V)
+such that every point of s_α^{-1}(Y) ∩ V has a neighborhood N in X such that the
+restriction of s_α to N is a homeomorphism with an open set of R^p.
+
+Proof. Let m_1 = sup_{x∈W} #(s_α^{-1}(x) ∩ V) (finite by Lemma 10.2).
+W_1 = {x ∈ W | #(s_α^{-1}(x) ∩ V) = m_1} (open by Lemma 8.1).
+For x ∈ W_1, find m_1 disjoint neighborhoods V_j of preimages x_j, all surjecting
+on the same neighborhood U. Restriction of s_α to each V_j is a bijection onto U,
+hence a homeomorphism.
+If W_1 not dense, take complement of its closure W^1 = W \ W̄_1 and iterate with
+m_2 < m_1, getting W_2, etc. Since m_j strictly decreases, process terminates and
+Y = ∪ W_j is dense. ∎
+
+
+================================================================================
+§11. RECONSTRUCTION THEOREM
+================================================================================
+
+Lemma 11.1.
+For every point χ ∈ X there exists p real elements x^μ ∈ A and a smooth family
+τ_t ∈ Aut(A), t ∈ R^p, τ_0 = Id, such that:
+  • The x^μ give a homeomorphism of a neighborhood of χ with an open set in R^p.
+  • The map t ↦ h(t) = χ ∘ τ_t is a homeomorphism of a neighborhood of 0 in R^p
+    with a neighborhood of χ.
+  • The map x ∘ h is a local diffeomorphism.
+
+Proof. By Lemma 4.4, χ ∈ U_α for some α. By Lemma 4.5, there exists smooth family
+σ_t ∈ Aut(A), neighborhood Z of χ, neighborhood W of 0 such that for κ ∈ Z,
+t ↦ s_α(κ ∘ σ_t) is a diffeomorphism. Take V = B_r ⊂ U_α with V̄ ⊂ U_α. Apply
+Lemma 10.3 to V = B_r: there exists dense open Y ⊂ s_α(V) with good property.
+Since ψ(t) = s_α(χ ∘ σ_t) is an open neighborhood of s_α(χ), choose u_0 ∈ W with
+χ ∘ σ_{u_0} ∈ V and ψ(u_0) ∈ Y. Let κ = χ ∘ σ_{u_0} ∈ s_α^{-1}(Y) ∩ V.
+By Lemma 10.3, there exists neighborhood N of κ where s_α is a homeomorphism onto
+an open set in R^p. Set
+  (189) κ = χ ∘ σ_{u_0}, χ = σ_{u_0}(κ)
+  (190) x^μ = σ_{u_0}(a_α^μ)
+Then x = s_α ∘ σ_{u_0}^{-1} gives a homeomorphism of σ_{u_0}(N) (a neighborhood of χ)
+with an open set of R^p. Define τ_t = σ_{u_0+t} ∘ σ_{u_0}^{-1}. Then
+  χ ∘ τ_t(x^μ) = χ ∘ σ_{u_0+t}(a_α^μ) = s_α^μ(χ ∘ σ_{u_0+t}) = ψ^μ(u_0+t)
+and
+  (191) x ∘ h(t) = ψ(u_0 + t)
+is a diffeomorphism from W_1 = W - u_0 to an open set. Injectivity of x ∘ h on W_1
+gives injectivity of h there. By continuity, h restricted to W_2 = h^{-1}(σ_{u_0}(N)) ∩ W_1
+is a homeomorphism of a neighborhood of 0 with a neighborhood of χ. ∎
+
+--- DEPENDENCIES ---
+  • Lemma 11.1 depends on Lemma 4.4, Lemma 4.5, Lemma 10.3, and Theorem 6.15
+    (existence of the smooth family σ_t ∈ Aut(A)).
+
+Lemma 11.2.
+The algebra A is locally the algebra of restrictions of smooth functions on R^p
+to a bounded open set of R^p.
+
+Proof. Let χ ∈ X. By Lemma 11.1, x^μ ∈ A give a homeomorphism of a neighborhood
+U of χ with a bounded open set x(U) ⊂ R^p. By smooth functional calculus
+(Proposition 2.4), C_c^∞(x(U)) ⊂ A via f ↦ f(x^μ). For smaller V with compact
+closure in U, C^∞(R^p)|_{x(V)} ⊂ A|_{x(V)}. To show every a ∈ A restricts to a
+smooth function on V in coordinates x: use the smooth family τ: R^p → Aut(A)
+from Lemma 11.1 with x ∘ τ a local diffeomorphism. For b ∈ A,
+τ_t(b) evaluated at χ is a smooth function of t (by smoothness of τ_t), so the
+restriction of b to V is smooth in coordinates x. ∎
+
+--- Theorem 11.3 ---
+Let (A,H,D) be a strongly regular spectral triple fulfilling the five conditions
+of §2 (cf. [11]) with c antisymmetric. Then there exists an oriented smooth
+compact manifold X such that A = C^∞(X).
+
+Proof. Let X = Spec(A) (compact). By Lemma 11.1 and Lemma 11.2, each point χ ∈ X
+has a neighborhood V and p real elements x^μ ∈ A giving a local homeomorphism
+φ: V → φ(V) ⊂ R^p with
+  f ∈ A|_V ⇔ f ∘ φ^{-1} ∈ C^∞(R^p)|_{φ(V)}
+On intersections of local charts, change of chart is C^∞. Take a finite cover by
+compactness: X becomes a p-dimensional smooth manifold. Lemma 11.2 shows
+A ⊂ C^∞(X). For f ∈ C^∞(X), pick a_j ∈ A with f|_{V_j} = a_j|_{V_j} for each
+chart V_j. Use partitions of unity ψ_j ∈ A (Lemma 2.10 of [22]):
+  f = Σ ψ_j a_j ∈ A.
+Hence A = C^∞(X). The cycle c gives a nowhere vanishing section of ∧^p(TX), so X
+is oriented. ∎
+
+--- DEPENDENCIES ---
+  • Theorem 11.3 depends on Lemma 11.1, Lemma 11.2, Proposition 2.4,
+    and the existence of partitions of unity in A.
+
+--- Theorem 11.4 ---
+An involutive algebra A is the algebra of smooth functions on an oriented smooth
+compact manifold if and only if it admits a faithful representation in a pair
+(H,D) fulfilling the five conditions of §2 with the cycle antisymmetric and the
+strong regularity.
+
+Proof. (⇒) Theorem 11.3. (⇐) Given an oriented smooth compact manifold X of
+dimension p, take H = L^2(X, ∧^*_C) (square integrable differential forms),
+D = d + d^* (signature operator), with Z/2-grading γ from Clifford multiplication
+by the volume form. In the odd case, reduce H to the subspace γξ = ξ.
+
+The faithful representation of Cliff T^*_x(X) in ∧^* T^*_x(X) is:
+  (192) v.ξ = v ∧ ξ - i_v ξ, ∀ v ∈ T^*_x(X), ξ ∈ ∧^* T^*_x(X)
+
+Let ω = e_1 ∧ ... ∧ e_p (positively oriented orthonormal basis).
+In the Clifford algebra, ω^2 = (-1)^{p(p+1)/2}. Define:
+  (193) γ ξ = i^{-p(p+1)/2} ω ξ
+
+Left Clifford multiplication by ω relates to the Hodge star:
+  (194) ω ξ = (-1)^{k(p-k) + k(k+1)/2} ★ ξ, ∀ ξ ∈ ∧^k
+One has d^* = (-1)^{p+1} γ d γ.
+
+Local coordinates x^μ give:
+  (195) [D,f] = Σ γ^μ ∂_μ f,  {γ^μ, γ^ν} = -2 g^{μν}
+  (196) [γ^1,...,γ^p] = p! i^{p(p+1)/2} (√g)^{-1} γ
+
+The global volume form gives the Hochschild cycle:
+  c = (1/p!) Σ_σ ε(σ) √g ⊗ x^{σ(1)} ⊗ ... ⊗ x^{σ(p)}
+fulfilling condition 4) up to the factor i^{p(p+1)/2}. Partition of unity gives
+the global form.
+
+Strong regularity: For an elliptic differential operator D of order 1 (Dirac or
+signature), D^2 has scalar principal symbol. For any differential operator P of
+order m, the symbol of order m+2 of [D^2,P] vanishes (commutator of principal
+symbols of order m and 2). So for T of order 0, δ_1^m(T) = P(1+D^2)^{-m/2} where
+P is of order m. By elliptic theory, these are bounded. ∎
+
+--- DEPENDENCIES ---
+  • The converse direction uses [18] (spin geometry), the check of orientability
+    using (195)-(196), and §13 Lemma 13.2 for strong regularity.
+
+--- Theorem 11.5 ---
+Let (A,H,D) be a spectral triple with A commutative, fulfilling the five
+conditions of §2 with the cycle c antisymmetric. Assume that the multiplicity
+of the action of A'' in H is 2^{p/2}. Then there exists a smooth oriented
+compact (spinc) manifold X such that A = C^∞(X).
+
+Proof. Need to dispense with the strong regularity hypothesis. By Remark 5.12 (78):
+  (197) [([D,a][D,b] + [D,b][D,a]), [D,c]] = 0, ∀ a,b,c ∈ A
+At a point χ ∈ X, let S_χ be the fiber of H_∞ and M_χ ⊂ End S_χ the subalgebra
+generated by [D,a] for a ∈ A. By (197):
+  (198) [D,a][D,b] + [D,b][D,a] ∈ Z(M_χ), ∀ a,b ∈ A
+Let e be a minimal projection in the center of M_χ. By π_D(c) = γ:
+  γ e = Σ_α e a_α^0 [[D,a_α^1],...,[D,a_α^p]] ≠ 0
+so dim T^*_e(χ) = {e[D,a] | a ∈ A}_χ ≥ p. For some α, the multiple commutator
+  [e[D,a_α^1],...,e[D,a_α^p]] ≠ 0
+which requires the e[D,a_α^j] to be linearly independent. By (198) and
+minimality of e:
+  (199) Q(e[D,a]) e = (e[D,a])^2, ∀ a ∈ A
+defines a positive non-degenerate quadratic form Q on (T^*_e(χ))_{sa}.
+The map e[D,a] ↦ e[D,a] gives a representation of the Clifford algebra C_Q in
+e S_χ. Thus dim e S_χ ≥ 2^{p/2}. The multiplicity hypothesis (A'' acts with
+multiplicity 2^{p/2}) plus absolute continuity gives fiber dimension of S is
+2^{p/2}. Hence e = 1, M_χ = End S_χ ∀ χ ∈ X, and dim T^*(χ) = p.
+
+On U_α, the [D,a_α^j] form a basis of T^*(χ). The monomials
+  μ_F = [[D,a_α^{j_1}],...,[D,a_α^{j_k}]]
+(for subsets F ⊂ {1,...,p}) form a basis of M_χ = End S_χ. Any T ∈ End S_χ can
+be written
+  (200) T = Σ a_F μ_F
+with coefficients a_F ∈ A (using the conditional expectation E_A). Hence any
+endomorphism of H_∞ is a polynomial in [D,a] with coefficients in A, and thus
+automatically regular. So strong regularity holds, and Theorem 11.3 applies.
+That X is spinc follows from [11] (see [14] for proof). ∎
+
+--- DEPENDENCIES ---
+  • Theorem 11.5 depends on Remark 5.12, Theorem 11.3, the representation theory
+    of Clifford algebras, and the conditional expectation E_A.
+
+
+================================================================================
+§12. FINAL REMARKS
+================================================================================
+
+--- 12.1 The Role of D ---
+
+Define the geodesic flow:
+  (201) γ_t(T) = e^{it|D|} T e^{-it|D|}, ∀ T ∈ L(H).
+An operator T ∈ L(H) is of class C^∞ when t ↦ γ_t(T) is C^∞ (norm topology).
+Denote C^∞(H,D) this subalgebra of L(H).
+
+The compatibility of (M,H) and (H,D) is measured by
+  (202) C^∞(M,H,D) = {T ∈ M ∩ C^∞(H,D) | [D,T] ∈ M' ∩ C^∞(H,D)}
+where M' is the commutant of M. A = C^∞(M,H,D) is a subalgebra of M.
+
+Equations for maximal compatibility:
+  (203) ⟨ξ, a η⟩ = ∫− (ξ|η) a |ds|^p, ∀ a ∈ A, ∀ ξ,η ∈ H_∞
+  (204) c(D) = 1, where (a_0 ⊗ ... ⊗ a_p)(D) = a_0[D,a_1]...[D,a_p]
+  (for p odd; for p even, c(D) = γ satisfies γ = γ*, γ^2 = 1, γ D = -D γ)
+
+--- Theorem 12.1 ---
+Let (M,H,D) fulfill (202), (203), (204), and N = 2^{p/2}. Then there exists a
+unique smooth compact oriented spinc Riemannian manifold (X,g) such that the
+triple (M,H,D) is given by:
+  • M = L^∞(X,dv) where dv is the Riemannian volume form.
+  • H = L^2(X,S) where S is the spinor bundle.
+  • D is a Dirac operator associated to the Riemannian metric g.
+
+Proof. Let A = C^∞(M,H,D). By weak density of (202) in M, multiplicity of
+A'' = M in H is N = 2^{p/2}. By construction, (A,H,D) fulfills conditions 1-3.
+Conditions 4 and 5 follow from (203) and (204). By Theorem 11.5, A = C^∞(X).
+Conclusion follows from [11] (see [14]). No uniqueness of D (only principal
+symbol known). ∎
+
+--- 12.2 Finite Propagation ---
+
+Lemma 12.2.
+The support of the kernel k_t(x,y) of e^{itD} is contained in
+  {(x,y) ∈ X^2 | d(x,y) ≤ |t|}
+where d(x,y) = sup |h(x)-h(y)| over ‖[D,h]‖ ≤ 1.
+
+Proof. For d(x,y) > |t|, ∃ h = h* with ‖[D,h]‖ ≤ 1 and h(y) - h(x) > |t|.
+Since h and [D,h] commute (order one), Hilsum's Lemma 1.10 of [17] gives
+b < h(y), a > h(x) with (h-b)_+ e^{-itD} (h-a)_- = 0, so k_t(x,y) = 0. ∎
+
+--- 12.3 Immersion versus Embedding ---
+The map ψ: X → R^N from components a_α^j (j ≥ 1) is an immersion, but not
+necessarily an embedding (counterexample given).
+
+--- 12.4 The Antisymmetry Condition ---
+The antisymmetrisation map:
+  P(a_0 ⊗ a_1 ⊗ ... ⊗ a_p) = (1/p!) Σ_β ε(β) a_0 ⊗ a_{β(1)} ⊗ ... ⊗ a_{β(p)}
+Its range is in Z_p(A,A) when A is commutative. P = (1/p!) ε_p ∘ π_p where
+  (205) ε_p: Ω_K^p → H_p(A,A), π_p: H_p(A,A) → Ω_K^p
+  (206) π_k(a_0 ⊗ ... ⊗ a_k) = a_0 da_1 ∧ ... ∧ da_k
+  (207) ε_k(a_0 da_1 ∧ ... ∧ da_k) = Σ ε(σ) a_0 ⊗ a_{σ(1)} ⊗ ... ⊗ a_{σ(k)}
+
+--- 12.5 Strong Regularity ---
+
+Proposition 12.3.
+Assuming regularity, the subalgebra Z_D(A) of End_A(H_∞) generated by A and the
+[D,b][D,c] + [D,c][D,b] for b,c ∈ A is a commutative algebra containing A and
+commuting with [D,a] for all a ∈ A.
+
+Proof. Follows from Remark 5.12 (78): [D,b]^2 commutes with [D,a] for all a ∈ A. ∎
+
+--- 12.6 The Noncommutative Case ---
+Conditions 1), 3), 5) extend as-is. Condition 2) (order one) extends using an
+antilinear unitary J (real structure, Tomita operator). Condition 4) extends
+but is not fully satisfactory yet (open question).
+
+
+================================================================================
+§13. APPENDIX 1: REGULARITY
+================================================================================
+
+--- EQUIVALENT FORMULATIONS ---
+
+A bounded operator T (acting on H_∞) has:
+  (208) ‖T‖ = sup{‖T ξ‖ | ξ ∈ H_∞, ‖ξ‖ ≤ 1} < ∞
+
+Lemma 13.1.
+Assume both T and [|D|,T] are bounded (as in (208)). Then T preserves
+Dom |D| = Dom D and the bounded extension of [|D|,T] coincides with the
+commutator |D| T - T |D| on Dom |D|.
+
+Proof. For ξ ∈ Dom |D|, pick ξ_n ∈ H_∞ with ξ_n → ξ, |D|ξ_n → |D|ξ.
+T bounded → T ξ_n → T ξ, T|D|ξ_n → T|D|ξ. [|D|,T] bounded → (|D|T - T|D|)ξ_n
+converges, so |D| T ξ_n converges. Closedness of |D| gives T ξ ∈ Dom |D|. ∎
+
+--- VARIANT ---
+
+Define on operators acting in H_∞:
+  (209) δ_1(T) = [D^2,T] (1+D^2)^{-1/2}
+
+Lemma 13.2.
+Let T acting in H_∞ be bounded.
+  (1) If δ_1(T) and δ_1^2(T) are bounded, so is δ(T).
+  (2) The δ_1^n(T) are bounded for all n iff so are the δ^n(T).
+
+Proof. (1) Use the integral representation for |D|:
+  (210) |D| = (2/π) ∫_0^∞ D^2/(D^2+u^2) du
+Decompose δ = δ' + δ_0 where δ_0 is bounded:
+  (211) δ'(T) = [Q,T], Q = D^2 (1+D^2)^{-1/2}
+  (212) δ_0(T) = [f_0(D),T], f_0(x) = |x| - x^2(1+x^2)^{-1/2}
+(since f_0 ∈ C_0(R), ‖δ_0‖ < 1). Compute δ'(T) via the integral:
+  (213) Q = (2/π) ∫_0^∞ D^2/(D^2+1+u^2) du
+After computation:
+  (215) δ'(T) = (1/2) [D^2,T](1+D^2)^{-1/2} + (1/2) [D^2,T](1+D^2)^{-3/2}
+       - (2/π) ∫_0^∞ (1/(D^2+1+u^2)) [D^2,[D^2,T]] (1+u^2)/(D^2+1+u^2)^2 du
+Using [D^2,[D^2,T]] = δ_1^2(T)(1+D^2) and the estimate
+‖(1+u^2)(1+D^2)/(D^2+1+u^2)^2‖ ≤ 1, one gets:
+  (216) ‖δ'(T)‖ ≤ ‖δ_1(T)‖ + ‖δ_1^2(T)‖
+and
+  (217) ‖δ(T)‖ ≤ Σ_{j=0}^2 ‖δ_1^j(T)‖
+
+(2) δ and δ_1 commute (since |D| commutes with D^2). Induction gives
+  (218) ‖δ^n(T)‖ ≤ Σ_0^{2n} c_{n,k} ‖δ_1^k(T)‖
+Conversely, use δ''(T) = [(1+D^2)^{1/2},T]. The square of
+T ↦ (1+D^2)^{1/2} T (1+D^2)^{-1/2} is T ↦ (1+D^2) T (1+D^2)^{-1}, giving
+  δ_1(T) = 2 δ''(T) + (δ'')^2(T) (1+D^2)^{-1/2}
+and the boundedness follows similarly. ∎
+
+--- SMOOTHNESS OF THE GEODESIC FLOW ---
+
+Lemma 13.3.
+For T ∈ L(H), the following are equivalent:
+  (1) T ∈ ∩_m Dom δ^m.
+  (2) t → γ_t(T) = e^{it|D|} T e^{-it|D|} is of class C^∞ in the norm topology.
+
+Proof. (1) ⇒ (2): By (10), T preserves H_∞. Taylor formula with remainder:
+  (219) f(t) = Σ_{k=0}^n (t^k/k!) f^{(k)}(0) + (t^{n+1}/n!) ∫_0^1 (1-u)^n f^{(n+1)}(tu) du
+for f(t) = e^{it|D|} T e^{-it|D|} ξ with ξ ∈ H_∞. Since f^{(k)}(s) = γ_s(δ^k(T))ξ:
+  (220) γ_t(T)ξ = Tξ + it δ(T)ξ + ... + (i^n t^n/n!) δ^n(T)ξ + remainder
+with remainder norm O(t^{n+1}). Thus t ↦ γ_t(T) is C^∞ in norm.
+
+(2) ⇒ (1): Suffices to show lim_{t→0} (1/t)(γ_t(T)-T) exists in norm ⇒ T ∈ Dom δ
+and the limit is i δ(T). For ξ ∈ H:
+  (221) ξ ∈ Dom |D| ⇔ ∃ lim_{t→0} (1/t)(e^{it|D|}ξ - ξ) in norm.
+If ‖(1/t)(γ_t(T)-T) - Y‖ → 0, then for ξ ∈ Dom |D|,
+(1/t)(e^{it|D|}Tξ - Tξ) → i T|D|ξ + Yξ, so Tξ ∈ Dom |D| and
+i|D|Tξ = i T|D|ξ + Yξ. Hence δ(T) bounded and the limit is i δ(T). ∎
+
+
+================================================================================
+§14. APPENDIX 2: THE DIXMIER TRACE AND THE HEAT EXPANSION
+================================================================================
+
+--- DEFINITIONS ---
+
+Characteristic value μ_n(T): n-th eigenvalue of |T| in decreasing order:
+  (222) μ_n(T) = inf{‖T|_{E^⊥}‖ | dim E = n-1}
+
+Definition 14.1. Weyl norms:
+  (223) σ_N(T) = Σ_1^N μ_n(T)
+
+Proposition 14.2.
+  (225) σ_N(T) = sup{‖T E‖_1 | dim E = N}
+For T ≥ 0:
+  (226) σ_N(T) = sup{Tr(T E) | dim E = N}
+
+Definition 14.3. Refined limiting processes:
+Cesàro mean:
+  (227) M(f)(λ) = (1/log λ) ∫_1^λ f(u) du/u
+For h(λ) bounded, ω a positive linear form on C_b(R_+^*) with ω(1) = 1,
+ω|_{C_0(R_+^*)} = 0, and φ a homeomorphism of R_+^*:
+  (228) Lim^k_{φ(λ)→ω} h(λ) = ω(M^k(g)), g(λ) = h(φ^{-1}(λ))
+
+Two-sided ideal L^{(1,∞)}:
+  (230) L^{(1,∞)}(H) = {T ∈ K | σ_N(T) = O(log N)}
+
+Definition 14.4. (Dixmier trace)
+For T ≥ 0, T ∈ L^{(1,∞)}(H):
+  (231) Tr_ω(T) = Lim_ω (1/log N) Σ_{n=1}^N μ_n(T)
+
+Proposition 14.5. (Basic properties)
+Tr_ω extends uniquely by linearity to L^{(1,∞)}(H) and:
+  (a) T ≥ 0 ⇒ Tr_ω(T) ≥ 0
+  (b) S bounded, T ∈ L^{(1,∞)} ⇒ Tr_ω(ST) = Tr_ω(TS)
+  (c) Tr_ω(T) depends only on the topological vector space structure of H.
+  (d) Tr_ω vanishes on L_0^{(1,∞)}(H) (closure of finite-rank operators).
+
+--- CONNECTION WITH HEAT EXPANSION ---
+
+Let D have μ_n(D^{-1}) = O(n^{-1/p}). E_N = spectral projection on first N
+eigenvectors of |D| (dim E_N = N, E_N < E_{N+1}):
+  (232) Tr(E_N |D|^{-p}) = σ_N(|D|^{-p})
+
+Lemma 14.6.
+For any bounded T ∈ L(H):
+  (233) Lim_ω (1/log N) Tr(E_N |D|^{-p} T) = Tr_ω(T |D|^{-p})
+
+Proof. Define φ(T) = LHS, ψ(T) = RHS. φ is positive linear functional.
+For T ≥ 0:
+  σ_N(T^{1/2} |D|^{-p} T^{1/2}) = σ_N(|D|^{-p/2} T |D|^{-p/2})
+  (by μ_n(A*A) = μ_n(AA*), (235))
+Then ψ(T) = Lim_ω (1/log N) σ_N(|D|^{-p/2} T |D|^{-p/2})
+  (236) ≥ Lim_ω (1/log N) Tr(E_N |D|^{-p} T) = φ(T).
+Since φ(1) = ψ(1) = Tr_ω(|D|^{-p}), the positive functional θ = ψ - φ = 0. ∎
+
+Define P(λ) = 1_{[0,λ]}(|D|), α(λ) = Tr P(λ).
+
+Lemma 14.7.
+Assume lim inf λ^{-p} α(λ) > 0 (238). Then for any bounded T:
+  (239) p Lim_ω (1/log N) Tr(E_N |D|^{-p} T) = Lim_{λ^p→ω} (1/log λ) Tr(P(λ) |D|^{-p} T)
+
+Proof. Constants c_1,c_2 from (240): c_1 λ^p ≤ α(λ) ≤ c_2 λ^p.
+Define f(N) = Tr(E_N |D|^{-p} T), g(λ) = Tr(P(λ) |D|^{-p} T).
+Since dim P(λ) ≤ N ⇒ P(λ) ≤ E_N:
+  (242) f(N) ≥ g(λ), ∀ λ, c_2 λ^p ≤ N.
+Similarly, dim P(λ) ≥ N ⇒ P(λ) ≥ E_N:
+  (243) f(N) ≤ g(λ), ∀ λ, c_1 λ^p ≥ N.
+So f(c_1 N) ≤ g(N^{1/p}) ≤ f(c_2 N) up to o(N). By scale invariance of Cesàro mean:
+  (244) |M(θ_μ(f))(λ) - M(f)(λ)| → 0 as λ → ∞
+Hence
+  (245) M((1/log N) f(N)) - M((1/log N) g(N^{1/p})) → 0
+giving the result with factor 1/p from the change of variable. ∎
+
+Corollary 14.8.
+Assuming (238):
+  (246) p Tr_ω(T |D|^{-p}) = Lim_{λ^p→ω} (1/log λ) Tr(P(λ) |D|^{-p} T), ∀ T ∈ L(H).
+
+Theorem 14.9.
+Assume (238). Let f ∈ C_c([0,∞[) and ρ = p ∫_0^∞ u^{p-1} f(u) du. Then:
+  (247) Lim^2_{ε^{-p}→ω} ε^p Tr(f(ε|D|) T) = ρ Tr_ω(T |D|^{-p})
+
+Proof. Let g(u) = u^p f(u), viewed as integrable on R_+^* with d*u = du/u.
+Assume T ≥ 0. Define dβ(λ) where β(λ) = Tr(P(λ) |D|^{-p} T) (non-decreasing step
+function, positive linear combination of Dirac masses). Then:
+  ε^p Tr(f(ε|D|) T) = ∫ g(ελ) dβ(λ)
+  (249) h(ε) := ε^p Tr(f(ε|D|) T) = ∫ g(ελ) dβ(λ)
+  (251) h(u^{-1}) = (g̃ ⋆ dβ)(u) where g̃(u) = g(u^{-1})
+The convolution g̃ d*u ⋆ dβ is absolutely continuous w.r.t. d*u.
+Extend Cesàro mean to measures:
+  (253) M(μ)(λ) = (1/log λ) ∫_1^λ dμ
+By (256) M(dβ)(λ) = (1/log λ)(β(λ) - β(1)).
+One has estimates:
+  (257) |M(θ_u(dβ))(λ) - M(dβ)(λ)| ≤ (a + b|log u|)(log λ)^{-1}
+Since g̃(u) and |log u| g̃(u) are integrable,
+  (258) M(∫ g̃(u) θ_u(dβ) d*u) - M(dβ) ∫ g̃(u) d*u → 0
+Equivalently:
+  (259) M(h̃) - M(dβ) ∫ g(u) d*u → 0, h̃(u) = h(u^{-1})
+By (256) and (246): Lim_{λ^p→ω} M(dβ)(λ) = p Tr_ω(T |D|^{-p}).
+Thus:
+  (261) (p ∫ g(u) d*u) Tr_ω(T |D|^{-p}) = Lim_{λ^p→ω} M(h̃)(λ)
+The RHS is ω(M(k)(u)), k(u) = M(h̃)(u^{1/p}). A simple computation shows
+k(u) = k_1(u) = M(h̃(λ^{1/p}))(u). ∎
+
+Corollary 14.10.
+Assume (238). Let f ∈ C_c([0,∞[)^+. Let ρ = p ∫_0^∞ u^{p-1} f(u) du.
+When ε → 0:
+  (262) lim inf ε^p Tr(f(ε|D|) T) ≤ ρ Tr_ω(T |D|^{-p})
+
+Proof. Let δ = lim inf. For any c < 1, h(ε) ≥ cδ for ε ≤ ε_c.
+Hence Lim^2_{ε^{-p}→ω} h(ε) ≥ cδ. By (247), cδ ≤ ρ Tr_ω(T |D|^{-p}),
+giving (262). ∎
+
+
+================================================================================
+END OF EXTRACTION
+================================================================================
