@@ -1100,6 +1100,7 @@ SCENE_ID_MAP = {
     '02_start.html':           {'scene-wuji':     '导论把你带到了&quot;没有尺子&quot;的门口。'},
     '07_worldtopos.html':      {'scene-lishi':    '现在来看看&quot;历史&quot;到底是怎么成立的。',
                                 'scene-wo':       '&quot;我&quot;坐在哪里？'},
+    '05_unknowable.html':      {'scene-sanzhong':    '把认知够不到的边界数一数'},
     '04_intentionality.html':  {'scene-heng':     '有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了'},
     '03_twostreams.html':      {'scene-zong':     '<strong>为什么理解流只能倒着写。</strong>'},
     '09_assertion.html':       {'scene-dui':      '搭板就是干两件事：<strong>打桩</strong>'},
