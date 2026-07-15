@@ -183,6 +183,7 @@
 </div>
 <p id="status">正在渲染公式…</p>
 <script>
+history.scrollRestoration = 'manual';
 var CURRENT_SCENE = (function(){ var h=window.location.hash; return h ? h.replace('#','') : "scene-songshou"; })();
 function showMap() {
   document.getElementById('map-overlay').classList.add('active');
@@ -354,7 +355,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   if (location.hash) {
     var el = document.getElementById(location.hash.slice(1));
-    if (el) el.scrollIntoView({ block: 'center' });
+    if (el) {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          el.scrollIntoView({ block: 'center' });
+        });
+      });
+    }
   }
 });
 </script>
