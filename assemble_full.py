@@ -175,7 +175,7 @@ HTML_SHELL = """<!DOCTYPE html>
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=7" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=8" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -870,6 +870,9 @@ class PageConverter:
                 out.append(p)
             else:
                 p = html_mod.escape(p)
+                # restore protected inline <span> anchors
+                p = re.sub(r'&lt;span id=&quot;(scene-[a-z]+)&quot;&gt;&lt;/span&gt;',
+                            r'<span id="\1"></span>', p)
                 p = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', p)
                 p = FN_REF.sub(footnote_link, p)
                 out.append(p)
@@ -1095,15 +1098,15 @@ def linkify_ending_next_chapter(body, next_href):
 #
 SCENE_ID_MAP = {
     '02_start.html':           {'scene-wuji':     '导论把你带到了&quot;没有尺子&quot;的门口。'},
-    '07_worldtopos.html':      {'scene-lishi':    '现在来看看&quot;历史&quot;到底是怎么成立的。'},
-    '05_unknowable.html':      {'scene-sanzhong':    '把认知够不到的边界数一数',
-                                'scene-hengxiang':   '横向不可知，就是参考态的锚',
-                                'scene-zongxiang':   '纵向不可知，就是未来',
-                                'scene-jiaoshoujia': '脚手架不可知，就是断言板'},
+    '07_worldtopos.html':      {'scene-lishi':    '现在来看看&quot;历史&quot;到底是怎么成立的。',
+                                'scene-wo':       '&quot;我&quot;坐在哪里？'},
+    '05_unknowable.html':      {'scene-sanzhong':    '把认知够不到的边界数一数'},
     '04_intentionality.html':  {'scene-heng':     '有了两股、有了两读，&quot;物理世界&quot;可以精确地安放了'},
     '03_twostreams.html':      {'scene-zong':     '<strong>为什么理解流只能倒着写。</strong>'},
     '09_assertion.html':       {'scene-dui':      '搭板就是干两件事：<strong>打桩</strong>'},
-    '06_theother.html':        {'scene-taren':    '先问一个人人都问过的问题：为什么我永远不能真正知道你在想什'},
+    '06_theother.html':        {'scene-taren':    '先问一个人人都问过的问题：为什么我永远不能真正知道你在想什',
+                                'scene-yisi':     '至于眼前这处抹不平',
+                                'scene-he':       '一种是<strong>可以被吸收</strong>'},
     '10_classicalworld.html':  {'scene-xianshi':  '这是一个方向的彻底反转。'},
     '12_epilogue.html':        {'scene-songshou': '所以松开那个锚，不是失去你。'},
     '08_intuition.html':       {'scene-luoji':    '直觉撞见的那道缝'},
@@ -1113,6 +1116,9 @@ SCENE_ID_MAP = {
 def inject_scene_ids(body, html_name):
     targets = SCENE_ID_MAP.get(html_name, {})
     for sid, marker in targets.items():
+        # skip if this id already exists in the body (e.g. from md <span>)
+        if f'id="{sid}"' in body or f"id='{sid}'" in body:
+            continue
         idx = body.find(marker)
         if idx < 0:
             continue
@@ -1250,7 +1256,7 @@ def export_html(chapters, meta=None):
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=7" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=8" type="image/svg+xml"></object></div>
  </div>
 </div>
 <script>
@@ -1359,7 +1365,7 @@ def patch_svg_dark(path):
 
     # 背景矩形（仅首次添加）
     if not already:
-        bg = '<rect x="0" y="0" width="680" height="600" fill="#1e1e1c"/>'
+        bg = '<rect x="0" y="0" width="740" height="620" fill="#1e1e1c"/>'
         svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n' + bg, svg, count=1)
 
     # ── 文字颜色 ──
@@ -1379,6 +1385,26 @@ def patch_svg_dark(path):
     svg = svg.replace('fill="#8A6A2A"', 'fill="#c8a040"')
     # 他者 sub text
     svg = svg.replace('fill="#3B6D11"', 'fill="#5ac820"')
+    # ── 新 SVG 特有颜色 ──
+    # 灰色副文本/虚线边框 (硌人的一处)
+    svg = svg.replace('fill="#8A867E"', 'fill="#d0ccc4"')
+    svg = svg.replace('stroke="#8A867E"', 'stroke="#9b97a0"')
+    svg = _re.sub(r'stroke:rgb\(138,\s*134,\s*126\)', 'stroke:#9b97a0', svg)
+    # "我"框暖色边框
+    svg = svg.replace('stroke="#8A6A2A"', 'stroke="#c8a040"')
+    # 平台 title 字体
+    svg = svg.replace('fill:rgb(0, 0, 0)', 'fill:#efece4')
+    # bg rect 暗色填充 (横向/纵向/脚手架/直觉 的实色底)
+    svg = svg.replace('fill="#712B13"', 'fill="#3a2010"')
+    svg = svg.replace('fill="#791F1F"', 'fill="#3a1010"')
+    svg = svg.replace('fill="#0C447C"', 'fill="#0a3040"')
+    svg = svg.replace('fill="#854F0B"', 'fill="#301800"')
+    # 对应边框
+    svg = svg.replace('stroke="#4A1B0C"', 'stroke="#8a3a20"')   # 横向边框
+    svg = svg.replace('stroke="#501313"', 'stroke="#a03030"')   # 纵向边框
+    svg = svg.replace('stroke="#042C53"', 'stroke="#1a5a9a"')   # 脚手架边框
+    svg = svg.replace('stroke="#412402"', 'stroke="#8a5a20"')   # 直觉边框
+    # ▼ 已由上方 dark bg fill 覆盖，删去下方旧版 attr 替换避免二次覆盖为亮色
 
     # ── 暖色填充（历史一致性/现实）→ 暗色化 ──
     svg = _re.sub(r'fill:rgb\(250,\s*238,\s*218\)', 'fill:#3a2e0a', svg)
@@ -1407,11 +1433,6 @@ def patch_svg_dark(path):
     svg = _re.sub(r'stroke:rgb\(133,\s*79,\s*11\)', 'stroke:#c88a2a', svg)
     svg = svg.replace('stroke="rgb(133,79,11)"', 'stroke="#c88a2a"')
     svg = _re.sub(r'stroke:rgb\(137,\s*135,\s*129\)', 'stroke:#9b97a0', svg)
-    # 深色框的边框 → 可见
-    svg = svg.replace('stroke="#4A1B0C"', 'stroke="#8a3a20"')   # 横向边框
-    svg = svg.replace('stroke="#501313"', 'stroke="#a03030"')   # 纵向边框
-    svg = svg.replace('stroke="#042C53"', 'stroke="#1a5a9a"')   # 脚手架边框
-    svg = svg.replace('stroke="#412402"', 'stroke="#8a5a20"')   # 直觉边框
 
     # ── 移除节点上的永久 SVG filter（参考色系无 glow-gold，高亮应仅来自 JS scene-current）──
     svg = svg.replace(' filter="url(#glow-gold)"', '')
