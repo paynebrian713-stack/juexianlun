@@ -78,6 +78,9 @@ HTML_SHELL = """<!DOCTYPE html>
   li.footnote:target {{ background: #2a2818; margin-left: -0.4rem; padding: .35rem .4rem; border-radius: 4px; }}
   a.fn-back {{ color: #8a867e; text-decoration: none; margin-right: .35rem; }}
   a.fn-back:hover {{ color: #7eb8da; }}
+  table.fn-table {{ border-collapse: collapse; width: 100%; margin: .5rem 0; font-size: .95em; }}
+  table.fn-table td, table.fn-table th {{ padding: .25rem .5rem; border: 1px solid #444; text-align: left; vertical-align: top; }}
+  table.fn-table th {{ background: #2a2a2a; font-weight: 600; }}
   a.ch-map {{ color: #7eb8da; text-decoration: none; }}
   a.ch-map:hover {{ text-decoration: underline; }}
   .fn-back-list {{ margin-left: .25rem; font-size: .85em; color: #7a766e; }}
@@ -850,7 +853,7 @@ class PageConverter:
         self.footnote_items = []
 
     def fmt_inline(self, s):
-        parts = re.split(r'(⟦MATHD?:[\d]+⟧)', s)
+        parts = re.split(r'(⟦MATHD?:\d+⟧|⟦HTML:\d+⟧)', s)
 
         def footnote_link(m):
             fid = m.group(1)
@@ -868,7 +871,7 @@ class PageConverter:
 
         out = []
         for p in parts:
-            if p.startswith('⟦MATHD:') or p.startswith('⟦MATH:'):
+            if p.startswith('⟦MATHD:') or p.startswith('⟦MATH:') or p.startswith('⟦HTML:'):
                 out.append(p)
             else:
                 p = html_mod.escape(p)
@@ -880,8 +883,47 @@ class PageConverter:
                 out.append(p)
         return ''.join(out)
 
+    def _extract_ftables(self, text):
+        """Extract markdown tables from text, replace with HTML placeholders.
+        Returns (modified_text, list_of_html_tables)."""
+        lines = text.split('\n')
+        out = []
+        tables = []
+        i = 0
+        while i < len(lines):
+            stripped = lines[i].strip()
+            if stripped.startswith('|') and i + 1 < len(lines):
+                next_stripped = lines[i+1].strip()
+                if re.match(r'^\|[\s\-:|]+\|$', next_stripped):
+                    # Collect table rows
+                    rows_html = []
+                    j = i
+                    while j < len(lines) and lines[j].strip().startswith('|'):
+                        if not re.match(r'^\|[\s\-:|]+\|$', lines[j].strip()):
+                            cells = [c.strip() for c in lines[j].strip().strip('|').split('|')]
+                            tag = 'th' if len(rows_html) == 0 else 'td'
+                            rows_html.append('<tr>' + ''.join(
+                                f'<{tag}>{self.fmt_inline(cell)}</{tag}>' for cell in cells
+                            ) + '</tr>')
+                        j += 1
+                    table_html = '<table class="fn-table">' + ''.join(rows_html) + '</table>'
+                    tables.append(table_html)
+                    out.append(f'⟦HTML:{len(tables)-1}⟧')
+                    i = j
+                    continue
+            out.append(lines[i])
+            i += 1
+        return '\n'.join(out), tables
+
     def collect_footnote(self, fid, body):
+        # Pre-extract markdown tables so they survive fmt_inline
+        body, tables = self._extract_ftables(body)
         content = self.fmt_inline(body)
+        # Restore table HTML placeholders
+        for idx, table_html in enumerate(tables):
+            content = content.replace(f'⟦HTML:{idx}⟧', table_html)
+        # Convert paragraph breaks (literal \n\n) to <br><br> for inline rendering
+        content = content.replace('\n\n', '<br><br>').replace('\n', ' ')
         backs = self.fn_index.back_links(self.html_name, fid)
         back_html = ''
         if backs:
@@ -957,8 +999,25 @@ class PageConverter:
 
             m_def = FN_DEF.match(stripped)
             if m_def:
-                self.collect_footnote(m_def.group(1), m_def.group(2))
+                fid = m_def.group(1)
+                body_lines = [m_def.group(2)]
                 i += 1
+                # Collect indented continuation lines (tables, multi-paragraph footnotes)
+                while i < len(lines):
+                    cont = lines[i]
+                    if not cont.rstrip('\n'):  # fully empty line
+                        # Peek: is next line indented continuation?
+                        if i + 1 < len(lines) and lines[i + 1].startswith('    '):
+                            body_lines.append('')
+                            i += 1
+                        else:
+                            break
+                    elif cont.startswith('    '):
+                        body_lines.append(cont[4:])  # strip 4-space indent
+                        i += 1
+                    else:
+                        break
+                self.collect_footnote(fid, '\n'.join(body_lines))
                 continue
 
             if stripped.startswith('#### '):
