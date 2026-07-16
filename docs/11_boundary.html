@@ -87,9 +87,14 @@
   a.fn-a { color: #caa76b; text-decoration: none; font-weight: 600; cursor: pointer; }
   a.fn-a:hover { color: #e0c080; text-decoration: underline; }
   a.fn-a::after { content: ' ◎'; font-size: .7em; opacity: .6; }
-  .fn-bubble { position: absolute; max-width: 360px; background: #2a2a24; border: 1px solid #4a4a44;
+  .fn-bubble { position: absolute; max-width: 360px; max-height: 75vh; overflow-y: auto;
+                background: #2a2a24; border: 1px solid #4a4a44;
                 border-radius: 8px; padding: .7rem .9rem; font-size: .9rem; z-index: 9999;
                 box-shadow: 0 6px 24px rgba(0,0,0,.7); line-height: 1.55; color: #c8c4bc; }
+  .fn-bubble::-webkit-scrollbar { width: 5px; }
+  .fn-bubble::-webkit-scrollbar-track { background: #343434; border-radius: 3px; }
+  .fn-bubble::-webkit-scrollbar-thumb { background: #5a5a5a; border-radius: 3px; }
+  .fn-bubble::-webkit-scrollbar-thumb:hover { background: #7a7a7a; }
   .fn-bubble-close { position: absolute; top: .15rem; right: .4rem; font-size: 1.1rem;
                      color: #8a867e; cursor: pointer; background: none; border: none; line-height:1; padding:0 .1rem; }
   .fn-bubble-close:hover { color: #e0dcd4; }
@@ -360,14 +365,23 @@ function showFnBubble(a, fid) {
   }
   var rect = a.getBoundingClientRect();
   var bRect = b.getBoundingClientRect();
-  var top = rect.bottom + window.scrollY + 8;
+  // max-height is 75vh via CSS; use actual rendered height
+  var bubbleH = bRect.height;
+  var spaceBelow = window.innerHeight - rect.bottom - 12;
+  var spaceAbove = rect.top - 12;
+  var top;
+  // Prefer below, flip above only if below is tight AND above has more room
+  if (spaceBelow < bubbleH && spaceAbove > spaceBelow) {
+    top = rect.top + window.scrollY - bubbleH - 8;
+    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
+  } else {
+    top = rect.bottom + window.scrollY + 8;
+  }
+  // Clamp: bubble top must not go above viewport
+  if (top < window.scrollY + 5) top = window.scrollY + 5;
   var left = rect.left + rect.width / 2 - 20;
   if (left + bRect.width > window.innerWidth - 12) left = window.innerWidth - bRect.width - 12;
   if (left < 8) left = 8;
-  if (rect.bottom + bRect.height > window.innerHeight - 12) {
-    top = rect.top + window.scrollY - bRect.height - 8;
-    b.querySelector('.fn-bubble-arrow').style.cssText = 'top:100%;bottom:auto;border-top:7px solid #4a4a44;border-bottom:none';
-  }
   b.style.left = left + 'px';
   b.style.top = top + 'px';
   b.style.opacity = 0;
