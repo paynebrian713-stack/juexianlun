@@ -441,10 +441,7 @@ def strip_footnotes_and_refs(text, ch_name=""):
     text = re.sub(r'\n\[\^[\w-]+\]:[^\n]*(?:\n(?!\[\^[\w-]+\]:|\n---\n)[^\n]*)*', '', text)
     text = re.sub(r'\[\^[\w-]+\]', '', text)
     if '附录' in ch_name:
-        # 🔧 W.6 截断：若附录节号重排，改此正则
-        m = re.search(r'\n## W\.6\b', text)
-        if m:
-            text = text[:m.start()]
+        pass  # W.6 保留
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text
 
