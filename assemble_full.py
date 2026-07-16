@@ -434,14 +434,24 @@ def clean_chapter(text, ch_name):
 
 
 def strip_footnotes_and_refs(text, ch_name=""):
-    """生成无脚注稿。🔧 附录章节号变了需改 W.6 截断点。"""
+    """生成无脚注稿。附录削减防御层/元评论，保留定理本体+W.6讨论+W.7开放问题。"""
     text = re.sub(r'\n(?:---\n)?## 脚注\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n(?:---\n)?## 参考文献\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n(?:---\n)?### 参考文献\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n\[\^[\w-]+\]:[^\n]*(?:\n(?!\[\^[\w-]+\]:|\n---\n)[^\n]*)*', '', text)
     text = re.sub(r'\[\^[\w-]+\]', '', text)
     if '附录' in ch_name:
-        pass  # W.6 保留
+        # 砍防御/元评论层，保留定理本体
+        cuts = [
+            r'\n### W\.2\.1″.*?(?=\n### |\n## )',   # 射程声明
+            r'\n### W\.2\.1′.*?(?=\n### |\n## )',   # 命题边界
+            r'\n### W\.2\.2′.*?(?=\n### |\n## )',   # 稳健性防误读
+            r'\n### W\.2\.3 .*?(?=\n### |\n## )',   # 内生态/外生态元叙述
+            r'\n### W\.2\.4 .*?(?=\n### |\n## )',   # 命题地位哥德尔类比
+            r'\n### W\.5\.4 .*?(?=\n### |\n## )',   # 对账与负结果
+        ]
+        for pat in cuts:
+            text = re.sub(pat, '', text, flags=re.DOTALL)
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text
 
