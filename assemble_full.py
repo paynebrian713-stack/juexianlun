@@ -56,16 +56,69 @@ def check_history():
             continue
         history = "\n" + parts[1]
 
-        # 只匹配块头行（以 * 开头且包含 vX→vY 的行）
-        header_lines = [ln.strip() for ln in history.split("\n") if ln.strip().startswith("*")]
-        # 从每行的前 150 字符中提取
+        # 格式 A：章节用 * 开头行含 vX→vY
+        header_lines_star = [ln.strip() for ln in history.split("\n") if ln.strip().startswith("*")]
         headers = []
-        for ln in header_lines:
+        for ln in header_lines_star:
             m = re.search(r"v([\d.]+)→v([\d.]+)", ln[:150])
             if m:
                 headers.append((m.group(1), m.group(2)))
                 short = ln[:100]
                 seen_vv[short].append(ch_name)
+
+        # 格式 B：附录用 > → **vX.Y 行（无显式 vX→vY，需手动配对）
+        # 附录可能有两个 ---：第一个是正文/沿革分界，第二个是沿革内部合并块/独立条目分界。
+        # rsplit 只取尾段，漏掉第一段 → 用 split 取第一个 --- 之后的全沿革区。
+        if not headers:
+            # 附录特判：检查 > → 格式
+            test_lines = [ln.strip() for ln in history.split("\n") if ln.strip().startswith("> → **v")]
+            if not test_lines:
+                # rsplit 的尾段也没有 > → 格式 → 可能被第二道 --- 截掉了
+                # 回退到文本里取第一个 --- 之后的全沿革区
+                parts2 = text.split("\n---\n", 1)
+                if len(parts2) >= 2:
+                    history = "\n" + parts2[1]
+
+            gt_lines = [ln.strip() for ln in history.split("\n") if ln.strip().startswith("> → **v")]
+            vers = []
+            for ln in gt_lines:
+                m = re.search(r"\*\*v([\d.]+)", ln)
+                if m:
+                    v = m.group(1)
+                    # 去重：连续两个同版本行只保留一个（附录常有多行描述同版）
+                    if not vers or v != vers[-1]:
+                        vers.append(v)
+            if vers:
+                # 从 > → 行之前的大块沿革文本里抓最后一个版本号，作为链头
+                first_gt = history.split("> → **v")[0]
+                prev_matches = re.findall(r"v([\d.]+)", first_gt)
+                prev = None
+                if prev_matches:
+                    prev = prev_matches[-1]
+                # rsplit 可能只取到第二段（缺合并块），prev 为空时回退到第一个 ---
+                if prev is None:
+                    parts2 = text.split("\n---\n", 1)
+                    if len(parts2) >= 2:
+                        history = "\n" + parts2[1]
+                        first_gt = history.split("> → **v")[0]
+                        prev_matches = re.findall(r"v([\d.]+)", first_gt)
+                        if prev_matches:
+                            prev = prev_matches[-1]
+                        # 重建 vers（全沿革区，含 v8.8 等被 rsplit 截掉的行）
+                        gt_lines = [ln.strip() for ln in history.split("\n") if ln.strip().startswith("> → **v")]
+                        vers = []
+                        for ln in gt_lines:
+                            m = re.search(r"\*\*v([\d.]+)", ln)
+                            if m:
+                                v = m.group(1)
+                                if not vers or v != vers[-1]:
+                                    vers.append(v)
+                if prev:
+                    headers = [(prev, vers[0])]
+                else:
+                    headers = [(vers[0], vers[0])]
+                for i in range(len(vers) - 1):
+                    headers.append((vers[i], vers[i + 1]))
 
         if not headers:
             continue  # 没有任何块头，不计较（可能是沿革去旧的最后一版）
