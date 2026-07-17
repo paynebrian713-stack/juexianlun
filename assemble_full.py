@@ -28,6 +28,78 @@ files = [
     (f"{BASE}/界限论_附录W_v8_16.md",                   "附录"),
 ]
 
+# ═══════════════════════════════════════════════════════════════
+# 沿革自检：每个 vX→vY 头只出现一次，版本号连成不间断的链
+# ═══════════════════════════════════════════════════════════════
+
+def check_history():
+    """扫描所有章节文件的沿革区，报粘重和链断裂。有错只打警告，不阻止生成。"""
+    import collections
+    ok = True
+    seen_vv = collections.defaultdict(list)  # vX→vY header → [(file,)]
+
+    for file_path, ch_name in files:
+        if file_path == "_零":
+            continue
+        if not os.path.exists(file_path):
+            continue
+        try:
+            with open(file_path, encoding="utf-8") as f:
+                text = f.read()
+        except Exception:
+            continue
+
+        parts = text.rsplit("\n---\n", 1)
+        if len(parts) < 2:
+            print(f"[沿革自检] ⚠️  {ch_name}: 无 --- 分隔符，无法提取沿革区")
+            ok = False
+            continue
+        history = "\n" + parts[1]
+
+        # 只匹配块头行（以 * 开头且包含 vX→vY 的行）
+        header_lines = [ln.strip() for ln in history.split("\n") if ln.strip().startswith("*")]
+        # 从每行的前 150 字符中提取
+        headers = []
+        for ln in header_lines:
+            m = re.search(r"v([\d.]+)→v([\d.]+)", ln[:150])
+            if m:
+                headers.append((m.group(1), m.group(2)))
+                short = ln[:100]
+                seen_vv[short].append(ch_name)
+
+        if not headers:
+            continue  # 没有任何块头，不计较（可能是沿革去旧的最后一版）
+
+        if len(headers) < 2:
+            continue  # 单条，无链可查
+
+        # 链连续性：后一个 from 应等于前一个 to（按出现顺序）
+        chain_broken = False
+        for i in range(len(headers) - 1):
+            if headers[i][1] != headers[i + 1][0]:
+                chain_broken = True
+                break
+
+        if chain_broken:
+            chain_str = " → ".join(f"v{a}→v{b}" for a, b in headers)
+            print(f"[沿革自检] ⚠️  {ch_name}: 版本链断裂 — {chain_str}")
+            ok = False
+
+    # 汇总粘重（同一块头出现在多章 or 同一章里重复——同一章内重复应已在上面链检查中体现）
+    dups = {k: v for k, v in seen_vv.items() if len(v) > 1}
+    if dups:
+        print("[沿革自检] ⚠️  粘重：以下版本头出现多于一次：")
+        for hdr, chs in dups.items():
+            print(f"           {hdr[:80]} → {', '.join(set(chs))}")
+        ok = False
+
+    if ok:
+        print("[沿革自检] ✅ 全部通过")
+    return ok
+
+
+check_history()
+
 # 🔧 章节增删/改名时必须同步：中文简称 → 英文短名（用于生成 HTML 文件名）
 SAFE_NAME = {
     "导论": "introduction",
