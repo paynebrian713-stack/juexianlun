@@ -533,7 +533,7 @@ def strip_footnotes_and_refs(text, ch_name=""):
 def load_chapter(file_path, ch_name):
     # 🔧 哨兵 "_零" → 真实路径：更新第零章文件版本号时改这里
     if file_path == "_零":
-        actual = f"{BASE}/界限论_第零章_可读重写_v0_39.md"
+        actual = f"{BASE}/界限论_第零章_可读重写_v0_40.md"
     else:
         actual = file_path
     with open(actual, encoding="utf-8") as f:
