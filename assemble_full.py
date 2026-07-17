@@ -17,8 +17,8 @@ files = [
     ("_零",                                             "第零章"),  # ← 哨兵：实路径见 load_chapter()
     (f"{BASE}/界限论_第一章_可读重写_v0_30.md",         "第一章"),
     (f"{BASE}/界限论_第二章_可读重写_v0_25.md",         "第二章"),
-    (f"{BASE}/界限论_第三章_可读重写_v1_9.md",          "第三章"),
-    (f"{BASE}/界限论_第四章_可读重写_v0_35.md",         "第四章"),
+    (f"{BASE}/界限论_第三章_可读重写_v1_10.md",         "第三章"),
+    (f"{BASE}/界限论_第四章_可读重写_v0_36.md",         "第四章"),
     (f"{BASE}/界限论_第五章_可读重写_v0_17.md",          "第五章"),
     (f"{BASE}/界限论_第六章_可读重写_v0_26.md",         "第六章"),
     (f"{BASE}/界限论_第七章_可读重写_v0_43.md",         "第七章"),
@@ -586,7 +586,7 @@ def strip_footnotes_and_refs(text, ch_name=""):
 def load_chapter(file_path, ch_name):
     # 🔧 哨兵 "_零" → 真实路径：更新第零章文件版本号时改这里
     if file_path == "_零":
-        actual = f"{BASE}/界限论_第零章_可读重写_v0_42.md"
+        actual = f"{BASE}/界限论_第零章_可读重写_v0_43.md"
     else:
         actual = file_path
     with open(actual, encoding="utf-8") as f:
