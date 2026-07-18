@@ -515,8 +515,18 @@ FN_DEF = re.compile(r'^\[\^([\w-]+)\]:\s*(.*)', re.M)
 # ── 章节加载与清理 ──────────────────────────────────────────
 
 def clean_title(line):
-    line = re.sub(r'\s*（[^）]*）', '', line)
-    line = re.sub(r'\s*\([^)]*\)', '', line)
+    # Remove nested Chinese parentheses recursively (inner first)
+    while '\uff08' in line and '\uff09' in line:
+        new_line = re.sub(r'\uff08[^\uff08\uff09]*\uff09', '', line)
+        if new_line == line:
+            break
+        line = new_line
+    # Remove English parentheses
+    while '(' in line and ')' in line:
+        new_line = re.sub(r'\([^()]*\)', '', line)
+        if new_line == line:
+            break
+        line = new_line
     return line.strip()
 
 
