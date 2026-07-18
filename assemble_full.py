@@ -25,7 +25,7 @@ files = [
     (f"{BASE}/界限论_第八章_可读重写_v0_30.md",         "第八章"),
     (f"{BASE}/界限论_第九章_可读重写_v0_22.md",         "第九章"),
     (f"{BASE}/界限论_尾声_可读重写_v0_34.md",           "尾声"),
-    (f"{BASE}/界限论_附录W_v8_35.md",                   "附录"),
+    (f"{BASE}/界限论_附录W_v8_36.md",                   "附录"),
 ]
 
 # ═══════════════════════════════════════════════════════════════
@@ -723,61 +723,65 @@ def linkify_w_refs(html):
 # 左列：图中原文（缩进、空格一个都不能差）
 # 右列：替换后带 <a href="#w-N"> 的 HTML
 # 若附录节号重排→改所有 href；若图表文字修改→改左列匹配串；位置不准→整段无声失效
-DPIAGRAM_REPLACE = [
-    ('                    公理 Σ  (W.1:M 为 III₁ 因子 · 可分)',
-     '                    公理 Σ  (<a href="#w-1" class="d-link">W.1</a>:M 为 III₁ 因子 · 可分)'),
-    ('        ┌──────── 引理 W.2.1  无凸显态 ────────┐   ← 全篇总源头(枢纽)',
-     '        ┌──────── <a href="#w-1-star" class="d-link">引理 W.2.1  无凸显态</a> ────────┐   ← 全篇总源头(枢纽)'),
-    ('   中心定理             + Cartan/FM 框架       (下游各处引用,',
-     '   <a href="#w-2" class="d-link">中心定理</a>             + <a href="#w-1" class="d-link">Cartan/FM 框架</a>       (下游各处引用,'),
-    (' (视角不可内生)            (W.1)                 不重复证明)',
-     ' (<a href="#w-2" class="d-link">视角不可内生</a>)            (<a href="#w-1" class="d-link">W.1</a>)                 不重复证明)'),
-    ('   主定理 A             主定理 B',
-     '   <a href="#w-2" class="d-link">主定理 A</a>             <a href="#w-3" class="d-link">主定理 B</a>'),
-    (' (不可能性:统一          (刻画:缝 = [σ] ∈ H²(R̄,𝕋),',
-     ' (<a href="#w-2" class="d-link">不可能性:统一</a>          (<a href="#w-3" class="d-link">刻画:缝 = [σ] ∈ H²(R̄,𝕋),</a>'),
-    ('  动力学不可自给)         他者身份;活账本非极大,',
-     '  <a href="#w-2" class="d-link">动力学不可自给</a>)         他者身份;活账本非极大,'),
-    ('                         荷K/他者[σ]同层·Sutherland)',
-     '                         <a href="#w-3" class="d-link">荷K/他者[σ]同层·Sutherland</a>)'),
-    ('        │              主定理 C',
-     '        │              <a href="#w-4" class="d-link">主定理 C</a>'),
-    ('        │            ([σ] 独立于全部公理;',
-     '        │            (<a href="#w-4" class="d-link">[σ] 独立于全部公理;</a>'),
-    ('        │             非平凡性押 (★))',
-     '        │             <a href="#w-4" class="d-link">非平凡性押 (★)</a>)'),
-    ('  W.2 同族配套(第一人称&quot;够不到&quot;的三面):',
-     '  <a href="#w-2" class="d-link">W.2 同族配套</a>(第一人称&quot;够不到&quot;的三面):'),
-    ('   态半  W.2.1–2.4(视角不可内生)',
-     '   态半  <a href="#w-2" class="d-link">W.2.1–2.4</a>(视角不可内生)'),
-    ('   窗口半 W.2.6(相对对易子平凡与否不可内生判定)',
-     '   窗口半 <a href="#w-2" class="d-link">W.2.6</a>(相对对易子平凡与否不可内生判定)'),
-    ('   舞台半 W.2.7(环境欠定,命题 R★)',
-     '   舞台半 <a href="#w-2" class="d-link">W.2.7</a>(环境欠定,命题 R★)'),
-    ('  推论层 W.5(非顺从/荷对偶/三刻画等价/有限性)由主定理导出',
-     '  <a href="#w-5" class="d-link">推论层 W.5</a>(非顺从/荷对偶/三刻画等价/有限性)由主定理导出'),
-    ('  图景层 W.6(判定机·三缺/对易性=语法/物理对照)= 讨论,非定理',
-     '  <a href="#w-6" class="d-link">图景层 W.6</a>(判定机·三缺/对易性=语法/物理对照)= 讨论,非定理'),
-    ('  开放    W.7((★) 等)',
-     '  开放    <a href="#w-7" class="d-link">W.7</a>((★) 等)'),
+# v8.36 拆为两张图：图一（三面同源）、图二（B/C 链）
+
+DPIAGRAM1_REPLACE = [
+    # ── 图一 · 三面同源（总根=无迹）────
+    ('                     公理 Σ (W.1:',
+     '                     公理 Σ (<a href="#w-1" class="d-link">W.1</a>:'),
+    ('   引理 W.1.★          [^weakwit]',
+     '   <a href="#w-1-star" class="d-link">引理 W.1.★</a>          [^weakwit]'),
+    ('   主定理 A                  ▼                  须借板',
+     '   <a href="#w-2" class="d-link">主定理 A</a>                  ▼                  须借板'),
+    ('   (视角不可内生 ⟹      乙:',
+     '   (<a href="#w-2" class="d-link">视角不可内生</a> ⟹      乙:'),
+    ('    统一动力学          丙:',
+     '    <a href="#w-2" class="d-link">统一动力学</a>          丙:'),
+    ('    不可自给)                │',
+     '    <a href="#w-2" class="d-link">不可自给</a>)                │'),
+    ('   ＝中心定理                ▼',
+     '   ＝<a href="#w-2" class="d-link">中心定理</a>                ▼'),
+    ('      → W.6.1.1',
+     '      → <a href="#w-6" class="d-link">W.6.1.1</a>'),
+    ('                 "不完全是特征,不是缺陷"(W.3.1)',
+     '                 "不完全是特征,不是缺陷"(<a href="#w-3" class="d-link">W.3.1</a>)'),
+]
+
+DPIAGRAM2_REPLACE = [
+    # ── 图二 · 主定理 B/C 链（不经无迹）────
+    ('   Cartan/FM 框架 (W.1) ——',
+     '   Cartan/FM 框架 (<a href="#w-1" class="d-link">W.1</a>) ——'),
+    ('   主定理 B (缝的内核',
+     '   <a href="#w-3" class="d-link">主定理 B</a> (缝的内核'),
+    ('   主定理 C ([σ]',
+     '   <a href="#w-4" class="d-link">主定理 C</a> ([σ]'),
+    ('〔配套证件·顺从⟹H²=0(W.5.1 主线,',
+     '〔配套证件·顺从⟹H²=0(<a href="#w-5" class="d-link">W.5.1</a> 主线,'),
 ]
 
 
 def linkify_ascii_diagram(body):
-    """将 W.0 ASCII 逻辑链图中的关键词转换为可点击跳转链接。"""
-    # 🔧 若图表内容（缩进/首字母）被修改，此 needle 必须同步更新，否则整段无声失效
-    needle = '<pre><code>\n                    公理 Σ'
-    start = body.find(needle)
-    if start < 0:
-        return body
-    end = body.find('</code></pre>', start)
-    if end < 0:
-        return body
-    content = body[start + len('<pre><code>\n'):end]
-    for old, new in DPIAGRAM_REPLACE:
-        content = content.replace(old, new)
-    new_block = f'<pre class="diagram"><code>{content}</code></pre>'
-    return body[:start] + new_block + body[end + len('</code></pre>'):]
+    """将 W.0 ASCII 逻辑链图中的关键词转换为可点击跳转链接。
+    v8.36 起拆为两张图（图一·三面同源、图二·B/C 链），各用独立替换表。"""
+    needles = [
+        ('【图一 · 三面同源', DPIAGRAM1_REPLACE),
+        ('【图二 · 主定理 B/C 链', DPIAGRAM2_REPLACE),
+    ]
+    result = body
+    for needle_text, replaces in needles:
+        needle = '<pre><code>\n' + needle_text
+        start = result.find(needle)
+        if start < 0:
+            continue
+        end = result.find('</code></pre>', start)
+        if end < 0:
+            continue
+        content = result[start + len('<pre><code>\n'):end]
+        for old, new in replaces:
+            content = content.replace(old, new)
+        new_block = f'<pre class="diagram"><code>{content}</code></pre>'
+        result = result[:start] + new_block + result[end + len('</code></pre>'):]
+    return result
 
 
 def extract_intro_subtitle(text):
