@@ -529,6 +529,11 @@ def clean_title(line):
         if new_line == line:
             break
         line = new_line
+    # Strip any remaining unmatched closing Chinese/English brackets
+    line = re.sub(r'[\uff09\)]+', '', line)
+    # Strip edit-note suffixes: ·P1-V ..., ／P1-W ..., §9.1
+    line = re.sub(r'[·／]P\d+[-–—].*$', '', line)
+    line = re.sub(r'\s*§\d+\.\d+\s*$', '', line)
     return line.strip()
 
 
