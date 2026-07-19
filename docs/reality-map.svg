@@ -80,8 +80,8 @@
 <text x="122" y="400" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">① 点集·地址（最粗·墙基）</text>
 <text x="122" y="414" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">打桩落盘（喂给引擎）</text>
 </g>
-<line x1="22" y1="405" x2="22" y2="330" stroke="#6f9a8e" stroke-width="1.7" opacity="0.75" marker-end="url(#arrow)"/>
-<text x="14" y="368" text-anchor="middle" fill="#6f9a8e" font-family="'Anthropic Sans',sans-serif" font-size="10" transform="rotate(-90 14 368)">自己的墙·实</text>
+<line x1="8" y1="405" x2="8" y2="330" stroke="#6f9a8e" stroke-width="1.7" opacity="0.75" marker-end="url(#arrow)"/>
+<text x="0" y="368" text-anchor="middle" fill="#6f9a8e" font-family="'Anthropic Sans',sans-serif" font-size="10" transform="rotate(-90 0 368)">自己的墙·实</text>
 <text x="122" y="440" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="11">①②③不欠态外位 · Borel 比拓扑粗（在下）</text>
 <!-- ①点集 喂给引擎 -->
 <path d="M210 396 C 280 384, 320 320, 342 286" fill="none" stroke="#6f9a8e" stroke-width="1.7" opacity="0.85" marker-end="url(#arrow)"/>
@@ -99,8 +99,8 @@
 <path d="M60 424 C 48 456, 48 480, 54 504" fill="none" stroke="#c86a30" stroke-width="1.7" opacity="0.9" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
 <text x="68" y="462" text-anchor="middle" fill="#d89050" font-family="'Anthropic Sans',sans-serif" font-size="10">爬不上→外接借</text>
 <!-- ④ ⇢ 现实（借来的度量配给现实） -->
-<path d="M246 524 C 288 522, 300 486, 310 464" fill="none" stroke="#3a8ac8" stroke-width="1.9" opacity="0.75" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
-<text x="310" y="488" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="13">借度量配现实</text>
+<path d="M246 530 C 275 548, 300 520, 318 462" fill="none" stroke="#3a8ac8" stroke-width="1.9" opacity="0.75" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+<text x="268" y="538" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="13">借度量配现实</text>
 
 <!-- ===== 右侧：遭遇→荷/他者 ===== -->
 <line x1="452" y1="438" x2="492" y2="438" stroke="#ba7517" stroke-width="1.8" opacity="0.9" marker-end="url(#arrow)"/>
