@@ -182,6 +182,8 @@ HTML_SHELL = """<!DOCTYPE html>
   h2:first-of-type {{ border-top: none; margin-top: 0; padding-top: 0; }}
   h3 {{ font-size: 1.08rem; color: #d0ccc4; }}
   blockquote {{ border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }}
+  ul, ol {{ margin: .8rem 0; padding-left: 1.6rem; }}
+  ul li, ol li {{ margin: .3rem 0; }}
   code {{ background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }}
   pre {{ background: #242420; padding: .75rem; overflow-x: auto; border-radius: 4px; color: #c8c4bc; }}
   .nav {{ font-size: .88rem; margin-bottom: 1.2rem; color: #7a766e; }}
@@ -308,7 +310,7 @@ HTML_SHELL = """<!DOCTYPE html>
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=17" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=8" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -1206,12 +1208,61 @@ class PageConverter:
                     i += 1
                 out.append('<table border="1" cellpadding="6" cellspacing="0">' + ''.join(rows) + '</table>')
                 continue
+            elif re.match(r'^[-*+]\s', stripped):
+                flush_quote()
+                items = []
+                while i < len(lines):
+                    s = lines[i].strip()
+                    if not s:
+                        # look ahead: next non-empty line is same list marker?
+                        peek = i + 1
+                        while peek < len(lines) and lines[peek].strip() == '':
+                            peek += 1
+                        if peek < len(lines) and not re.match(r'^[-*+]\s', lines[peek].strip()):
+                            break
+                        i += 1
+                        continue
+                    if re.match(r'^[-*+]\s', s):
+                        content = re.sub(r'^[-*+]\s+', '', s)
+                        items.append(content)
+                        i += 1
+                    else:
+                        break
+                if items:
+                    lis = ''.join(f'<li>{self.fmt_inline(item)}</li>' for item in items)
+                    out.append(f'<ul>{lis}</ul>')
+                continue
+            elif re.match(r'^\d+\.\s', stripped):
+                flush_quote()
+                items = []
+                while i < len(lines):
+                    s = lines[i].strip()
+                    if not s:
+                        peek = i + 1
+                        while peek < len(lines) and lines[peek].strip() == '':
+                            peek += 1
+                        if peek < len(lines) and not re.match(r'^\d+\.\s', lines[peek].strip()):
+                            break
+                        i += 1
+                        continue
+                    if re.match(r'^\d+\.\s', s):
+                        content = re.sub(r'^\d+\.\s+', '', s)
+                        items.append(content)
+                        i += 1
+                    else:
+                        break
+                if items:
+                    lis = ''.join(f'<li>{self.fmt_inline(item)}</li>' for item in items)
+                    out.append(f'<ol>{lis}</ol>')
+                continue
             else:
                 para = [line]
                 i += 1
                 while i < len(lines):
                     s = lines[i].strip()
                     if s == '' or s == '* * *' or s.startswith('#') or s.startswith('>') or s.startswith('```'):
+                        break
+                    if s.startswith('|') or s.startswith('- ') or s.startswith('* ') or s.startswith('+ '):
                         break
                     if re.fullmatch(r'⟦MATHD:\d+⟧', s):
                         break
@@ -1478,7 +1529,7 @@ def export_html(chapters, meta=None):
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=17" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=8" type="image/svg+xml"></object></div>
  </div>
 </div>
 <script>
@@ -1585,15 +1636,10 @@ def patch_svg_dark(path):
     if 'preserveAspectRatio=' not in svg:
         svg = svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ', 1)
 
-    # 背景矩形（仅首次添加；尺寸跟 viewBox，已有全幅 bg 则不重复）
+    # 背景矩形（仅首次添加）
     if not already:
-        vb = _re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg)
-        bw, bh = (vb.group(1), vb.group(2)) if vb else ('780', '700')
-        has_bg = _re.search(r'<rect\s+x="0"\s+y="0"\s+width="[\d.]+"\s+height="[\d.]+"\s+fill="#1e1e1c"', svg)
-        insert = '\n<!--svg-dark:v1-->'
-        if not has_bg:
-            insert += f'\n<rect x="0" y="0" width="{bw}" height="{bh}" fill="#1e1e1c"/>'
-        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1' + insert, svg, count=1)
+        bg = '<rect x="0" y="0" width="740" height="620" fill="#1e1e1c"/>'
+        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n' + bg, svg, count=1)
 
     # ── 文字颜色 ──
     # 主要文本：黑色→浅色
@@ -1673,25 +1719,14 @@ def patch_svg_dark(path):
         svg = svg.replace('opacity="0.65"', 'opacity="0.9"')
         svg = svg.replace('opacity="0.7"', 'opacity="0.9"')
         svg = svg.replace('opacity="0.8"', 'opacity="0.95"')
-        # 字号微调：主标题 +3；中号 +1；注解小字（≤11）保持原设计，避免全抬到 15 导致重叠
+        # 字号 +3（14→17, 12→15）
         def _norm_css(m):
             n = int(m.group(1))
-            if n >= 14:
-                t = min(n + 3, 17)
-            elif n >= 12:
-                t = n + 1
-            else:
-                t = n
-            return f'font-size:{t}px'
+            return f'font-size:{"17" if n >= 14 else "15"}px'
         svg = _re.sub(r'font-size:(\d+)px', _norm_css, svg)
         def _norm_attr(m):
             n = int(m.group(1))
-            if n >= 14:
-                t = min(n + 3, 17)
-            elif n >= 12:
-                t = n + 1
-            else:
-                t = n
+            t = 17 if n >= 14 else 15
             return f'font-size="{t}"'
         svg = _re.sub(r'font-size="(\d+)"', _norm_attr, svg)
         # 线条加粗 +0.5

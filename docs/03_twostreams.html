@@ -14,6 +14,8 @@
   h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   h3 { font-size: 1.08rem; color: #d0ccc4; }
   blockquote { border-left: 3px solid #4a4a44; margin: 1rem 0; padding: .2rem 0 .2rem 1rem; color: #a8a49c; }
+  ul, ol { margin: .8rem 0; padding-left: 1.6rem; }
+  ul li, ol li { margin: .3rem 0; }
   code { background: #2a2a26; padding: .08em .3em; border-radius: 3px; font-size: .9em; color: #c0bca0; }
   pre { background: #242420; padding: .75rem; overflow-x: auto; border-radius: 4px; color: #c8c4bc; }
   .nav { font-size: .88rem; margin-bottom: 1.2rem; color: #7a766e; }
@@ -199,9 +201,7 @@
 <p>沿模流朝过去追溯，定义反向收缩序列</p>
 <div class="math-block">\[\mathcal{N}_\lambda:=\sigma_{-\lambda}^{\omega^*}(\mathcal{N}),\qquad\lambda\ge0.\]</div>
 <p>\(\lambda\) 是反向时间，越大，追溯的曾在越久远。这个序列有三条性质：</p>
-<p>1. <strong>严格递减</strong>：\(\mu>\lambda\Rightarrow\mathcal{N}_\mu\subsetneq\mathcal{N}_\lambda\)。每往回一步，可理解的脉络就收窄一点——越靠源头，分化出来的结构越少。（由半边模包含的<strong>严格</strong>单侧性直接得出。）</p>
-<p>2. <strong>极限被模流双侧保持</strong>：\(\mathcal{N}_{-\infty}:=\bigcap_{\lambda\ge0}\mathcal{N}_\lambda\) 满足 \(\sigma_t(\mathcal{N}_{-\infty})=\mathcal{N}_{-\infty}\)（模流是自同构、与交运算交换）。</p>
-<p>3. <strong>极限的值</strong>：在本书采用的标准（非退化）半边模包含定义下，这个极限就是 \(\mathbb{C}1\)——&quot;\(\bigcap_t\sigma_t(\mathcal{N})=\mathbb{C}1\)&quot;正是那个定义的一部分（附录 W.2.1′）<sup><a href="#fn-connes-erg" id="fnref-connes-erg" class="fn-a" data-fn="fn-connes-erg">[connes-erg]</a></sup>。（&quot;标准&quot;这一条本身也在 <sup><a href="#fn-premise" class="fn-a" data-fn="fn-premise">[premise]</a></sup> 那条前件里：本书处理的是这样一个被给予的、标准的窗口，并不宣称每个窗口都标准。<sup><a href="#fn-standard" id="fnref-standard" class="fn-a" data-fn="fn-standard">[standard]</a></sup>）所以追溯到底，归于的是<strong>再没有可分化结构</strong>的那个极限。</p>
+<ol><li><strong>严格递减</strong>：\(\mu>\lambda\Rightarrow\mathcal{N}_\mu\subsetneq\mathcal{N}_\lambda\)。每往回一步，可理解的脉络就收窄一点——越靠源头，分化出来的结构越少。（由半边模包含的<strong>严格</strong>单侧性直接得出。）</li><li><strong>极限被模流双侧保持</strong>：\(\mathcal{N}_{-\infty}:=\bigcap_{\lambda\ge0}\mathcal{N}_\lambda\) 满足 \(\sigma_t(\mathcal{N}_{-\infty})=\mathcal{N}_{-\infty}\)（模流是自同构、与交运算交换）。</li><li><strong>极限的值</strong>：在本书采用的标准（非退化）半边模包含定义下，这个极限就是 \(\mathbb{C}1\)——&quot;\(\bigcap_t\sigma_t(\mathcal{N})=\mathbb{C}1\)&quot;正是那个定义的一部分（附录 W.2.1′）<sup><a href="#fn-connes-erg" id="fnref-connes-erg" class="fn-a" data-fn="fn-connes-erg">[connes-erg]</a></sup>。（&quot;标准&quot;这一条本身也在 <sup><a href="#fn-premise" class="fn-a" data-fn="fn-premise">[premise]</a></sup> 那条前件里：本书处理的是这样一个被给予的、标准的窗口，并不宣称每个窗口都标准。<sup><a href="#fn-standard" id="fnref-standard" class="fn-a" data-fn="fn-standard">[standard]</a></sup>）所以追溯到底，归于的是<strong>再没有可分化结构</strong>的那个极限。</li></ol>
 <p>第三条要说准，因为它容易被写过头。追溯的终点，不是一个&quot;绝对的虚无点&quot;——说&quot;归于虚无&quot;，是过强了。它是<strong>再没有可分化结构</strong>的那个极限：每往回一步，可理解的脉络就窄一分；追到底，分化就穷尽了。这跟第零章那个中心化子 \(\mathcal{M}^{\omega^*}\) <strong>不是一回事</strong>——那个是模流自己的不动点代数（它可以非平凡，见第零章 0.C″），只依赖基线 \(\omega^*\)、跟你这一具体窗口无关；而这里这个，是<strong>你这一具体窗口</strong>追溯的终点，依赖那个被给予的 \(\mathcal{N}\)。可反复回到、做流不变比较的那个不动底子，是前者。<sup><a href="#fn-p5" id="fnref-p5" class="fn-a" data-fn="fn-p5">[p5]</a></sup></p>
 <p><span id="scene-zong"></span><strong>为什么理解流只能倒着写。</strong> 上面的反向收缩序列，是从当下的窗口 \(\mathcal{N}\) 出发、朝过去 \(\sigma_{-\lambda}\) 定义的。反过来，想从不动核朝前&quot;积出&quot; \(\mathcal{N}\)，是做不到的：正向的 \(\sigma_{+\lambda}(\mathcal{N})\supsetneq\mathcal{N}\)（\(\lambda>0\)）需要一批多出来的生成元，它们落在当下窗口之外、尚未被给予（半边模包含只保证 \(t\le0\) 方向落在 \(\mathcal{N}\) 内）。所以从当下朝前重建的那个映射，不是&quot;算不准&quot;，是根本没有定义域——它要用的材料不在场（这正接第三章：未来是&quot;无物&quot;，不是&quot;难算&quot;）。收缩路径确定、可算到底；展开映射，无从落笔。所以理解流的动力学，起点定在当下、终点定在过去的极限，方向永远是从现在往回。</p>
 <p>这不是数学的别扭，是&quot;理解&quot;这件事的本性：理解永远是对已经在此者的把握——&quot;原来如此&quot;这个词，已经泄露了方向。一个朝前积的&quot;理解动力学&quot;，概念上就矛盾：那不是理解，是预言，而预言是没有的（选择算不尽，第四章）。</p>
@@ -318,7 +318,7 @@
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=17" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=8" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
