@@ -125,8 +125,8 @@
 <text x="679" y="520" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">荷 · 可吸收</text>
 <text x="679" y="540" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="'Anthropic Sans',sans-serif" font-size="14">压得进账本（在流上）</text>
 </g></a>
-<path d="M585 530 C 540 470, 490 448, 452 436" fill="none" stroke="#ba7517" stroke-width="1.9" opacity="0.9" marker-end="url(#arrow)"/>
-<text x="540" y="488" text-anchor="middle" fill="#c8a040" font-family="'Anthropic Sans',sans-serif" font-size="15">账本扩大</text>
+<path d="M585 540 C 530 490, 480 475, 452 454" fill="none" stroke="#ba7517" stroke-width="1.9" opacity="0.9" marker-end="url(#arrow)"/>
+<text x="530" y="515" text-anchor="middle" fill="#c8a040" font-family="'Anthropic Sans',sans-serif" font-size="15">账本扩大</text>
 
 <!-- ===== 松手（右上）→ 撤锚回无迹，先交还④ ===== -->
 <a href="12_epilogue.html#scene-songshou" target="_top"><g>
