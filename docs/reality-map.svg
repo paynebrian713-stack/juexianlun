@@ -111,22 +111,22 @@
 <text x="576" y="444" text-anchor="middle" dominant-baseline="central" fill="#d0ccc4" font-family="'Anthropic Sans',sans-serif" font-size="14">都先当荷去压</text>
 <text x="576" y="460" text-anchor="middle" dominant-baseline="central" fill="#d0ccc4" font-family="'Anthropic Sans',sans-serif" font-size="14">当下分不清是荷是他者</text>
 </g>
-<line x1="644" y1="418" x2="678" y2="372" stroke="#3b6d11" stroke-width="1.9" opacity="0.9" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="620" y1="418" x2="630" y2="372" stroke="#3b6d11" stroke-width="1.9" opacity="0.9" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
 <g>
-<rect x="656" y="320" width="150" height="46" rx="8" fill="none" stroke="#3b6d11" stroke-width="2.0" stroke-dasharray="5 4"/>
-<text x="731" y="337" text-anchor="middle" dominant-baseline="central" fill="#8ad060" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">他者 · 抹不平</text>
-<text x="731" y="355" text-anchor="middle" dominant-baseline="central" fill="#5ac820" font-family="'Anthropic Sans',sans-serif" font-size="17">留在缝里，不接账本</text>
+<rect x="585" y="315" width="188" height="56" rx="8" fill="none" stroke="#3b6d11" stroke-width="2.0" stroke-dasharray="5 4"/>
+<text x="679" y="333" text-anchor="middle" dominant-baseline="central" fill="#8ad060" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">他者 · 抹不平</text>
+<text x="679" y="354" text-anchor="middle" dominant-baseline="central" fill="#5ac820" font-family="'Anthropic Sans',sans-serif" font-size="14">留在缝里，不接账本</text>
 </g>
-<path d="M656 338 C 646 302, 694 266, 730 244" fill="none" stroke="#c87040" stroke-width="1.5" opacity="0.9" stroke-dasharray="4 5" marker-end="url(#arrow)"/>
-<text x="680" y="296" text-anchor="middle" fill="#c87040" font-family="'Anthropic Sans',sans-serif" font-size="13">逼出重奠</text>
-<line x1="644" y1="468" x2="678" y2="500" stroke="#ba7517" stroke-width="1.9" opacity="0.9" marker-end="url(#arrow)"/>
+<path d="M585 340 C 575 302, 640 266, 670 244" fill="none" stroke="#c87040" stroke-width="1.5" opacity="0.9" stroke-dasharray="4 5" marker-end="url(#arrow)"/>
+<text x="640" y="296" text-anchor="middle" fill="#c87040" font-family="'Anthropic Sans',sans-serif" font-size="13">逼出重奠</text>
+<line x1="620" y1="468" x2="630" y2="500" stroke="#ba7517" stroke-width="1.9" opacity="0.9" marker-end="url(#arrow)"/>
 <a href="06_theother.html#scene-he" target="_top"><g>
-<rect x="656" y="506" width="150" height="46" rx="8" fill="#3a2e0a" stroke="#c88a2a" stroke-width="1.5"/>
-<text x="731" y="523" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">荷 · 可吸收</text>
-<text x="731" y="541" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="'Anthropic Sans',sans-serif" font-size="17">压得进账本（在流上）</text>
+<rect x="585" y="502" width="188" height="56" rx="8" fill="#3a2e0a" stroke="#c88a2a" stroke-width="1.5"/>
+<text x="679" y="520" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">荷 · 可吸收</text>
+<text x="679" y="540" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="'Anthropic Sans',sans-serif" font-size="14">压得进账本（在流上）</text>
 </g></a>
-<path d="M654 524 C 540 522, 460 494, 434 465" fill="none" stroke="#ba7517" stroke-width="1.9" opacity="0.9" marker-end="url(#arrow)"/>
-<text x="536" y="496" text-anchor="middle" fill="#c8a040" font-family="'Anthropic Sans',sans-serif" font-size="17">账本扩大</text>
+<path d="M585 520 C 545 490, 505 450, 454 430" fill="none" stroke="#ba7517" stroke-width="1.9" opacity="0.9" marker-end="url(#arrow)"/>
+<text x="530" y="470" text-anchor="middle" fill="#c8a040" font-family="'Anthropic Sans',sans-serif" font-size="15">账本扩大</text>
 
 <!-- ===== 松手（右上）→ 撤锚回无迹，先交还④ ===== -->
 <a href="12_epilogue.html#scene-songshou" target="_top"><g>
