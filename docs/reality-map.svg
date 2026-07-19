@@ -1,6 +1,5 @@
 <svg preserveAspectRatio="xMidYMid meet" width="100%" viewBox="0 0 780 700" role="img" xmlns="http://www.w3.org/2000/svg">
 <!--svg-dark:v1-->
-<rect x="0" y="0" width="740" height="620" fill="#1e1e1c"/>
 <rect x="0" y="0" width="780" height="700" fill="#1e1e1c"/>
 <title>经典世界怎么被认出来（几何＝四层，①②③引擎撞的墙，④是墙外借来的）</title>
 <desc>根是无迹，在顶。往下是"我"——坐上参照席、发动核对的活动。引擎是历史一致性：核对、照不裁。引擎运转时撞到三处够不到：横向·参考态、纵向·单侧，以及"脚手架·D"——脚手架不是一格，是一整条阶梯，引擎想要几何就撞上它。阶梯从粗到细：①点集（打桩落盘的地址，喂给引擎），②可测·可广播（哪些可指认、能广播——这层维数盲、看不见远近；且不是免费的：可广播押退相干选出独大账本、押7b），③拓扑·序（模流给"谁挨着谁、能逼近"，给序不给尺）。Borel 比拓扑粗、在下，拓扑更细在上（Borel 由拓扑遗忘开集而来）。①②③是自己够得着的墙面，都不欠态外位——引擎爬到③就到顶。④度量·D 在这道墙的外面、够不到：距离与维数的数值，要外接借来一把尺、付一次态外位；D 可去、非典范、充当非为真。③与④之间有一道间隙，④画成虚线、进出④的箭头都是虚的——前三层是自己搭的，第四层是赊来的。引擎缝出现实（压出来的岛），④再把借来的度量配给现实。现实的岛是真的，但海不因此变浅：造的是岛、不是大陆，搭得再高也不接近"真几何"。现实往下撞直觉·逻辑的边界；往右遭遇他者：都先当荷去压，当下分不清眼前这处是荷还是他者（结构性的，不是不够细心）——压得进账本的是荷（绕回现实、在流上），压不掉的是他者（留在缝里、不接账本）。他者逼出重奠。松手撤锚回无迹，借来的④第一个被交还。点任一节点跳到对应章节。</desc>
@@ -8,9 +7,9 @@
 <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
 </defs>
 <text x="36" y="26" fill="#e8e4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">经典世界怎么被认出来</text>
-<text x="36" y="45" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="15">几何＝四层：①②③引擎撞的墙（自己的底），④是墙外借来的（充当非为真）</text>
-<text x="744" y="14" text-anchor="end" fill="#b0aca0" font-family="'Anthropic Sans',sans-serif" font-size="15">实线＝自己的/在流上　虚线＝借来的·够不到的（压不动）</text>
-<text x="744" y="32" text-anchor="end" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="15">安全＝不欠态外位（②仍押退相干/广播债，非白给）</text>
+<text x="36" y="45" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="14">几何＝四层：①②③引擎撞的墙（自己的底），④是墙外借来的（充当非为真）</text>
+<text x="744" y="14" text-anchor="end" fill="#b0aca0" font-family="'Anthropic Sans',sans-serif" font-size="13">实线＝自己的/在流上　虚线＝借来的·够不到的（压不动）</text>
+<text x="744" y="32" text-anchor="end" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="13">安全＝不欠态外位（②仍押退相干/广播债，非白给）</text>
 
 <!-- ===== 主干：无迹→我→引擎→现实→直觉 ===== -->
 <a href="02_start.html#scene-wuji" target="_top"><g>
@@ -33,9 +32,9 @@
 <a href="10_classicalworld.html#scene-xianshi" target="_top"><g>
 <rect x="308" y="416" width="144" height="46" rx="8" fill="#3a2e0a" stroke="#c88a2a" stroke-width="1.7"/>
 <text x="380" y="432" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">现实</text>
-<text x="380" y="450" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="'Anthropic Sans',sans-serif" font-size="15">四层搭出的岛</text>
+<text x="380" y="450" text-anchor="middle" dominant-baseline="central" fill="#d8d4cc" font-family="'Anthropic Sans',sans-serif" font-size="14">四层搭出的岛</text>
 </g></a>
-<text x="380" y="478" text-anchor="middle" fill="#c8a040" font-family="'Anthropic Sans',sans-serif" font-size="15" font-style="italic">岛是真的，海不因此变浅</text>
+<text x="380" y="478" text-anchor="middle" fill="#c8a040" font-family="'Anthropic Sans',sans-serif" font-size="13" font-style="italic">岛是真的，海不因此变浅</text>
 <line x1="380" y1="484" x2="380" y2="522" stroke="#ba7517" stroke-width="1.8" opacity="0.85" marker-end="url(#arrow)"/>
 <text x="402" y="506" fill="#c8a040" font-family="'Anthropic Sans',sans-serif" font-size="17">压到底</text>
 <a href="08_intuition.html#scene-luoji" target="_top"><g>
@@ -64,46 +63,46 @@
 <text x="118" y="300" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">脚手架 · D（第三面墙 · 从粗到细）</text>
 <!-- 引擎→四层：第三条撞墙线 -->
 <path d="M338 262 C 280 292, 220 310, 214 320" fill="none" stroke="#3a8ac8" stroke-width="2.1" opacity="0.85" marker-end="url(#arrow)"/>
-<text x="256" y="294" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="15">想要几何→撞上</text>
+<text x="256" y="294" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="13">想要几何→撞上</text>
 <!-- ③ 拓扑 -->
 <g>
 <rect x="34" y="312" width="176" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
 <text x="122" y="324" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">③ 拓扑·序（更细·墙顶）</text>
-<text x="122" y="338" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="15">模流给序不给尺</text>
+<text x="122" y="338" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">模流给序不给尺</text>
 </g>
 <!-- ② 可测 -->
 <g>
 <rect x="34" y="350" width="176" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
 <text x="122" y="362" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">② 可测·可广播（更粗）</text>
-<text x="122" y="376" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="15">维数盲 · 押退相干/7b</text>
+<text x="122" y="376" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">维数盲 · 押退相干/7b</text>
 </g>
 <!-- ① 点集 -->
 <g>
 <rect x="34" y="388" width="176" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
 <text x="122" y="400" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">① 点集·地址（最粗·墙基）</text>
-<text x="122" y="414" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="15">打桩落盘（喂给引擎）</text>
+<text x="122" y="414" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">打桩落盘（喂给引擎）</text>
 </g>
 <line x1="22" y1="405" x2="22" y2="330" stroke="#6f9a8e" stroke-width="1.7" opacity="0.75" marker-end="url(#arrow)"/>
-<text x="14" y="368" text-anchor="middle" fill="#6f9a8e" font-family="'Anthropic Sans',sans-serif" font-size="15" transform="rotate(-90 14 368)">自己的墙·实</text>
-<text x="122" y="434" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="15">①②③不欠态外位 · Borel 比拓扑粗（在下）</text>
+<text x="14" y="368" text-anchor="middle" fill="#6f9a8e" font-family="'Anthropic Sans',sans-serif" font-size="10" transform="rotate(-90 14 368)">自己的墙·实</text>
+<text x="122" y="440" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="11">①②③不欠态外位 · Borel 比拓扑粗（在下）</text>
 <!-- ①点集 喂给引擎 -->
 <path d="M210 396 C 280 384, 320 320, 342 286" fill="none" stroke="#6f9a8e" stroke-width="1.7" opacity="0.85" marker-end="url(#arrow)"/>
-<text x="300" y="360" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="15">落盘喂引擎</text>
+<text x="300" y="360" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="11">落盘喂引擎</text>
 
 <!-- ===== ④ 墙外·够不到（右下一块独立，隔） ===== -->
 <line x1="122" y1="436" x2="122" y2="500" stroke="#c86a30" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.85"/>
-<text x="150" y="482" text-anchor="middle" fill="#c86a30" font-family="'Anthropic Sans',sans-serif" font-size="15" opacity="0.9">隔·墙外</text>
+<text x="178" y="478" text-anchor="middle" fill="#c86a30" font-family="'Anthropic Sans',sans-serif" font-size="9" opacity="0.9">隔·墙外</text>
 <a href="09_assertion.html#scene-dui" target="_top"><g>
 <rect x="34" y="506" width="212" height="44" rx="8" fill="none" stroke="#3a8ac8" stroke-width="1.9" stroke-dasharray="6 4"/>
 <text x="140" y="521" text-anchor="middle" dominant-baseline="central" fill="#B5D4F4" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">④ 度量·D · 外接借来（墙外·够不到）</text>
-<text x="140" y="538" text-anchor="middle" dominant-baseline="central" fill="#85B7EB" font-family="'Anthropic Sans',sans-serif" font-size="15">距离·几维 · 充当非为真 · 付态外位</text>
+<text x="140" y="538" text-anchor="middle" dominant-baseline="central" fill="#85B7EB" font-family="'Anthropic Sans',sans-serif" font-size="13">距离·几维 · 充当非为真 · 付态外位</text>
 </g></a>
 <!-- ①墙基 ⇢ ④（爬不上去，只能外接借；虚线+断，走左侧不挤中间） -->
 <path d="M60 424 C 48 456, 48 480, 54 504" fill="none" stroke="#c86a30" stroke-width="1.7" opacity="0.9" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
-<text x="100" y="470" text-anchor="middle" fill="#d89050" font-family="'Anthropic Sans',sans-serif" font-size="15">爬不上→外接借</text>
+<text x="68" y="462" text-anchor="middle" fill="#d89050" font-family="'Anthropic Sans',sans-serif" font-size="10">爬不上→外接借</text>
 <!-- ④ ⇢ 现实（借来的度量配给现实） -->
 <path d="M246 524 C 288 522, 300 486, 310 464" fill="none" stroke="#3a8ac8" stroke-width="1.9" opacity="0.75" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
-<text x="292" y="512" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="15">借度量配现实</text>
+<text x="310" y="488" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="13">借度量配现实</text>
 
 <!-- ===== 右侧：遭遇→荷/他者 ===== -->
 <line x1="452" y1="438" x2="492" y2="438" stroke="#ba7517" stroke-width="1.8" opacity="0.9" marker-end="url(#arrow)"/>
@@ -111,8 +110,8 @@
 <g>
 <rect x="496" y="410" width="160" height="64" rx="8" fill="none" stroke="#9b97a0" stroke-width="2.0" stroke-dasharray="5 4"/>
 <text x="576" y="426" text-anchor="middle" dominant-baseline="central" fill="#e8e4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">硌人的一处</text>
-<text x="576" y="444" text-anchor="middle" dominant-baseline="central" fill="#d0ccc4" font-family="'Anthropic Sans',sans-serif" font-size="15">都先当荷去压</text>
-<text x="576" y="460" text-anchor="middle" dominant-baseline="central" fill="#d0ccc4" font-family="'Anthropic Sans',sans-serif" font-size="15">当下分不清是荷是他者</text>
+<text x="576" y="444" text-anchor="middle" dominant-baseline="central" fill="#d0ccc4" font-family="'Anthropic Sans',sans-serif" font-size="14">都先当荷去压</text>
+<text x="576" y="460" text-anchor="middle" dominant-baseline="central" fill="#d0ccc4" font-family="'Anthropic Sans',sans-serif" font-size="14">当下分不清是荷是他者</text>
 </g>
 <line x1="644" y1="418" x2="678" y2="372" stroke="#3b6d11" stroke-width="1.9" opacity="0.9" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
 <g>
@@ -121,7 +120,7 @@
 <text x="731" y="355" text-anchor="middle" dominant-baseline="central" fill="#5ac820" font-family="'Anthropic Sans',sans-serif" font-size="17">留在缝里，不接账本</text>
 </g>
 <path d="M656 338 C 646 302, 694 266, 730 244" fill="none" stroke="#c87040" stroke-width="1.5" opacity="0.9" stroke-dasharray="4 5" marker-end="url(#arrow)"/>
-<text x="680" y="296" text-anchor="middle" fill="#c87040" font-family="'Anthropic Sans',sans-serif" font-size="15">逼出重奠</text>
+<text x="680" y="296" text-anchor="middle" fill="#c87040" font-family="'Anthropic Sans',sans-serif" font-size="13">逼出重奠</text>
 <line x1="644" y1="468" x2="678" y2="500" stroke="#ba7517" stroke-width="1.9" opacity="0.9" marker-end="url(#arrow)"/>
 <a href="06_theother.html#scene-he" target="_top"><g>
 <rect x="656" y="506" width="150" height="46" rx="8" fill="#3a2e0a" stroke="#c88a2a" stroke-width="1.5"/>
@@ -142,5 +141,5 @@
 <!-- 松手 → 无迹（回根，走外圈上方） -->
 <path d="M614 200 C 520 150, 440 110, 394 90" fill="none" stroke="#3ac8a0" stroke-width="1.9" opacity="0.9" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
 <!-- 松手先交还④：④左下角短提示，不横穿中心 -->
-<text x="40" y="566" text-anchor="start" fill="#3ac8a0" font-family="'Anthropic Sans',sans-serif" font-size="15" opacity="0.75">（松手时借来的④第一个交还）</text>
+<text x="40" y="578" text-anchor="start" fill="#3ac8a0" font-family="'Anthropic Sans',sans-serif" font-size="10" opacity="0.75">（松手时借来的④第一个交还）</text>
 </svg>

@@ -308,7 +308,7 @@ HTML_SHELL = """<!DOCTYPE html>
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=8" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=9" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -1478,7 +1478,7 @@ def export_html(chapters, meta=None):
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=8" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=9" type="image/svg+xml"></object></div>
  </div>
 </div>
 <script>
@@ -1585,10 +1585,15 @@ def patch_svg_dark(path):
     if 'preserveAspectRatio=' not in svg:
         svg = svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ', 1)
 
-    # 背景矩形（仅首次添加）
+    # 背景矩形（仅首次添加；尺寸跟 viewBox，已有全幅 bg 则不重复）
     if not already:
-        bg = '<rect x="0" y="0" width="740" height="620" fill="#1e1e1c"/>'
-        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1\n<!--svg-dark:v1-->\n' + bg, svg, count=1)
+        vb = _re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg)
+        bw, bh = (vb.group(1), vb.group(2)) if vb else ('780', '700')
+        has_bg = _re.search(r'<rect\s+x="0"\s+y="0"\s+width="[\d.]+"\s+height="[\d.]+"\s+fill="#1e1e1c"', svg)
+        insert = '\n<!--svg-dark:v1-->'
+        if not has_bg:
+            insert += f'\n<rect x="0" y="0" width="{bw}" height="{bh}" fill="#1e1e1c"/>'
+        svg = _re.sub(r'(<svg\b[^>]*>)', r'\1' + insert, svg, count=1)
 
     # ── 文字颜色 ──
     # 主要文本：黑色→浅色
@@ -1668,14 +1673,25 @@ def patch_svg_dark(path):
         svg = svg.replace('opacity="0.65"', 'opacity="0.9"')
         svg = svg.replace('opacity="0.7"', 'opacity="0.9"')
         svg = svg.replace('opacity="0.8"', 'opacity="0.95"')
-        # 字号 +3（14→17, 12→15）
+        # 字号微调：主标题 +3；中号 +1；注解小字（≤11）保持原设计，避免全抬到 15 导致重叠
         def _norm_css(m):
             n = int(m.group(1))
-            return f'font-size:{"17" if n >= 14 else "15"}px'
+            if n >= 14:
+                t = min(n + 3, 17)
+            elif n >= 12:
+                t = n + 1
+            else:
+                t = n
+            return f'font-size:{t}px'
         svg = _re.sub(r'font-size:(\d+)px', _norm_css, svg)
         def _norm_attr(m):
             n = int(m.group(1))
-            t = 17 if n >= 14 else 15
+            if n >= 14:
+                t = min(n + 3, 17)
+            elif n >= 12:
+                t = n + 1
+            else:
+                t = n
             return f'font-size="{t}"'
         svg = _re.sub(r'font-size="(\d+)"', _norm_attr, svg)
         # 线条加粗 +0.5
