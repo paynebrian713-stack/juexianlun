@@ -69,7 +69,7 @@
 <g>
 <rect x="34" y="350" width="176" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
 <text x="122" y="362" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">② 可测·可广播（更粗）</text>
-<text x="122" y="376" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">维数盲·押退相干 · 亦导航尺/表能力</text>
+<text x="122" y="376" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">维数盲 · 押退相干/7b</text>
 </g>
 <!-- ① 点集·几何墙基（打桩第二角色） -->
 <g>
@@ -84,14 +84,14 @@
 <g>
 <rect x="238" y="356" width="132" height="36" rx="7" fill="none" stroke="#6f9a8e" stroke-width="1.7"/>
 <text x="304" y="369" text-anchor="middle" dominant-baseline="central" fill="#b9d6cc" font-family="'Anthropic Sans',sans-serif" font-size="15" font-weight="500">立账投影</text>
-<text x="304" y="384" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="12">退相干事实·喂引擎（算子）</text>
+<text x="304" y="384" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="12">退相干事实·喂引擎</text>
 </g>
 <!-- 立账投影 → 引擎（实线·喂） -->
 <path d="M312 356 C 330 330, 355 305, 372 288" fill="none" stroke="#6f9a8e" stroke-width="1.8" opacity="0.9" marker-end="url(#arrow)"/>
 <text x="360" y="330" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="12">喂·核对</text>
 <!-- ①几何墙基 ↔ 立账投影：同一批投影·两角色（细点线，非借） -->
 <path d="M210 402 C 222 396, 230 388, 238 380" fill="none" stroke="#8a857a" stroke-width="1.2" opacity="0.85" stroke-dasharray="1.5 3"/>
-<text x="224" y="418" text-anchor="middle" fill="#8a857a" font-family="'Anthropic Sans',sans-serif" font-size="11">同一批投影·两角色</text>
+<text x="224" y="434" text-anchor="middle" fill="#8a857a" font-family="'Anthropic Sans',sans-serif" font-size="11">同一批投影·两角色</text>
 <!-- ===== ④ 墙外·够不到 ===== -->
 <line x1="122" y1="436" x2="122" y2="500" stroke="#c86a30" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.85"/>
 <text x="178" y="478" text-anchor="middle" fill="#c86a30" font-family="'Anthropic Sans',sans-serif" font-size="12" opacity="0.9">隔·墙外</text>
