@@ -308,7 +308,7 @@ HTML_SHELL = """<!DOCTYPE html>
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=16" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=17" type="image/svg+xml"></object></div>
  </div>
 </div>
 <p id="status">正在渲染公式…</p>
@@ -1478,7 +1478,7 @@ def export_html(chapters, meta=None):
    <a href="index.html">← 目录</a>
    <button class="map-close" onclick="hideMap()" aria-label="关闭">✕</button>
   </div>
-  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=16" type="image/svg+xml"></object></div>
+  <div class="map-svg-wrap"><object id="map-svg" data="reality-map.svg?v=17" type="image/svg+xml"></object></div>
  </div>
 </div>
 <script>
