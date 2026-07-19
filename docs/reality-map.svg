@@ -57,29 +57,29 @@
 <!-- ===== 脚手架·D：第三面墙 ①②③ ===== -->
 <text x="118" y="300" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">脚手架 · 从粗到细</text>
 <!-- 引擎→四层：第三条撞墙线 -->
-<path d="M338 262 C 280 292, 220 310, 214 320" fill="none" stroke="#3a8ac8" stroke-width="2.1" opacity="0.85" marker-end="url(#arrow)"/>
+<path d="M338 262 C 280 292, 220 310, 224 320" fill="none" stroke="#3a8ac8" stroke-width="2.1" opacity="0.85" marker-end="url(#arrow)"/>
 <text x="256" y="294" text-anchor="middle" fill="#8ab0c8" font-family="'Anthropic Sans',sans-serif" font-size="13">想要几何→撞上</text>
 <!-- ③ 拓扑 -->
 <g>
-<rect x="34" y="312" width="176" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
-<text x="122" y="324" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">③ 拓扑·序（更细·墙顶）</text>
-<text x="122" y="338" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">模流给序不给尺</text>
+<rect x="34" y="312" width="190" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
+<text x="129" y="324" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="15" font-weight="500">③ 拓扑·序（更细·墙顶）</text>
+<text x="129" y="338" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">模流给序不给尺</text>
 </g>
 <!-- ② 可测 -->
 <g>
-<rect x="34" y="350" width="176" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
-<text x="122" y="362" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">② 可测·可广播（更粗）</text>
-<text x="122" y="376" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">维数盲 · 押退相干/7b</text>
+<rect x="34" y="350" width="190" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
+<text x="129" y="362" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="15" font-weight="500">② 可测·可广播（更粗）</text>
+<text x="129" y="376" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">维数盲 · 押退相干/7b</text>
 </g>
 <!-- ① 点集·几何墙基（打桩第二角色） -->
 <g>
-<rect x="34" y="388" width="176" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
-<text x="122" y="400" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="17" font-weight="500">① 点集·几何墙基（最粗）</text>
-<text x="122" y="414" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">ℚ锐地址（供几何·非喂引擎）</text>
+<rect x="34" y="388" width="190" height="34" rx="7" fill="#22302e" stroke="#5f857b" stroke-width="1.5"/>
+<text x="129" y="400" text-anchor="middle" dominant-baseline="central" fill="#cfe4dc" font-family="'Anthropic Sans',sans-serif" font-size="15" font-weight="500">① 点集·几何墙基（最粗）</text>
+<text x="129" y="414" text-anchor="middle" dominant-baseline="central" fill="#9ec0b6" font-family="'Anthropic Sans',sans-serif" font-size="13">ℚ锐地址（供几何·非喂引擎）</text>
 </g>
 <line x1="18" y1="405" x2="18" y2="330" stroke="#6f9a8e" stroke-width="1.7" opacity="0.75" marker-end="url(#arrow)"/>
 <text x="10" y="368" text-anchor="middle" fill="#6f9a8e" font-family="'Anthropic Sans',sans-serif" font-size="10" transform="rotate(-90 10 368)">自己的墙·实</text>
-<text x="122" y="440" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="11">①②③不欠态外位 · Borel 比拓扑粗（在下）</text>
+<text x="129" y="440" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="11">①②③不欠态外位 · Borel 比拓扑粗（在下）</text>
 <!-- ===== 立账投影：打桩第一角色（喂引擎，实线） ===== -->
 <g>
 <rect x="238" y="356" width="132" height="36" rx="7" fill="none" stroke="#6f9a8e" stroke-width="1.7"/>
@@ -90,10 +90,10 @@
 <path d="M312 356 C 330 330, 355 305, 372 288" fill="none" stroke="#6f9a8e" stroke-width="1.8" opacity="0.9" marker-end="url(#arrow)"/>
 <text x="360" y="330" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="12">喂·核对</text>
 <!-- ①几何墙基 ↔ 立账投影：同一批投影·两角色（细点线，非借） -->
-<path d="M210 402 C 222 396, 230 388, 238 380" fill="none" stroke="#8a857a" stroke-width="1.2" opacity="0.85" stroke-dasharray="1.5 3"/>
+<path d="M224 402 C 232 396, 235 388, 238 380" fill="none" stroke="#8a857a" stroke-width="1.2" opacity="0.85" stroke-dasharray="1.5 3"/>
 <text x="224" y="434" text-anchor="middle" fill="#8a857a" font-family="'Anthropic Sans',sans-serif" font-size="11">同一批投影·两角色</text>
 <!-- ===== ④ 墙外·够不到 ===== -->
-<line x1="122" y1="436" x2="122" y2="500" stroke="#c86a30" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.85"/>
+<line x1="129" y1="436" x2="129" y2="500" stroke="#c86a30" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.85"/>
 <text x="178" y="478" text-anchor="middle" fill="#c86a30" font-family="'Anthropic Sans',sans-serif" font-size="12" opacity="0.9">隔·墙外</text>
 <a href="09_assertion.html#scene-dui" target="_top"><g>
 <rect x="34" y="506" width="212" height="44" rx="8" fill="none" stroke="#3a8ac8" stroke-width="1.9" stroke-dasharray="6 4"/>
