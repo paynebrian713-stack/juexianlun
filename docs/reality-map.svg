@@ -91,7 +91,6 @@
 <text x="360" y="330" text-anchor="middle" fill="#7f9a92" font-family="'Anthropic Sans',sans-serif" font-size="12">喂·核对</text>
 <!-- ①几何墙基 ↔ 立账投影：同一批投影·两角色（细点线，非借） -->
 <path d="M224 402 C 232 396, 235 388, 238 380" fill="none" stroke="#8a857a" stroke-width="1.2" opacity="0.85" stroke-dasharray="1.5 3"/>
-<text x="224" y="434" text-anchor="middle" fill="#8a857a" font-family="'Anthropic Sans',sans-serif" font-size="11">同一批投影·两角色</text>
 <!-- ===== ④ 墙外·够不到 ===== -->
 <line x1="129" y1="436" x2="129" y2="500" stroke="#c86a30" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.85"/>
 <text x="178" y="478" text-anchor="middle" fill="#c86a30" font-family="'Anthropic Sans',sans-serif" font-size="12" opacity="0.9">隔·墙外</text>
