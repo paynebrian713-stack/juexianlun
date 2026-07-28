@@ -581,7 +581,7 @@ def strip_footnotes_and_refs(text, ch_name=""):
     text = re.sub(r'\n(?:---\n)?## 脚注\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n(?:---\n)?## 参考文献\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
     text = re.sub(r'\n(?:---\n)?### 参考文献\n.*?(?=\n---\n|\Z)', '', text, flags=re.DOTALL)
-    text = re.sub(r'\n\[\^[\w-]+\]:[^\n]*(?:\n(?!\[\^[\w-]+\]:|\n---\n)[^\n]*)*', '', text)
+    text = re.sub(r'\n\[\^[\w-]+\]:[^\n]*(?:\n(?!\[\^[\w-]+\]:|\n---\n|\* \* \*)[^\n]*)*', '', text)
     text = re.sub(r'\[\^[\w-]+\]', '', text)
     if '附录' in ch_name:
         cuts = [
