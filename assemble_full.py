@@ -15,7 +15,7 @@ KATEX = "vendor/katex"
 files = [
     (f"{BASE}/界限论_导论_可读重写_v0_47.md",         "导论"),
     ("_零",                                             "第零章"),  # ← 哨兵：实路径见 load_chapter()
-    (f"{BASE}/界限论_第一章_可读重写_v0_36.md",         "第一章"),
+    (f"{BASE}/界限论_第一章_可读重写_v0_37.md",         "第一章"),
     (f"{BASE}/界限论_第二章_可读重写_v0_34.md",         "第二章"),
     (f"{BASE}/界限论_第三章_可读重写_v1_23.md",         "第三章"),
     (f"{BASE}/界限论_第四章_可读重写_v0_40.md",         "第四章"),
@@ -604,7 +604,7 @@ def strip_footnotes_and_refs(text, ch_name=""):
 def load_chapter(file_path, ch_name):
     # 🔧 哨兵 "_零" → 真实路径：更新第零章文件版本号时改这里
     if file_path == "_零":
-        actual = f"{BASE}/界限论_第零章_可读重写_v0_43.md"
+        actual = f"{BASE}/界限论_第零章_可读重写_v0_44.md"
     else:
         actual = file_path
     with open(actual, encoding="utf-8") as f:
