@@ -523,14 +523,20 @@ def clean_title(line):
         if new_line == line:
             break
         line = new_line
+    # Remove Fuchsia brackets 〔〕 (U+3014/U+3015)
+    while '\u3014' in line and '\u3015' in line:
+        new_line = re.sub(r'\u3014[^\u3014\u3015]*\u3015', '', line)
+        if new_line == line:
+            break
+        line = new_line
     # Remove English parentheses
     while '(' in line and ')' in line:
         new_line = re.sub(r'\([^()]*\)', '', line)
         if new_line == line:
             break
         line = new_line
-    # Strip any remaining unmatched closing Chinese/English brackets
-    line = re.sub(r'[\uff09\)]+', '', line)
+    # Strip any remaining unmatched closing Chinese/English/Fuchsia brackets
+    line = re.sub(r'[\uff09\)\u3015]+', '', line)
     # Strip edit-note suffixes: ·P1-V ..., ／P1-W ..., §9.1
     line = re.sub(r'[·／]P\d+[-–—].*$', '', line)
     line = re.sub(r'\s*§\d+\.\d+\s*$', '', line)
